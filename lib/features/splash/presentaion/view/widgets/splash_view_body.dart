@@ -21,7 +21,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
   void initState() {
     super.initState();
     _initSlidingAnimation();
-    _navigateToHome();
+    _navigateToOnBoarding();
   }
 
   @override
@@ -32,6 +32,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   @override
   Widget build(BuildContext context) {
+    _preloadImage(context);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -55,19 +57,24 @@ class _SplashViewBodyState extends State<SplashViewBody>
     );
   }
 
-  void _navigateToHome() {
-    Future.delayed(
+  void _navigateToOnBoarding() async {
+    await Future.delayed(
       const Duration(milliseconds: 2500),
-      () => GoRouter.of(context).push(AppRouter.kHomeScreen),
+      () => GoRouter.of(context).push(AppRouter.kOnBoardingView),
     );
   }
 
-  void _initSlidingAnimation() {
+  Future<void> _preloadImage(BuildContext context) async {
+    const ImageProvider imageProvider = AssetImage(AssetsManager.onBoarding);
+    await precacheImage(imageProvider, context);
+  }
+
+  void _initSlidingAnimation() async {
     animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 1));
     slidingAnimation =
         Tween<Offset>(begin: const Offset(0, 2), end: Offset.zero)
             .animate(animationController);
-    animationController.forward();
+    await animationController.forward();
   }
 }

@@ -10,4 +10,5 @@ class ColorManager {
   static const accentColor =  Color(0xffFFA500);
   static const shadeTextColor = Color(0xff7C7C7C);
   static const textColorLight = Color(0xff181725);
+  static const textColorBtn = Color(0xffFFF9FF);
 }
