@@ -5,7 +5,7 @@ import 'package:nectar/core/utils/theme_manager.dart';
 
 import 'features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 
-bool light = false;
+bool light = true;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

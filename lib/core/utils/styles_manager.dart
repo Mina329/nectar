@@ -19,7 +19,7 @@ abstract class StylesManager {
     fontWeight: FontWeight.w500,
   );
   static TextStyle gilroyMedium16 = const TextStyle(
-    color: ColorManager.shadeTextColor,
+    color: ColorManager.lightShadeTextColor,
     fontFamily: AssetsManager.gilroyMedium,
     fontSize: 16,
     fontWeight: FontWeight.w500,
@@ -52,13 +52,13 @@ abstract class StylesManager {
     fontWeight: FontWeight.w600,
   );
   static TextStyle gilroySemiBold14 = const TextStyle(
-    color: ColorManager.shadeTextColor,
+    color: ColorManager.lightShadeTextColor,
     fontFamily: AssetsManager.gilroySemiBold,
     fontSize: 14,
     fontWeight: FontWeight.w600,
   );
    static TextStyle gilroySemiBold16 = const TextStyle(
-    color: ColorManager.shadeTextColor,
+    color: ColorManager.lightShadeTextColor,
     fontFamily: AssetsManager.gilroySemiBold,
     fontSize: 16,
     fontWeight: FontWeight.w600,

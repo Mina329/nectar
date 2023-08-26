@@ -26,6 +26,7 @@ class HomeView extends StatelessWidget {
     return BlocBuilder<NavigationBarCubit, NavigationBarState>(
       builder: (context, state) {
         return Scaffold(
+          resizeToAvoidBottomInset: true,
           bottomNavigationBar: CustomBottomNavigationBar(
             onItemTapped: (p0) =>
                 BlocProvider.of<NavigationBarCubit>(context).changeIndex(p0),
