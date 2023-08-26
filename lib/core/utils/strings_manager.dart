@@ -3,4 +3,9 @@ abstract class StringsManager{
   static const onBoardingTitle = "Welcome\nto our store";
   static const getStarted = "Get Started";
   static const onBoardingDescription = "Ger your groceries in as fast as one hour";
+  static const shop = "Shop";
+  static const cart = "Cart";
+  static const explore = "Explore";
+  static const favorite = "Favorite";
+  static const account = "Account";
 }

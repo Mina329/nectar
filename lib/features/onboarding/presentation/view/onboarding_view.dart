@@ -10,15 +10,18 @@ class OnBoardingView extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return Scaffold(
-      body: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(AssetsManager.onBoarding),
-              fit: BoxFit.cover,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(AssetsManager.onBoarding),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          child: const OnBoardingViewBody()),
+            child: const OnBoardingViewBody()),
+      ),
     );
   }
 }

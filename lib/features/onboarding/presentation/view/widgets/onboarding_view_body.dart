@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/core/utils/styles_manager.dart';
@@ -50,7 +52,9 @@ class OnBoardingViewBody extends StatelessWidget {
               width: 350,
               height: 70,
               child: CustomElevatedBtn(
-                onPressed: () {},
+                onPressed: () {
+                  GoRouter.of(context).push(AppRouter.kHomeView);
+                },
                 txt: StringsManager.getStarted,
                 style: StylesManager.gilroySemiBold18,
               ),
