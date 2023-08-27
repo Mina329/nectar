@@ -51,6 +51,12 @@ abstract class StylesManager {
     fontSize: 26,
     fontWeight: FontWeight.w600,
   );
+  static TextStyle gilroySemiBold24 = const TextStyle(
+    color: ColorManager.textColorLight,
+    fontFamily: AssetsManager.gilroySemiBold,
+    fontSize: 24,
+    fontWeight: FontWeight.w600,
+  );
   static TextStyle gilroySemiBold14 = const TextStyle(
     color: ColorManager.lightShadeTextColor,
     fontFamily: AssetsManager.gilroySemiBold,
@@ -63,5 +69,11 @@ abstract class StylesManager {
     fontSize: 16,
     fontWeight: FontWeight.w600,
   );
-  
+  //---------------Bold-----------------------------
+  static TextStyle gilroyBold16 = const TextStyle(
+    color: ColorManager.textColorLight,
+    fontFamily: AssetsManager.gilroyBold,
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+  );
 }

@@ -15,5 +15,5 @@ class ColorManager {
   static const textColorBtn = Color(0xffFFF9FF);
   static const lightenedPrimaryColorDark = Color(0xffA2D0A3);
   static const searchBarColor = Color(0xffF2F3F2);
-  
+  static const borderColorLight = Color(0xffE2E2E2);
 }

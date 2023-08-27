@@ -17,12 +17,20 @@ abstract class ThemeManager {
       ),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        backgroundColor: Colors.white,
-        selectedItemColor: ColorManager.primaryColorLight,
-        unselectedItemColor: ColorManager.textColorLight,
-        type: BottomNavigationBarType.shifting),
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      backgroundColor: Colors.white,
+      selectedItemColor: ColorManager.primaryColorLight,
+      unselectedItemColor: ColorManager.textColorLight,
+      type: BottomNavigationBarType.shifting,
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: const ButtonStyle().copyWith(
+        overlayColor:  MaterialStatePropertyAll(
+          ColorManager.accentColor.withAlpha(20),
+        ),
+      ),
+    ),
   );
   static final darkTheme = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: ColorManager.backgroundColorDark,
@@ -45,6 +53,13 @@ abstract class ThemeManager {
       selectedItemColor: Colors.white,
       unselectedItemColor: ColorManager.lightenedPrimaryColorDark,
       type: BottomNavigationBarType.fixed,
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: const ButtonStyle().copyWith(
+        overlayColor:  MaterialStatePropertyAll(
+          ColorManager.accentColor.withAlpha(20),
+        ),
+      ),
     ),
   );
 }
