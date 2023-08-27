@@ -11,4 +11,7 @@ abstract class StringsManager {
   static const account = "Account";
   static const exlusiveOffer = "Exlusive Offer";
   static const seeAll = "See all";
+  static const bestSelling = "Best Selling";
+  static const groceries = "Groceries";
+  static const pulses = "Pulses";
 }

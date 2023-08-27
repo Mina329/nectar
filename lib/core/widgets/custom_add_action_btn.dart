@@ -10,6 +10,7 @@ class CustomAddActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: null,
       onPressed: () {},
       backgroundColor: ColorManager.primaryColorLight,
       shape: RoundedRectangleBorder(

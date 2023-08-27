@@ -5,8 +5,8 @@ import '../../../../../core/utils/strings_manager.dart';
 import '../../../../../core/utils/styles_manager.dart';
 import 'grocery_item.dart';
 
-class ExclusiveOfferSection extends StatelessWidget {
-  const ExclusiveOfferSection({super.key});
+class BestSellingSection extends StatelessWidget {
+  const BestSellingSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ExclusiveOfferSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                StringsManager.exlusiveOffer,
+                StringsManager.bestSelling,
                 style: StylesManager.gilroySemiBold24,
               ),
               TextButton(

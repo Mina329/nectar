@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/strings_manager.dart';
 import '../../../../../core/utils/styles_manager.dart';
+import 'category_groceries_section_item.dart';
 import 'grocery_item.dart';
 
-class ExclusiveOfferSection extends StatelessWidget {
-  const ExclusiveOfferSection({super.key});
+class GroceriesSection extends StatelessWidget {
+  const GroceriesSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class ExclusiveOfferSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                StringsManager.exlusiveOffer,
+                StringsManager.groceries,
                 style: StylesManager.gilroySemiBold24,
               ),
               TextButton(
@@ -36,6 +37,21 @@ class ExclusiveOfferSection extends StatelessWidget {
             height: 20,
           ),
           SizedBox(
+            height: 105,
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: 10,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => const Padding(
+                padding: EdgeInsets.only(right: 15),
+                child: CategoryGroceriesSectionItem(),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          SizedBox(
             height: 255,
             child: ListView.builder(
               itemCount: 10,
@@ -46,7 +62,10 @@ class ExclusiveOfferSection extends StatelessWidget {
                 child: GroceryItem(),
               ),
             ),
-          )
+          ),
+          const SizedBox(
+            height: 40,
+          ),
         ],
       ),
     );
