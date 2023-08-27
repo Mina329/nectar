@@ -3,13 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/utils/theme_manager.dart';
 
+import 'core/cache/cache_helper.dart';
 import 'features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 
 bool light = true;
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await CacheData.casheIntialization();
+  if (CacheData.getData(key: "light") == null) {
+    CacheData.setData(key: "light", value: true);
+  }
+  light = CacheData.getData(key: "light");
   runApp(const MyApp());
 }
 
