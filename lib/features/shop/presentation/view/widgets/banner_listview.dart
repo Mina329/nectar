@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'banner_item.dart';
 
@@ -28,7 +29,7 @@ class _BannerListViewState extends State<BannerListView> {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.12,
+        height: 115.h,
         child: Stack(
           children: [
             PageView.builder(
@@ -37,7 +38,7 @@ class _BannerListViewState extends State<BannerListView> {
               itemCount: 3,
               controller: _pageController,
               itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.only(right: 10),
+                padding:  EdgeInsets.only(right: 10.w),
                 child: BannerItem(index: index),
               ),
             ),

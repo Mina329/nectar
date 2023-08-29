@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
-import 'package:nectar/core/utils/styles_manager.dart';
 
 import '../../../../../core/widgets/custom_elevated_btn.dart';
 
@@ -22,14 +21,14 @@ class OnBoardingViewBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SvgPicture.asset(
-            AssetsManager.splashImg,
+            AssetsManager.carrotImgDARK,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * .03,
           ),
           Text(
             StringsManager.onBoardingTitle,
-            style: StylesManager.largeHeadingTextStyle,
+            style: Theme.of(context).textTheme.displayLarge,
             textAlign: TextAlign.center,
             maxLines: 2,
           ),
@@ -38,9 +37,7 @@ class OnBoardingViewBody extends StatelessWidget {
           ),
           Text(
             StringsManager.onBoardingDescription,
-            style: StylesManager.gilroyMedium16.copyWith(
-              color: const Color(0xffFCFCFC).withOpacity(0.7),
-            ),
+            style: Theme.of(context).textTheme.bodyMedium,
             textAlign: TextAlign.center,
             maxLines: 2,
           ),
@@ -56,7 +53,7 @@ class OnBoardingViewBody extends StatelessWidget {
                   GoRouter.of(context).push(AppRouter.kHomeView);
                 },
                 txt: StringsManager.getStarted,
-                style: StylesManager.gilroySemiBold18,
+                style: Theme.of(context).textTheme.labelLarge!,
               ),
             ),
           ),

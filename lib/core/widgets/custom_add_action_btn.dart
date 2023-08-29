@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../utils/color_manager.dart';
 
@@ -12,11 +13,19 @@ class CustomAddActionButton extends StatelessWidget {
     return FloatingActionButton(
       heroTag: null,
       onPressed: () {},
-      backgroundColor: ColorManager.primaryColorLight,
+      backgroundColor: Theme.of(context).brightness == Brightness.light
+          ? ColorManager.greenPrimary
+          : ColorManager.greyLarge,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      child: const Icon(Icons.add),
+      child: Icon(
+        Icons.add,
+        size: 24.sp,
+        color: Theme.of(context).brightness == Brightness.light
+            ? ColorManager.whiteText
+            : ColorManager.grayOpacity,
+      ),
     );
   }
 }

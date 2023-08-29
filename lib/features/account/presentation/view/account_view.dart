@@ -7,10 +7,10 @@ class AccountView extends StatefulWidget {
   const AccountView({Key? key}) : super(key: key);
 
   @override
-  _AccountViewState createState() => _AccountViewState();
+  AccountViewState createState() => AccountViewState();
 }
 
-class _AccountViewState extends State<AccountView> {
+class AccountViewState extends State<AccountView> {
   bool switchValue = !CacheData.getData(key: "light");
 
   @override
@@ -22,8 +22,6 @@ class _AccountViewState extends State<AccountView> {
           setState(() async {
             switchValue = value;
             await CacheData.setData(key: "light", value: !value);
-            print(value);
-
             Restart.restartApp();
           });
         },

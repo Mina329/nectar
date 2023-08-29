@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BannerItem extends StatelessWidget {
   const BannerItem({super.key, required this.index});
@@ -12,8 +13,8 @@ class BannerItem extends StatelessWidget {
         ),
       ),
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.12,
-        width: MediaQuery.of(context).size.width - 60,
+        height: 115.h,
+        width: 368.w,
         child: Image.asset(
           "assets/images/banner$index.png",
           fit: BoxFit.fill,

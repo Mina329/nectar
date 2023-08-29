@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nectar/core/widgets/custom_search_bar.dart';
 import 'banner_listview.dart';
 import 'best_selling_section.dart';
@@ -11,37 +12,37 @@ class ShopViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 25),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 25.w),
       child: CustomScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: [
-          CustomShopAppBar(),
-          CustomSearchBar(),
+          const CustomShopAppBar(),
+          const CustomSearchBar(),
           SliverToBoxAdapter(
             child: SizedBox(
-              height: 20,
+              height: 20.h,
             ),
           ),
-          BannerListView(),
+          const BannerListView(),
           SliverToBoxAdapter(
             child: SizedBox(
-              height: 30,
+              height: 30.h,
             ),
           ),
-          ExclusiveOfferSection(),
+          const ExclusiveOfferSection(),
           SliverToBoxAdapter(
             child: SizedBox(
-              height: 30,
+              height: 30.h,
             ),
           ),
-          BestSellingSection(),
+          const BestSellingSection(),
           SliverToBoxAdapter(
             child: SizedBox(
-              height: 30,
+              height: 30.h,
             ),
           ),
-          GroceriesSection()
+          const GroceriesSection()
         ],
       ),
     );

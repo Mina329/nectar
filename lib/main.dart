@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/utils/theme_manager.dart';
 
@@ -28,10 +29,13 @@ class MyApp extends StatelessWidget {
           create: (context) => NavigationBarCubit(),
         )
       ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        theme: light ? ThemeManager.lightTheme : ThemeManager.darkTheme,
-        routerConfig: AppRouter.router,
+      child: ScreenUtilInit(
+        designSize: const Size(414,896),
+        builder: (context, child) => MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          theme: light ? ThemeManager.lightTheme : ThemeManager.darkTheme,
+          routerConfig: AppRouter.router,
+        ),
       ),
     );
   }

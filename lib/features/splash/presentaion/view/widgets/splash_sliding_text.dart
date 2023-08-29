@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
-import 'package:nectar/core/utils/styles_manager.dart';
 
 class SplashSlidingText extends StatelessWidget {
   const SplashSlidingText({
@@ -14,12 +13,12 @@ class SplashSlidingText extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: slidingAnimation,
-      builder: (context,_) {
+      builder: (context, _) {
         return SlideTransition(
           position: slidingAnimation,
           child: Text(
             StringsManager.splashDescription,
-            style: StylesManager.splashTextStyle,
+            style: Theme.of(context).textTheme.displaySmall,
             textAlign: TextAlign.center,
           ),
         );

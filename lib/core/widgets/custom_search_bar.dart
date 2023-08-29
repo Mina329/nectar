@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:nectar/core/utils/strings_manager.dart';
 import '../utils/color_manager.dart';
-import '../utils/styles_manager.dart';
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({super.key});
@@ -11,14 +10,18 @@ class CustomSearchBar extends StatelessWidget {
     return SliverToBoxAdapter(
       child: TextField(
         decoration: InputDecoration(
-          hintText: "Search Store",
-          hintStyle: StylesManager.gilroySemiBold14,
-          prefixIcon: const Icon(
+          hintText: StringsManager.searchStore,
+          hintStyle: Theme.of(context).textTheme.bodySmall,
+          prefixIcon: Icon(
             Icons.search,
-            color: ColorManager.textColorLight,
+            color: Theme.of(context).brightness == Brightness.light
+                ? ColorManager.darkBlue
+                : ColorManager.grayOpacity,
           ),
           filled: true,
-          fillColor: ColorManager.searchBarColor,
+          fillColor: Theme.of(context).brightness == Brightness.light
+              ? ColorManager.searchBarColorLIGHT
+              : ColorManager.searchBarColorDARK,
           border: const OutlineInputBorder(
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.all(

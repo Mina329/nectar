@@ -38,7 +38,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        SvgPicture.asset(AssetsManager.splashImg),
+        SvgPicture.asset(AssetsManager.carrotImgDARK),
         const SizedBox(
           width: 18,
         ),

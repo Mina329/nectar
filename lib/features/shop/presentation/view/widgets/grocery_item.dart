@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/utils/assets_manager.dart';
 import '../../../../../core/utils/color_manager.dart';
-import '../../../../../core/utils/styles_manager.dart';
 import '../../../../../core/widgets/custom_add_action_btn.dart';
 
 class GroceryItem extends StatelessWidget {
@@ -12,54 +13,67 @@ class GroceryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 255,
-      width: 170,
+      height: 255.h,
+      width: 173.w,
       decoration: BoxDecoration(
+        color: Theme.of(context).brightness == Brightness.light
+            ? ColorManager.whiteBackground
+            : ColorManager.darkBluePrimary,
         borderRadius: BorderRadius.circular(15),
         border: Border.all(
-          color: ColorManager.borderColorLight,
+          color: Theme.of(context).brightness == Brightness.light
+              ? ColorManager.borderColorLIGHT
+              : ColorManager.borderColorDARK,
         ),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Image.asset("assets/images/banana.png"),
+          SizedBox(
+            width: 140.w,
+            height: 140.h,
+            child: Image.asset("assets/images/banana.png"),
+          ),
           Padding(
-            padding: const EdgeInsets.only(
-              left: 15,
+            padding: EdgeInsets.only(
+              left: 15.w,
             ),
             child: Text(
               "Organic Bananas",
-              style: StylesManager.gilroyBold16,
+              style: Theme.of(context).textTheme.titleSmall,
               textAlign: TextAlign.start,
             ),
           ),
-          const SizedBox(
-            height: 5,
+          SizedBox(
+            height: 5.h,
           ),
           Padding(
-            padding: const EdgeInsets.only(
-              left: 15,
+            padding: EdgeInsets.only(
+              left: 15.w,
             ),
             child: Text(
               "7pcs, Priceg",
-              style: StylesManager.gilroyMedium14.copyWith(
-                color: ColorManager.lightShadeTextColor,
-              ),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  fontFamily: AssetsManager.gilroyMedium,
+                  fontWeight: FontWeight.w500),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "\$4.99",
-                  style: StylesManager.gilroySemiBold18.copyWith(
-                    color: ColorManager.textColorLight,
-                  ),
-                ),
-                const CustomAddActionButton()
+                Text("\$4.99",
+                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                          fontFamily: AssetsManager.gilroySemiBold,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18.sp,
+                        )),
+                SizedBox(
+                    width: 45.w,
+                    height: 45.h,
+                    child: const CustomAddActionButton())
               ],
             ),
           )

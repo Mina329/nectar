@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../../../core/utils/color_manager.dart';
-import '../../../../../core/utils/styles_manager.dart';
-import '../../../../../main.dart';
+import 'package:nectar/core/utils/assets_manager.dart';
 
 class CustomShopAppBar extends StatelessWidget {
   const CustomShopAppBar({super.key});
@@ -14,32 +12,34 @@ class CustomShopAppBar extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
+            height: 60.h,
           ),
-          SvgPicture.asset("assets/images/logo_colored.svg"),
-          const SizedBox(
-            height: 10,
+          SvgPicture.asset(
+            Theme.of(context).brightness == Brightness.light
+                ? AssetsManager.carrotImgLIGHT
+                : AssetsManager.carrotImgDARK,
+            height: 31.h,
+            width: 27.w,
+          ),
+          SizedBox(
+            height: 7.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 Icons.location_pin,
-                color: light ? ColorManager.darkShadeTextColor : Colors.white,
+                color: Theme.of(context).textTheme.bodyLarge!.color,
               ),
-              const SizedBox(
-                width: 10,
+              SizedBox(
+                width: 7.w,
               ),
-              Text(
-                "Cairo, Egypt",
-                style: StylesManager.gilroySemiBold18.copyWith(
-                  color: light ? ColorManager.darkShadeTextColor : Colors.white,
-                ),
-              ),
+              Text("Cairo, Egypt",
+                  style: Theme.of(context).textTheme.bodyLarge),
             ],
           ),
-          const SizedBox(
-            height: 20,
+          SizedBox(
+            height: 20.h,
           ),
         ],
       ),

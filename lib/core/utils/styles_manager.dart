@@ -1,85 +1,154 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
 
 import 'color_manager.dart';
 
 abstract class StylesManager {
-  // ----------------Medium style----------------
-  static TextStyle splashTextStyle = const TextStyle(
+  static TextStyle displaySmall = TextStyle(
     letterSpacing: 5.5,
-    color: ColorManager.backgroundColorLight,
+    color: ColorManager.whiteText,
     fontFamily: AssetsManager.gilroyMedium,
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
-  );
-  static TextStyle gilroyMedium18 = const TextStyle(
-    color: ColorManager.primaryColorLight,
-    fontFamily: AssetsManager.gilroyMedium,
-    fontSize: 18,
-    fontWeight: FontWeight.w500,
-  );
-  static TextStyle gilroyMedium16 = const TextStyle(
-    color: ColorManager.lightShadeTextColor,
-    fontFamily: AssetsManager.gilroyMedium,
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-  );
- 
-  static TextStyle gilroyMedium14 = const TextStyle(
-    color: ColorManager.textColorLight,
-    fontFamily: AssetsManager.gilroyMedium,
-    fontSize: 14,
+    fontSize: 14.sp,
     fontWeight: FontWeight.w500,
   );
 
-  // -----------SemiBold style---------------
-  static TextStyle largeHeadingTextStyle = const TextStyle(
-    color: ColorManager.backgroundColorLight,
+// ###################### LIGHT #####################
+
+  // ##################### SEMI_BOLD #####################
+
+  static TextStyle bodySmallLIGHT = TextStyle(
+    color: ColorManager.greySmall,
     fontFamily: AssetsManager.gilroySemiBold,
-    fontSize: 48,
+    fontSize: 14.sp,
     fontWeight: FontWeight.w600,
   );
-  static TextStyle gilroySemiBold18 = const TextStyle(
-    color: ColorManager.backgroundColorLight,
+  static TextStyle labelMediumLIGHT = TextStyle(
+    color: ColorManager.darkBlue,
     fontFamily: AssetsManager.gilroySemiBold,
-    fontSize: 18,
+    fontSize: 16.sp,
     fontWeight: FontWeight.w600,
   );
-  static TextStyle gilroySemiBold20 = const TextStyle(
-    color: ColorManager.textColorLight,
+  static TextStyle labelLargeLIGHT = TextStyle(
+    color: ColorManager.whiteText,
     fontFamily: AssetsManager.gilroySemiBold,
-    fontSize: 20,
+    fontSize: 18.sp,
     fontWeight: FontWeight.w600,
   );
-  static TextStyle gilroySemiBold26 = const TextStyle(
-    color: ColorManager.textColorLight,
+  static TextStyle bodyLargeLIGHT = TextStyle(
+    color: ColorManager.greyLarge,
     fontFamily: AssetsManager.gilroySemiBold,
-    fontSize: 26,
+    fontSize: 18.sp,
     fontWeight: FontWeight.w600,
   );
-  static TextStyle gilroySemiBold24 = const TextStyle(
-    color: ColorManager.textColorLight,
+  static TextStyle titleMediumLIGHT = TextStyle(
+    color: ColorManager.darkgrey,
     fontFamily: AssetsManager.gilroySemiBold,
-    fontSize: 24,
+    fontSize: 20.sp,
     fontWeight: FontWeight.w600,
   );
-  static TextStyle gilroySemiBold14 = const TextStyle(
-    color: ColorManager.lightShadeTextColor,
+  static TextStyle headingMediumLIGHT = TextStyle(
+    color: ColorManager.darkBlue,
     fontFamily: AssetsManager.gilroySemiBold,
-    fontSize: 14,
+    fontSize: 24.sp,
     fontWeight: FontWeight.w600,
   );
-   static TextStyle gilroySemiBold16 = const TextStyle(
-    color: ColorManager.lightShadeTextColor,
+  static TextStyle headingSmallLIGHT = TextStyle(
+    color: ColorManager.darkBlue,
     fontFamily: AssetsManager.gilroySemiBold,
-    fontSize: 16,
+    fontSize: 12.sp,
     fontWeight: FontWeight.w600,
   );
-  //---------------Bold-----------------------------
-  static TextStyle gilroyBold16 = const TextStyle(
-    color: ColorManager.textColorLight,
+  static TextStyle displayLargeLIGHT = TextStyle(
+    color: ColorManager.whiteText,
+    fontFamily: AssetsManager.gilroySemiBold,
+    fontSize: 48.sp,
+    fontWeight: FontWeight.w600,
+  );
+
+  // ##################### MEDIUM #####################
+
+  static TextStyle bodyMediumLIGHT = TextStyle(
+    color: ColorManager.grayOpacity,
+    fontFamily: AssetsManager.gilroyMedium,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w500,
+  );
+
+  // ###################### BOLD #####################
+
+  static TextStyle titleSmallLIGHT = TextStyle(
+    color: ColorManager.darkBlue,
     fontFamily: AssetsManager.gilroyBold,
-    fontSize: 16,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w700,
+  );
+
+// ###################### DARK #####################
+
+  // ##################### SEMI_BOLD #####################
+
+  static TextStyle bodySmallDARK = TextStyle(
+    color: ColorManager.grayOpacity,
+    fontFamily: AssetsManager.gilroySemiBold,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w600,
+  );
+  static TextStyle labelMediumDARK = TextStyle(
+    color: ColorManager.whiteText,
+    fontFamily: AssetsManager.gilroySemiBold,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w600,
+  );
+  static TextStyle labelLargeDARK = TextStyle(
+    color: ColorManager.whiteText,
+    fontFamily: AssetsManager.gilroySemiBold,
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w600,
+  );
+  static TextStyle bodyLargeDARK = TextStyle(
+    color: ColorManager.whiteText,
+    fontFamily: AssetsManager.gilroySemiBold,
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w600,
+  );
+  static TextStyle titleMediumDARK = TextStyle(
+    color: ColorManager.grayOpacity,
+    fontFamily: AssetsManager.gilroySemiBold,
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w600,
+  );
+  static TextStyle headingMediumDARK = TextStyle(
+    color: ColorManager.whiteText,
+    fontFamily: AssetsManager.gilroySemiBold,
+    fontSize: 24.sp,
+    fontWeight: FontWeight.w600,
+  );
+  static TextStyle headingSmallDARK = TextStyle(
+    color: ColorManager.greyLarge,
+    fontFamily: AssetsManager.gilroySemiBold,
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w600,
+  );
+  static TextStyle displayLargeDARK = TextStyle(
+    color: ColorManager.whiteText,
+    fontFamily: AssetsManager.gilroySemiBold,
+    fontSize: 48.sp,
+    fontWeight: FontWeight.w600,
+  );
+
+  // ##################### MEDIUM #####################
+  static TextStyle bodyMediumDARK = TextStyle(
+    color: ColorManager.grayOpacity,
+    fontFamily: AssetsManager.gilroyMedium,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w500,
+  );
+  // ###################### BOLD #####################
+  static TextStyle titleSmallDARK = TextStyle(
+    color: ColorManager.whiteText,
+    fontFamily: AssetsManager.gilroyBold,
+    fontSize: 16.sp,
     fontWeight: FontWeight.w700,
   );
 }
