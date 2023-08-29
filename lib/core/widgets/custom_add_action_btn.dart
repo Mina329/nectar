@@ -17,7 +17,7 @@ class CustomAddActionButton extends StatelessWidget {
           ? ColorManager.greenPrimary
           : ColorManager.greyLarge,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(15),
       ),
       child: Icon(
         Icons.add,

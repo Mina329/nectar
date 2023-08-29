@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -25,7 +26,7 @@ class CategoryGroceriesSectionItem extends StatelessWidget {
             width: 15.w,
           ),
           Text(
-            StringsManager.pulses,
+            StringsManager.pulses.tr(),
             style: Theme.of(context).textTheme.titleMedium,
           )
         ],

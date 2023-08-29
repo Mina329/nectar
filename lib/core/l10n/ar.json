@@ -1,0 +1,18 @@
+{
+    "splashDescription"     :  "online groceriet",
+    "onBoardingTitle"       : "مرحبا\nبك فى متجرنا",
+    "getStarted"            : "البدء",
+    "onBoardingDescription" :   "احصل على مشترياتك من البقالة خلال ساعة واحدة",
+    "shop"                  : "المتجر",
+    "cart"                  : "العربة",
+    "explore"               : "التصفح",
+    "favorite"              : "المفضل",
+    "account"               : "الحساب",
+    "exlusiveOffer"         : "عروض حصرية",
+    "seeAll"                : "شاهد الكل",
+    "bestSelling"           : "الاكثر مبيعا",
+    "groceries"             : "البقالة",
+    "pulses"                : "البقوليات",
+    "searchStore"           : "ابحث المتجر"
+
+}

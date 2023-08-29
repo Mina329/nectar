@@ -36,8 +36,8 @@ class GroceryItem extends StatelessWidget {
             child: Image.asset("assets/images/banana.png"),
           ),
           Padding(
-            padding: EdgeInsets.only(
-              left: 15.w,
+            padding: EdgeInsets.symmetric(
+              horizontal: 15.w,
             ),
             child: Text(
               "Organic Bananas",
@@ -49,8 +49,8 @@ class GroceryItem extends StatelessWidget {
             height: 5.h,
           ),
           Padding(
-            padding: EdgeInsets.only(
-              left: 15.w,
+            padding: EdgeInsets.symmetric(
+              horizontal: 15.w,
             ),
             child: Text(
               "7pcs, Priceg",

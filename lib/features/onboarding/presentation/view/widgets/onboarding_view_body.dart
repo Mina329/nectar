@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -27,7 +28,7 @@ class OnBoardingViewBody extends StatelessWidget {
             height: MediaQuery.of(context).size.height * .03,
           ),
           Text(
-            StringsManager.onBoardingTitle,
+            StringsManager.onBoardingTitle.tr(),
             style: Theme.of(context).textTheme.displayLarge,
             textAlign: TextAlign.center,
             maxLines: 2,
@@ -36,7 +37,7 @@ class OnBoardingViewBody extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.01,
           ),
           Text(
-            StringsManager.onBoardingDescription,
+            StringsManager.onBoardingDescription.tr(),
             style: Theme.of(context).textTheme.bodyMedium,
             textAlign: TextAlign.center,
             maxLines: 2,
@@ -52,7 +53,7 @@ class OnBoardingViewBody extends StatelessWidget {
                 onPressed: () {
                   GoRouter.of(context).push(AppRouter.kHomeView);
                 },
-                txt: StringsManager.getStarted,
+                txt: StringsManager.getStarted.tr(),
                 style: Theme.of(context).textTheme.labelLarge!,
               ),
             ),

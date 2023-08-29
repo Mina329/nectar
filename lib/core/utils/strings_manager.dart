@@ -1,18 +1,18 @@
 abstract class StringsManager {
-  static const splashDescription = "online groceriet";
-  static const onBoardingTitle = "Welcome\nto our store";
-  static const getStarted = "Get Started";
+  static const splashDescription = "splashDescription";
+  static const onBoardingTitle = "onBoardingTitle";
+  static const getStarted = "getStarted";
   static const onBoardingDescription =
-      "Ger your groceries in as fast as one hour";
-  static const shop = "Shop";
-  static const cart = "Cart";
-  static const explore = "Explore";
-  static const favorite = "Favorite";
-  static const account = "Account";
-  static const exlusiveOffer = "Exlusive Offer";
-  static const seeAll = "See all";
-  static const bestSelling = "Best Selling";
-  static const groceries = "Groceries";
-  static const pulses = "Pulses";
-  static const searchStore = "Search Store";
+      "onBoardingDescription";
+  static const shop = "shop";
+  static const cart = "cart";
+  static const explore = "explore";
+  static const favorite = "favorite";
+  static const account = "account";
+  static const exlusiveOffer = "exlusiveOffer";
+  static const seeAll = "seeAll";
+  static const bestSelling = "bestSelling";
+  static const groceries = "groceries";
+  static const pulses = "pulses";
+  static const searchStore = "searchStore";
 }

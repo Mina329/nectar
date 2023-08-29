@@ -23,21 +23,22 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NavigationBarCubit, NavigationBarState>(
-      builder: (context, state) {
-        return Scaffold(
-          resizeToAvoidBottomInset: true,
-          bottomNavigationBar: CustomBottomNavigationBar(
-            onItemTapped: (p0) =>
-                BlocProvider.of<NavigationBarCubit>(context).changeIndex(p0),
-            selectedIndex:
-                BlocProvider.of<NavigationBarCubit>(context).selectedIndex,
-          ),
-          body: _stateBodyMap[state.runtimeType] ?? const SizedBox(),
-        );
-      },
+    return BlocProvider(
+      create: (context) => NavigationBarCubit(),
+      child: BlocBuilder<NavigationBarCubit, NavigationBarState>(
+        builder: (context, state) {
+          return Scaffold(
+            resizeToAvoidBottomInset: true,
+            bottomNavigationBar: CustomBottomNavigationBar(
+              onItemTapped: (p0) =>
+                  BlocProvider.of<NavigationBarCubit>(context).changeIndex(p0),
+              selectedIndex:
+                  BlocProvider.of<NavigationBarCubit>(context).selectedIndex,
+            ),
+            body: _stateBodyMap[state.runtimeType] ?? const SizedBox(),
+          );
+        },
+      ),
     );
   }
 }
-
-

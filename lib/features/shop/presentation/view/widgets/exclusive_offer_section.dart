@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nectar/core/l10n/locales.dart';
 
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/strings_manager.dart';
@@ -18,13 +20,13 @@ class ExclusiveOfferSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                StringsManager.exlusiveOffer,
+                StringsManager.exlusiveOffer.tr(),
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               TextButton(
                 onPressed: () {},
                 child: Text(
-                  StringsManager.seeAll,
+                  StringsManager.seeAll.tr(),
                   style: Theme.of(context).textTheme.labelMedium!.copyWith(
                         color: Theme.of(context).brightness == Brightness.light
                             ? ColorManager.green
@@ -44,7 +46,9 @@ class ExclusiveOfferSection extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => Padding(
-                padding: EdgeInsets.only(right: 15.w),
+                padding: context.locale == ENGLISH_LOCALE
+                    ? EdgeInsets.only(right: 15.w)
+                    : EdgeInsets.only(left: 15.w),
                 child: const GroceryItem(),
               ),
             ),

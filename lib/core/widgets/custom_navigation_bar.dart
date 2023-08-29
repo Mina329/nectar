@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../utils/strings_manager.dart';
 
@@ -21,11 +23,11 @@ class CustomBottomNavigationBar extends StatelessWidget {
   ];
 
   final List<String> labelsList = [
-    StringsManager.shop,
-    StringsManager.explore,
-    StringsManager.cart,
-    StringsManager.favorite,
-    StringsManager.account,
+    StringsManager.shop.tr(),
+    StringsManager.explore.tr(),
+    StringsManager.cart.tr(),
+    StringsManager.favorite.tr(),
+    StringsManager.account.tr(),
   ];
 
   final int itemCount = 5;
@@ -43,7 +45,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 75,
+      height: 75.h,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(

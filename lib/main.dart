@@ -1,41 +1,61 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nectar/core/cache/cache_keys_values.dart';
+import 'package:nectar/core/l10n/locales.dart';
 import 'package:nectar/core/utils/app_router.dart';
+import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/core/utils/theme_manager.dart';
-
 import 'core/cache/cache_helper.dart';
-import 'features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
-
-bool light = true;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheData.casheIntialization();
-  if (CacheData.getData(key: "light") == null) {
-    CacheData.setData(key: "light", value: true);
+  await EasyLocalization.ensureInitialized();
+  if (CacheData.getData(key: CacheKeys.kDARKMODE) == null) {
+    CacheData.setData(key: CacheKeys.kDARKMODE, value: CacheValues.LIGHT);
   }
-  light = CacheData.getData(key: "light");
-  runApp(const MyApp());
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [ENGLISH_LOCALE, ARABIC_LOCALE],
+      path: AssetsManager.localization,
+      child: Phoenix(
+        child: const MyApp(),
+      ),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void didChangeDependencies() {
+    CacheData.getLocale().then(
+      (locale) => context.setLocale(locale),
+    );
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => NavigationBarCubit(),
-        )
-      ],
-      child: ScreenUtilInit(
-        designSize: const Size(414,896),
-        builder: (context, child) => MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          theme: light ? ThemeManager.lightTheme : ThemeManager.darkTheme,
-          routerConfig: AppRouter.router,
-        ),
+    return ScreenUtilInit(
+      designSize: const Size(414, 896),
+      builder: (context, child) => MaterialApp.router(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        debugShowCheckedModeBanner: false,
+        theme: CacheData.getData(key: CacheKeys.kDARKMODE)
+            ? ThemeManager.darkTheme
+            : ThemeManager.lightTheme,
+        routerConfig: AppRouter.router,
       ),
     );
   }

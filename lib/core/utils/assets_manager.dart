@@ -9,5 +9,6 @@ abstract class AssetsManager {
   static const gilroyRegular = "assets/fonts/Gilroy-Regular.ttf";
   static const gilroyBold = "assets/fonts/Gilroy-Bold.ttf";
 
+  static const localization = "lib/core/l10n";
 }
 

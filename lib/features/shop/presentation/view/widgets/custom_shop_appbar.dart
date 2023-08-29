@@ -29,6 +29,7 @@ class CustomShopAppBar extends StatelessWidget {
             children: [
               Icon(
                 Icons.location_pin,
+                size: 24.sp,
                 color: Theme.of(context).textTheme.bodyLarge!.color,
               ),
               SizedBox(

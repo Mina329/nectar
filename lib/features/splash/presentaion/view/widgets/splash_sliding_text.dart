@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 
@@ -17,7 +18,7 @@ class SplashSlidingText extends StatelessWidget {
         return SlideTransition(
           position: slidingAnimation,
           child: Text(
-            StringsManager.splashDescription,
+            StringsManager.splashDescription.tr(),
             style: Theme.of(context).textTheme.displaySmall,
             textAlign: TextAlign.center,
           ),

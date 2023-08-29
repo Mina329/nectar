@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 import '../utils/color_manager.dart';
@@ -10,7 +11,7 @@ class CustomSearchBar extends StatelessWidget {
     return SliverToBoxAdapter(
       child: TextField(
         decoration: InputDecoration(
-          hintText: StringsManager.searchStore,
+          hintText: StringsManager.searchStore.tr(),
           hintStyle: Theme.of(context).textTheme.bodySmall,
           prefixIcon: Icon(
             Icons.search,

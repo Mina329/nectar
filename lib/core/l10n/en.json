@@ -1,0 +1,18 @@
+{
+    "splashDescription"     :  "online groceriet",
+    "onBoardingTitle"       : "Welcome\nto our store",
+    "getStarted"            : "Get Started",
+    "onBoardingDescription" :   "Ger your groceries in as fast as one hour",
+    "shop"                  : "Shop",
+    "cart"                  : "Cart",
+    "explore"               : "Explore",
+    "favorite"              : "Favorites",
+    "account"               : "Account",
+    "exlusiveOffer"         : "Exlusive Offers",
+    "seeAll"                : "See All",
+    "bestSelling"           : "Best Selling",
+    "groceries"             : "Groceries",
+    "pulses"                : "Pulses",
+    "searchStore"           : "Search Store"
+
+}
