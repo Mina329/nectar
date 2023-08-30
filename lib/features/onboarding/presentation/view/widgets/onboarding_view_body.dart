@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/app_router.dart';
@@ -47,8 +48,8 @@ class OnBoardingViewBody extends StatelessWidget {
           ),
           Center(
             child: SizedBox(
-              width: 350,
-              height: 70,
+              width: 370.w,
+              height: 70.h,
               child: CustomElevatedBtn(
                 onPressed: () {
                   GoRouter.of(context).push(AppRouter.kHomeView);

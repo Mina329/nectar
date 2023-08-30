@@ -15,10 +15,11 @@ class ColorManager {
   static const darkBlueBackground = Color(0xff16171b);
   static const greenPrimary = Color(0xff53B175);
   static const darkBluePrimary = Color(0xff1f1f23);
-
+  static const secondaryBackgroundLIGHT = Color(0xffF2F3F2);
+  static const secondaryBackgroundDARK = Color(0xff1f1f24);
+  
 // ############### WIDGETS #############
-  static const searchBarColorLIGHT = Color(0xffF2F3F2);
-  static const searchBarColorDARK = Color(0xff1f1f24);
+
   static const borderColorLIGHT = Color(0xffE2E2E2);
   static const borderColorDARK = Color(0xffE2E2E2);
   static const accentColor = Color(0xffFFA500);

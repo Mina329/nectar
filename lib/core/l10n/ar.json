@@ -13,6 +13,8 @@
     "bestSelling"           : "الاكثر مبيعا",
     "groceries"             : "البقالة",
     "pulses"                : "البقوليات",
-    "searchStore"           : "ابحث المتجر"
-
+    "searchStore"           : "ابحث المتجر",
+    "productDetails"        : "مواصفات المنتج",
+    "reviews"               : "التقيمات",
+    "addToCart"             : "اضف الى العربة"
 }

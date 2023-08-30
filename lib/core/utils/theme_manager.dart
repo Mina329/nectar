@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nectar/core/utils/color_manager.dart';
 import 'package:nectar/core/utils/styles_manager.dart';
 
 abstract class ThemeManager {
   static final lightTheme = ThemeData.light().copyWith(
     scaffoldBackgroundColor: ColorManager.whiteBackground,
+    hoverColor: ColorManager.secondaryBackgroundLIGHT,
     primaryColor: ColorManager.greenPrimary,
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        iconSize: 24.sp,
+      ),
+    ),
+    iconTheme: IconThemeData(size: 24.sp, color: ColorManager.darkBluePrimary),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: ColorManager.green,
@@ -54,7 +62,14 @@ abstract class ThemeManager {
 
   static final darkTheme = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: ColorManager.darkBlueBackground,
+    hoverColor: ColorManager.secondaryBackgroundDARK,
     primaryColor: ColorManager.darkBluePrimary,
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        iconSize: 24.sp,
+      ),
+    ),
+    iconTheme: IconThemeData(size: 24.sp, color: ColorManager.grayOpacity),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: ColorManager.green,

@@ -20,9 +20,7 @@ class CustomSearchBar extends StatelessWidget {
                 : ColorManager.grayOpacity,
           ),
           filled: true,
-          fillColor: Theme.of(context).brightness == Brightness.light
-              ? ColorManager.searchBarColorLIGHT
-              : ColorManager.searchBarColorDARK,
+          fillColor: Theme.of(context).hoverColor,
           border: const OutlineInputBorder(
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.all(

@@ -2,8 +2,7 @@ abstract class StringsManager {
   static const splashDescription = "splashDescription";
   static const onBoardingTitle = "onBoardingTitle";
   static const getStarted = "getStarted";
-  static const onBoardingDescription =
-      "onBoardingDescription";
+  static const onBoardingDescription = "onBoardingDescription";
   static const shop = "shop";
   static const cart = "cart";
   static const explore = "explore";
@@ -15,4 +14,7 @@ abstract class StringsManager {
   static const groceries = "groceries";
   static const pulses = "pulses";
   static const searchStore = "searchStore";
+  static const productDetails = "productDetails";
+  static const reviews = "reviews";
+  static const addToCart = "addToCart";
 }

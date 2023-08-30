@@ -13,6 +13,9 @@
     "bestSelling"           : "Best Selling",
     "groceries"             : "Groceries",
     "pulses"                : "Pulses",
-    "searchStore"           : "Search Store"
+    "searchStore"           : "Search Store",
+    "productDetails"        : "Product Details",
+    "reviews"               : "ٌReviews",
+    "addToCart"             : "Add To Cart"
 
 }
