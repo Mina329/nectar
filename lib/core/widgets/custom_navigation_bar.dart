@@ -9,17 +9,33 @@ class CustomBottomNavigationBar extends StatelessWidget {
     super.key,
     required this.onItemTapped,
     required this.selectedIndex,
+    required this.height,
   });
 
   final Function(int) onItemTapped;
   final int selectedIndex;
-
+  final double height;
   final List<Icon> iconsList = [
-    const Icon(Icons.storefront),
-    const Icon(Icons.manage_search),
-    const Icon(Icons.shopping_cart_outlined),
-    const Icon(Icons.favorite_border),
-    const Icon(Icons.person_outlined),
+    Icon(
+      Icons.storefront,
+      size: 24.sp,
+    ),
+    Icon(
+      Icons.manage_search,
+      size: 24.sp,
+    ),
+    Icon(
+      Icons.shopping_cart_outlined,
+      size: 24.sp,
+    ),
+    Icon(
+      Icons.favorite_border,
+      size: 24.sp,
+    ),
+    Icon(
+      Icons.person_outlined,
+      size: 24.sp,
+    ),
   ];
 
   final List<String> labelsList = [
@@ -45,7 +61,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 75.h,
+      height: height.h,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(

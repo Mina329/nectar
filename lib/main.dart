@@ -1,5 +1,7 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nectar/core/cache/cache_keys_values.dart';
@@ -9,19 +11,27 @@ import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/core/utils/theme_manager.dart';
 import 'core/cache/cache_helper.dart';
 
+bool enableDevicePreview = true;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheData.casheIntialization();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   await EasyLocalization.ensureInitialized();
   if (CacheData.getData(key: CacheKeys.kDARKMODE) == null) {
     CacheData.setData(key: CacheKeys.kDARKMODE, value: CacheValues.LIGHT);
   }
   runApp(
-    EasyLocalization(
-      supportedLocales: const [ENGLISH_LOCALE, ARABIC_LOCALE],
-      path: AssetsManager.localization,
-      child: Phoenix(
-        child: const MyApp(),
+    DevicePreview(
+      enabled: enableDevicePreview,
+      builder: (context) => EasyLocalization(
+        supportedLocales: const [ENGLISH_LOCALE, ARABIC_LOCALE],
+        path: AssetsManager.localization,
+        child: Phoenix(
+          child: const MyApp(),
+        ),
       ),
     ),
   );
@@ -48,9 +58,11 @@ class _MyAppState extends State<MyApp> {
     return ScreenUtilInit(
       designSize: const Size(414, 896),
       builder: (context, child) => MaterialApp.router(
+        locale: context.locale,
+        builder: DevicePreview.appBuilder,
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
-        locale: context.locale,
+        //locale: context.locale,
         debugShowCheckedModeBanner: false,
         theme: CacheData.getData(key: CacheKeys.kDARKMODE)
             ? ThemeManager.darkTheme

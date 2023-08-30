@@ -40,7 +40,7 @@ class GroceryItem extends StatelessWidget {
           children: [
             SizedBox(
               width: 140.w,
-              height: 140.h,
+              height: 135.h,
               child: Image.asset("assets/images/banana.png"),
             ),
             Padding(
