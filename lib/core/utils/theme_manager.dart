@@ -57,6 +57,7 @@ abstract class ThemeManager {
       labelLarge: StylesManager.labelLargeLIGHT,
       headlineSmall: StylesManager.headingSmallLIGHT,
       displaySmall: StylesManager.displaySmall,
+      titleLarge: StylesManager.titleLargeLIGHT,
     ),
   );
 
@@ -113,6 +114,7 @@ abstract class ThemeManager {
       labelLarge: StylesManager.labelLargeDARK,
       headlineSmall: StylesManager.headingSmallDARK,
       displaySmall: StylesManager.displaySmall,
+      titleLarge: StylesManager.titleLargeDARK,
     ),
   );
 }

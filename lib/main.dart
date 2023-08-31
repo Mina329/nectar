@@ -11,7 +11,7 @@ import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/core/utils/theme_manager.dart';
 import 'core/cache/cache_helper.dart';
 
-bool enableDevicePreview = true;
+bool enableDevicePreview = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheData.casheIntialization();

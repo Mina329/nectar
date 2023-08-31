@@ -16,5 +16,6 @@
     "searchStore"           : "ابحث المتجر",
     "productDetails"        : "مواصفات المنتج",
     "reviews"               : "التقيمات",
-    "addToCart"             : "اضف الى العربة"
+    "addToCart"             : "اضف الى العربة",
+    "findProducts"          : "ابحث عن المنتجات"
 }

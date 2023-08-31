@@ -83,6 +83,12 @@ abstract class StylesManager {
     fontSize: 16.sp,
     fontWeight: FontWeight.w700,
   );
+  static TextStyle titleLargeLIGHT = TextStyle(
+    color: ColorManager.darkBlue,
+    fontFamily: AssetsManager.gilroyBold,
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w700,
+  );
 
 // ###################### DARK #####################
 
@@ -149,6 +155,12 @@ abstract class StylesManager {
     color: ColorManager.whiteText,
     fontFamily: AssetsManager.gilroyBold,
     fontSize: 16.sp,
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle titleLargeDARK = TextStyle(
+    color: ColorManager.whiteText,
+    fontFamily: AssetsManager.gilroyBold,
+    fontSize: 20.sp,
     fontWeight: FontWeight.w700,
   );
 }
