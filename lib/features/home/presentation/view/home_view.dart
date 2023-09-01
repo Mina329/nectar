@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +30,7 @@ class HomeView extends StatelessWidget {
           return Scaffold(
             resizeToAvoidBottomInset: true,
             bottomNavigationBar: CustomBottomNavigationBar(
-              height: Platform.isAndroid   ? 88 : 99, // TODO:: Is Android ?
+              height: false   ? 88 : 101, // TODO:: Is Android ? Platform.isAndroid
               onItemTapped: (p0) =>
                   BlocProvider.of<NavigationBarCubit>(context).changeIndex(p0),
               selectedIndex:

@@ -7,9 +7,15 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: SizedBox(
+      child: Container(
         height: 105.h,
         width: double.infinity,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(15),
+            bottomLeft: Radius.circular(15),
+          ),
+        ),
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Padding(

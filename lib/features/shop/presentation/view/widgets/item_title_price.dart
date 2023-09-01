@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nectar/core/widgets/custom_rounded_square_widget.dart';
 
 import '../../../../../core/utils/assets_manager.dart';
 import '../../../../../core/utils/color_manager.dart';
@@ -58,20 +58,7 @@ class ItemTitlePrice extends StatelessWidget {
                         : ColorManager.grayOpacity,
                   ),
                 ),
-                Container(
-                  width: 45.w,
-                  height: 45.h,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color:
-                          Theme.of(context).brightness == Brightness.light
-                              ? ColorManager.borderColorLIGHT
-                              : ColorManager.borderColorDARK,
-                    ),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                  ),
+                CustomRoundedSquareWidget(
                   child: Center(
                     child: Text(
                       "1",

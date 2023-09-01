@@ -17,5 +17,8 @@
     "productDetails"        : "مواصفات المنتج",
     "reviews"               : "التقيمات",
     "addToCart"             : "اضف الى العربة",
-    "findProducts"          : "ابحث عن المنتجات"
+    "findProducts"          : "ابحث عن المنتجات",
+    "myCart"                : "عربة التسوق",
+    "goToCheckout"          : "تابع عملية الشراء"
+
 }

@@ -9,6 +9,8 @@ class ColorManager {
   static const greySmall = Color(0xff7C7C7C);
   static const darkBlue = Color(0xff181725);
   static const green = Color(0xff53B175);
+  static const darkGreen = Color(0xff489E67);
+
 
 // ############### SCAFFOLD #############
   static const whiteBackground = Color(0xffffffff);

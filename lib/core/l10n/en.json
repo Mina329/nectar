@@ -17,5 +17,7 @@
     "productDetails"        : "Product Details",
     "reviews"               : "ٌReviews",
     "addToCart"             : "Add To Cart",
-    "findProducts"          : "Find Products"
+    "findProducts"          : "Find Products",
+    "myCart"                : "My Cart",
+    "goToCheckout"          : "Go to Checkout"
 }
