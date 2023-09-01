@@ -16,7 +16,7 @@ class CategoryItem extends StatelessWidget {
       },
       child: Container(
         width: 175.w,
-        height: 189.h,
+        height: 200.h,
         decoration: BoxDecoration(
           border: Border.all(
             color: ColorManager.green.withOpacity(0.7),

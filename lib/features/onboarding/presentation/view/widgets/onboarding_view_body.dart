@@ -24,9 +24,11 @@ class OnBoardingViewBody extends StatelessWidget {
         children: [
           SvgPicture.asset(
             AssetsManager.carrotImgDARK,
+            width: 48.w,
+            height: 56.h,
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * .03,
+            height: 35.h,
           ),
           Text(
             StringsManager.onBoardingTitle.tr(),
@@ -35,7 +37,7 @@ class OnBoardingViewBody extends StatelessWidget {
             maxLines: 2,
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.01,
+            height: 5.h,
           ),
           Text(
             StringsManager.onBoardingDescription.tr(),
@@ -44,7 +46,7 @@ class OnBoardingViewBody extends StatelessWidget {
             maxLines: 2,
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
+            height: 30.h,
           ),
           Center(
             child: SizedBox(
@@ -60,7 +62,7 @@ class OnBoardingViewBody extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
+            height: 90.h,
           )
         ],
       ),

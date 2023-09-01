@@ -10,7 +10,7 @@ class CategoryGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverGrid(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 175.w / 189.h,
+          childAspectRatio: 175.w / 200.h,
           crossAxisCount: 2,
           mainAxisSpacing: 14.h,
           crossAxisSpacing: 14.w,

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nectar/features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
@@ -29,7 +31,7 @@ class HomeView extends StatelessWidget {
           return Scaffold(
             resizeToAvoidBottomInset: true,
             bottomNavigationBar: CustomBottomNavigationBar(
-              height: false   ? 88 : 99, // TODO:: Is Android ?
+              height: Platform.isAndroid   ? 88 : 99, // TODO:: Is Android ?
               onItemTapped: (p0) =>
                   BlocProvider.of<NavigationBarCubit>(context).changeIndex(p0),
               selectedIndex:

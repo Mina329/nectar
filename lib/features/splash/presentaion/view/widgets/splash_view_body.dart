@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
@@ -38,17 +39,25 @@ class _SplashViewBodyState extends State<SplashViewBody>
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        SvgPicture.asset(AssetsManager.carrotImgDARK),
-        const SizedBox(
-          width: 18,
+        SvgPicture.asset(
+          AssetsManager.carrotImgDARK,
+          width: 55.w,
+          height: 63.h,
+        ),
+        SizedBox(
+          width: 18.w,
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset(AssetsManager.nectarImg),
-            const SizedBox(
-              height: 5,
+            SvgPicture.asset(
+              AssetsManager.nectarImg,
+              width: 195.w,
+              height: 46.h,
+            ),
+            SizedBox(
+              height: 5.h,
             ),
             SplashSlidingText(slidingAnimation: slidingAnimation),
           ],

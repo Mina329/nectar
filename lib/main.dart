@@ -15,6 +15,8 @@ bool enableDevicePreview = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheData.casheIntialization();
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
