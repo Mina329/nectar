@@ -9,12 +9,10 @@ class CustomBottomNavigationBar extends StatelessWidget {
     super.key,
     required this.onItemTapped,
     required this.selectedIndex,
-    required this.height,
   });
 
   final Function(int) onItemTapped;
   final int selectedIndex;
-  final double height;
   final List<Icon> iconsList = [
     Icon(
       Icons.storefront,
@@ -61,13 +59,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height.h,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
+            color: Colors.grey.withOpacity(0.2),
             spreadRadius: 3,
-            blurRadius: 20,
+            blurRadius: 10,
             offset: const Offset(0, 2),
           ),
         ],

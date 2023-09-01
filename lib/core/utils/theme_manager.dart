@@ -45,6 +45,7 @@ abstract class ThemeManager {
         ),
       ),
     ),
+    dividerColor: ColorManager.green,
     textTheme: TextTheme(
       displayLarge: StylesManager.displayLargeLIGHT,
       titleMedium: StylesManager.titleMediumLIGHT,
@@ -82,10 +83,12 @@ abstract class ThemeManager {
         ),
       ),
     ),
+    
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       showSelectedLabels: true,
       showUnselectedLabels: true,
-      backgroundColor: ColorManager.darkBluePrimary,
+      backgroundColor: ColorManager.darkBlueBackground,
+      
       unselectedLabelStyle: StylesManager.headingSmallDARK,
       unselectedItemColor: ColorManager.greyLarge,
       selectedLabelStyle: StylesManager.headingSmallDARK
@@ -93,7 +96,7 @@ abstract class ThemeManager {
       unselectedIconTheme: const IconThemeData(color: ColorManager.greyLarge),
       selectedIconTheme: const IconThemeData(color: ColorManager.greySmall),
       selectedItemColor: ColorManager.greySmall,
-      type: BottomNavigationBarType.shifting,
+      type: BottomNavigationBarType.fixed,
     ),
     textButtonTheme: TextButtonThemeData(
       style: const ButtonStyle().copyWith(
@@ -102,6 +105,7 @@ abstract class ThemeManager {
         ),
       ),
     ),
+    dividerColor: ColorManager.grayOpacity,
     textTheme: TextTheme(
       displayLarge: StylesManager.displayLargeDARK,
       titleMedium: StylesManager.titleMediumDARK,

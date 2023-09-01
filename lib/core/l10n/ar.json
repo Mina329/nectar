@@ -19,6 +19,6 @@
     "addToCart"             : "اضف الى العربة",
     "findProducts"          : "ابحث عن المنتجات",
     "myCart"                : "عربة التسوق",
-    "goToCheckout"          : "تابع عملية الشراء"
-
+    "goToCheckout"          : "تابع عملية الشراء",
+    "addAllToCart"          : "اضافة الكل الى العربة"
 }

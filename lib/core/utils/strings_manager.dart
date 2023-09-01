@@ -20,4 +20,5 @@ abstract class StringsManager {
   static const findProducts = "findProducts";
   static const myCart = "myCart";
   static const goToCheckout = "goToCheckout";
+  static const addAllToCart = "addAllToCart";
 }

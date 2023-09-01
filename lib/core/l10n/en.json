@@ -6,7 +6,7 @@
     "shop"                  : "Shop",
     "cart"                  : "Cart",
     "explore"               : "Explore",
-    "favorite"              : "Favorites",
+    "favorite"              : "Favourites",
     "account"               : "Account",
     "exlusiveOffer"         : "Exlusive Offers",
     "seeAll"                : "See All",
@@ -19,5 +19,7 @@
     "addToCart"             : "Add To Cart",
     "findProducts"          : "Find Products",
     "myCart"                : "My Cart",
-    "goToCheckout"          : "Go to Checkout"
+    "goToCheckout"          : "Go to Checkout",
+    "addAllToCart"          : "Add All To Cart"
+
 }
