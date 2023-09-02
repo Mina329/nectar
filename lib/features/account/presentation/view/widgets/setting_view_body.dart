@@ -13,9 +13,18 @@ import 'package:nectar/features/account/presentation/view/widgets/setting_item.d
 import 'package:nectar/main.dart';
 import '../../../../../core/utils/app_router.dart';
 
-class SettingViewBody extends StatelessWidget {
+class SettingViewBody extends StatefulWidget {
   const SettingViewBody({super.key});
 
+  @override
+  State<SettingViewBody> createState() => _SettingViewBodyState();
+}
+
+class _SettingViewBodyState extends State<SettingViewBody> {
+  String themeValue =
+      CacheData.getData(key: CacheKeys.kDARKMODE) == CacheValues.DARK
+          ? StringsManager.dark.tr()
+          : StringsManager.light.tr();
   void _showDynamicDialog(
       {required BuildContext context,
       required String dialogTitle,
@@ -127,10 +136,7 @@ class SettingViewBody extends StatelessWidget {
                 context: context,
                 dialogTitle: StringsManager.theme.tr(),
                 options: [StringsManager.light.tr(), StringsManager.dark.tr()],
-                groupValue: CacheData.getData(key: CacheKeys.kDARKMODE) ==
-                        CacheValues.DARK
-                    ? StringsManager.dark.tr()
-                    : StringsManager.light.tr(),
+                groupValue: themeValue,
                 onChanged: (p0) {
                   if (p0 == StringsManager.light.tr()) {
                     CacheData.setData(
@@ -141,6 +147,12 @@ class SettingViewBody extends StatelessWidget {
                         key: CacheKeys.kDARKMODE, value: CacheValues.DARK);
                     notifier.value = ThemeMode.dark;
                   }
+                  setState(() {
+                    themeValue = CacheData.getData(key: CacheKeys.kDARKMODE) ==
+                            CacheValues.DARK
+                        ? StringsManager.dark.tr()
+                        : StringsManager.light.tr();
+                  });
                 },
               );
             },

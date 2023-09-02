@@ -29,7 +29,7 @@
     "notification"          : "Notification",
     "about"                 : "About",
     "orderId:"              : "Order ID : ",
-    "totalPrice:"           : "Total Price : ",
+    "totalPrice:"           : "Total Price",
     "downloadReceipt"       : "Download Receipt",
     "settings"              : "Settings",
     "language"              : "Language",
@@ -37,7 +37,9 @@
     "english"               : "English",
     "theme"                 : "Theme",
     "light"                 : "Light",
-    "dark"                  : "Dark"
-    
-
+    "dark"                  : "Dark",
+    "checkout"              : "Checkout",
+    "selectMethod"          : "Select Method",
+    "termsAndConditions"    : "By placing an order you agree to our Terms And Conditions",
+    "placeOrder"            : "Place Order"
 }

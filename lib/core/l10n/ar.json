@@ -29,7 +29,7 @@
     "notification"          : "التنبيهات",
     "about"                 : "حول",
     "orderId:"              : "رقم الطلب : ",
-    "totalPrice:"           : "السعر الكلى : ",
+    "totalPrice:"           : "السعر الكلى",
     "downloadReceipt"       : "تحميل الفاتورة",
     "settings"              : "الاعدادات",
     "language"              : "اللغة",
@@ -37,5 +37,12 @@
     "english"               : "English",
     "theme"                 : "السمة",
     "light"                 : "فاتح",
-    "dark"                  : "داكن"
+    "dark"                  : "داكن",
+    "checkout"              : "الدفع",
+    "selectMethod"          : "اختر مكان",
+    "termsAndConditions"    : "من خلال تقديم الطلب فإنك توافق على الشروط والأحكام الخاصة بنا",
+    "placeOrder"            : "ارسال الطلب"
+
+
+
 }

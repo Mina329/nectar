@@ -55,7 +55,7 @@ class OrderCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   Text(
-                    "\$50",
+                    " : \$50",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ],

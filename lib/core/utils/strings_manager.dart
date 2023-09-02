@@ -38,4 +38,8 @@ abstract class StringsManager {
   static const theme = "theme";
   static const light = "light";
   static const dark = "dark";
+  static const checkout = "checkout";
+  static const selectMethod = "selectMethod";
+  static const termsAndConditions = "termsAndConditions";
+  static const placeOrder = "placeOrder";
 }
