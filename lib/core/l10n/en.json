@@ -20,6 +20,16 @@
     "findProducts"          : "Find Products",
     "myCart"                : "My Cart",
     "goToCheckout"          : "Go to Checkout",
-    "addAllToCart"          : "Add All To Cart"
+    "addAllToCart"          : "Add All To Cart",
+    "orders"                : "Orders",
+    "myDetails"             : "My Details",
+    "deliveryAddress"       : "Delivery Address",
+    "paymentMethod"         : "Payment Method",
+    "promoCode"             : "Promo Code",
+    "notification"          : "Notification",
+    "about"                 : "About",
+    "orderId:"              : "Order ID : ",
+    "totalPrice:"           : "Total Price : ",
+    "downloadReceipt"       : "Download Receipt"
 
 }

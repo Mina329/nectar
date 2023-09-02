@@ -21,4 +21,14 @@ abstract class StringsManager {
   static const myCart = "myCart";
   static const goToCheckout = "goToCheckout";
   static const addAllToCart = "addAllToCart";
+  static const orders = "orders";
+  static const myDetails = "myDetails";
+  static const deliveryAddress = "deliveryAddress";
+  static const paymentMethod = "paymentMethod";
+  static const promoCode = "promoCode";
+  static const notification = "notification";
+  static const about = "about";
+  static const orderId = "orderId:";
+  static const totalPrice = "totalPrice:";
+  static const downloadReceipt = "downloadReceipt";
 }

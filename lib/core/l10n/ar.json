@@ -20,5 +20,16 @@
     "findProducts"          : "ابحث عن المنتجات",
     "myCart"                : "عربة التسوق",
     "goToCheckout"          : "تابع عملية الشراء",
-    "addAllToCart"          : "اضافة الكل الى العربة"
+    "addAllToCart"          : "اضافة الكل الى العربة",
+    "orders"                : "الطلبات",
+    "myDetails"             : "حسابى",
+    "deliveryAddress"       : "عناوين التوصيل",
+    "paymentMethod"         : "طرق الدفع",
+    "promoCode"             : "القسائم",
+    "notification"          : "التنبيهات",
+    "about"                 : "حول",
+    "orderId:"              : "رقم الطلب : ",
+    "totalPrice:"           : "السعر الكلى : ",
+    "downloadReceipt"       : "تحميل الفاتورة"
+
 }

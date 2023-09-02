@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   animated_bottom_navigation_bar: ^1.2.0
+  cached_network_image: ^3.2.3
   cupertino_icons: ^1.0.2
   device_preview: ^1.1.0
   dots_indicator: ^3.0.0
@@ -49,13 +50,12 @@ dependency_overrides:
     git:
       url: https://github.com/bradrushworth/flutter_device_preview.git
       path: device_preview
-#    path: ../flutter_device_preview/device_preview
+  #    path: ../flutter_device_preview/device_preview
   device_frame:
     git:
       url: https://github.com/bradrushworth/flutter_device_preview.git
       path: device_frame
 #    path: ../flutter_device_preview/device_frame
-
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
