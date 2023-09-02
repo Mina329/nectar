@@ -31,4 +31,11 @@ abstract class StringsManager {
   static const orderId = "orderId:";
   static const totalPrice = "totalPrice:";
   static const downloadReceipt = "downloadReceipt";
+  static const settings = "settings";
+  static const language = "language";
+  static const arabic = "arabic";
+  static const english = "english";
+  static const theme = "theme";
+  static const light = "light";
+  static const dark = "dark";
 }

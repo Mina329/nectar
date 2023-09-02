@@ -30,6 +30,12 @@
     "about"                 : "حول",
     "orderId:"              : "رقم الطلب : ",
     "totalPrice:"           : "السعر الكلى : ",
-    "downloadReceipt"       : "تحميل الفاتورة"
-
+    "downloadReceipt"       : "تحميل الفاتورة",
+    "settings"              : "الاعدادات",
+    "language"              : "اللغة",
+    "arabic"                : "العربية",
+    "english"               : "English",
+    "theme"                 : "السمة",
+    "light"                 : "فاتح",
+    "dark"                  : "داكن"
 }

@@ -30,6 +30,14 @@
     "about"                 : "About",
     "orderId:"              : "Order ID : ",
     "totalPrice:"           : "Total Price : ",
-    "downloadReceipt"       : "Download Receipt"
+    "downloadReceipt"       : "Download Receipt",
+    "settings"              : "Settings",
+    "language"              : "Language",
+    "arabic"                : "العربية",
+    "english"               : "English",
+    "theme"                 : "Theme",
+    "light"                 : "Light",
+    "dark"                  : "Dark"
+    
 
 }

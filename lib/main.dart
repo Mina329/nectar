@@ -12,6 +12,8 @@ import 'package:nectar/core/utils/theme_manager.dart';
 import 'core/cache/cache_helper.dart';
 
 bool enableDevicePreview = false;
+final ValueNotifier<ThemeMode> notifier = ValueNotifier(ThemeMode.light);
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheData.casheIntialization();
@@ -59,18 +61,21 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(414, 896),
-      builder: (context, child) => MaterialApp.router(
-        locale: context.locale,
-        builder: DevicePreview.appBuilder,
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        //locale: context.locale,
-        debugShowCheckedModeBanner: false,
-        theme: CacheData.getData(key: CacheKeys.kDARKMODE)
-            ? ThemeManager.darkTheme
-            : ThemeManager.lightTheme,
-        routerConfig: AppRouter.router,
-      ),
+      builder: (context, child) => ValueListenableBuilder<ThemeMode>(
+          valueListenable: notifier,
+          builder: (context, value, child) {
+            return MaterialApp.router(
+              locale: context.locale,
+              builder: DevicePreview.appBuilder,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              debugShowCheckedModeBanner: false,
+              theme: ThemeManager.lightTheme,
+              darkTheme: ThemeManager.darkTheme,
+              themeMode: value,
+              routerConfig: AppRouter.router,
+            );
+          }),
     );
   }
 }

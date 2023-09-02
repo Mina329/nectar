@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:nectar/core/utils/app_router.dart';
 
 import '../../../../../core/utils/assets_manager.dart';
 import '../../../../../core/utils/color_manager.dart';
@@ -71,7 +73,9 @@ class ProfileCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      GoRouter.of(context).push(AppRouter.kSettingView);
+                    },
                     child: const Icon(
                       Icons.settings_outlined,
                     ),

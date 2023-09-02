@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:nectar/features/account/presentation/view/setting_view.dart';
 import 'package:nectar/features/explore/presentation/view/category_details_view.dart';
 import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
@@ -13,6 +14,7 @@ abstract class AppRouter {
   static const kItemDetailsView = "/itemDetailsView";
   static const kCategoryDetailsView = "/categoryItemsView";
   static const kOrdersView = "/ordersView";
+  static const kSettingView = "/settingView";
 
   static final router = GoRouter(routes: [
     GoRoute(
@@ -38,6 +40,10 @@ abstract class AppRouter {
     GoRoute(
       path: kOrdersView,
       builder: (context, state) => const OrdersView(),
+    ),
+    GoRoute(
+      path: kSettingView,
+      builder: (context, state) => const SettingView(),
     ),
   ]);
 }
