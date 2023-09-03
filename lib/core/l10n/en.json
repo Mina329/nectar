@@ -41,5 +41,13 @@
     "checkout"              : "Checkout",
     "selectMethod"          : "Select Method",
     "termsAndConditions"    : "By placing an order you agree to our Terms And Conditions",
-    "placeOrder"            : "Place Order"
+    "placeOrder"            : "Place Order",
+    "email"                 : "Email",
+    "phoneNumber"           : "Phone Number",
+    "firstName"             : "First Name",
+    "firstNameValidation"   : "Please enter your first name",
+    "lastName"              : "Last Name",
+    "lastNameValidation"    : "Please enter your last name",
+    "dateOfBirth"           : "Date Of Birth"
+
 }

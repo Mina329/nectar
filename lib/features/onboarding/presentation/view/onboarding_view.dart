@@ -15,7 +15,7 @@ class OnBoardingView extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(AssetsManager.onBoarding),
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
             child: const OnBoardingViewBody()),

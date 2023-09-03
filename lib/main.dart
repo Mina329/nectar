@@ -12,7 +12,10 @@ import 'package:nectar/core/utils/theme_manager.dart';
 import 'core/cache/cache_helper.dart';
 
 bool enableDevicePreview = false;
-final ValueNotifier<ThemeMode> notifier = ValueNotifier(ThemeMode.light);
+final ValueNotifier<ThemeMode> notifier = ValueNotifier(
+    CacheData.getData(key: CacheKeys.kDARKMODE) == CacheValues.DARK
+        ? ThemeMode.dark
+        : ThemeMode.light);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +29,9 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   if (CacheData.getData(key: CacheKeys.kDARKMODE) == null) {
     CacheData.setData(key: CacheKeys.kDARKMODE, value: CacheValues.LIGHT);
+  }
+  if (CacheData.getData(key: CacheKeys.kLANGUAGE) == null) {
+    CacheData.setData(key: CacheKeys.kLANGUAGE, value: CacheValues.ENGLISH);
   }
   runApp(
     DevicePreview(

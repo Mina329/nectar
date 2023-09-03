@@ -22,7 +22,7 @@
     "goToCheckout"          : "تابع عملية الشراء",
     "addAllToCart"          : "اضافة الكل الى العربة",
     "orders"                : "الطلبات",
-    "myDetails"             : "حسابى",
+    "myDetails"             : "تفاصيل الحساب",
     "deliveryAddress"       : "عناوين التوصيل",
     "paymentMethod"         : "طرق الدفع",
     "promoCode"             : "القسائم",
@@ -35,13 +35,20 @@
     "language"              : "اللغة",
     "arabic"                : "العربية",
     "english"               : "English",
-    "theme"                 : "السمة",
+    "theme"                 : "المظهر",
     "light"                 : "فاتح",
     "dark"                  : "داكن",
     "checkout"              : "الدفع",
     "selectMethod"          : "اختر مكان",
     "termsAndConditions"    : "من خلال تقديم الطلب فإنك توافق على الشروط والأحكام الخاصة بنا",
-    "placeOrder"            : "ارسال الطلب"
+    "placeOrder"            : "ارسال الطلب",
+    "email"                 : "الايميل",
+    "phoneNumber"           : "رقم الهاتف",
+    "firstName"             : "الاسم الاول",
+    "firstNameValidation"   : "برجاء ادخال الاسم الاول",
+    "lastName"              : "الاسم الاخير",
+    "lastNameValidation"    : "برجاء ادخال الاسم الاخير",
+    "dateOfBirth"           : "تاريخ الميلاد"
 
 
 

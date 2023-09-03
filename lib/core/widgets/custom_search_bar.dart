@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 import '../utils/color_manager.dart';
 
@@ -12,12 +13,17 @@ class CustomSearchBar extends StatelessWidget {
       child: TextField(
         decoration: InputDecoration(
           hintText: StringsManager.searchStore.tr(),
+          alignLabelWithHint: true,
           hintStyle: Theme.of(context).textTheme.bodySmall,
-          prefixIcon: Icon(
-            Icons.search,
-            color: Theme.of(context).brightness == Brightness.light
-                ? ColorManager.darkBlue
-                : ColorManager.grayOpacity,
+          prefixIcon: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
+            child: Icon(
+              Icons.search,
+              size: 24.sp,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? ColorManager.darkBlue
+                  : ColorManager.grayOpacity,
+            ),
           ),
           filled: true,
           fillColor: Theme.of(context).hoverColor,

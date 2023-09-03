@@ -83,12 +83,10 @@ abstract class ThemeManager {
         ),
       ),
     ),
-    
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       showSelectedLabels: true,
       showUnselectedLabels: true,
       backgroundColor: ColorManager.darkBlueBackground,
-      
       unselectedLabelStyle: StylesManager.headingSmallDARK,
       unselectedItemColor: ColorManager.greyLarge,
       selectedLabelStyle: StylesManager.headingSmallDARK

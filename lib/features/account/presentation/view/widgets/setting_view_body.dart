@@ -21,10 +21,15 @@ class SettingViewBody extends StatefulWidget {
 }
 
 class _SettingViewBodyState extends State<SettingViewBody> {
-  String themeValue =
-      CacheData.getData(key: CacheKeys.kDARKMODE) == CacheValues.DARK
-          ? StringsManager.dark.tr()
-          : StringsManager.light.tr();
+  late String themeValue;
+  @override
+  void initState() {
+    super.initState();
+    themeValue = CacheData.getData(key: CacheKeys.kDARKMODE) == CacheValues.DARK
+        ? StringsManager.dark.tr()
+        : StringsManager.light.tr();
+  }
+
   void _showDynamicDialog(
       {required BuildContext context,
       required String dialogTitle,
@@ -127,10 +132,9 @@ class _SettingViewBodyState extends State<SettingViewBody> {
           ),
           SettingItem(
             title: StringsManager.theme.tr(),
-            value:
-                CacheData.getData(key: CacheKeys.kDARKMODE) == CacheValues.DARK
-                    ? StringsManager.dark.tr()
-                    : StringsManager.light.tr(),
+            value: Theme.of(context).brightness == Brightness.dark
+                ? StringsManager.dark.tr()
+                : StringsManager.light.tr(),
             onTap: () {
               _showDynamicDialog(
                 context: context,

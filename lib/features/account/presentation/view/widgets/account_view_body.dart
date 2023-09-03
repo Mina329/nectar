@@ -43,6 +43,15 @@ class AccountListItemListView extends StatelessWidget {
     Icons.notifications_none,
     Icons.error_outline
   ];
+  final List<String> routerList = [
+    AppRouter.kOrdersView,
+    AppRouter.kMyDetailsView,
+    AppRouter.kOrdersView,
+    AppRouter.kOrdersView,
+    AppRouter.kOrdersView,
+    AppRouter.kOrdersView,
+    AppRouter.kOrdersView,
+  ];
   @override
   Widget build(BuildContext context) {
     return SliverList(
@@ -52,7 +61,7 @@ class AccountListItemListView extends StatelessWidget {
           leadingIcon: iconsList[index],
           title: titleList[index],
           onTap: () {
-            GoRouter.of(context).push(AppRouter.kOrdersView);
+            GoRouter.of(context).push(routerList[index]);
           },
         ),
       ),

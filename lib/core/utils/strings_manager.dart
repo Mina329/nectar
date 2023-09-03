@@ -42,4 +42,11 @@ abstract class StringsManager {
   static const selectMethod = "selectMethod";
   static const termsAndConditions = "termsAndConditions";
   static const placeOrder = "placeOrder";
+  static const email = "email";
+  static const phoneNumber = "phoneNumber";
+  static const firstName = "firstName";
+  static const firstNameValidation = "firstNameValidation";
+  static const lastName = "lastName";
+  static const lastNameValidation = "lastNameValidation";
+  static const dateOfBirth = "dateOfBirth";
 }
