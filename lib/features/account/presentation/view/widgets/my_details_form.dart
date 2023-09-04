@@ -192,7 +192,8 @@ class MyDetailsForm extends StatelessWidget {
                         );
                       });
                   if (selectedDate != null) {
-                    dateInputController.text = DateFormat('dd MMMM yyyy',
+                    dateInputController.text = DateFormat(
+                            'dd MMMM yyyy',
                             // ignore: use_build_context_synchronously
                             context.locale == ENGLISH_LOCALE ? "en" : "ar")
                         .format(selectedDate!);

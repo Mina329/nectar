@@ -51,6 +51,11 @@
 	<array>
     <string>en</string>
     <string>ar</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location</string>
+
 	</array>
 </dict>
 </plist>

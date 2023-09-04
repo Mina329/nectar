@@ -49,4 +49,6 @@ abstract class StringsManager {
   static const lastName = "lastName";
   static const lastNameValidation = "lastNameValidation";
   static const dateOfBirth = "dateOfBirth";
+  static const save = "save";
+  static const addAddress = "addAddress";
 }

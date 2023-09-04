@@ -46,7 +46,7 @@ class AccountListItemListView extends StatelessWidget {
   final List<String> routerList = [
     AppRouter.kOrdersView,
     AppRouter.kMyDetailsView,
-    AppRouter.kOrdersView,
+    AppRouter.kDeliveryAddressView,
     AppRouter.kOrdersView,
     AppRouter.kOrdersView,
     AppRouter.kOrdersView,

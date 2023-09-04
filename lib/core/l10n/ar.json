@@ -48,8 +48,8 @@
     "firstNameValidation"   : "برجاء ادخال الاسم الاول",
     "lastName"              : "الاسم الاخير",
     "lastNameValidation"    : "برجاء ادخال الاسم الاخير",
-    "dateOfBirth"           : "تاريخ الميلاد"
-
-
+    "dateOfBirth"           : "تاريخ الميلاد",
+    "save"                  : "حفظ",
+    "addAddress"            : "اضافة عنوان"
 
 }

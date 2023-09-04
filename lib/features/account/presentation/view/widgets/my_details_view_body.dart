@@ -46,11 +46,11 @@ class MyDetailsViewBody extends StatelessWidget {
               child: CustomElevatedBtn(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      // Add 
+                      // Add
                       GoRouter.of(context).pop();
                     }
                   },
-                  txt: "Save",
+                  txt: StringsManager.save.tr(),
                   style: Theme.of(context).textTheme.labelLarge!),
             ),
           )

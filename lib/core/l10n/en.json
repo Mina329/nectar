@@ -48,6 +48,8 @@
     "firstNameValidation"   : "Please enter your first name",
     "lastName"              : "Last Name",
     "lastNameValidation"    : "Please enter your last name",
-    "dateOfBirth"           : "Date Of Birth"
+    "dateOfBirth"           : "Date Of Birth",
+    "save"                  : "Save",
+    "addAddress"            : "Add Address"
 
 }
