@@ -10,6 +10,7 @@ import 'package:nectar/core/widgets/custom_loading_indicator.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/location_cubit/location_cubit.dart';
 import '../../../../../core/utils/strings_manager.dart';
 import '../../../../account/presentation/view/widgets/custom_account_list_items_app_bar.dart';
+import 'delivery_address_list_view.dart';
 
 class DeliveryAddressViewBody extends StatelessWidget {
   const DeliveryAddressViewBody({super.key});
@@ -22,10 +23,15 @@ class DeliveryAddressViewBody extends StatelessWidget {
           CustomAccountListItemsAppBar(
             title: StringsManager.deliveryAddress.tr(),
           ),
-          const Expanded(
-            child: CustomScrollView(
-              physics: BouncingScrollPhysics(),
-              slivers: [],
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25.w),
+              child: const CustomScrollView(
+                physics: BouncingScrollPhysics(),
+                slivers: [
+                  DeliveryAddressListView(),
+                ],
+              ),
             ),
           ),
           Padding(

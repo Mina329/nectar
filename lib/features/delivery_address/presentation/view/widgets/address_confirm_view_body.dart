@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nectar/core/widgets/custom_loading_indicator.dart';
 import '../../../../../core/utils/strings_manager.dart';
 import '../../../../../core/widgets/custom_elevated_btn.dart';
 import '../../../../account/presentation/view/widgets/custom_account_list_items_app_bar.dart';
@@ -20,6 +21,7 @@ class AddressConfirmViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final Placemark locationName =
         BlocProvider.of<LocationCubit>(context).locationName;
+        bool mapVisible = true;
     return Scaffold(
       body: Column(
         children: [
@@ -35,9 +37,14 @@ class AddressConfirmViewBody extends StatelessWidget {
                     height: 20.h,
                   ),
                 ),
-                GoogleMapThumbnail(
-                    location: BlocProvider.of<LocationCubit>(context)
-                        .currentLocation),
+                SliverToBoxAdapter(
+                  child: Visibility(
+                    visible: mapVisible,
+                    child: GoogleMapThumbnail(
+                        location: BlocProvider.of<LocationCubit>(context)
+                            .currentLocation),
+                  ),
+                ),
                 SliverToBoxAdapter(
                   child: SizedBox(
                     height: 10.h,
@@ -70,8 +77,20 @@ class AddressConfirmViewBody extends StatelessWidget {
               child: CustomElevatedBtn(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      
-                      GoRouter.of(context).pop();
+                      var capturedContext = context;
+                      showDialog(
+                        context: capturedContext,
+                        barrierDismissible: false,
+                        builder: (capturedContext) {
+                          return const Center(
+                            child: CustomLoadingIndicator(),
+                          );
+                        },
+                      );
+                      Future.delayed(const Duration(seconds: 1), () {
+                        GoRouter.of(capturedContext).pop();
+                        GoRouter.of(capturedContext).pop();
+                      });
                     }
                   },
                   txt: StringsManager.save.tr(),
