@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:nectar/features/account/presentation/view/setting_view.dart';
+import 'package:nectar/features/delivery_address/presentation/view/address_confirm_view.dart';
 import 'package:nectar/features/explore/presentation/view/category_details_view.dart';
 import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
@@ -21,6 +22,7 @@ abstract class AppRouter {
   static const kMyDetailsView = "/myDetailsView";
   static const kDeliveryAddressView = "/deliveryAddressView";
   static const kGoogleMapView = "/googleMapView";
+  static const kAddressConfirmView = "/addressConfirmView";
 
   static final router = GoRouter(routes: [
     GoRoute(
@@ -62,6 +64,10 @@ abstract class AppRouter {
     GoRoute(
       path: kGoogleMapView,
       builder: (context, state) => const GoogleMapView(),
+    ),
+    GoRoute(
+      path: kAddressConfirmView,
+      builder: (context, state) => const AddressConfirmView(),
     ),
   ]);
 }

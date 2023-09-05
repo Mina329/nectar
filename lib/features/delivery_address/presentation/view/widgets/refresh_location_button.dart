@@ -20,8 +20,8 @@ class RereshLocationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      left: 25.w,
-      bottom: 25.h,
+      right: 25.w,
+      bottom: 100.h,
       child: Container(
         width: 50.w,
         height: 50.h,
