@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nectar/core/utils/strings_manager.dart';
 
 class AddressConfirmationForm extends StatelessWidget {
   const AddressConfirmationForm(
@@ -23,7 +25,7 @@ class AddressConfirmationForm extends StatelessWidget {
                       .headlineMedium!
                       .copyWith(fontSize: 14.sp),
                   decoration: InputDecoration(
-                    hintText: "Building Number",
+                    hintText: StringsManager.buildingNumber.tr(),
                     hintStyle: Theme.of(context).textTheme.bodySmall,
                     filled: true,
                     fillColor: Theme.of(context).hoverColor,
@@ -36,7 +38,7 @@ class AddressConfirmationForm extends StatelessWidget {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Invalid data";
+                      return StringsManager.invalidData.tr();
                     }
                     return null;
                   },
@@ -56,7 +58,7 @@ class AddressConfirmationForm extends StatelessWidget {
                             .headlineMedium!
                             .copyWith(fontSize: 14.sp),
                         decoration: InputDecoration(
-                          hintText: "Appartment number",
+                          hintText: StringsManager.appartmentNumber.tr(),
                           hintMaxLines: 1,
                           hintStyle: Theme.of(context).textTheme.bodySmall,
                           filled: true,
@@ -70,7 +72,7 @@ class AddressConfirmationForm extends StatelessWidget {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Invalid data";
+                            return StringsManager.invalidData.tr();
                           }
                           return null;
                         },
@@ -85,7 +87,7 @@ class AddressConfirmationForm extends StatelessWidget {
                             .headlineMedium!
                             .copyWith(fontSize: 14.sp),
                         decoration: InputDecoration(
-                          hintText: "Floor",
+                          hintText: StringsManager.floor.tr(),
                           hintMaxLines: 1,
                           hintStyle: Theme.of(context).textTheme.bodySmall,
                           filled: true,
@@ -99,7 +101,7 @@ class AddressConfirmationForm extends StatelessWidget {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Invalid data";
+                            return StringsManager.invalidData.tr();
                           }
                           return null;
                         },
@@ -118,7 +120,7 @@ class AddressConfirmationForm extends StatelessWidget {
                       .headlineMedium!
                       .copyWith(fontSize: 14.sp),
                   decoration: InputDecoration(
-                    hintText: "Street",
+                    hintText: StringsManager.street.tr(),
                     hintStyle: Theme.of(context).textTheme.bodySmall,
                     filled: true,
                     fillColor: Theme.of(context).hoverColor,
@@ -131,7 +133,7 @@ class AddressConfirmationForm extends StatelessWidget {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Invalid data";
+                      return StringsManager.invalidData.tr();
                     }
                     return null;
                   },

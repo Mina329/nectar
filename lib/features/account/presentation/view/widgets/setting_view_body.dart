@@ -94,6 +94,9 @@ class _SettingViewBodyState extends State<SettingViewBody> {
         children: [
           CustomAccountListItemsAppBar(
             title: StringsManager.settings.tr(),
+            backArrowOnPressed: () {
+              GoRouter.of(context).pop();
+            },
           ),
           const Divider(),
           SettingItem(

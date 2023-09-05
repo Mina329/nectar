@@ -10,9 +10,10 @@ class DeliveryAddressItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-    height: 100.h,
+    height: 105.h,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
           height: 10.h,

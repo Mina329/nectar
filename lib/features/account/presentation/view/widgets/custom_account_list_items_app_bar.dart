@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class CustomAccountListItemsAppBar extends StatelessWidget {
-  const CustomAccountListItemsAppBar({super.key, required this.title});
+  const CustomAccountListItemsAppBar({super.key, required this.title, required this.backArrowOnPressed});
   final String title;
+  final VoidCallback backArrowOnPressed;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -17,9 +17,7 @@ class CustomAccountListItemsAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               IconButton(
-                onPressed: () {
-                  GoRouter.of(context).pop();
-                },
+                onPressed: backArrowOnPressed,
                 icon: const Icon(
                   Icons.arrow_back_ios_rounded,
                 ),

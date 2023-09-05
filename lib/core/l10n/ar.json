@@ -50,6 +50,16 @@
     "lastNameValidation"    : "برجاء ادخال الاسم الاخير",
     "dateOfBirth"           : "تاريخ الميلاد",
     "save"                  : "حفظ",
-    "addAddress"            : "اضافة عنوان"
+    "addAddress"            : "اضافة عنوان",
+    "myLocation"            : "مكانى",
+    "confirm"               : "تأكيد",
+    "newAddress"            : "عنوان جديد",
+    "area"                  : "المنطقة",
+    "change"                : "تغير",
+    "buildingNumber"        : "رقم المبنى",
+    "appartmentNumber"      : "رقم الشقة",
+    "floor"                 : "الدور",
+    "street"                : "الشارع",
+    "invalidData"           : "بيانات غير صالحة"
 
 }

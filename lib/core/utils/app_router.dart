@@ -1,13 +1,17 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nectar/core/utils/service_locator.dart';
 import 'package:nectar/features/account/presentation/view/setting_view.dart';
+import 'package:nectar/features/delivery_address/data/repos/delivery_address_repo_impl.dart';
 import 'package:nectar/features/delivery_address/presentation/view/address_confirm_view.dart';
+import 'package:nectar/features/delivery_address/presentation/view_model/location_bloc/location_bloc.dart';
 import 'package:nectar/features/explore/presentation/view/category_details_view.dart';
 import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
 import '../../features/delivery_address/presentation/view/delivery_address_view.dart';
 import '../../features/delivery_address/presentation/view/google_map_view.dart';
-import '../../features/account/presentation/view/my_details_view.dart';
-import '../../features/account/presentation/view/orders_view.dart';
+import '../../features/my_details/presentation/view/my_details_view.dart';
+import '../../features/orders/presentation/view/orders_view.dart';
 import '../../features/onboarding/presentation/view/onboarding_view.dart';
 import '../../features/shop/presentation/view/item_details_view.dart';
 
@@ -59,15 +63,27 @@ abstract class AppRouter {
     ),
     GoRoute(
       path: kDeliveryAddressView,
-      builder: (context, state) => const DeliveryAddressView(),
+      builder: (context, state) => MultiBlocProvider(providers: [
+        BlocProvider(
+          create: (context) =>
+              LocationBloc(getIt.get<DeliveryAddressRepoImpl>()),
+        )
+      ], child: const DeliveryAddressView()),
     ),
     GoRoute(
       path: kGoogleMapView,
-      builder: (context, state) => const GoogleMapView(),
+      builder: (context, state) {
+        LocationBloc bloc = state.extra as LocationBloc;
+        return BlocProvider.value(value: bloc, child: const GoogleMapView());
+      },
     ),
     GoRoute(
       path: kAddressConfirmView,
-      builder: (context, state) => const AddressConfirmView(),
+      builder: (context, state) {
+        LocationBloc bloc = state.extra as LocationBloc;
+        return BlocProvider.value(
+            value: bloc, child: const AddressConfirmView());
+      },
     ),
   ]);
 }

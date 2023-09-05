@@ -1,8 +1,8 @@
 {
-    "splashDescription"     :  "online groceriet",
+    "splashDescription"     : "online groceriet",
     "onBoardingTitle"       : "Welcome\nto our store",
     "getStarted"            : "Get Started",
-    "onBoardingDescription" :   "Ger your groceries in as fast as one hour",
+    "onBoardingDescription" : "Ger your groceries in as fast as one hour",
     "shop"                  : "Shop",
     "cart"                  : "Cart",
     "explore"               : "Explore",
@@ -50,6 +50,16 @@
     "lastNameValidation"    : "Please enter your last name",
     "dateOfBirth"           : "Date Of Birth",
     "save"                  : "Save",
-    "addAddress"            : "Add Address"
+    "addAddress"            : "Add Address",
+    "myLocation"            : "My Location",
+    "confirm"               : "Confirm",
+    "newAddress"            : "New Address",
+    "area"                  : "Area",
+    "change"                : "Change",
+    "buildingNumber"        : "Building Number",
+    "appartmentNumber"      : "Appartment Number",
+    "floor"                 : "Floor",
+    "street"                : "Street",
+    "invalidData"           : "Invalid Data"
 
 }

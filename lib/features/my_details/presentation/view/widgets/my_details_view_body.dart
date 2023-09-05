@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nectar/core/widgets/custom_elevated_btn.dart';
 
 import '../../../../../core/utils/strings_manager.dart';
-import 'custom_account_list_items_app_bar.dart';
+import '../../../../account/presentation/view/widgets/custom_account_list_items_app_bar.dart';
 import 'my_details_form.dart';
 
 class MyDetailsViewBody extends StatelessWidget {
@@ -20,6 +20,9 @@ class MyDetailsViewBody extends StatelessWidget {
         children: [
           CustomAccountListItemsAppBar(
             title: StringsManager.myDetails.tr(),
+            backArrowOnPressed: () {
+              GoRouter.of(context).pop();
+            },
           ),
           Expanded(
             child: CustomScrollView(

@@ -1,8 +1,8 @@
+
 import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nectar/core/cache/cache_keys_values.dart';
@@ -10,8 +10,8 @@ import 'package:nectar/core/l10n/locales.dart';
 import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/core/utils/theme_manager.dart';
-import 'package:nectar/features/delivery_address/presentation/view_model/location_cubit/location_cubit.dart';
 import 'core/cache/cache_helper.dart';
+import 'core/utils/service_locator.dart';
 
 bool enableDevicePreview = false;
 final ValueNotifier<ThemeMode> notifier = ValueNotifier(
@@ -22,6 +22,7 @@ final ValueNotifier<ThemeMode> notifier = ValueNotifier(
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheData.casheIntialization();
+  setupServiceLocator();
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   SystemChrome.setPreferredOrientations([
@@ -72,23 +73,16 @@ class _MyAppState extends State<MyApp> {
       builder: (context, child) => ValueListenableBuilder<ThemeMode>(
           valueListenable: notifier,
           builder: (context, value, child) {
-            return MultiBlocProvider(
-              providers: [
-                BlocProvider(
-                  create: (context) => LocationCubit(),
-                )
-              ],
-              child: MaterialApp.router(
-                locale: context.locale,
-                builder: DevicePreview.appBuilder,
-                localizationsDelegates: context.localizationDelegates,
-                supportedLocales: context.supportedLocales,
-                debugShowCheckedModeBanner: false,
-                theme: ThemeManager.lightTheme,
-                darkTheme: ThemeManager.darkTheme,
-                themeMode: value,
-                routerConfig: AppRouter.router,
-              ),
+            return MaterialApp.router(
+              locale: context.locale,
+              builder: DevicePreview.appBuilder,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              debugShowCheckedModeBanner: false,
+              theme: ThemeManager.lightTheme,
+              darkTheme: ThemeManager.darkTheme,
+              themeMode: value,
+              routerConfig: AppRouter.router,
             );
           }),
     );

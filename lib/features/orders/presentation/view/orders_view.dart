@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nectar/features/account/presentation/view/widgets/orders_view_body.dart';
+import 'package:nectar/features/orders/presentation/view/widgets/orders_view_body.dart';
 
 class OrdersView extends StatelessWidget {
   const OrdersView({super.key});

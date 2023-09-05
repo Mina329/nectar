@@ -51,4 +51,14 @@ abstract class StringsManager {
   static const dateOfBirth = "dateOfBirth";
   static const save = "save";
   static const addAddress = "addAddress";
+  static const myLocation = "myLocation";
+  static const confirm = "confirm";
+  static const newAddress = "newAddress";
+  static const area = "area";
+  static const change = "change";
+  static const buildingNumber = "buildingNumber";
+  static const appartmentNumber = "appartmentNumber";
+  static const floor = "floor";
+  static const street = "street";
+  static const invalidData = "invalidData";
 }
