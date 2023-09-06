@@ -10,8 +10,9 @@ class RefreshMyCurrentLocation extends LocationEvent {}
 class GetPlacemark extends LocationEvent {
   final double latitude;
   final double longitude;
+  final String language;
 
-  GetPlacemark(this.latitude, this.longitude);
+  GetPlacemark(this.latitude, this.longitude, this.language);
 }
 
 class MapVisibility extends LocationEvent{}

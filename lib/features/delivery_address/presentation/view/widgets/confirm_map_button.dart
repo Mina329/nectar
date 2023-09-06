@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nectar/core/cache/cache_helper.dart';
+import 'package:nectar/core/cache/cache_keys_values.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 
 import '../../../../../core/utils/app_router.dart';
@@ -55,7 +57,11 @@ class ConfirmMapButton extends StatelessWidget {
                         .latitude,
                     BlocProvider.of<LocationBloc>(context)
                         .currentLocation
-                        .longitude),
+                        .longitude,
+                    CacheData.getData(key: CacheKeys.kLANGUAGE) ==
+                            CacheValues.ARABIC
+                        ? "ar"
+                        : "en"),
               );
             },
             txt: StringsManager.confirm.tr(),
