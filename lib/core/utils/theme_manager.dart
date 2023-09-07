@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nectar/core/utils/color_manager.dart';
 import 'package:nectar/core/utils/styles_manager.dart';
 
-abstract class ThemeManager {
-  static final lightTheme = ThemeData.light().copyWith(
+
+
+ThemeData getLightThemeData(){
+  return ThemeData.light().copyWith(
     scaffoldBackgroundColor: ColorManager.whiteBackground,
     hoverColor: ColorManager.secondaryBackgroundLIGHT,
     primaryColor: ColorManager.greenPrimary,
@@ -29,10 +31,10 @@ abstract class ThemeManager {
       showSelectedLabels: true,
       showUnselectedLabels: true,
       backgroundColor: Colors.white,
-      unselectedLabelStyle: StylesManager.headingSmallLIGHT,
+      unselectedLabelStyle: headingSmallLIGHT,
       unselectedItemColor: ColorManager.darkBlue,
       selectedLabelStyle:
-          StylesManager.headingSmallLIGHT.copyWith(color: ColorManager.green),
+          headingSmallLIGHT.copyWith(color: ColorManager.green),
       unselectedIconTheme: const IconThemeData(color: ColorManager.darkBlue),
       selectedIconTheme: const IconThemeData(color: ColorManager.green),
       selectedItemColor: ColorManager.green,
@@ -47,22 +49,25 @@ abstract class ThemeManager {
     ),
     dividerColor: ColorManager.green,
     textTheme: TextTheme(
-      displayLarge: StylesManager.displayLargeLIGHT,
-      titleMedium: StylesManager.titleMediumLIGHT,
-      titleSmall: StylesManager.titleSmallLIGHT,
-      headlineMedium: StylesManager.headingMediumLIGHT,
-      bodySmall: StylesManager.bodySmallLIGHT,
-      bodyMedium: StylesManager.bodyMediumLIGHT,
-      bodyLarge: StylesManager.bodyLargeLIGHT,
-      labelMedium: StylesManager.labelMediumLIGHT,
-      labelLarge: StylesManager.labelLargeLIGHT,
-      headlineSmall: StylesManager.headingSmallLIGHT,
-      displaySmall: StylesManager.displaySmall,
-      titleLarge: StylesManager.titleLargeLIGHT,
+      displayLarge: displayLargeLIGHT,
+      titleMedium: titleMediumLIGHT,
+      titleSmall: titleSmallLIGHT,
+      headlineMedium: headingMediumLIGHT,
+      bodySmall: bodySmallLIGHT,
+      bodyMedium: bodyMediumLIGHT,
+      bodyLarge: bodyLargeLIGHT,
+      labelMedium: labelMediumLIGHT,
+      labelLarge: labelLargeLIGHT,
+      headlineSmall: headingSmallLIGHT,
+      displaySmall: displaySmall,
+      titleLarge: titleLargeLIGHT,
     ),
   );
 
-  static final darkTheme = ThemeData.dark().copyWith(
+}
+
+ThemeData getDarkThemeData(){
+  return ThemeData.dark().copyWith(
     scaffoldBackgroundColor: ColorManager.darkBlueBackground,
     hoverColor: ColorManager.secondaryBackgroundDARK,
     primaryColor: ColorManager.darkBluePrimary,
@@ -87,9 +92,9 @@ abstract class ThemeManager {
       showSelectedLabels: true,
       showUnselectedLabels: true,
       backgroundColor: ColorManager.darkBlueBackground,
-      unselectedLabelStyle: StylesManager.headingSmallDARK,
+      unselectedLabelStyle: headingSmallDARK,
       unselectedItemColor: ColorManager.greyLarge,
-      selectedLabelStyle: StylesManager.headingSmallDARK
+      selectedLabelStyle: headingSmallDARK
           .copyWith(color: ColorManager.greySmall),
       unselectedIconTheme: const IconThemeData(color: ColorManager.greyLarge),
       selectedIconTheme: const IconThemeData(color: ColorManager.greySmall),
@@ -105,18 +110,18 @@ abstract class ThemeManager {
     ),
     dividerColor: ColorManager.grayOpacity,
     textTheme: TextTheme(
-      displayLarge: StylesManager.displayLargeDARK,
-      titleMedium: StylesManager.titleMediumDARK,
-      titleSmall: StylesManager.titleSmallDARK,
-      headlineMedium: StylesManager.headingMediumDARK,
-      bodySmall: StylesManager.bodySmallDARK,
-      bodyMedium: StylesManager.bodyMediumDARK,
-      bodyLarge: StylesManager.bodyLargeDARK,
-      labelMedium: StylesManager.labelMediumDARK,
-      labelLarge: StylesManager.labelLargeDARK,
-      headlineSmall: StylesManager.headingSmallDARK,
-      displaySmall: StylesManager.displaySmall,
-      titleLarge: StylesManager.titleLargeDARK,
+      displayLarge: displayLargeDARK,
+      titleMedium: titleMediumDARK,
+      titleSmall: titleSmallDARK,
+      headlineMedium: headingMediumDARK,
+      bodySmall: bodySmallDARK,
+      bodyMedium: bodyMediumDARK,
+      bodyLarge: bodyLargeDARK,
+      labelMedium: labelMediumDARK,
+      labelLarge: labelLargeDARK,
+      headlineSmall: headingSmallDARK,
+      displaySmall: displaySmall,
+      titleLarge: titleLargeDARK,
     ),
   );
 }

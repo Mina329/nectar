@@ -10,6 +10,7 @@ import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
 import '../../features/delivery_address/presentation/view/delivery_address_view.dart';
 import '../../features/delivery_address/presentation/view/google_map_view.dart';
+import '../../features/delivery_address/presentation/view/search_address_view.dart';
 import '../../features/my_details/presentation/view/my_details_view.dart';
 import '../../features/orders/presentation/view/orders_view.dart';
 import '../../features/onboarding/presentation/view/onboarding_view.dart';
@@ -27,6 +28,7 @@ abstract class AppRouter {
   static const kDeliveryAddressView = "/deliveryAddressView";
   static const kGoogleMapView = "/googleMapView";
   static const kAddressConfirmView = "/addressConfirmView";
+  static const kSearchAddressView = "/searchAddressView";
 
   static final router = GoRouter(routes: [
     GoRoute(
@@ -83,6 +85,14 @@ abstract class AppRouter {
         LocationBloc bloc = state.extra as LocationBloc;
         return BlocProvider.value(
             value: bloc, child: const AddressConfirmView());
+      },
+    ),
+    GoRoute(
+      path: kSearchAddressView,
+      builder: (context, state) {
+        LocationBloc bloc = state.extra as LocationBloc;
+        return BlocProvider.value(
+            value: bloc, child: const SearchAddressView());
       },
     ),
   ]);

@@ -55,7 +55,12 @@ class GoogleMapAppBar extends StatelessWidget {
                     .copyWith(color: ColorManager.whiteText),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  final locationBloc = BlocProvider.of<LocationBloc>(context);
+                  GoRouter.of(context).push(
+                        AppRouter.kSearchAddressView,
+                        extra: locationBloc);
+                },
                 icon: const Icon(
                   Icons.search,
                   color: ColorManager.whiteText,

@@ -79,8 +79,8 @@ class _MyAppState extends State<MyApp> {
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
               debugShowCheckedModeBanner: false,
-              theme: ThemeManager.lightTheme,
-              darkTheme: ThemeManager.darkTheme,
+              theme: getLightThemeData(),
+              darkTheme: getDarkThemeData(),
               themeMode: value,
               routerConfig: AppRouter.router,
             );
