@@ -31,7 +31,6 @@ class AccountListItemListView extends StatelessWidget {
     StringsManager.deliveryAddress.tr(),
     StringsManager.paymentMethod.tr(),
     StringsManager.promoCode.tr(),
-    StringsManager.notification.tr(),
     StringsManager.about.tr(),
   ];
   final List<IconData?> iconsList = [
@@ -40,15 +39,13 @@ class AccountListItemListView extends StatelessWidget {
     Icons.location_on_outlined,
     Icons.payment,
     Icons.receipt_outlined,
-    Icons.notifications_none,
     Icons.error_outline
   ];
   final List<String> routerList = [
     AppRouter.kOrdersView,
     AppRouter.kMyDetailsView,
     AppRouter.kDeliveryAddressView,
-    AppRouter.kOrdersView,
-    AppRouter.kOrdersView,
+    AppRouter.kPaymentMethodView,
     AppRouter.kOrdersView,
     AppRouter.kOrdersView,
   ];

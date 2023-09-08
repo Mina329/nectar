@@ -63,4 +63,7 @@ abstract class StringsManager {
   static const invalidData = "invalidData";
   static const error = "error";
   static const search = "search";
+  static const cash = "cash";
+  static const visa = "visa";
+  static const mobileWallet = "mobileWallet";
 }

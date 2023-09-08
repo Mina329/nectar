@@ -16,6 +16,7 @@ import '../../features/delivery_address/presentation/view/search_address_view.da
 import '../../features/my_details/presentation/view/my_details_view.dart';
 import '../../features/orders/presentation/view/orders_view.dart';
 import '../../features/onboarding/presentation/view/onboarding_view.dart';
+import '../../features/payment_method/presentation/view/payment_method_view.dart';
 import '../../features/shop/presentation/view/item_details_view.dart';
 
 abstract class AppRouter {
@@ -31,6 +32,7 @@ abstract class AppRouter {
   static const kGoogleMapView = "/googleMapView";
   static const kAddressConfirmView = "/addressConfirmView";
   static const kSearchAddressView = "/searchAddressView";
+  static const kPaymentMethodView = "/paymentMethodView";
 
   static final router = GoRouter(routes: [
     GoRoute(
@@ -102,6 +104,10 @@ abstract class AppRouter {
           BlocProvider.value(value: passingObjects.bloc),
         ], child: const SearchAddressView());
       },
+    ),
+    GoRoute(
+      path: kPaymentMethodView,
+      builder: (context, state) => const PaymentMethodView(),
     ),
   ]);
 }
