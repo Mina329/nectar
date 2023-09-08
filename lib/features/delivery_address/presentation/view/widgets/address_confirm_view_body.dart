@@ -20,85 +20,92 @@ class AddressConfirmViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final Placemark locationName =
         BlocProvider.of<LocationBloc>(context).currentLocationPlacemark;
-    return Scaffold(
-      body: Column(
-        children: [
-          CustomAccountListItemsAppBar(
-            title: StringsManager.newAddress.tr(),
-            backArrowOnPressed: () {
-              BlocProvider.of<LocationBloc>(context).add(MapVisibility());
-              GoRouter.of(context).pop();
-            },
-          ),
-          Expanded(
-            child: CustomScrollView(
-              physics: const BouncingScrollPhysics(),
-              slivers: [
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 20.h,
+    return WillPopScope(
+      onWillPop: () async {
+        BlocProvider.of<LocationBloc>(context).add(MapVisibility());
+        GoRouter.of(context).pop();
+        return false;
+      },
+      child: Scaffold(
+        body: Column(
+          children: [
+            CustomAccountListItemsAppBar(
+              title: StringsManager.newAddress.tr(),
+              backArrowOnPressed: () {
+                BlocProvider.of<LocationBloc>(context).add(MapVisibility());
+                GoRouter.of(context).pop();
+              },
+            ),
+            Expanded(
+              child: CustomScrollView(
+                physics: const BouncingScrollPhysics(),
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 20.h,
+                    ),
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: BlocBuilder<LocationBloc, LocationState>(
-                    builder: (context, state) {
-                      if (state is MapVisibilityLoading) {
+                  SliverToBoxAdapter(
+                    child: BlocBuilder<LocationBloc, LocationState>(
+                      builder: (context, state) {
+                        if (state is MapVisibilityLoading) {
+                          return Visibility(
+                            visible: false,
+                            child: GoogleMapThumbnail(
+                                location: BlocProvider.of<LocationBloc>(context)
+                                    .currentLocation),
+                          );
+                        }
                         return Visibility(
-                          visible: false,
+                          visible: true,
                           child: GoogleMapThumbnail(
                               location: BlocProvider.of<LocationBloc>(context)
                                   .currentLocation),
                         );
-                      }
-                      return Visibility(
-                        visible: true,
-                        child: GoogleMapThumbnail(
-                            location: BlocProvider.of<LocationBloc>(context)
-                                .currentLocation),
-                      );
-                    },
+                      },
+                    ),
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 10.h,
+                  SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 10.h,
+                    ),
                   ),
-                ),
-                AreaCard(
-                  placeName:
-                      "${locationName.results?[0].components?.neighbourhood ?? ' ' } "
-                      "${locationName.results?[0].components?.state ?? ' '} "
-                      "${locationName.results?[0].components?.city ?? ' '} "
-                ),
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 10.h,
+                  AreaCard(
+                      placeName:
+                          "${locationName.results?[0].components?.neighbourhood ?? ' '} "
+                          "${locationName.results?[0].components?.state ?? ' '} "
+                          "${locationName.results?[0].components?.city ?? ' '} "),
+                  SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 10.h,
+                    ),
                   ),
-                ),
-                AddressConfirmationForm(
-                  formKey: formKey,
-                  streetName: locationName.results?[0] == null
-                      ? ''
-                      : locationName.results![0].components == null
-                          ? ''
-                          : locationName.results![0].components!.road == null
-                              ? ''
-                              : locationName.results![0].components!.road!,
-                  buildingNumber: locationName.results?[0] == null
-                      ? ''
-                      : locationName.results![0].components == null
-                          ? ''
-                          : locationName.results![0].components!.houseNumber ==
-                                  null
-                              ? ''
-                              : locationName
-                                  .results![0].components!.houseNumber!,
-                )
-              ],
+                  AddressConfirmationForm(
+                    formKey: formKey,
+                    streetName: locationName.results?[0] == null
+                        ? ''
+                        : locationName.results![0].components == null
+                            ? ''
+                            : locationName.results![0].components!.road == null
+                                ? ''
+                                : locationName.results![0].components!.road!,
+                    buildingNumber: locationName.results?[0] == null
+                        ? ''
+                        : locationName.results![0].components == null
+                            ? ''
+                            : locationName
+                                        .results![0].components!.houseNumber ==
+                                    null
+                                ? ''
+                                : locationName
+                                    .results![0].components!.houseNumber!,
+                  )
+                ],
+              ),
             ),
-          ),
-          SaveAddressButton(formKey: formKey)
-        ],
+            SaveAddressButton(formKey: formKey)
+          ],
+        ),
       ),
     );
   }

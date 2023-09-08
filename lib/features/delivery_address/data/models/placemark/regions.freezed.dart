@@ -20,12 +20,16 @@ Regions _$RegionsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Regions {
+
   @JsonKey(name: 'AFRICA')
-  String? get africa => throw _privateConstructorUsedError;
+  String? get africa =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'EG')
-  String? get eg => throw _privateConstructorUsedError;
+  String? get eg =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'NORTHERN_AFRICA')
-  String? get northernAfrica => throw _privateConstructorUsedError;
+  String? get northernAfrica =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'WORLD')
   String? get world => throw _privateConstructorUsedError;
 
@@ -147,15 +151,19 @@ class _$_Regions implements _Regions {
   factory _$_Regions.fromJson(Map<String, dynamic> json) =>
       _$$_RegionsFromJson(json);
 
+
   @override
   @JsonKey(name: 'AFRICA')
   final String? africa;
+
   @override
   @JsonKey(name: 'EG')
   final String? eg;
+
   @override
   @JsonKey(name: 'NORTHERN_AFRICA')
   final String? northernAfrica;
+
   @override
   @JsonKey(name: 'WORLD')
   final String? world;
@@ -205,16 +213,16 @@ abstract class _Regions implements Regions {
 
   factory _Regions.fromJson(Map<String, dynamic> json) = _$_Regions.fromJson;
 
-  @override
+  @override 
   @JsonKey(name: 'AFRICA')
   String? get africa;
-  @override
+  @override 
   @JsonKey(name: 'EG')
   String? get eg;
-  @override
+  @override 
   @JsonKey(name: 'NORTHERN_AFRICA')
   String? get northernAfrica;
-  @override
+  @override 
   @JsonKey(name: 'WORLD')
   String? get world;
   @override

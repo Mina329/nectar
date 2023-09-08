@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nectar/core/errors/failure.dart';
+import 'package:nectar/features/delivery_address/data/models/search_address_suggestion/search_address_suggestion.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../core/utils/api_service.dart';
@@ -42,8 +43,25 @@ class DeliveryAddressRepoImpl extends DeliveryAddressRepo {
       var data = await apiService.getGeoCoding(
           latitude: latitude, longitude: longitude, language: language);
       Placemark placemark = Placemark.fromJson(data);
-      print("--------------------------------");
       return right(placemark);
+    } catch (e) {
+      return left(
+        LocationServiceFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, SearchAddressSuggestion>> fetchSearchAddressSuggestion(
+      String latitude, String longitude, String query) async {
+    try {
+      var data = await apiService.getGeoSearchSuggestion(
+          latitude: latitude, longitude: longitude, query: query);
+      SearchAddressSuggestion suggestions =
+          SearchAddressSuggestion.fromJson(data);
+      return right(suggestions);
     } catch (e) {
       return left(
         LocationServiceFailure(

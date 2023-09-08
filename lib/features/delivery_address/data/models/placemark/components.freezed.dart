@@ -21,20 +21,26 @@ Components _$ComponentsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Components {
   @JsonKey(name: 'ISO_3166-1_alpha-2')
-  String? get iso31661Alpha2 => throw _privateConstructorUsedError;
+  String? get iso31661Alpha2 =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'ISO_3166-1_alpha-3')
-  String? get iso31661Alpha3 => throw _privateConstructorUsedError;
+  String? get iso31661Alpha3 =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'ISO_3166-2')
-  List<String>? get iso31662 => throw _privateConstructorUsedError;
+  List<String>? get iso31662 =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: '_category')
-  String? get category => throw _privateConstructorUsedError;
+  String? get category =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: '_type')
   String? get type => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get continent => throw _privateConstructorUsedError;
-  String? get country => throw _privateConstructorUsedError;
+  String? get country =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'country_code')
-  String? get countryCode => throw _privateConstructorUsedError;
+  String? get countryCode =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'house_number')
   String? get houseNumber => throw _privateConstructorUsedError;
   String? get neighbourhood => throw _privateConstructorUsedError;
@@ -295,13 +301,17 @@ class _$_Components implements _Components {
   factory _$_Components.fromJson(Map<String, dynamic> json) =>
       _$$_ComponentsFromJson(json);
 
+
   @override
   @JsonKey(name: 'ISO_3166-1_alpha-2')
   final String? iso31661Alpha2;
+
   @override
   @JsonKey(name: 'ISO_3166-1_alpha-3')
   final String? iso31661Alpha3;
+
   final List<String>? _iso31662;
+
   @override
   @JsonKey(name: 'ISO_3166-2')
   List<String>? get iso31662 {
@@ -312,9 +322,11 @@ class _$_Components implements _Components {
     return EqualUnmodifiableListView(value);
   }
 
+
   @override
   @JsonKey(name: '_category')
   final String? category;
+
   @override
   @JsonKey(name: '_type')
   final String? type;
@@ -324,9 +336,11 @@ class _$_Components implements _Components {
   final String? continent;
   @override
   final String? country;
+
   @override
   @JsonKey(name: 'country_code')
   final String? countryCode;
+
   @override
   @JsonKey(name: 'house_number')
   final String? houseNumber;
@@ -426,19 +440,19 @@ abstract class _Components implements Components {
   factory _Components.fromJson(Map<String, dynamic> json) =
       _$_Components.fromJson;
 
-  @override
+  @override 
   @JsonKey(name: 'ISO_3166-1_alpha-2')
   String? get iso31661Alpha2;
-  @override
+  @override 
   @JsonKey(name: 'ISO_3166-1_alpha-3')
   String? get iso31661Alpha3;
-  @override
+  @override 
   @JsonKey(name: 'ISO_3166-2')
   List<String>? get iso31662;
-  @override
+  @override 
   @JsonKey(name: '_category')
   String? get category;
-  @override
+  @override 
   @JsonKey(name: '_type')
   String? get type;
   @override
@@ -447,10 +461,10 @@ abstract class _Components implements Components {
   String? get continent;
   @override
   String? get country;
-  @override
+  @override 
   @JsonKey(name: 'country_code')
   String? get countryCode;
-  @override
+  @override 
   @JsonKey(name: 'house_number')
   String? get houseNumber;
   @override

@@ -20,25 +20,34 @@ Currency _$CurrencyFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Currency {
+
   @JsonKey(name: 'alternate_symbols')
-  List<String>? get alternateSymbols => throw _privateConstructorUsedError;
+  List<String>? get alternateSymbols =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'decimal_mark')
-  String? get decimalMark => throw _privateConstructorUsedError;
+  String? get decimalMark =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'html_entity')
-  String? get htmlEntity => throw _privateConstructorUsedError;
+  String? get htmlEntity =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'iso_code')
-  String? get isoCode => throw _privateConstructorUsedError;
+  String? get isoCode =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'iso_numeric')
   String? get isoNumeric => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
+  String? get name =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'smallest_denomination')
   int? get smallestDenomination => throw _privateConstructorUsedError;
-  String? get subunit => throw _privateConstructorUsedError;
+  String? get subunit =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'subunit_to_unit')
   int? get subunitToUnit => throw _privateConstructorUsedError;
-  String? get symbol => throw _privateConstructorUsedError;
+  String? get symbol =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'symbol_first')
-  int? get symbolFirst => throw _privateConstructorUsedError;
+  int? get symbolFirst =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'thousands_separator')
   String? get thousandsSeparator => throw _privateConstructorUsedError;
 
@@ -267,7 +276,9 @@ class _$_Currency implements _Currency {
   factory _$_Currency.fromJson(Map<String, dynamic> json) =>
       _$$_CurrencyFromJson(json);
 
+
   final List<String>? _alternateSymbols;
+
   @override
   @JsonKey(name: 'alternate_symbols')
   List<String>? get alternateSymbols {
@@ -279,33 +290,41 @@ class _$_Currency implements _Currency {
     return EqualUnmodifiableListView(value);
   }
 
+
   @override
   @JsonKey(name: 'decimal_mark')
   final String? decimalMark;
+
   @override
   @JsonKey(name: 'html_entity')
   final String? htmlEntity;
+
   @override
   @JsonKey(name: 'iso_code')
   final String? isoCode;
+
   @override
   @JsonKey(name: 'iso_numeric')
   final String? isoNumeric;
   @override
   final String? name;
+
   @override
   @JsonKey(name: 'smallest_denomination')
   final int? smallestDenomination;
   @override
   final String? subunit;
+
   @override
   @JsonKey(name: 'subunit_to_unit')
   final int? subunitToUnit;
   @override
   final String? symbol;
+
   @override
   @JsonKey(name: 'symbol_first')
   final int? symbolFirst;
+
   @override
   @JsonKey(name: 'thousands_separator')
   final String? thousandsSeparator;
@@ -391,37 +410,37 @@ abstract class _Currency implements Currency {
 
   factory _Currency.fromJson(Map<String, dynamic> json) = _$_Currency.fromJson;
 
-  @override
+  @override 
   @JsonKey(name: 'alternate_symbols')
   List<String>? get alternateSymbols;
-  @override
+  @override 
   @JsonKey(name: 'decimal_mark')
   String? get decimalMark;
-  @override
+  @override 
   @JsonKey(name: 'html_entity')
   String? get htmlEntity;
-  @override
+  @override 
   @JsonKey(name: 'iso_code')
   String? get isoCode;
-  @override
+  @override 
   @JsonKey(name: 'iso_numeric')
   String? get isoNumeric;
   @override
   String? get name;
-  @override
+  @override 
   @JsonKey(name: 'smallest_denomination')
   int? get smallestDenomination;
   @override
   String? get subunit;
-  @override
+  @override 
   @JsonKey(name: 'subunit_to_unit')
   int? get subunitToUnit;
   @override
   String? get symbol;
-  @override
+  @override 
   @JsonKey(name: 'symbol_first')
   int? get symbolFirst;
-  @override
+  @override 
   @JsonKey(name: 'thousands_separator')
   String? get thousandsSeparator;
   @override

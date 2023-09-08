@@ -20,7 +20,8 @@ UnM49 _$UnM49FromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UnM49 {
-  Regions? get regions => throw _privateConstructorUsedError;
+  Regions? get regions =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'statistical_groupings')
   List<String>? get statisticalGroupings => throw _privateConstructorUsedError;
 
@@ -137,7 +138,9 @@ class _$_UnM49 implements _UnM49 {
 
   @override
   final Regions? regions;
+
   final List<String>? _statisticalGroupings;
+
   @override
   @JsonKey(name: 'statistical_groupings')
   List<String>? get statisticalGroupings {
@@ -193,7 +196,7 @@ abstract class _UnM49 implements UnM49 {
 
   @override
   Regions? get regions;
-  @override
+  @override 
   @JsonKey(name: 'statistical_groupings')
   List<String>? get statisticalGroupings;
   @override

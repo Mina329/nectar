@@ -1,7 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/color_manager.dart';
+import 'package:nectar/core/utils/strings_manager.dart';
+import 'package:nectar/features/delivery_address/presentation/view_model/location_bloc/location_bloc.dart';
+import 'package:nectar/features/delivery_address/presentation/view_model/search_address_cubit/search_address_cubit.dart';
 
 class AddressSearchBar extends StatelessWidget {
   AddressSearchBar({super.key});
@@ -25,13 +30,25 @@ class AddressSearchBar extends StatelessWidget {
             height: 50.h,
             width: 330.w,
             child: TextField(
+              onChanged: (value) {
+                BlocProvider.of<SearchAddressCubit>(context).fetchSuggestions(
+                    BlocProvider.of<LocationBloc>(context)
+                        .currentLocation
+                        .latitude
+                        .toString(),
+                    BlocProvider.of<LocationBloc>(context)
+                        .currentLocation
+                        .longitude
+                        .toString(),
+                    value);
+              },
               controller: fieldText,
               style: Theme.of(context)
                   .textTheme
                   .headlineMedium!
                   .copyWith(fontSize: 14.sp),
               textAlignVertical: TextAlignVertical.bottom,
-              decoration: InputDecoration(
+              decoration: InputDecoration(  
                 suffixIcon: GestureDetector(
                   onTap: () {
                     fieldText.clear();
@@ -47,7 +64,7 @@ class AddressSearchBar extends StatelessWidget {
                     ),
                   ),
                 ),
-                hintText: "Search",
+                hintText: StringsManager.search.tr(),
                 alignLabelWithHint: true,
                 hintStyle: Theme.of(context).textTheme.bodySmall,
                 prefixIcon: Padding(

@@ -21,15 +21,20 @@ Annotations _$AnnotationsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Annotations {
   @JsonKey(name: 'DMS')
-  Dms? get dms => throw _privateConstructorUsedError;
+  Dms? get dms =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'MGRS')
-  String? get mgrs => throw _privateConstructorUsedError;
+  String? get mgrs =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'Maidenhead')
-  String? get maidenhead => throw _privateConstructorUsedError;
+  String? get maidenhead =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'Mercator')
-  Mercator? get mercator => throw _privateConstructorUsedError;
+  Mercator? get mercator =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'OSM')
-  Osm? get osm => throw _privateConstructorUsedError;
+  Osm? get osm =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'UN_M49')
   UnM49? get unM49 => throw _privateConstructorUsedError;
   int? get callingcode => throw _privateConstructorUsedError;
@@ -570,22 +575,22 @@ abstract class _Annotations implements Annotations {
   factory _Annotations.fromJson(Map<String, dynamic> json) =
       _$_Annotations.fromJson;
 
-  @override
+  @override 
   @JsonKey(name: 'DMS')
   Dms? get dms;
-  @override
+  @override 
   @JsonKey(name: 'MGRS')
   String? get mgrs;
-  @override
+  @override 
   @JsonKey(name: 'Maidenhead')
   String? get maidenhead;
-  @override
+  @override 
   @JsonKey(name: 'Mercator')
   Mercator? get mercator;
-  @override
+  @override 
   @JsonKey(name: 'OSM')
   Osm? get osm;
-  @override
+  @override 
   @JsonKey(name: 'UN_M49')
   UnM49? get unM49;
   @override

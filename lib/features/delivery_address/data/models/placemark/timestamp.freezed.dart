@@ -20,8 +20,10 @@ Timestamp _$TimestampFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Timestamp {
+
   @JsonKey(name: 'created_http')
-  String? get createdHttp => throw _privateConstructorUsedError;
+  String? get createdHttp =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'created_unix')
   int? get createdUnix => throw _privateConstructorUsedError;
 
@@ -119,9 +121,11 @@ class _$_Timestamp implements _Timestamp {
   factory _$_Timestamp.fromJson(Map<String, dynamic> json) =>
       _$$_TimestampFromJson(json);
 
+
   @override
   @JsonKey(name: 'created_http')
   final String? createdHttp;
+
   @override
   @JsonKey(name: 'created_unix')
   final int? createdUnix;
@@ -168,10 +172,10 @@ abstract class _Timestamp implements Timestamp {
   factory _Timestamp.fromJson(Map<String, dynamic> json) =
       _$_Timestamp.fromJson;
 
-  @override
+  @override 
   @JsonKey(name: 'created_http')
   String? get createdHttp;
-  @override
+  @override 
   @JsonKey(name: 'created_unix')
   int? get createdUnix;
   @override

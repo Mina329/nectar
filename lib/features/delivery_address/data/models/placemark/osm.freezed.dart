@@ -20,8 +20,10 @@ Osm _$OsmFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Osm {
+
   @JsonKey(name: 'edit_url')
-  String? get editUrl => throw _privateConstructorUsedError;
+  String? get editUrl =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'note_url')
   String? get noteUrl => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
@@ -127,9 +129,11 @@ class _$_Osm implements _Osm {
 
   factory _$_Osm.fromJson(Map<String, dynamic> json) => _$$_OsmFromJson(json);
 
+
   @override
   @JsonKey(name: 'edit_url')
   final String? editUrl;
+
   @override
   @JsonKey(name: 'note_url')
   final String? noteUrl;
@@ -177,10 +181,10 @@ abstract class _Osm implements Osm {
 
   factory _Osm.fromJson(Map<String, dynamic> json) = _$_Osm.fromJson;
 
-  @override
+  @override 
   @JsonKey(name: 'edit_url')
   String? get editUrl;
-  @override
+  @override 
   @JsonKey(name: 'note_url')
   String? get noteUrl;
   @override

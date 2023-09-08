@@ -24,11 +24,13 @@ mixin _$Placemark {
   List<License>? get licenses => throw _privateConstructorUsedError;
   Rate? get rate => throw _privateConstructorUsedError;
   List<Result>? get results => throw _privateConstructorUsedError;
-  Status? get status => throw _privateConstructorUsedError;
+  Status? get status =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'stay_informed')
   StayInformed? get stayInformed => throw _privateConstructorUsedError;
   String? get thanks => throw _privateConstructorUsedError;
-  Timestamp? get timestamp => throw _privateConstructorUsedError;
+  Timestamp? get timestamp =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'total_results')
   int? get totalResults => throw _privateConstructorUsedError;
 
@@ -307,6 +309,7 @@ class _$_Placemark implements _Placemark {
 
   @override
   final Status? status;
+
   @override
   @JsonKey(name: 'stay_informed')
   final StayInformed? stayInformed;
@@ -314,6 +317,7 @@ class _$_Placemark implements _Placemark {
   final String? thanks;
   @override
   final Timestamp? timestamp;
+
   @override
   @JsonKey(name: 'total_results')
   final int? totalResults;
@@ -396,14 +400,14 @@ abstract class _Placemark implements Placemark {
   List<Result>? get results;
   @override
   Status? get status;
-  @override
+  @override 
   @JsonKey(name: 'stay_informed')
   StayInformed? get stayInformed;
   @override
   String? get thanks;
   @override
   Timestamp? get timestamp;
-  @override
+  @override 
   @JsonKey(name: 'total_results')
   int? get totalResults;
   @override

@@ -4,7 +4,9 @@ import 'package:nectar/core/utils/service_locator.dart';
 import 'package:nectar/features/account/presentation/view/setting_view.dart';
 import 'package:nectar/features/delivery_address/data/repos/delivery_address_repo_impl.dart';
 import 'package:nectar/features/delivery_address/presentation/view/address_confirm_view.dart';
+import 'package:nectar/features/delivery_address/presentation/view/widgets/google_map_app_bar.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/location_bloc/location_bloc.dart';
+import 'package:nectar/features/delivery_address/presentation/view_model/search_address_cubit/search_address_cubit.dart';
 import 'package:nectar/features/explore/presentation/view/category_details_view.dart';
 import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
@@ -90,9 +92,15 @@ abstract class AppRouter {
     GoRoute(
       path: kSearchAddressView,
       builder: (context, state) {
-        LocationBloc bloc = state.extra as LocationBloc;
-        return BlocProvider.value(
-            value: bloc, child: const SearchAddressView());
+        PassingObjects passingObjects = state.extra as PassingObjects;
+        return MultiBlocProvider(providers: [
+          BlocProvider(
+            create: (context) => SearchAddressCubit(
+                getIt.get<DeliveryAddressRepoImpl>(),
+                passingObjects.controller),
+          ),
+          BlocProvider.value(value: passingObjects.bloc),
+        ], child: const SearchAddressView());
       },
     ),
   ]);

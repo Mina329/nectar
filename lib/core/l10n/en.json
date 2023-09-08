@@ -60,6 +60,8 @@
     "appartmentNumber"      : "Appartment Number",
     "floor"                 : "Floor",
     "street"                : "Street",
-    "invalidData"           : "Invalid Data"
+    "invalidData"           : "Invalid Data",
+    "error"                 : "Oops! Something went wrong",
+    "search"                : "Search"
 
 }

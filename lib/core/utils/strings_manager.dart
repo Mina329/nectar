@@ -61,4 +61,6 @@ abstract class StringsManager {
   static const floor = "floor";
   static const street = "street";
   static const invalidData = "invalidData";
+  static const error = "error";
+  static const search = "search";
 }

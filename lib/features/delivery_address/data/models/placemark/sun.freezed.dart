@@ -20,7 +20,8 @@ Sun _$SunFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Sun {
-  Rise? get rise => throw _privateConstructorUsedError;
+  Rise? get rise =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'set')
   Set? get sunSet => throw _privateConstructorUsedError;
 
@@ -140,6 +141,7 @@ class _$_Sun implements _Sun {
 
   @override
   final Rise? rise;
+
   @override
   @JsonKey(name: 'set')
   final Set? sunSet;
@@ -184,7 +186,7 @@ abstract class _Sun implements Sun {
 
   @override
   Rise? get rise;
-  @override
+  @override 
   @JsonKey(name: 'set')
   Set? get sunSet;
   @override

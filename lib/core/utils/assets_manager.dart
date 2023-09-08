@@ -3,6 +3,7 @@ abstract class AssetsManager {
   static const carrotImgLIGHT = "assets/images/logo_colored.svg";
   static const nectarImg = "assets/images/nectar.svg";
   static const onBoarding = "assets/images/onboarding.png";
+  static const error = "assets/images/error.png";
   static const loading = "assets/animation/loading.json";
 
   static const gilroyMedium = "assets/fonts/Gilroy-Medium.ttf";
@@ -12,4 +13,3 @@ abstract class AssetsManager {
 
   static const localization = "lib/core/l10n";
 }
-

@@ -60,6 +60,9 @@
     "appartmentNumber"      : "رقم الشقة",
     "floor"                 : "الدور",
     "street"                : "الشارع",
-    "invalidData"           : "بيانات غير صالحة"
+    "invalidData"           : "بيانات غير صالحة",
+    "error"                 : "عذرا حدث خطأ ما",
+    "search"                : "بحث"
+
 
 }

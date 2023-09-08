@@ -20,9 +20,11 @@ Roadinfo _$RoadinfoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Roadinfo {
+
   @JsonKey(name: 'drive_on')
   String? get driveOn => throw _privateConstructorUsedError;
-  String? get road => throw _privateConstructorUsedError;
+  String? get road =>
+      throw _privateConstructorUsedError; 
   @JsonKey(name: 'speed_in')
   String? get speedIn => throw _privateConstructorUsedError;
 
@@ -133,11 +135,13 @@ class _$_Roadinfo implements _Roadinfo {
   factory _$_Roadinfo.fromJson(Map<String, dynamic> json) =>
       _$$_RoadinfoFromJson(json);
 
+
   @override
   @JsonKey(name: 'drive_on')
   final String? driveOn;
   @override
   final String? road;
+
   @override
   @JsonKey(name: 'speed_in')
   final String? speedIn;
@@ -183,12 +187,12 @@ abstract class _Roadinfo implements Roadinfo {
 
   factory _Roadinfo.fromJson(Map<String, dynamic> json) = _$_Roadinfo.fromJson;
 
-  @override
+  @override 
   @JsonKey(name: 'drive_on')
   String? get driveOn;
   @override
   String? get road;
-  @override
+  @override 
   @JsonKey(name: 'speed_in')
   String? get speedIn;
   @override
