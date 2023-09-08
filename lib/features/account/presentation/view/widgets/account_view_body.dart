@@ -46,8 +46,8 @@ class AccountListItemListView extends StatelessWidget {
     AppRouter.kMyDetailsView,
     AppRouter.kDeliveryAddressView,
     AppRouter.kPaymentMethodView,
-    AppRouter.kOrdersView,
-    AppRouter.kOrdersView,
+    AppRouter.kPromoCodeView,
+    AppRouter.kAboutView,
   ];
   @override
   Widget build(BuildContext context) {

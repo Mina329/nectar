@@ -2,13 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nectar/features/account/presentation/view/widgets/promo_code_list_view.dart';
 import '../../../../../core/utils/strings_manager.dart';
-import '../../../../account/presentation/view/widgets/custom_account_list_items_app_bar.dart';
-import 'add_address_button.dart';
-import 'delivery_address_list_view.dart';
+import 'custom_account_list_items_app_bar.dart';
 
-class DeliveryAddressViewBody extends StatelessWidget {
-  const DeliveryAddressViewBody({super.key});
+class PromoCodeViewBody extends StatelessWidget {
+  const PromoCodeViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class DeliveryAddressViewBody extends StatelessWidget {
       body: Column(
         children: [
           CustomAccountListItemsAppBar(
-            title: StringsManager.deliveryAddress.tr(),
+            title: StringsManager.promoCode.tr(),
             backArrowOnPressed: () {
               GoRouter.of(context).pop();
             },
@@ -28,12 +27,11 @@ class DeliveryAddressViewBody extends StatelessWidget {
               child: const CustomScrollView(
                 physics: BouncingScrollPhysics(),
                 slivers: [
-                  DeliveryAddressListView(),
+                  PromoCodeListView(),
                 ],
               ),
             ),
-          ),
-          const AddAddressButton()
+          )
         ],
       ),
     );

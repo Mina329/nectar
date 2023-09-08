@@ -20,6 +20,7 @@ class OrdersViewBody extends StatelessWidget {
               GoRouter.of(context).pop();
             },
           ),
+          const Divider(),
           Expanded(
             child: CustomScrollView(
               physics: const BouncingScrollPhysics(),

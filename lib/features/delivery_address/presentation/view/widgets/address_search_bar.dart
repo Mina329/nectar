@@ -8,10 +8,16 @@ import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/location_bloc/location_bloc.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/search_address_cubit/search_address_cubit.dart';
 
-class AddressSearchBar extends StatelessWidget {
-  AddressSearchBar({super.key});
-  final fieldText = TextEditingController();
+class AddressSearchBar extends StatefulWidget {
+  const AddressSearchBar({super.key});
 
+  @override
+  State<AddressSearchBar> createState() => _AddressSearchBarState();
+}
+
+class _AddressSearchBarState extends State<AddressSearchBar> {
+  final fieldText = TextEditingController();
+  bool showSuffixIcon = false;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -31,6 +37,9 @@ class AddressSearchBar extends StatelessWidget {
             width: 330.w,
             child: TextField(
               onChanged: (value) {
+                setState(() {
+                  showSuffixIcon = fieldText.text.isNotEmpty;
+                });
                 BlocProvider.of<SearchAddressCubit>(context).fetchSuggestions(
                     BlocProvider.of<LocationBloc>(context)
                         .currentLocation
@@ -48,22 +57,28 @@ class AddressSearchBar extends StatelessWidget {
                   .headlineMedium!
                   .copyWith(fontSize: 14.sp),
               textAlignVertical: TextAlignVertical.bottom,
-              decoration: InputDecoration(  
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    fieldText.clear();
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.w),
-                    child: Icon(
-                      Icons.close,
-                      size: 24.sp,
-                      color: Theme.of(context).brightness == Brightness.light
-                          ? ColorManager.darkBlue
-                          : ColorManager.grayOpacity,
-                    ),
-                  ),
-                ),
+              decoration: InputDecoration(
+                suffixIcon: showSuffixIcon
+                    ? GestureDetector(
+                        onTap: () {
+                          fieldText.clear();
+                          setState(() {
+                            showSuffixIcon = false;
+                          });
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
+                          child: Icon(
+                            Icons.close,
+                            size: 24.sp,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? ColorManager.darkBlue
+                                    : ColorManager.grayOpacity,
+                          ),
+                        ),
+                      )
+                    : null,
                 hintText: StringsManager.search.tr(),
                 alignLabelWithHint: true,
                 hintStyle: Theme.of(context).textTheme.bodySmall,

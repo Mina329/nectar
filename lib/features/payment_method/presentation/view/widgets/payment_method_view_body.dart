@@ -34,8 +34,10 @@ class _PaymentMethodViewBodyState extends State<PaymentMethodViewBody> {
               GoRouter.of(context).pop();
             },
           ),
+          const Divider(),
           Expanded(
             child: ListView(
+              padding: EdgeInsets.zero,
               physics: const BouncingScrollPhysics(),
               children: options.map((option) {
                 return Column(

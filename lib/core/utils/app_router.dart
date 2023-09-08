@@ -10,6 +10,8 @@ import 'package:nectar/features/delivery_address/presentation/view_model/search_
 import 'package:nectar/features/explore/presentation/view/category_details_view.dart';
 import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
+import '../../features/account/presentation/view/about_view.dart';
+import '../../features/account/presentation/view/promo_code_view.dart';
 import '../../features/delivery_address/presentation/view/delivery_address_view.dart';
 import '../../features/delivery_address/presentation/view/google_map_view.dart';
 import '../../features/delivery_address/presentation/view/search_address_view.dart';
@@ -33,6 +35,8 @@ abstract class AppRouter {
   static const kAddressConfirmView = "/addressConfirmView";
   static const kSearchAddressView = "/searchAddressView";
   static const kPaymentMethodView = "/paymentMethodView";
+  static const kPromoCodeView = "/promoCodeView";
+  static const kAboutView = "/aboutView";
 
   static final router = GoRouter(routes: [
     GoRoute(
@@ -108,6 +112,14 @@ abstract class AppRouter {
     GoRoute(
       path: kPaymentMethodView,
       builder: (context, state) => const PaymentMethodView(),
+    ),
+    GoRoute(
+      path: kPromoCodeView,
+      builder: (context, state) => const PromoCodeView(),
+    ),
+    GoRoute(
+      path: kAboutView,
+      builder: (context, state) => const AboutView(),
     ),
   ]);
 }
