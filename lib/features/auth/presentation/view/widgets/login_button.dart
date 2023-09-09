@@ -6,7 +6,8 @@ class LoginButton extends StatelessWidget {
     super.key,
     required this.color,
     required this.txt,
-    required this.icon, required this.onPressed,
+    required this.icon,
+    required this.onPressed,
   });
   final Color color;
   final String txt;
@@ -24,10 +25,16 @@ class LoginButton extends StatelessWidget {
           ),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            SizedBox(
+              width: 30.w,
+            ),
             Icon(
               icon,
+            ),
+            SizedBox(
+              width: 50.w,
             ),
             Text(
               txt,

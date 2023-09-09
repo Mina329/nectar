@@ -8,8 +8,17 @@ import 'package:nectar/core/utils/color_manager.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/features/auth/presentation/view/widgets/auth_app_bar.dart';
 
-class PhoneAuthViewBody extends StatelessWidget {
+class PhoneAuthViewBody extends StatefulWidget {
   const PhoneAuthViewBody({super.key});
+
+  @override
+  State<PhoneAuthViewBody> createState() => _PhoneAuthViewBodyState();
+}
+
+class _PhoneAuthViewBodyState extends State<PhoneAuthViewBody> {
+  final controller = TextEditingController();
+
+  bool validate = true;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +62,7 @@ class PhoneAuthViewBody extends StatelessWidget {
             ),
             SliverToBoxAdapter(
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CountryFlag.fromCountryCode(
                     'EG',
@@ -76,9 +86,14 @@ class PhoneAuthViewBody extends StatelessWidget {
                     width: 250.w,
                     height: 50.h,
                     child: TextField(
+                      controller: controller,
                       cursorColor: ColorManager.green,
-                      decoration: const InputDecoration(
-                        focusedBorder: OutlineInputBorder(
+                      keyboardType: TextInputType.number,
+                      maxLength: 10,
+                      decoration: InputDecoration(
+                        counterText: "",
+                        errorText: validate ? null : "Invalid data",
+                        focusedBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: ColorManager.green),
                         ),
                       ),
@@ -94,10 +109,22 @@ class PhoneAuthViewBody extends StatelessWidget {
     );
   }
 
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   FloatingActionButton buildForwardButton(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-        GoRouter.of(context).push(AppRouter.kPhoneVerifyView);
+        if (controller.text.length != 10) {
+          setState(() {
+            validate = false;
+          });
+        } else {
+          GoRouter.of(context).push(AppRouter.kPhoneVerifyView);
+        }
       },
       backgroundColor: ColorManager.green,
       child: const Center(

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/features/auth/presentation/view/widgets/auth_app_bar.dart';
@@ -9,8 +10,15 @@ import 'package:nectar/features/auth/presentation/view/widgets/otp_form.dart';
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/strings_manager.dart';
 
-class PhoneVerifyViewBody extends StatelessWidget {
+class PhoneVerifyViewBody extends StatefulWidget {
   const PhoneVerifyViewBody({super.key});
+
+  @override
+  State<PhoneVerifyViewBody> createState() => _PhoneVerifyViewBodyState();
+}
+
+class _PhoneVerifyViewBodyState extends State<PhoneVerifyViewBody> {
+  bool isEnabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +70,18 @@ class PhoneVerifyViewBody extends StatelessWidget {
             Positioned(
                 bottom: 25.h,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: isEnabled
+                      ? () {
+                          Fluttertoast.showToast(msg: "resending code...");
+                          setState(() {
+                            isEnabled = false;
+                          });
+                        }
+                      : null,
                   child: Text(
                     StringsManager.resendCode.tr(),
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: ColorManager.green,
+                          color: isEnabled ? ColorManager.green : ColorManager.greySmall,
                           fontSize: 18.sp,
                         ),
                   ),
