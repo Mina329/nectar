@@ -4,7 +4,9 @@ abstract class AssetsManager {
   static const nectarImg = "assets/images/nectar.svg";
   static const onBoarding = "assets/images/onboarding.png";
   static const error = "assets/images/error.png";
+  static const loginImg = "assets/images/login.png";
   static const loading = "assets/animation/loading.json";
+  static const loginLocationImg = "assets/images/location.svg";
 
   static const gilroyMedium = "assets/fonts/Gilroy-Medium.ttf";
   static const gilroySemiBold = "assets/fonts/Gilroy-SemiBold.ttf";

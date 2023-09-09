@@ -50,7 +50,10 @@ class ProfileCard extends StatelessWidget {
                             width: 5.w,
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              GoRouter.of(context)
+                                  .push(AppRouter.kMyDetailsView);
+                            },
                             child: Icon(
                               Icons.create_outlined,
                               color: Theme.of(context).brightness ==

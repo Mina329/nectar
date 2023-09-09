@@ -12,6 +12,10 @@ import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
 import '../../features/account/presentation/view/about_view.dart';
 import '../../features/account/presentation/view/promo_code_view.dart';
+import '../../features/auth/presentation/view/location_select_view.dart';
+import '../../features/auth/presentation/view/login_view.dart';
+import '../../features/auth/presentation/view/phone_auth_view.dart';
+import '../../features/auth/presentation/view/phone_verify_view.dart';
 import '../../features/delivery_address/presentation/view/delivery_address_view.dart';
 import '../../features/delivery_address/presentation/view/google_map_view.dart';
 import '../../features/delivery_address/presentation/view/search_address_view.dart';
@@ -37,6 +41,10 @@ abstract class AppRouter {
   static const kPaymentMethodView = "/paymentMethodView";
   static const kPromoCodeView = "/promoCodeView";
   static const kAboutView = "/aboutView";
+  static const kLoginView = "/loginView";
+  static const kPhoneAuthView = "/phoneAuthView";
+  static const kPhoneVerifyView = "/phoneVerifyView";
+  static const kLocationSelectView = "/locationSelectView";
 
   static final router = GoRouter(routes: [
     GoRoute(
@@ -120,6 +128,22 @@ abstract class AppRouter {
     GoRoute(
       path: kAboutView,
       builder: (context, state) => const AboutView(),
+    ),
+    GoRoute(
+      path: kLoginView,
+      builder: (context, state) => const LoginView(),
+    ),
+    GoRoute(
+      path: kPhoneAuthView,
+      builder: (context, state) => const PhoneAuthView(),
+    ),
+    GoRoute(
+      path: kPhoneVerifyView,
+      builder: (context, state) => const PhoneVerifyView(),
+    ),
+    GoRoute(
+      path: kLocationSelectView,
+      builder: (context, state) => const LocationSelectView(),
     ),
   ]);
 }

@@ -31,6 +31,8 @@ dependencies:
   animated_bottom_navigation_bar: ^1.2.0
   build_runner: ^2.4.6
   cached_network_image: ^3.2.3
+  country_flags: ^2.1.1
+  country_pickers: ^2.0.0
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   device_preview: ^1.1.0

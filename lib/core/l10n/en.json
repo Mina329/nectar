@@ -65,5 +65,17 @@
   "search": "Search",
   "cash": "Cash",
   "visa": "Visa",
-  "mobileWallet": "Mobile Wallet"
+  "mobileWallet": "Mobile Wallet",
+  "loginDescription": "Get your groceries\nwith nectar",
+  "googleLogin": "Continue with Google",
+  "facebookLogin": "Continue with Facebook",
+  "enterMobile": "Enter your mobile number",
+  "mobileNumber": "Mobile Number",
+  "enterVerify": "Enter your 6-digit code",
+  "code": "Code",
+  "resendCode": "Resend Code",
+  "selectYourLocation": "Select Your Location",
+  "locationDescription": "Switch on your location to stay in tune with what's happening in your area",
+  "yourGovernorate": "Your Governrate",
+  "chooseYourGovernorate": "Choose your Governorate"
 }

@@ -9,12 +9,11 @@ import '../../../../account/presentation/view/widgets/custom_account_list_items_
 import 'my_details_form.dart';
 
 class MyDetailsViewBody extends StatelessWidget {
-  const MyDetailsViewBody({super.key});
+  MyDetailsViewBody({super.key});
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-
     return Scaffold(
       body: Column(
         children: [
@@ -25,19 +24,17 @@ class MyDetailsViewBody extends StatelessWidget {
             },
           ),
           const Divider(),
-          Expanded(
-            child: CustomScrollView(
-              physics: const BouncingScrollPhysics(),
-              slivers: [
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 20.h,
-                  ),
-                ),
-                MyDetailsForm(formKey: formKey),
-              ],
-            ),
+          SizedBox(
+            height: 20.h,
           ),
+          Expanded(
+              child: ListView(
+            padding: EdgeInsets.zero,
+            physics: const BouncingScrollPhysics(),
+            children: [
+              MyDetailsForm(formKey: formKey),
+            ],
+          )),
           Padding(
             padding: EdgeInsets.only(
               bottom: 25.h,

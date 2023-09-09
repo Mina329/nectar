@@ -65,5 +65,17 @@
   "search": "بحث",
   "cash": "كاش",
   "visa": "فيزا",
-  "mobileWallet": "محفظة الهاتف"
+  "mobileWallet": "محفظة الهاتف",
+  "loginDescription": "أحصل على بقالتك\nمع نكتار",
+  "googleLogin": "الاستمرار بجوجل",
+  "facebookLogin": "الاستمرار بفيسبوك",
+  "enterMobile": "ادخل رقم الهاتف",
+  "mobileNumber": "رقم الهاتف",
+  "enterVerify": "ادخل الرمز المرسل لك",
+  "code": "الرمز",
+  "resendCode": "اعادة الارسال",
+  "selectYourLocation": "اختار مكانك",
+  "locationDescription": "فعل موقعك للبقاء على الاطلاع على ما هو جديد",
+  "yourGovernorate": "محافظتك",
+  "chooseYourGovernorate": "اختر محافظتك"
 }

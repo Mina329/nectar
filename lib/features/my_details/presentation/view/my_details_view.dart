@@ -6,6 +6,6 @@ class MyDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MyDetailsViewBody();
+    return MyDetailsViewBody();
   }
 }

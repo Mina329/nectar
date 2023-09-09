@@ -66,4 +66,16 @@ abstract class StringsManager {
   static const cash = "cash";
   static const visa = "visa";
   static const mobileWallet = "mobileWallet";
+  static const loginDescription = "loginDescription";
+  static const googleLogin = "googleLogin";
+  static const facebookLogin = "facebookLogin";
+  static const enterMobile = "enterMobile";
+  static const mobileNumber = "mobileNumber";
+  static const enterVerify = "enterVerify";
+  static const code = "code";
+  static const resendCode = "resendCode";
+  static const selectYourLocation = "selectYourLocation";
+  static const locationDescription = "locationDescription";
+  static const yourGovernorate = "yourGovernorate";
+  static const chooseYourGovernorate = "chooseYourGovernorate";
 }

@@ -16,6 +16,7 @@ class OnBoardingViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _preloadImage(context);
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 3.5, sigmaY: 3.5),
       child: Column(
@@ -54,7 +55,7 @@ class OnBoardingViewBody extends StatelessWidget {
               height: 70.h,
               child: CustomElevatedBtn(
                 onPressed: () {
-                  GoRouter.of(context).push(AppRouter.kHomeView);
+                  GoRouter.of(context).push(AppRouter.kLoginView);
                 },
                 txt: StringsManager.getStarted.tr(),
                 style: Theme.of(context).textTheme.labelLarge!,
@@ -67,5 +68,9 @@ class OnBoardingViewBody extends StatelessWidget {
         ],
       ),
     );
+  }
+  Future<void> _preloadImage(BuildContext context) async {
+    const ImageProvider imageProvider = AssetImage(AssetsManager.loginImg);
+    await precacheImage(imageProvider, context);
   }
 }

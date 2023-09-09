@@ -10,6 +10,9 @@ class ColorManager {
   static const darkBlue = Color(0xff181725);
   static const green = Color(0xff53B175);
   static const darkGreen = Color(0xff489E67);
+  static const googleButton = Color(0xff5383EC);
+  static const facebookButton = Color(0xff4A66AC);
+  static const loginBackground = Color(0xfffcfcfc);
 
 
 // ############### SCAFFOLD #############
