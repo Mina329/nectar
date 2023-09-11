@@ -49,7 +49,7 @@ class LoginViewBody extends StatelessWidget {
                   ),
                   Text(
                     StringsManager.loginDescription.tr(),
-                    style: headingMediumLIGHT,
+                    style: StylesManager.headingMediumLIGHT,
                   ),
                   SizedBox(
                     height: 80.h,
