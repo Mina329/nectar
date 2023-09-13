@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'navigation_bar_state.dart';
 
 class NavigationBarCubit extends Cubit<NavigationBarState> {
-  NavigationBarCubit() : super(NavigationBarInitial());
+  NavigationBarCubit() : super(NavigationBarShop());
   int selectedIndex = 0;
   void changeIndex(int index) {
     selectedIndex = index;
@@ -13,7 +13,6 @@ class NavigationBarCubit extends Cubit<NavigationBarState> {
   }
 
   void changeBody() {
-    emit(NavigationBarInitial());
     switch (selectedIndex) {
       case 0:
         emit(NavigationBarShop());

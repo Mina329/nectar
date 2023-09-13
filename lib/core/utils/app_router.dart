@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/service_locator.dart';
@@ -46,104 +47,190 @@ abstract class AppRouter {
   static const kPhoneVerifyView = "/phoneVerifyView";
   static const kLocationSelectView = "/locationSelectView";
 
-  static final router = GoRouter(routes: [
-    GoRoute(
-      path: kSplashView,
-      builder: (context, state) => const SplashView(),
-    ),
-    GoRoute(
-      path: kOnBoardingView,
-      builder: (context, state) => const OnBoardingView(),
-    ),
-    GoRoute(
-      path: kHomeView,
-      builder: (context, state) => const HomeView(),
-    ),
-    GoRoute(
-      path: kItemDetailsView,
-      builder: (context, state) => const ItemDetailsView(),
-    ),
-    GoRoute(
-      path: kCategoryDetailsView,
-      builder: (context, state) => const CategoryDetailsView(),
-    ),
-    GoRoute(
-      path: kOrdersView,
-      builder: (context, state) => const OrdersView(),
-    ),
-    GoRoute(
-      path: kSettingView,
-      builder: (context, state) => const SettingView(),
-    ),
-    GoRoute(
-      path: kMyDetailsView,
-      builder: (context, state) => const MyDetailsView(),
-    ),
-    GoRoute(
-      path: kDeliveryAddressView,
-      builder: (context, state) => MultiBlocProvider(providers: [
-        BlocProvider(
-          create: (context) =>
-              LocationBloc(getIt.get<DeliveryAddressRepoImpl>()),
-        )
-      ], child: const DeliveryAddressView()),
-    ),
-    GoRoute(
-      path: kGoogleMapView,
-      builder: (context, state) {
-        LocationBloc bloc = state.extra as LocationBloc;
-        return BlocProvider.value(value: bloc, child: const GoogleMapView());
-      },
-    ),
-    GoRoute(
-      path: kAddressConfirmView,
-      builder: (context, state) {
-        LocationBloc bloc = state.extra as LocationBloc;
-        return BlocProvider.value(
-            value: bloc, child: const AddressConfirmView());
-      },
-    ),
-    GoRoute(
-      path: kSearchAddressView,
-      builder: (context, state) {
-        PassingObjects passingObjects = state.extra as PassingObjects;
-        return MultiBlocProvider(providers: [
-          BlocProvider(
-            create: (context) => SearchAddressCubit(
-                getIt.get<DeliveryAddressRepoImpl>(),
-                passingObjects.controller),
+  static final router = GoRouter(
+    routes: [
+      GoRoute(
+        path: kSplashView,
+        builder: (context, state) => const SplashView(),
+      ),
+      GoRoute(
+        path: kOnBoardingView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          const OnBoardingView(),
+        ),
+      ),
+      GoRoute(
+        path: kHomeView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          HomeView(),
+        ),
+      ),
+      GoRoute(
+        path: kItemDetailsView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          const ItemDetailsView(),
+        ),
+      ),
+      GoRoute(
+        path: kCategoryDetailsView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          const CategoryDetailsView(),
+        ),
+      ),
+      GoRoute(
+        path: kOrdersView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          const OrdersView(),
+        ),
+      ),
+      GoRoute(
+        path: kSettingView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          const SettingView(),
+        ),
+      ),
+      GoRoute(
+        path: kMyDetailsView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          const MyDetailsView(),
+        ),
+      ),
+      GoRoute(
+        path: kDeliveryAddressView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => LocationBloc(
+                  getIt.get<DeliveryAddressRepoImpl>(),
+                ),
+              )
+            ],
+            child: const DeliveryAddressView(),
           ),
-          BlocProvider.value(value: passingObjects.bloc),
-        ], child: const SearchAddressView());
-      },
-    ),
-    GoRoute(
-      path: kPaymentMethodView,
-      builder: (context, state) => const PaymentMethodView(),
-    ),
-    GoRoute(
-      path: kPromoCodeView,
-      builder: (context, state) => const PromoCodeView(),
-    ),
-    GoRoute(
-      path: kAboutView,
-      builder: (context, state) => const AboutView(),
-    ),
-    GoRoute(
-      path: kLoginView,
-      builder: (context, state) => const LoginView(),
-    ),
-    GoRoute(
-      path: kPhoneAuthView,
-      builder: (context, state) => const PhoneAuthView(),
-    ),
-    GoRoute(
-      path: kPhoneVerifyView,
-      builder: (context, state) => const PhoneVerifyView(),
-    ),
-    GoRoute(
-      path: kLocationSelectView,
-      builder: (context, state) => const LocationSelectView(),
-    ),
-  ]);
+        ),
+      ),
+      GoRoute(
+        path: kGoogleMapView,
+        pageBuilder: (context, state) {
+          LocationBloc bloc = state.extra as LocationBloc;
+          return screenTransition(
+            state,
+            BlocProvider.value(
+              value: bloc,
+              child: const GoogleMapView(),
+            ),
+          );
+        },
+      ),
+      GoRoute(
+        path: kAddressConfirmView,
+        pageBuilder: (context, state) {
+          LocationBloc bloc = state.extra as LocationBloc;
+          return screenTransition(
+            state,
+            BlocProvider.value(
+              value: bloc,
+              child: const AddressConfirmView(),
+            ),
+          );
+        },
+      ),
+      GoRoute(
+        path: kSearchAddressView,
+        pageBuilder: (context, state) {
+          PassingObjects passingObjects = state.extra as PassingObjects;
+          return screenTransition(
+            state,
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => SearchAddressCubit(
+                    getIt.get<DeliveryAddressRepoImpl>(),
+                    passingObjects.controller,
+                  ),
+                ),
+                BlocProvider.value(value: passingObjects.bloc),
+              ],
+              child: const SearchAddressView(),
+            ),
+          );
+        },
+      ),
+      GoRoute(
+        path: kPaymentMethodView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          const PaymentMethodView(),
+        ),
+      ),
+      GoRoute(
+        path: kPromoCodeView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          const PromoCodeView(),
+        ),
+      ),
+      GoRoute(
+        path: kAboutView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          const AboutView(),
+        ),
+      ),
+      GoRoute(
+        path: kLoginView,
+        pageBuilder: (BuildContext context, GoRouterState state) =>
+            screenTransition(
+          state,
+          const LoginView(),
+        ),
+      ),
+      GoRoute(
+        path: kPhoneAuthView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          const PhoneAuthView(),
+        ),
+      ),
+      GoRoute(
+        path: kPhoneVerifyView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          const PhoneVerifyView(),
+        ),
+      ),
+      GoRoute(
+        path: kLocationSelectView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          const LocationSelectView(),
+        ),
+      ),
+    ],
+  );
+}
+
+CustomTransitionPage<void> screenTransition(
+    GoRouterState state, Widget screen) {
+  return CustomTransitionPage<void>(
+    key: state.pageKey,
+    child: screen,
+    transitionDuration: const Duration(milliseconds: 300),
+    transitionsBuilder: (BuildContext context, Animation<double> animation,
+        Animation<double> secondaryAnimation, Widget child) {
+      return FadeTransition(
+        opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
+        child: child,
+      );
+    },
+  );
 }
