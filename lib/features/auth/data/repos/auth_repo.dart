@@ -5,4 +5,6 @@ import '../../../../core/errors/failure.dart';
 abstract class AuthRepo {
   Future<Either<FirebaseAuthFailure, UserCredential>> emailSignUp(
       String signUpEmail, String signUpPassword);
+  Future<Either<FirebaseAuthFailure, UserCredential>> emailLogIn(
+      String logInEmail, String logInPassword);
 }

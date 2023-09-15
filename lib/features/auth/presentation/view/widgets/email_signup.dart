@@ -5,13 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nectar/features/auth/presentation/view%20model/auth_cubit/auth_email_cubit.dart';
-
 import '../../../../../core/utils/app_router.dart';
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/strings_manager.dart';
 import '../../../../../core/widgets/custom_elevated_btn.dart';
 import '../../../../../core/widgets/custom_loading_indicator.dart';
+import '../../view model/email_auth_cubit/email_auth_cubit.dart';
 
 class EmailSignUp extends StatefulWidget {
   const EmailSignUp({super.key, required this.formKey, required this.login});
@@ -76,7 +75,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                     return null;
                   },
                   onSaved: (value) {
-                    BlocProvider.of<AuthEmailCubit>(context).signUpFirstName =
+                    BlocProvider.of<EmailAuthCubit>(context).signUpFirstName =
                         value!;
                   },
                 ),
@@ -116,7 +115,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                     return null;
                   },
                   onSaved: (value) {
-                    BlocProvider.of<AuthEmailCubit>(context).signUpLastName =
+                    BlocProvider.of<EmailAuthCubit>(context).signUpLastName =
                         value!;
                   },
                 ),
@@ -158,7 +157,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                     return null;
                   },
                   onSaved: (value) {
-                    BlocProvider.of<AuthEmailCubit>(context).signUpEmail =
+                    BlocProvider.of<EmailAuthCubit>(context).signUpEmail =
                         value!;
                   },
                 ),
@@ -219,7 +218,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                     return null;
                   },
                   onSaved: (value) {
-                    BlocProvider.of<AuthEmailCubit>(context).signUpPassword =
+                    BlocProvider.of<EmailAuthCubit>(context).signUpPassword =
                         value!;
                   },
                 ),
@@ -230,9 +229,9 @@ class _EmailSignUpState extends State<EmailSignUp> {
                   child: SizedBox(
                     width: 370.w,
                     height: 70.h,
-                    child: BlocListener<AuthEmailCubit, AuthEmailState>(
+                    child: BlocListener<EmailAuthCubit, EmailAuthState>(
                       listener: (context, state) {
-                        if (state is SignUpLoading) {
+                        if (state is EmailSignUpLoading) {
                           showDialog(
                             context: context,
                             barrierDismissible: false,
@@ -240,11 +239,11 @@ class _EmailSignUpState extends State<EmailSignUp> {
                               return const CustomLoadingIndicator();
                             },
                           );
-                        } else if (state is SignUpSuccess) {
+                        } else if (state is EmailSignUpSuccess) {
                           print(state.userCredential);
                           GoRouter.of(context).pop();
                           GoRouter.of(context).push(AppRouter.kPhoneAuthView);
-                        } else if (state is SignUpFailure) {
+                        } else if (state is EmailSignUpFailure) {
                           GoRouter.of(context).pop();
                           Fluttertoast.showToast(msg: state.errorMessage);
                         }
@@ -255,7 +254,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                             return;
                           }
                           widget.formKey.currentState!.save();
-                          BlocProvider.of<AuthEmailCubit>(context).signUp();
+                          BlocProvider.of<EmailAuthCubit>(context).signUp();
                         },
                         txt: StringsManager.signup.tr(),
                         style: Theme.of(context).textTheme.labelLarge!,

@@ -14,7 +14,7 @@ import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
 import '../../features/account/presentation/view/about_view.dart';
 import '../../features/account/presentation/view/promo_code_view.dart';
-import '../../features/auth/presentation/view model/auth_cubit/auth_email_cubit.dart';
+import '../../features/auth/presentation/view model/email_auth_cubit/email_auth_cubit.dart';
 import '../../features/auth/presentation/view/email_auth_view.dart';
 import '../../features/auth/presentation/view/location_select_view.dart';
 import '../../features/auth/presentation/view/login_view.dart';
@@ -223,8 +223,14 @@ abstract class AppRouter {
         path: kEmailAuthView,
         pageBuilder: (context, state) => screenTransition(
           state,
-          BlocProvider(
-            create: (context) => AuthEmailCubit(getIt.get<AuthRepo>()),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => EmailAuthCubit(
+                  getIt.get<AuthRepo>(),
+                ),
+              ),
+            ],
             child: const EmailAuthView(),
           ),
         ),
