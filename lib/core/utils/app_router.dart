@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/service_locator.dart';
 import 'package:nectar/features/account/presentation/view/setting_view.dart';
+import 'package:nectar/features/auth/data/repos/auth_repo.dart';
 import 'package:nectar/features/delivery_address/data/repos/delivery_address_repo_impl.dart';
 import 'package:nectar/features/delivery_address/presentation/view/address_confirm_view.dart';
 import 'package:nectar/features/delivery_address/presentation/view/widgets/google_map_app_bar.dart';
@@ -13,6 +14,7 @@ import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
 import '../../features/account/presentation/view/about_view.dart';
 import '../../features/account/presentation/view/promo_code_view.dart';
+import '../../features/auth/presentation/view model/auth_cubit/auth_email_cubit.dart';
 import '../../features/auth/presentation/view/email_auth_view.dart';
 import '../../features/auth/presentation/view/location_select_view.dart';
 import '../../features/auth/presentation/view/login_view.dart';
@@ -221,7 +223,10 @@ abstract class AppRouter {
         path: kEmailAuthView,
         pageBuilder: (context, state) => screenTransition(
           state,
-          const EmailAuthView(),
+          BlocProvider(
+            create: (context) => AuthEmailCubit(getIt.get<AuthRepo>()),
+            child: const EmailAuthView(),
+          ),
         ),
       ),
     ],

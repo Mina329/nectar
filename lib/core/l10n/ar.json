@@ -83,7 +83,7 @@
   "signup" : "التسجيل",
   "password" : "كلمة المرور",
   "emailValidation": "برجاء ادخال الايميل الخاص بك",
-  "passwordValidation": "برجاء ادخال كلمة المرور",
+  "passwordValidation": "برجاء ادخال كلمة مرور صالحة",
   "notRegistered" : "ليس لديك حساب ؟",
   "registered" : "لديك حساب بالفعل ؟"
 

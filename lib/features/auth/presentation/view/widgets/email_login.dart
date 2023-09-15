@@ -20,6 +20,8 @@ class EmailLogIn extends StatefulWidget {
 
 class _EmailLogInState extends State<EmailLogIn> {
   bool obscureText = true;
+  String _enteredEmail = '';
+  String _enteredPassword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +68,15 @@ class _EmailLogInState extends State<EmailLogIn> {
                     ),
                   ),
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value == null ||
+                        value.isEmpty ||
+                        !value.contains('@')) {
                       return StringsManager.emailValidation.tr();
                     }
                     return null;
+                  },
+                  onSaved: (value){
+                    _enteredEmail = value!;
                   },
                 ),
                 SizedBox(
@@ -121,10 +128,15 @@ class _EmailLogInState extends State<EmailLogIn> {
                     ),
                   ),
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value == null ||
+                        value.isEmpty ||
+                        value.trim().length < 6) {
                       return StringsManager.passwordValidation.tr();
                     }
                     return null;
+                  },
+                  onSaved: (value){
+                    _enteredPassword = value!;
                   },
                 ),
                 SizedBox(

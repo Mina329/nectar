@@ -82,8 +82,8 @@
   "login" : "Login",
   "signup" : "Sign Up",
   "password" : "Password",
-  "emailValidation": "please enter your email address",
-  "passwordValidation": "please enter your password",
+  "emailValidation": "please enter a valid email address",
+  "passwordValidation": "please enter a valid password",
   "notRegistered" : "Don’t have an account ?",
   "registered" : "Already have an account ?"
 
