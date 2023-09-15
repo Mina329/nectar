@@ -45,9 +45,9 @@
   "email": "Email",
   "phoneNumber": "Phone Number",
   "firstName": "First Name",
-  "firstNameValidation": "Please enter your first name",
+  "firstNameValidation": "please enter your first name",
   "lastName": "Last Name",
-  "lastNameValidation": "Please enter your last name",
+  "lastNameValidation": "please enter your last name",
   "dateOfBirth": "Date Of Birth",
   "save": "Save",
   "addAddress": "Add Address",
@@ -69,6 +69,7 @@
   "loginDescription": "Get your groceries\nwith nectar",
   "googleLogin": "Continue with Google",
   "facebookLogin": "Continue with Facebook",
+  "emailLogin": "Continue with Email",
   "enterMobile": "Enter your mobile number",
   "mobileNumber": "Mobile Number",
   "enterVerify": "Enter your 6-digit code",
@@ -77,5 +78,13 @@
   "selectYourLocation": "Select Your Location",
   "locationDescription": "Switch on your location to stay in tune with what's happening in your area",
   "yourGovernorate": "Your Governrate",
-  "chooseYourGovernorate": "Choose your Governorate"
+  "chooseYourGovernorate": "Choose your Governorate",
+  "login" : "Login",
+  "signup" : "Sign Up",
+  "password" : "Password",
+  "emailValidation": "please enter your email address",
+  "passwordValidation": "please enter your password",
+  "notRegistered" : "Don’t have an account ?",
+  "registered" : "Already have an account ?"
+
 }

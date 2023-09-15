@@ -72,6 +72,17 @@ class LoginViewBody extends StatelessWidget {
                     onPressed: () {
                       GoRouter.of(context).push(AppRouter.kPhoneAuthView);
                     },
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  LoginButton(
+                    color: ColorManager.green,
+                    icon: Icons.email,
+                    txt: StringsManager.emailLogin.tr(),
+                    onPressed: () {
+                      GoRouter.of(context).push(AppRouter.kEmailAuthView);
+                    },
                   )
                 ],
               ),

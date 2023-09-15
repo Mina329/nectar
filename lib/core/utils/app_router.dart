@@ -13,6 +13,7 @@ import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
 import '../../features/account/presentation/view/about_view.dart';
 import '../../features/account/presentation/view/promo_code_view.dart';
+import '../../features/auth/presentation/view/email_auth_view.dart';
 import '../../features/auth/presentation/view/location_select_view.dart';
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/phone_auth_view.dart';
@@ -46,6 +47,7 @@ abstract class AppRouter {
   static const kPhoneAuthView = "/phoneAuthView";
   static const kPhoneVerifyView = "/phoneVerifyView";
   static const kLocationSelectView = "/locationSelectView";
+  static const kEmailAuthView = "/emailAuthView";
 
   static final router = GoRouter(
     routes: [
@@ -64,7 +66,7 @@ abstract class AppRouter {
         path: kHomeView,
         pageBuilder: (context, state) => screenTransition(
           state,
-          HomeView(),
+          const HomeView(),
         ),
       ),
       GoRoute(
@@ -213,6 +215,13 @@ abstract class AppRouter {
         pageBuilder: (context, state) => screenTransition(
           state,
           const LocationSelectView(),
+        ),
+      ),
+      GoRoute(
+        path: kEmailAuthView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          const EmailAuthView(),
         ),
       ),
     ],

@@ -69,6 +69,7 @@ abstract class StringsManager {
   static const loginDescription = "loginDescription";
   static const googleLogin = "googleLogin";
   static const facebookLogin = "facebookLogin";
+  static const emailLogin = "emailLogin";
   static const enterMobile = "enterMobile";
   static const mobileNumber = "mobileNumber";
   static const enterVerify = "enterVerify";
@@ -78,4 +79,11 @@ abstract class StringsManager {
   static const locationDescription = "locationDescription";
   static const yourGovernorate = "yourGovernorate";
   static const chooseYourGovernorate = "chooseYourGovernorate";
+  static const login = "login";
+  static const signup = "signup";
+  static const password = "password";
+  static const emailValidation = "emailValidation";
+  static const passwordValidation = "passwordValidation";
+  static const notRegistered = "notRegistered";
+  static const registered = "registered";
 }

@@ -69,6 +69,7 @@
   "loginDescription": "أحصل على بقالتك\nمع نكتار",
   "googleLogin": "الاستمرار بجوجل",
   "facebookLogin": "الاستمرار بفيسبوك",
+  "emailLogin": "الاستمرار بالايميل",
   "enterMobile": "ادخل رقم الهاتف",
   "mobileNumber": "رقم الهاتف",
   "enterVerify": "ادخل الرمز المرسل لك",
@@ -77,5 +78,14 @@
   "selectYourLocation": "اختار مكانك",
   "locationDescription": "فعل موقعك للبقاء على الاطلاع على ما هو جديد",
   "yourGovernorate": "محافظتك",
-  "chooseYourGovernorate": "اختر محافظتك"
+  "chooseYourGovernorate": "اختر محافظتك",
+  "login" : "تسجيل الدخول",
+  "signup" : "التسجيل",
+  "password" : "كلمة المرور",
+  "emailValidation": "برجاء ادخال الايميل الخاص بك",
+  "passwordValidation": "برجاء ادخال كلمة المرور",
+  "notRegistered" : "ليس لديك حساب ؟",
+  "registered" : "لديك حساب بالفعل ؟"
+
+
 }

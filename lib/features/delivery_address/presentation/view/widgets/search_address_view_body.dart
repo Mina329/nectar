@@ -18,7 +18,7 @@ class SearchAddressViewBody extends StatelessWidget {
             SizedBox(
               height: 30.h,
             ),
-            AddressSearchBar(),
+            const AddressSearchBar(),
             const SearchResultListView()
           ],
         ),
