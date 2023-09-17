@@ -79,12 +79,13 @@
   "locationDescription": "Switch on your location to stay in tune with what's happening in your area",
   "yourGovernorate": "Your Governrate",
   "chooseYourGovernorate": "Choose your Governorate",
-  "login" : "Login",
-  "signup" : "Sign Up",
-  "password" : "Password",
+  "login": "Login",
+  "signup": "Sign Up",
+  "password": "Password",
   "emailValidation": "please enter a valid email address",
   "passwordValidation": "please enter a valid password",
-  "notRegistered" : "Don’t have an account ?",
-  "registered" : "Already have an account ?"
-
+  "notRegistered": "Don’t have an account ?",
+  "registered": "Already have an account ?",
+  "signOut": "Sign Out",
+  "somethingWrong": "Something went wrong"
 }

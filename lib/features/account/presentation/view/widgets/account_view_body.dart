@@ -1,23 +1,66 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/app_router.dart';
+import 'package:nectar/core/widgets/custom_elevated_btn.dart';
 import 'package:nectar/features/account/presentation/view/widgets/account_list_item.dart';
 import 'package:nectar/features/account/presentation/view/widgets/profile_card.dart';
+import 'package:nectar/features/auth/presentation/view%20model/google_auth_cubit/google_auth_cubit.dart';
 
 import '../../../../../core/utils/strings_manager.dart';
+import '../../../../../core/widgets/custom_loading_indicator.dart';
 
 class AccountViewBody extends StatelessWidget {
   const AccountViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      physics: const BouncingScrollPhysics(),
-      slivers: [
-        const ProfileCard(),
-        AccountListItemListView(),
+    return Stack(
+      children: [
+        CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            const ProfileCard(),
+            AccountListItemListView(),
+          ],
+        ),
+        Positioned(
+            bottom: 25.h,
+            left: 25.w,
+            right: 25.w,
+            child: SizedBox(
+              height: 70.h,
+              child: BlocListener<GoogleAuthCubit, GoogleAuthState>(
+                listener: (context, state) {
+                  if (state is GoogleLogOutAuthLoading) {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return const CustomLoadingIndicator();
+                      },
+                    );
+                  } else if (state is GoogleLogOutAuthFailure) {
+                    GoRouter.of(context).pop();
+                    Fluttertoast.showToast(msg: state.errMessage);
+                  } else if (state is GoogleLogOutAuthSuccess) {
+                    GoRouter.of(context).pop();
+                    GoRouter.of(context).go(AppRouter.kLoginView);
+                  }
+                },
+                child: CustomElevatedBtn(
+                  onPressed: () {
+                    BlocProvider.of<GoogleAuthCubit>(context).logOut();
+                  },
+                  style: Theme.of(context).textTheme.labelLarge!,
+                  txt: StringsManager.signOut.tr(),
+                ),
+              ),
+            )),
       ],
     );
   }

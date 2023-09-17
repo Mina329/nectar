@@ -1,10 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import '../../../../core/errors/failure.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:nectar/core/errors/failure.dart';
 
 abstract class AuthRepo {
-  Future<Either<FirebaseAuthFailure, UserCredential>> emailSignUp(
-      String signUpEmail, String signUpPassword);
-  Future<Either<FirebaseAuthFailure, UserCredential>> emailLogIn(
-      String logInEmail, String logInPassword);
+  Future<Either<GoogleSignInFailure, GoogleSignInAccount>> login();
+  Future<Either<GoogleSignInFailure, GoogleSignInAccount?>> logout();
 }

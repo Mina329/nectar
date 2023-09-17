@@ -86,4 +86,6 @@ abstract class StringsManager {
   static const passwordValidation = "passwordValidation";
   static const notRegistered = "notRegistered";
   static const registered = "registered";
+  static const signOut = "signOut";
+  static const somethingWrong = "somethingWrong";
 }

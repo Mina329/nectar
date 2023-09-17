@@ -79,13 +79,13 @@
   "locationDescription": "فعل موقعك للبقاء على الاطلاع على ما هو جديد",
   "yourGovernorate": "محافظتك",
   "chooseYourGovernorate": "اختر محافظتك",
-  "login" : "تسجيل الدخول",
-  "signup" : "التسجيل",
-  "password" : "كلمة المرور",
+  "login": "تسجيل الدخول",
+  "signup": "التسجيل",
+  "password": "كلمة المرور",
   "emailValidation": "برجاء ادخال الايميل الخاص بك",
   "passwordValidation": "برجاء ادخال كلمة مرور صالحة",
-  "notRegistered" : "ليس لديك حساب ؟",
-  "registered" : "لديك حساب بالفعل ؟"
-
-
+  "notRegistered": "ليس لديك حساب ؟",
+  "registered": "لديك حساب بالفعل ؟",
+  "signOut": "تسجيل الخروج",
+  "somethingWrong": "حدث خطأ ما"
 }

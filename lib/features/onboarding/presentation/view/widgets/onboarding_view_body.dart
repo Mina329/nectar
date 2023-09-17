@@ -69,6 +69,7 @@ class OnBoardingViewBody extends StatelessWidget {
       ),
     );
   }
+
   Future<void> _preloadImage(BuildContext context) async {
     const ImageProvider imageProvider = AssetImage(AssetsManager.loginImg);
     await precacheImage(imageProvider, context);

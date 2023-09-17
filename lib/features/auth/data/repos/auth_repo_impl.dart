@@ -1,46 +1,38 @@
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:nectar/core/errors/failure.dart';
+import 'package:nectar/core/utils/strings_manager.dart';
 
-import '../../../../main.dart';
 import 'auth_repo.dart';
 
 class AuthRepoImpl extends AuthRepo {
+  static final _googleSignIn = GoogleSignIn();
+
   @override
-  Future<Either<FirebaseAuthFailure, UserCredential>> emailSignUp(
-      String signUpEmail, String signUpPassword) async {
+  Future<Either<GoogleSignInFailure, GoogleSignInAccount>> login() async {
     try {
-      final userCredential = await firebase.createUserWithEmailAndPassword(
-        email: signUpEmail,
-        password: signUpPassword,
-      );
-      return right(userCredential);
-    } on FirebaseAuthException catch (e) {
-      return left(
-        FirebaseAuthFailure.fromAuthException(
-          e,
-        ),
-      );
+      var result = await _googleSignIn.signIn();
+      if (result == null) {
+        return left(GoogleSignInFailure(StringsManager.somethingWrong.tr()));
+      } else {
+        return right(result);
+      }
+    } catch (e) {
+      return left(GoogleSignInFailure(StringsManager.somethingWrong.tr()));
     }
   }
 
   @override
-  Future<Either<FirebaseAuthFailure, UserCredential>> emailLogIn(
-      String logInEmail, String logInPassword) async {
+  Future<Either<GoogleSignInFailure, GoogleSignInAccount?>> logout() async {
     try {
-      final userCredential = await firebase.signInWithEmailAndPassword(
-        email: logInEmail,
-        password: logInPassword,
-      );
-      return right(userCredential);
-    } on FirebaseAuthException catch (e) {
-      return left(
-        FirebaseAuthFailure.fromAuthException(
-          e,
-        ),
-      );
+      var result = await _googleSignIn.disconnect();
+
+      return right(result);
+    } catch (e) {
+      return left(GoogleSignInFailure(StringsManager.somethingWrong.tr()));
     }
   }
 }

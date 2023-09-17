@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nectar/core/utils/service_locator.dart';
 import 'package:nectar/features/account/presentation/view/widgets/account_view_body.dart';
+import 'package:nectar/features/auth/data/repos/auth_repo.dart';
+import 'package:nectar/features/auth/presentation/view%20model/google_auth_cubit/google_auth_cubit.dart';
 
-class AccountView extends StatefulWidget {
-  const AccountView({Key? key}) : super(key: key);
+class AccountView extends StatelessWidget {
+  const AccountView({super.key});
 
-  @override
-  AccountViewState createState() => AccountViewState();
-}
-
-class AccountViewState extends State<AccountView> {
   @override
   Widget build(BuildContext context) {
-    return const AccountViewBody();
+    return MultiBlocProvider(providers: [
+      BlocProvider(
+        create: (context) => GoogleAuthCubit(
+          getIt.get<AuthRepo>(),
+        ),
+      )
+    ], child: const AccountViewBody());
   }
 }

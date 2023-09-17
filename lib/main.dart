@@ -1,6 +1,5 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -12,22 +11,17 @@ import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/core/utils/theme_manager.dart';
 import 'core/cache/cache_helper.dart';
 import 'core/utils/service_locator.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 bool enableDevicePreview = false;
 final ValueNotifier<ThemeMode> notifier = ValueNotifier(
     CacheData.getData(key: CacheKeys.kDARKMODE) == CacheValues.DARK
         ? ThemeMode.dark
         : ThemeMode.light);
-final firebase = FirebaseAuth.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheData.casheIntialization();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
   setupServiceLocator();
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));

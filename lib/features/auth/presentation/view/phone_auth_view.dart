@@ -6,6 +6,6 @@ class PhoneAuthView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  PhoneAuthViewBody();
+    return  const PhoneAuthViewBody();
   }
 }

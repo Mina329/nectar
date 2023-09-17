@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/service_locator.dart';
 import 'package:nectar/features/account/presentation/view/setting_view.dart';
 import 'package:nectar/features/auth/data/repos/auth_repo.dart';
+import 'package:nectar/features/auth/presentation/view%20model/google_auth_cubit/google_auth_cubit.dart';
 import 'package:nectar/features/delivery_address/data/repos/delivery_address_repo_impl.dart';
 import 'package:nectar/features/delivery_address/presentation/view/address_confirm_view.dart';
 import 'package:nectar/features/delivery_address/presentation/view/widgets/google_map_app_bar.dart';
@@ -14,8 +15,6 @@ import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
 import '../../features/account/presentation/view/about_view.dart';
 import '../../features/account/presentation/view/promo_code_view.dart';
-import '../../features/auth/presentation/view model/email_auth_cubit/email_auth_cubit.dart';
-import '../../features/auth/presentation/view/email_auth_view.dart';
 import '../../features/auth/presentation/view/location_select_view.dart';
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/phone_auth_view.dart';
@@ -49,7 +48,6 @@ abstract class AppRouter {
   static const kPhoneAuthView = "/phoneAuthView";
   static const kPhoneVerifyView = "/phoneVerifyView";
   static const kLocationSelectView = "/locationSelectView";
-  static const kEmailAuthView = "/emailAuthView";
 
   static final router = GoRouter(
     routes: [
@@ -195,7 +193,13 @@ abstract class AppRouter {
         pageBuilder: (BuildContext context, GoRouterState state) =>
             screenTransition(
           state,
-          const LoginView(),
+          MultiBlocProvider(providers: [
+            BlocProvider(
+              create: (context) => GoogleAuthCubit(
+                getIt.get<AuthRepo>(),
+              ),
+            )
+          ], child: const LoginView()),
         ),
       ),
       GoRoute(
@@ -217,22 +221,6 @@ abstract class AppRouter {
         pageBuilder: (context, state) => screenTransition(
           state,
           const LocationSelectView(),
-        ),
-      ),
-      GoRoute(
-        path: kEmailAuthView,
-        pageBuilder: (context, state) => screenTransition(
-          state,
-          MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => EmailAuthCubit(
-                  getIt.get<AuthRepo>(),
-                ),
-              ),
-            ],
-            child: const EmailAuthView(),
-          ),
         ),
       ),
     ],

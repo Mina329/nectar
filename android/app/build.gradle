@@ -54,6 +54,13 @@ android {
         versionName flutterVersionName
     }
     signingConfigs{
+        
+        release{
+            keyAlias 'androiddebugkey'
+            keyPassword 'nectar'
+            storeFile file('nectar-keystore.jks')
+            storePassword 'nectar'
+        }
         debug{
             keyAlias 'androiddebugkey'
             keyPassword 'nectar'
@@ -67,6 +74,11 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+        }
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.release
         }
     }
 }

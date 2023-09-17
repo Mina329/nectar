@@ -1,15 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/core/utils/color_manager.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/core/utils/styles_manager.dart';
+import 'package:nectar/features/auth/presentation/view%20model/google_auth_cubit/google_auth_cubit.dart';
 
 import '../../../../../core/utils/app_router.dart';
+import '../../../../../core/widgets/custom_loading_indicator.dart';
 import 'login_button.dart';
 
 class LoginViewBody extends StatelessWidget {
@@ -54,13 +58,34 @@ class LoginViewBody extends StatelessWidget {
                   SizedBox(
                     height: 80.h,
                   ),
-                  LoginButton(
-                    color: ColorManager.googleButton,
-                    icon: FontAwesomeIcons.google,
-                    txt: StringsManager.googleLogin.tr(),
-                    onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kPhoneAuthView);
+                  BlocListener<GoogleAuthCubit, GoogleAuthState>(
+                    listener: (context, state) {
+                      if (state is GoogleLogInAuthLoading) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return const CustomLoadingIndicator();
+                          },
+                        );
+                      } else if (state is GoogleLogInAuthFailure) {
+                        GoRouter.of(context).pop();
+                        Fluttertoast.showToast(msg: state.errMessage);
+                      } else if (state is GoogleLogInAuthSuccess) {
+                        state.account.authentication
+                            .then((value) => print(value.accessToken));
+                        GoRouter.of(context).pop();
+                        GoRouter.of(context).push(AppRouter.kPhoneAuthView);
+                      }
                     },
+                    child: LoginButton(
+                      color: ColorManager.googleButton,
+                      icon: FontAwesomeIcons.google,
+                      txt: StringsManager.googleLogin.tr(),
+                      onPressed: () {
+                        BlocProvider.of<GoogleAuthCubit>(context).logIn();
+                      },
+                    ),
                   ),
                   SizedBox(
                     height: 20.h,
@@ -73,17 +98,6 @@ class LoginViewBody extends StatelessWidget {
                       GoRouter.of(context).push(AppRouter.kPhoneAuthView);
                     },
                   ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  LoginButton(
-                    color: ColorManager.green,
-                    icon: Icons.email,
-                    txt: StringsManager.emailLogin.tr(),
-                    onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kEmailAuthView);
-                    },
-                  )
                 ],
               ),
             ),
