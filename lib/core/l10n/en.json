@@ -87,5 +87,6 @@
   "notRegistered": "Don’t have an account ?",
   "registered": "Already have an account ?",
   "signOut": "Sign Out",
-  "somethingWrong": "Something went wrong"
+  "somethingWrong": "Something went wrong",
+  "empty": "Oops, Nothing Here!"
 }

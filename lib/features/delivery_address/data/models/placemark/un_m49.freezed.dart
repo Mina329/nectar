@@ -21,7 +21,7 @@ UnM49 _$UnM49FromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UnM49 {
   Regions? get regions =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'statistical_groupings')
   List<String>? get statisticalGroupings => throw _privateConstructorUsedError;
 
@@ -138,9 +138,9 @@ class _$_UnM49 implements _UnM49 {
 
   @override
   final Regions? regions;
-
+// ignore: invalid_annotation_target
   final List<String>? _statisticalGroupings;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'statistical_groupings')
   List<String>? get statisticalGroupings {
@@ -196,7 +196,7 @@ abstract class _UnM49 implements UnM49 {
 
   @override
   Regions? get regions;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'statistical_groupings')
   List<String>? get statisticalGroupings;
   @override

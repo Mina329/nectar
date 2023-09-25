@@ -20,28 +20,28 @@ Components _$ComponentsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Components {
-
+// ignore: invalid_annotation_target
   @JsonKey(name: 'ISO_3166-1_alpha-2')
   String? get iso31661Alpha2 =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'ISO_3166-1_alpha-3')
   String? get iso31661Alpha3 =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'ISO_3166-2')
   List<String>? get iso31662 =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: '_category')
   String? get category =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: '_type')
   String? get type => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get continent => throw _privateConstructorUsedError;
   String? get country =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'country_code')
   String? get countryCode =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'house_number')
   String? get houseNumber => throw _privateConstructorUsedError;
   String? get neighbourhood => throw _privateConstructorUsedError;
@@ -302,17 +302,17 @@ class _$_Components implements _Components {
   factory _$_Components.fromJson(Map<String, dynamic> json) =>
       _$$_ComponentsFromJson(json);
 
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'ISO_3166-1_alpha-2')
   final String? iso31661Alpha2;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'ISO_3166-1_alpha-3')
   final String? iso31661Alpha3;
-
+// ignore: invalid_annotation_target
   final List<String>? _iso31662;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'ISO_3166-2')
   List<String>? get iso31662 {
@@ -323,11 +323,11 @@ class _$_Components implements _Components {
     return EqualUnmodifiableListView(value);
   }
 
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: '_category')
   final String? category;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: '_type')
   final String? type;
@@ -337,11 +337,11 @@ class _$_Components implements _Components {
   final String? continent;
   @override
   final String? country;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'country_code')
   final String? countryCode;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'house_number')
   final String? houseNumber;
@@ -441,19 +441,19 @@ abstract class _Components implements Components {
   factory _Components.fromJson(Map<String, dynamic> json) =
       _$_Components.fromJson;
 
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'ISO_3166-1_alpha-2')
   String? get iso31661Alpha2;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'ISO_3166-1_alpha-3')
   String? get iso31661Alpha3;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'ISO_3166-2')
   List<String>? get iso31662;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: '_category')
   String? get category;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: '_type')
   String? get type;
   @override
@@ -462,10 +462,10 @@ abstract class _Components implements Components {
   String? get continent;
   @override
   String? get country;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'country_code')
   String? get countryCode;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'house_number')
   String? get houseNumber;
   @override

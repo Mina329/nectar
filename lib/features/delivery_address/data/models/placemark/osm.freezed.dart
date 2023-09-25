@@ -20,10 +20,10 @@ Osm _$OsmFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Osm {
-
+// ignore: invalid_annotation_target
   @JsonKey(name: 'edit_url')
   String? get editUrl =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'note_url')
   String? get noteUrl => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
@@ -129,11 +129,11 @@ class _$_Osm implements _Osm {
 
   factory _$_Osm.fromJson(Map<String, dynamic> json) => _$$_OsmFromJson(json);
 
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'edit_url')
   final String? editUrl;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'note_url')
   final String? noteUrl;
@@ -181,10 +181,10 @@ abstract class _Osm implements Osm {
 
   factory _Osm.fromJson(Map<String, dynamic> json) = _$_Osm.fromJson;
 
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'edit_url')
   String? get editUrl;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'note_url')
   String? get noteUrl;
   @override

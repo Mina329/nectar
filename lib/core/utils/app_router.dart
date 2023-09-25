@@ -10,6 +10,8 @@ import 'package:nectar/features/delivery_address/presentation/view/address_confi
 import 'package:nectar/features/delivery_address/presentation/view/widgets/google_map_app_bar.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/location_bloc/location_bloc.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/search_address_cubit/search_address_cubit.dart';
+import 'package:nectar/features/explore/data/repos/explore_repo.dart';
+import 'package:nectar/features/explore/presentation/view%20model/category_items_cubit/category_items_cubit.dart';
 import 'package:nectar/features/explore/presentation/view/category%20details%20view/category_details_view.dart';
 import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
@@ -21,6 +23,7 @@ import '../../features/auth/presentation/view/phone verify view/phone_verify_vie
 import '../../features/delivery_address/presentation/view/delivery_address_view.dart';
 import '../../features/delivery_address/presentation/view/google_map_view.dart';
 import '../../features/delivery_address/presentation/view/search_address_view.dart';
+import '../../features/explore/data/models/category_model/category_model.dart';
 import '../../features/my_details/presentation/view/my_details_view.dart';
 import '../../features/orders/presentation/view/orders_view.dart';
 import '../../features/onboarding/presentation/view/onboarding_view.dart';
@@ -75,12 +78,21 @@ abstract class AppRouter {
         ),
       ),
       GoRoute(
-        path: kCategoryDetailsView,
-        pageBuilder: (context, state) => screenTransition(
-          state,
-          const CategoryDetailsView(),
-        ),
-      ),
+          path: kCategoryDetailsView,
+          pageBuilder: (context, state) {
+            CategoryModel category = state.extra as CategoryModel;
+            return screenTransition(
+              state,
+              BlocProvider(
+                create: (context) => CategoryItemsCubit(
+                  getIt.get<ExploreRepo>(),
+                )..fetchCategoryItems(category.id!),
+                child: CategoryDetailsView(
+                  category: category,
+                ),
+              ),
+            );
+          }),
       GoRoute(
         path: kOrdersView,
         pageBuilder: (context, state) => screenTransition(

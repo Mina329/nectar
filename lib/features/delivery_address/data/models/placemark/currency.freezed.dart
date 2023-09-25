@@ -20,34 +20,34 @@ Currency _$CurrencyFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Currency {
-
+// ignore: invalid_annotation_target
   @JsonKey(name: 'alternate_symbols')
   List<String>? get alternateSymbols =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'decimal_mark')
   String? get decimalMark =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'html_entity')
   String? get htmlEntity =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'iso_code')
   String? get isoCode =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'iso_numeric')
   String? get isoNumeric => throw _privateConstructorUsedError;
   String? get name =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'smallest_denomination')
   int? get smallestDenomination => throw _privateConstructorUsedError;
   String? get subunit =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'subunit_to_unit')
   int? get subunitToUnit => throw _privateConstructorUsedError;
   String? get symbol =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'symbol_first')
   int? get symbolFirst =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'thousands_separator')
   String? get thousandsSeparator => throw _privateConstructorUsedError;
 
@@ -276,9 +276,9 @@ class _$_Currency implements _Currency {
   factory _$_Currency.fromJson(Map<String, dynamic> json) =>
       _$$_CurrencyFromJson(json);
 
-
+// ignore: invalid_annotation_target
   final List<String>? _alternateSymbols;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'alternate_symbols')
   List<String>? get alternateSymbols {
@@ -290,41 +290,41 @@ class _$_Currency implements _Currency {
     return EqualUnmodifiableListView(value);
   }
 
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'decimal_mark')
   final String? decimalMark;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'html_entity')
   final String? htmlEntity;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'iso_code')
   final String? isoCode;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'iso_numeric')
   final String? isoNumeric;
   @override
   final String? name;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'smallest_denomination')
   final int? smallestDenomination;
   @override
   final String? subunit;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'subunit_to_unit')
   final int? subunitToUnit;
   @override
   final String? symbol;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'symbol_first')
   final int? symbolFirst;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'thousands_separator')
   final String? thousandsSeparator;
@@ -410,37 +410,37 @@ abstract class _Currency implements Currency {
 
   factory _Currency.fromJson(Map<String, dynamic> json) = _$_Currency.fromJson;
 
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'alternate_symbols')
   List<String>? get alternateSymbols;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'decimal_mark')
   String? get decimalMark;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'html_entity')
   String? get htmlEntity;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'iso_code')
   String? get isoCode;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'iso_numeric')
   String? get isoNumeric;
   @override
   String? get name;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'smallest_denomination')
   int? get smallestDenomination;
   @override
   String? get subunit;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'subunit_to_unit')
   int? get subunitToUnit;
   @override
   String? get symbol;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'symbol_first')
   int? get symbolFirst;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'thousands_separator')
   String? get thousandsSeparator;
   @override

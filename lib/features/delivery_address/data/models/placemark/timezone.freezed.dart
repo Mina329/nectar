@@ -21,16 +21,16 @@ Timezone _$TimezoneFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Timezone {
   String? get name =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'now_in_dst')
   int? get nowInDst =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'offset_sec')
   int? get offsetSec =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'offset_string')
   String? get offsetString =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'short_name')
   String? get shortName => throw _privateConstructorUsedError;
 
@@ -169,19 +169,19 @@ class _$_Timezone implements _Timezone {
 
   @override
   final String? name;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'now_in_dst')
   final int? nowInDst;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'offset_sec')
   final int? offsetSec;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'offset_string')
   final String? offsetString;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'short_name')
   final String? shortName;
@@ -238,16 +238,16 @@ abstract class _Timezone implements Timezone {
 
   @override
   String? get name;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'now_in_dst')
   int? get nowInDst;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'offset_sec')
   int? get offsetSec;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'offset_string')
   String? get offsetString;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'short_name')
   String? get shortName;
   @override

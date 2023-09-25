@@ -49,7 +49,12 @@ class BestSellingSection extends StatelessWidget {
                 padding: context.locale == ENGLISH_LOCALE
                     ? EdgeInsets.only(right: 15.w)
                     : EdgeInsets.only(left: 15.w),
-                child: const GroceryItem(),
+                child: const GroceryItem(
+                    name: "Banana",
+                    price: "50.00",
+                    imageLink:
+                        "https://groceries-backend-7ncm.onrender.com/public/items/a2f0739b-e8c8-4220-ac62-4fabe60e5151/thumbnail.png",
+                    quantity: "0.5 kg"),
               ),
             ),
           )

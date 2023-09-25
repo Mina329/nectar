@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/app_router.dart';
 
 import '../../../../../../core/utils/api_service.dart';
+import '../../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../data/models/category_model/category_model.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -15,7 +16,10 @@ class CategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(AppRouter.kCategoryDetailsView);
+        GoRouter.of(context).push(
+          AppRouter.kCategoryDetailsView,
+          extra: category,
+        );
       },
       child: Container(
         width: 175.w,
@@ -36,13 +40,20 @@ class CategoryItem extends StatelessWidget {
               height: 27.h,
             ),
             CachedNetworkImage(
-                imageUrl: "${ApiService.baseUrl}${category.image}",
-                width: 111.w,
-                height: 74.h,
-                errorWidget: (context, url, error) => const Icon(
-                      Icons.error,
-                      color: Colors.red,
-                    )),
+              imageUrl: "${ApiService.baseUrl}${category.image}",
+              width: 111.w,
+              height: 74.h,
+              errorWidget: (context, url, error) {
+                try {
+                  throw error;
+                } catch (e) {}
+                return const Icon(
+                  Icons.error,
+                  color: Colors.red,
+                );
+              },
+              placeholder: (context, url) => const CustomCircularIndicator(),
+            ),
             SizedBox(
               height: 27.h,
             ),

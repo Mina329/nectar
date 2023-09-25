@@ -20,22 +20,22 @@ Annotations _$AnnotationsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Annotations {
-
+// ignore: invalid_annotation_target
   @JsonKey(name: 'DMS')
   Dms? get dms =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'MGRS')
   String? get mgrs =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'Maidenhead')
   String? get maidenhead =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'Mercator')
   Mercator? get mercator =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'OSM')
   Osm? get osm =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'UN_M49')
   UnM49? get unM49 => throw _privateConstructorUsedError;
   int? get callingcode => throw _privateConstructorUsedError;
@@ -450,27 +450,27 @@ class _$_Annotations implements _Annotations {
   factory _$_Annotations.fromJson(Map<String, dynamic> json) =>
       _$$_AnnotationsFromJson(json);
 
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'DMS')
   final Dms? dms;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'MGRS')
   final String? mgrs;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'Maidenhead')
   final String? maidenhead;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'Mercator')
   final Mercator? mercator;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'OSM')
   final Osm? osm;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'UN_M49')
   final UnM49? unM49;
@@ -582,22 +582,22 @@ abstract class _Annotations implements Annotations {
   factory _Annotations.fromJson(Map<String, dynamic> json) =
       _$_Annotations.fromJson;
 
-  @override
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'DMS')
   Dms? get dms;
-  @override
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'MGRS')
   String? get mgrs;
-  @override
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'Maidenhead')
   String? get maidenhead;
-  @override
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'Mercator')
   Mercator? get mercator;
-  @override
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'OSM')
   Osm? get osm;
-  @override
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'UN_M49')
   UnM49? get unM49;
   @override

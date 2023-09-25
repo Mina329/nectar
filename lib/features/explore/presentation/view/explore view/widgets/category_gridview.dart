@@ -2,22 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/features/explore/presentation/view%20model/categories_cubit/categories_cubit.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../../../../../core/widgets/custom_empty_widget.dart';
 import 'category_item.dart';
 import 'category_shimmer.dart';
 
 class CategoryGridView extends StatelessWidget {
   const CategoryGridView({super.key});
-
-  static const List<Color> colors = [
-    Color(0xff59A5C6),
-    Color(0xffFFCE54),
-    Color(0xffFF5733),
-    Color(0xff2ECC71),
-    Color(0xff8E44AD),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +33,7 @@ class CategoryGridView extends StatelessWidget {
                     child: const CategoryShimmer()),
               ));
         } else if (state is CategoriesFailure) {
+          Fluttertoast.showToast(msg: state.errMessage);
           return SliverToBoxAdapter(
             child: Center(
               child: SvgPicture.asset(
@@ -49,6 +44,11 @@ class CategoryGridView extends StatelessWidget {
             ),
           );
         } else if (state is CategoriesSuccess) {
+          if (state.categories.isEmpty) {
+            return const SliverFillRemaining(
+              child: CustomEmptyWidget(),
+            );
+          }
           return SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 childAspectRatio: 175.w / 200.h,
@@ -60,7 +60,11 @@ class CategoryGridView extends StatelessWidget {
                 childCount: state.categories.length,
                 (context, index) => CategoryItem(
                   category: state.categories[index],
-                  color: colors[index % colors.length],
+                  color: BlocProvider.of<CategoriesCubit>(context).colors[
+                      index %
+                          BlocProvider.of<CategoriesCubit>(context)
+                              .colors
+                              .length],
                 ),
               ));
         }

@@ -20,3 +20,16 @@ class CustomLoadingIndicator extends StatelessWidget {
     );
   }
 }
+
+class CustomCircularIndicator extends StatelessWidget {
+  const CustomCircularIndicator({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Lottie.asset(
+      AssetsManager.loading,
+      width: 50.w,
+      height: 100.h,
+    );
+  }
+}

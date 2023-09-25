@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:nectar/core/utils/api_service.dart';
+import 'package:nectar/features/explore/data/models/category_item_model/category_item_model.dart';
 import 'package:nectar/features/explore/data/repos/explore_repo.dart';
 
 import '../../../../core/errors/failure.dart';
@@ -20,6 +21,31 @@ class ExploreRepoImpl extends ExploreRepo {
         categories.add(CategoryModel.fromJson(item));
       }
       return right(categories);
+    } catch (e) {
+      if (e is DioException) {
+        return left(
+          ServerFailure.fromDioException(
+            e,
+          ),
+        );
+      }
+      return left(
+        ServerFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CategoryItemModel>>> fetchCategoryItems(String categoryId) async {
+    try {
+      var data = await _apiService.get(endPoint: "api/v1/categories/$categoryId/items");
+      List<CategoryItemModel> categoryItems = [];
+      for (var item in data["data"]) {
+        categoryItems.add(CategoryItemModel.fromJson(item));
+      }
+      return right(categoryItems);
     } catch (e) {
       if (e is DioException) {
         return left(

@@ -20,16 +20,16 @@ Regions _$RegionsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Regions {
-
+// ignore: invalid_annotation_target
   @JsonKey(name: 'AFRICA')
   String? get africa =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'EG')
   String? get eg =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'NORTHERN_AFRICA')
   String? get northernAfrica =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(name: 'WORLD')
   String? get world => throw _privateConstructorUsedError;
 
@@ -151,19 +151,19 @@ class _$_Regions implements _Regions {
   factory _$_Regions.fromJson(Map<String, dynamic> json) =>
       _$$_RegionsFromJson(json);
 
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'AFRICA')
   final String? africa;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'EG')
   final String? eg;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'NORTHERN_AFRICA')
   final String? northernAfrica;
-
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'WORLD')
   final String? world;
@@ -213,16 +213,16 @@ abstract class _Regions implements Regions {
 
   factory _Regions.fromJson(Map<String, dynamic> json) = _$_Regions.fromJson;
 
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'AFRICA')
   String? get africa;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'EG')
   String? get eg;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'NORTHERN_AFRICA')
   String? get northernAfrica;
-  @override 
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'WORLD')
   String? get world;
   @override

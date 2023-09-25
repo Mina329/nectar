@@ -87,5 +87,6 @@
   "notRegistered": "ليس لديك حساب ؟",
   "registered": "لديك حساب بالفعل ؟",
   "signOut": "تسجيل الخروج",
-  "somethingWrong": "حدث خطأ ما"
+  "somethingWrong": "حدث خطأ ما",
+  "empty": "عذرًا، لا يوجد شيء هنا!"
 }

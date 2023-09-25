@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomCategoryAppBar extends StatelessWidget {
-  const CustomCategoryAppBar({super.key});
-
+  const CustomCategoryAppBar({super.key, required this.title});
+  final String title;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -26,7 +26,7 @@ class CustomCategoryAppBar extends StatelessWidget {
                 ),
               ),
               Text(
-                "Beverages",
+                title,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               IconButton(
