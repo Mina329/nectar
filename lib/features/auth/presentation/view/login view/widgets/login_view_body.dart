@@ -12,8 +12,8 @@ import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/core/utils/styles_manager.dart';
 import 'package:nectar/features/auth/presentation/view%20model/google_auth_cubit/google_auth_cubit.dart';
 
-import '../../../../../core/utils/app_router.dart';
-import '../../../../../core/widgets/custom_loading_indicator.dart';
+import '../../../../../../core/utils/app_router.dart';
+import '../../../../../../core/widgets/custom_loading_indicator.dart';
 import 'login_button.dart';
 
 class LoginViewBody extends StatelessWidget {

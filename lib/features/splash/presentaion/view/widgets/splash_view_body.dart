@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nectar/core/cache/cache_helper.dart';
+import 'package:nectar/core/cache/cache_keys_values.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/features/splash/presentaion/view/widgets/splash_app_name_animation.dart';
 import 'package:nectar/features/splash/presentaion/view/widgets/splash_circles_animation.dart';
@@ -86,22 +88,50 @@ class _SplashViewBodyState extends State<SplashViewBody>
       body: Stack(
         children: [
           AppNameAnimation(logoAnimation: logoAnimation),
-          UpperCircleAnimation(circlesAnimationController: circlesAnimationController, upperCircleAnimation: upperCircleAnimation),
-          LowerCircleAnimation(circlesAnimationController: circlesAnimationController, lowerCircleAnimation: lowerCircleAnimation),
-          CarrotAnimatedBuilder(componentController: componentController, carrotAnimation: carrotAnimation),
-          PepperAnimatedBuilder(componentController: componentController, pepperAnimation: pepperAnimation),
-          BeanAnimatedBuilder(componentController: componentController, beanAnimation: beanAnimation),
-          TomatoAnimatedBuilder(componentController: componentController, tomatoAnimation: tomatoAnimation),
+          UpperCircleAnimation(
+              circlesAnimationController: circlesAnimationController,
+              upperCircleAnimation: upperCircleAnimation),
+          LowerCircleAnimation(
+              circlesAnimationController: circlesAnimationController,
+              lowerCircleAnimation: lowerCircleAnimation),
+          CarrotAnimatedBuilder(
+              componentController: componentController,
+              carrotAnimation: carrotAnimation),
+          PepperAnimatedBuilder(
+              componentController: componentController,
+              pepperAnimation: pepperAnimation),
+          BeanAnimatedBuilder(
+              componentController: componentController,
+              beanAnimation: beanAnimation),
+          TomatoAnimatedBuilder(
+              componentController: componentController,
+              tomatoAnimation: tomatoAnimation),
         ],
       ),
     );
   }
 
   void _navigateToOnBoarding() async {
-    await Future.delayed(
-      const Duration(milliseconds: 3500),
-      () => GoRouter.of(context).push(AppRouter.kOnBoardingView),
-    );
+    if (CacheData.getData(key: CacheKeys.kONBOARDING) == null) {
+      await CacheData.setData(
+          key: CacheKeys.kONBOARDING, value: CacheValues.ONBOARDING);
+      await Future.delayed(
+        const Duration(milliseconds: 3500),
+        () => GoRouter.of(context).go(AppRouter.kOnBoardingView),
+      );
+    } else {
+      if (CacheData.getData(key: CacheKeys.kSIGNED) == CacheValues.NOT_SIGNED) {
+        await Future.delayed(
+          const Duration(milliseconds: 3500),
+          () => GoRouter.of(context).go(AppRouter.kLoginView),
+        );
+      } else {
+        await Future.delayed(
+          const Duration(milliseconds: 3500),
+          () => GoRouter.of(context).go(AppRouter.kHomeView),
+        );
+      }
+    }
   }
 
   void _initComponentAnimation() {
@@ -150,7 +180,3 @@ class _SplashViewBodyState extends State<SplashViewBody>
     });
   }
 }
-
-
-
-

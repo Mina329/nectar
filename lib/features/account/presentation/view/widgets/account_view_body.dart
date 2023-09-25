@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nectar/core/cache/cache_helper.dart';
+import 'package:nectar/core/cache/cache_keys_values.dart';
 import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/widgets/custom_elevated_btn.dart';
 import 'package:nectar/features/account/presentation/view/widgets/account_list_item.dart';
@@ -35,7 +37,7 @@ class AccountViewBody extends StatelessWidget {
             child: SizedBox(
               height: 70.h,
               child: BlocListener<GoogleAuthCubit, GoogleAuthState>(
-                listener: (context, state) {
+                listener: (context, state) async {
                   if (state is GoogleLogOutAuthLoading) {
                     showDialog(
                       context: context,
@@ -49,6 +51,8 @@ class AccountViewBody extends StatelessWidget {
                     Fluttertoast.showToast(msg: state.errMessage);
                   } else if (state is GoogleLogOutAuthSuccess) {
                     GoRouter.of(context).pop();
+                    await CacheData.setData(
+                        key: CacheKeys.kSIGNED, value: CacheValues.NOT_SIGNED);
                     GoRouter.of(context).go(AppRouter.kLoginView);
                   }
                 },

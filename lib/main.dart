@@ -12,6 +12,7 @@ import 'package:nectar/core/utils/theme_manager.dart';
 import 'core/cache/cache_helper.dart';
 import 'core/utils/service_locator.dart';
 
+String testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVzSW4iOiIxMmgiLCJpZCI6IjZkMTZkMTgwLWEwYTItNGViOS04NzRiLTYxZDM0ZDIyM2E5MCIsImlhdCI6MTY5NTYzMzAxOH0.0OQPSPzlfFyZYjWKnVjuwlUToZA-YvN0RU5AJua62_Q";
 bool enableDevicePreview = false;
 final ValueNotifier<ThemeMode> notifier = ValueNotifier(
     CacheData.getData(key: CacheKeys.kDARKMODE) == CacheValues.DARK
