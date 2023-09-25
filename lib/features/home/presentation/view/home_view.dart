@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nectar/features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
+import '../../../../core/utils/service_locator.dart';
 import '../../../../core/widgets/custom_navigation_bar.dart';
 import '../../../account/presentation/view/account_view.dart';
 import '../../../cart/presentation/view/cart_view.dart';
-import '../../../explore/presentation/view/explore_view.dart';
+import '../../../explore/data/repos/explore_repo.dart';
+import '../../../explore/presentation/view model/categories_cubit/categories_cubit.dart';
+import '../../../explore/presentation/view/explore view/explore_view.dart';
 import '../../../favourite/presentation/view/favourite_view.dart';
 import '../../../shop/presentation/view/shop_view.dart';
 
@@ -18,7 +21,12 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final Map<Type, Widget> _stateBodyMap = {
     NavigationBarShop: const ShopView(),
-    NavigationBarExplore: const ExploreView(),
+    NavigationBarExplore: BlocProvider(
+      create: (context) => CategoriesCubit(
+        getIt.get<ExploreRepo>(),
+      )..fetchCategories(),
+      child: const ExploreView(),
+    ),
     NavigationBarCart: const CartView(),
     NavigationBarFavourite: const FavouriteView(),
     NavigationBarAccount: const AccountView(),

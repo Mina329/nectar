@@ -20,21 +20,22 @@ Annotations _$AnnotationsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Annotations {
+
   @JsonKey(name: 'DMS')
   Dms? get dms =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'MGRS')
   String? get mgrs =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'Maidenhead')
   String? get maidenhead =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'Mercator')
   Mercator? get mercator =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'OSM')
   Osm? get osm =>
-      throw _privateConstructorUsedError; 
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'UN_M49')
   UnM49? get unM49 => throw _privateConstructorUsedError;
   int? get callingcode => throw _privateConstructorUsedError;
@@ -449,21 +450,27 @@ class _$_Annotations implements _Annotations {
   factory _$_Annotations.fromJson(Map<String, dynamic> json) =>
       _$$_AnnotationsFromJson(json);
 
+
   @override
   @JsonKey(name: 'DMS')
   final Dms? dms;
+
   @override
   @JsonKey(name: 'MGRS')
   final String? mgrs;
+
   @override
   @JsonKey(name: 'Maidenhead')
   final String? maidenhead;
+
   @override
   @JsonKey(name: 'Mercator')
   final Mercator? mercator;
+
   @override
   @JsonKey(name: 'OSM')
   final Osm? osm;
+
   @override
   @JsonKey(name: 'UN_M49')
   final UnM49? unM49;
@@ -575,22 +582,22 @@ abstract class _Annotations implements Annotations {
   factory _Annotations.fromJson(Map<String, dynamic> json) =
       _$_Annotations.fromJson;
 
-  @override 
+  @override
   @JsonKey(name: 'DMS')
   Dms? get dms;
-  @override 
+  @override
   @JsonKey(name: 'MGRS')
   String? get mgrs;
-  @override 
+  @override
   @JsonKey(name: 'Maidenhead')
   String? get maidenhead;
-  @override 
+  @override
   @JsonKey(name: 'Mercator')
   Mercator? get mercator;
-  @override 
+  @override
   @JsonKey(name: 'OSM')
   Osm? get osm;
-  @override 
+  @override
   @JsonKey(name: 'UN_M49')
   UnM49? get unM49;
   @override

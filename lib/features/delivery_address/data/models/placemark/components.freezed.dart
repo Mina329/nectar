@@ -20,6 +20,7 @@ Components _$ComponentsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Components {
+
   @JsonKey(name: 'ISO_3166-1_alpha-2')
   String? get iso31661Alpha2 =>
       throw _privateConstructorUsedError; 
@@ -31,7 +32,7 @@ mixin _$Components {
       throw _privateConstructorUsedError; 
   @JsonKey(name: '_category')
   String? get category =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; 
   @JsonKey(name: '_type')
   String? get type => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;

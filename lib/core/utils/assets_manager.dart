@@ -3,7 +3,7 @@ abstract class AssetsManager {
   static const carrotImgLIGHT = "assets/images/logo_colored.svg";
   static const nectarImg = "assets/images/nectar.svg";
   static const onBoarding = "assets/images/onboarding.png";
-  static const error = "assets/images/error.png";
+  static const error = "assets/images/error.svg";
   static const loginImg = "assets/images/login.png";
   static const loading = "assets/animation/loading.json";
   static const loginLocationImg = "assets/images/location.svg";

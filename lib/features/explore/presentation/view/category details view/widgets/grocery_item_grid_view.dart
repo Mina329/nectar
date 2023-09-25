@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../shop/presentation/view/widgets/grocery_item.dart';
+import 'package:nectar/features/shop/presentation/view/widgets/grocery_item.dart';
 
 class GroceryItemGridView extends StatelessWidget {
   const GroceryItemGridView({super.key});

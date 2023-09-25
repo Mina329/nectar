@@ -10,7 +10,7 @@ import 'package:nectar/features/delivery_address/presentation/view/address_confi
 import 'package:nectar/features/delivery_address/presentation/view/widgets/google_map_app_bar.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/location_bloc/location_bloc.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/search_address_cubit/search_address_cubit.dart';
-import 'package:nectar/features/explore/presentation/view/category_details_view.dart';
+import 'package:nectar/features/explore/presentation/view/category%20details%20view/category_details_view.dart';
 import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
 import '../../features/account/presentation/view/about_view.dart';
