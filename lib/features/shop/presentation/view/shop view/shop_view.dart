@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nectar/features/shop/presentation/view/widgets/shop_view_body.dart';
+import 'package:nectar/features/shop/presentation/view/shop%20view/widgets/shop_view_body.dart';
 
 class ShopView extends StatelessWidget {
   const ShopView({super.key});

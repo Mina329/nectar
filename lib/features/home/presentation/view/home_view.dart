@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nectar/features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
+import 'package:nectar/features/shop/data/repos/shop_repo.dart';
+import 'package:nectar/features/shop/presentation/view%20model/exclusive_offers_cubit/exclusive_offers_cubit.dart';
 import '../../../../core/utils/service_locator.dart';
 import '../../../../core/widgets/custom_navigation_bar.dart';
 import '../../../account/presentation/view/account_view.dart';
@@ -9,7 +11,7 @@ import '../../../explore/data/repos/explore_repo.dart';
 import '../../../explore/presentation/view model/categories_cubit/categories_cubit.dart';
 import '../../../explore/presentation/view/explore view/explore_view.dart';
 import '../../../favourite/presentation/view/favourite_view.dart';
-import '../../../shop/presentation/view/shop_view.dart';
+import '../../../shop/presentation/view/shop view/shop_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -20,7 +22,16 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final Map<Type, Widget> _stateBodyMap = {
-    NavigationBarShop: const ShopView(),
+    NavigationBarShop: MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ExclusiveOffersCubit(
+            getIt.get<ShopRepo>(),
+          )..getExclusiveOffersItems(),
+        )
+      ],
+      child: const ShopView(),
+    ),
     NavigationBarExplore: BlocProvider(
       create: (context) => CategoriesCubit(
         getIt.get<ExploreRepo>(),

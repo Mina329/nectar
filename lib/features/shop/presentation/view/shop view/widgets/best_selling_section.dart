@@ -1,14 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nectar/core/l10n/locales.dart';
 
-import '../../../../../core/utils/color_manager.dart';
-import '../../../../../core/utils/strings_manager.dart';
+import '../../../../../../core/l10n/locales.dart';
+import '../../../../../../core/utils/color_manager.dart';
+import '../../../../../../core/utils/strings_manager.dart';
 import 'grocery_item.dart';
 
-class ExclusiveOfferSection extends StatelessWidget {
-  const ExclusiveOfferSection({super.key});
+class BestSellingSection extends StatelessWidget {
+  const BestSellingSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ExclusiveOfferSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                StringsManager.exlusiveOffer.tr(),
+                StringsManager.bestSelling.tr(),
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               TextButton(
@@ -55,7 +55,7 @@ class ExclusiveOfferSection extends StatelessWidget {
                     imageLink:
                         "https://groceries-backend-7ncm.onrender.com/public/items/a2f0739b-e8c8-4220-ac62-4fabe60e5151/thumbnail.png",
                     quantity: "0.5 kg",
-                    offerPrice: 5.00),
+                    offerPrice: null),
               ),
             ),
           )

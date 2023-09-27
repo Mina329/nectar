@@ -29,11 +29,9 @@ class CustomCategoryAppBar extends StatelessWidget {
                 title,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.filter_list_alt,
-                ),
+              const Icon(
+                Icons.filter_list_alt,
+                color: Colors.transparent,
               ),
             ],
           ),

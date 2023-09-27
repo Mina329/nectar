@@ -28,7 +28,9 @@ import '../../features/my_details/presentation/view/my_details_view.dart';
 import '../../features/orders/presentation/view/orders_view.dart';
 import '../../features/onboarding/presentation/view/onboarding_view.dart';
 import '../../features/payment_method/presentation/view/payment_method_view.dart';
-import '../../features/shop/presentation/view/item_details_view.dart';
+import '../../features/shop/data/section_info_model/section_info_model.dart';
+import '../../features/shop/presentation/view/item details view/item_details_view.dart';
+import '../../features/shop/presentation/view/section details view/section_details_view.dart';
 
 abstract class AppRouter {
   static const kSplashView = "/";
@@ -49,6 +51,7 @@ abstract class AppRouter {
   static const kLoginView = "/loginView";
   static const kPhoneAuthView = "/phoneAuthView";
   static const kPhoneVerifyView = "/phoneVerifyView";
+  static const kSectionDetailsView = "/sectionDetailsView";
 
   static final router = GoRouter(
     routes: [
@@ -226,6 +229,18 @@ abstract class AppRouter {
           const PhoneVerifyView(),
         ),
       ),
+      GoRoute(
+          path: kSectionDetailsView,
+          pageBuilder: (context, state) {
+            SectionInfoModel model = state.extra as SectionInfoModel;
+            return screenTransition(
+              state,
+              SectionDetailsView(
+                name: model.name,
+                items: model.items,
+              ),
+            );
+          }),
     ],
   );
 }

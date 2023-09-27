@@ -25,11 +25,7 @@ class ShopViewBody extends StatelessWidget {
             ),
           ),
           const BannerListView(),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 30.h,
-            ),
-          ),
+          
           const ExclusiveOfferSection(),
           SliverToBoxAdapter(
             child: SizedBox(

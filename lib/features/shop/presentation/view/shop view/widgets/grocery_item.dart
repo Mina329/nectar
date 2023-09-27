@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/widgets/custom_loading_indicator.dart';
 
-import '../../../../../core/utils/assets_manager.dart';
-import '../../../../../core/utils/color_manager.dart';
-import '../../../../../core/widgets/custom_add_action_btn.dart';
+import '../../../../../../core/utils/assets_manager.dart';
+import '../../../../../../core/utils/color_manager.dart';
+import '../../../../../../core/widgets/custom_add_action_btn.dart';
 
 class GroceryItem extends StatelessWidget {
   const GroceryItem({
@@ -59,6 +59,9 @@ class GroceryItem extends StatelessWidget {
                 width: 140.w,
                 height: 135.h,
                 errorBuilder: (context, error, stackTrace) {
+                  try {
+                    throw error;
+                  } catch (e) {}
                   return const Icon(
                     Icons.error,
                     color: Colors.red,
@@ -130,8 +133,8 @@ class GroceryItem extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    width: 45.w,
-                    height: 45.h,
+                    width: 40.w,
+                    height: 40.h,
                     child: const CustomAddActionButton(),
                   ),
                 ],

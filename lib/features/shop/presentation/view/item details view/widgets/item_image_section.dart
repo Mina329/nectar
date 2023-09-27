@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/utils/color_manager.dart';
+import '../../../../../../core/utils/color_manager.dart';
 
 class ItemImageSection extends StatefulWidget {
   const ItemImageSection({super.key});

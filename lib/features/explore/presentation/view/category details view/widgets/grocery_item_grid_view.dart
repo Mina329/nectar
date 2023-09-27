@@ -9,7 +9,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/widgets/custom_empty_widget.dart';
 import '../../../../../../core/widgets/item_shimmer.dart';
-import '../../../../../shop/presentation/view/widgets/grocery_item.dart';
+import '../../../../../shop/presentation/view/shop view/widgets/grocery_item.dart';
 
 class GroceryItemGridView extends StatelessWidget {
   const GroceryItemGridView({super.key});

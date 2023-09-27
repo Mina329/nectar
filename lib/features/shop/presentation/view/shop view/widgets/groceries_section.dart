@@ -2,13 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/l10n/locales.dart';
-import '../../../../../core/utils/color_manager.dart';
-import '../../../../../core/utils/strings_manager.dart';
+import '../../../../../../core/l10n/locales.dart';
+import '../../../../../../core/utils/color_manager.dart';
+import '../../../../../../core/utils/strings_manager.dart';
+import 'category_groceries_section_item.dart';
 import 'grocery_item.dart';
 
-class BestSellingSection extends StatelessWidget {
-  const BestSellingSection({super.key});
+class GroceriesSection extends StatelessWidget {
+  const GroceriesSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class BestSellingSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                StringsManager.bestSelling.tr(),
+                StringsManager.groceries.tr(),
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               TextButton(
@@ -35,6 +36,23 @@ class BestSellingSection extends StatelessWidget {
                 ),
               )
             ],
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          SizedBox(
+            height: 105.h,
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: 10,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => Padding(
+                padding: context.locale == ENGLISH_LOCALE
+                    ? EdgeInsets.only(right: 15.w)
+                    : EdgeInsets.only(left: 15.w),
+                child: const CategoryGroceriesSectionItem(),
+              ),
+            ),
           ),
           SizedBox(
             height: 20.h,
@@ -58,7 +76,10 @@ class BestSellingSection extends StatelessWidget {
                     offerPrice: null),
               ),
             ),
-          )
+          ),
+          SizedBox(
+            height: 40.h,
+          ),
         ],
       ),
     );

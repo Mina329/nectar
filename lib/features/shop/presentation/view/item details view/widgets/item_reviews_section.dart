@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
-import 'package:nectar/features/shop/presentation/view/widgets/review_item.dart';
+import 'package:nectar/features/shop/presentation/view/item%20details%20view/widgets/review_item.dart';
 
-import '../../../../../core/utils/assets_manager.dart';
-import '../../../../../core/utils/color_manager.dart';
+import '../../../../../../core/utils/assets_manager.dart';
+import '../../../../../../core/utils/color_manager.dart';
 
 class ItemReviewsSection extends StatelessWidget {
   const ItemReviewsSection({super.key});
