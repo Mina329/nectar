@@ -1,15 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:nectar/core/utils/config.dart';
-
 import '../../main.dart';
+import 'env.dart';
 
 class ApiService {
   final Dio _dio;
-  final geoCodingUrl = "https://api.opencagedata.com/geocode/v1/json?";
-  final geoSearchAutoSuggestionUrl =
-      "https://autosuggest.search.hereapi.com/v1/autosuggest?";
   ApiService(this._dio);
-  static const baseUrl = "https://groceries-backend-7ncm.onrender.com/";
   final headers = {
     'Authorization': "Bearer $testToken",
   };
@@ -18,7 +13,7 @@ class ApiService {
       required String longitude,
       required String language}) async {
     var response = await _dio.get(
-        "${geoCodingUrl}key=$geoCodingApiKey&q=$latitude+$longitude&language=$language");
+        "${Env.GEOCODING_URL}key=${Env.GEOCODING_API_KEY}&q=$latitude+$longitude&language=$language");
     return response.data;
   }
 
@@ -27,13 +22,13 @@ class ApiService {
       required String longitude,
       required String query}) async {
     var response = await _dio.get(
-        "${geoSearchAutoSuggestionUrl}at=$latitude,$longitude&limit=20&q=$query&apiKey=$geoSearchAutoSuggestionApiKey");
+        "${Env.GEOSEARCH_AUTO_SUGGESTION_URL}at=$latitude,$longitude&limit=20&q=$query&apiKey=${Env.GEOSEARCH_AUTO_SUGGESTION_API_KEY}");
     return response.data;
   }
 
   Future<Map<String, dynamic>> get({required String endPoint}) async {
     var response = await _dio.get(
-      "$baseUrl$endPoint",
+      "${Env.BACKEND_BASE_URL}$endPoint",
       options: Options(
         headers: headers,
       ),

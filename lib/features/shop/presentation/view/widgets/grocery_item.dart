@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -15,13 +14,13 @@ class GroceryItem extends StatelessWidget {
     required this.name,
     required this.quantity,
     required this.price,
-    this.offerPrice,
+    required this.offerPrice,
     required this.imageLink,
   });
   final String name;
   final String quantity;
   final String price;
-  final String? offerPrice;
+  final double? offerPrice;
   final String imageLink;
   @override
   Widget build(BuildContext context) {
@@ -50,23 +49,24 @@ class GroceryItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(
+              height: 5.h,
+            ),
+            SizedBox(
               width: 140.w,
               height: 135.h,
-              child: CachedNetworkImage(
-                  imageUrl: imageLink,
-                  width: 140.w,
-                  height: 135.h,
-                  errorWidget: (context, url, error) {
-                    try {
-                      throw error;
-                    } catch (e) {}
-                    return const Icon(
-                      Icons.error,
-                      color: Colors.red,
-                    );
-                  },
-                  placeholder: (context, url) =>
-                      const CustomCircularIndicator()),
+              child: Image.network(
+                imageLink,
+                width: 140.w,
+                height: 135.h,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Icon(
+                    Icons.error,
+                    color: Colors.red,
+                  );
+                },
+                loadingBuilder: (context, child, loadingProgress) =>
+                    const CustomCircularIndicator(),
+              ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -99,16 +99,41 @@ class GroceryItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("$price L.E.",
-                      style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                            fontFamily: AssetsManager.gilroySemiBold,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18.sp,
-                          )),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (offerPrice != null)
+                        Text(
+                          "$offerPrice L.E.",
+                          style:
+                              Theme.of(context).textTheme.labelMedium!.copyWith(
+                                    fontFamily: AssetsManager.gilroySemiBold,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18.sp,
+                                  ),
+                        ),
+                      Text(
+                        "$price L.E.",
+                        style: offerPrice == null
+                            ? Theme.of(context).textTheme.labelMedium!.copyWith(
+                                  fontFamily: AssetsManager.gilroySemiBold,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18.sp,
+                                )
+                            : Theme.of(context).textTheme.labelMedium!.copyWith(
+                                  fontFamily: AssetsManager.gilroySemiBold,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 11.sp,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                      ),
+                    ],
+                  ),
                   SizedBox(
-                      width: 45.w,
-                      height: 45.h,
-                      child: const CustomAddActionButton())
+                    width: 45.w,
+                    height: 45.h,
+                    child: const CustomAddActionButton(),
+                  ),
                 ],
               ),
             )

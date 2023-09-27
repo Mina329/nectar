@@ -1,10 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/app_router.dart';
+import 'package:nectar/core/utils/env.dart';
 
-import '../../../../../../core/utils/api_service.dart';
 import '../../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../data/models/category_model/category_model.dart';
 
@@ -39,20 +38,22 @@ class CategoryItem extends StatelessWidget {
             SizedBox(
               height: 27.h,
             ),
-            CachedNetworkImage(
-              imageUrl: "${ApiService.baseUrl}${category.image}",
+            SizedBox(
               width: 111.w,
               height: 74.h,
-              errorWidget: (context, url, error) {
-                try {
-                  throw error;
-                } catch (e) {}
-                return const Icon(
-                  Icons.error,
-                  color: Colors.red,
-                );
-              },
-              placeholder: (context, url) => const CustomCircularIndicator(),
+              child: Image.network(
+                "${Env.BACKEND_BASE_URL}${category.image}",
+                width: 111.w,
+                height: 74.h,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Icon(
+                    Icons.error,
+                    color: Colors.red,
+                  );
+                },
+                loadingBuilder: (context, child, loadingProgress) =>
+                    const CustomCircularIndicator(),
+              ),
             ),
             SizedBox(
               height: 27.h,

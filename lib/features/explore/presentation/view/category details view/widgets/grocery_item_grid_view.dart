@@ -3,10 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:nectar/core/utils/env.dart';
 import 'package:nectar/features/explore/presentation/view%20model/category_items_cubit/category_items_cubit.dart';
 import 'package:shimmer/shimmer.dart';
-
-import '../../../../../../core/utils/api_service.dart';
 import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/widgets/custom_empty_widget.dart';
 import '../../../../../../core/widgets/item_shimmer.dart';
@@ -65,9 +64,10 @@ class GroceryItemGridView extends StatelessWidget {
                     price: state.categoryItems[index].price.toString(),
                     imageLink: state.categoryItems[index].thumbnail == null
                         ? ""
-                        : "${ApiService.baseUrl}${state.categoryItems[index].thumbnail}",
+                        : "${Env.BACKEND_BASE_URL}${state.categoryItems[index].thumbnail}",
                     quantity:
-                        "${state.categoryItems[index].quantity}${state.categoryItems[index].quantityType}"),
+                        "${state.categoryItems[index].quantity}${state.categoryItems[index].quantityType}",
+                        offerPrice: state.categoryItems[index].offerPrice,),
               ));
         }
         return const SliverToBoxAdapter();
@@ -75,4 +75,3 @@ class GroceryItemGridView extends StatelessWidget {
     );
   }
 }
-
