@@ -10,6 +10,7 @@ part 'categories_state.dart';
 class CategoriesCubit extends Cubit<CategoriesState> {
   CategoriesCubit(this.exploreRepo) : super(CategoriesInitial());
   final ExploreRepo exploreRepo;
+  bool first = true;
   final List<Color> colors = [
     const Color(0xff59A5C6),
     const Color(0xffFFCE54),
@@ -18,7 +19,10 @@ class CategoriesCubit extends Cubit<CategoriesState> {
     const Color(0xff8E44AD),
   ];
   Future<void> fetchCategories() async {
-    emit(CategoriesLoading());
+    if (first) {
+      emit(CategoriesLoading());
+      first = false;
+    }
     var result = await exploreRepo.fetchCategories();
     result.fold(
       (failure) => emit(

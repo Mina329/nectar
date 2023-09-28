@@ -89,4 +89,8 @@ abstract class StringsManager {
   static const signOut = "signOut";
   static const somethingWrong = "somethingWrong";
   static const empty = "empty";
+  static const unavailable = "unavailable";
+  static const anonymousUser = "anonymousUser";
+  static const noDescription = "noDescription";
+  static const noReviews = "noReviews";
 }

@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/l10n/locales.dart';
 import 'package:nectar/core/utils/app_router.dart';
-import 'package:nectar/features/shop/data/section_info_model/section_info_model.dart';
+import 'package:nectar/features/shop/data/models/section_info_model/section_info_model.dart';
 import 'package:nectar/features/shop/presentation/view%20model/exclusive_offers_cubit/exclusive_offers_cubit.dart';
 import 'package:nectar/features/shop/presentation/view/shop%20view/widgets/sections_shimmer.dart';
 import '../../../../../../core/utils/color_manager.dart';
@@ -76,7 +76,8 @@ class ExclusiveOfferSection extends StatelessWidget {
                           ? EdgeInsets.only(right: 15.w)
                           : EdgeInsets.only(left: 15.w),
                       child: GroceryItem(
-                        name: state.items[index].name!,
+                        id: state.items[index].id,
+                        name: state.items[index].name,
                         price: "${state.items[index].price}",
                         imageLink: state.items[index].thumbnail,
                         quantity:

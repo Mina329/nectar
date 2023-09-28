@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nectar/core/utils/strings_manager.dart';
 
 class CustomCategoryAppBar extends StatelessWidget {
   const CustomCategoryAppBar({super.key, required this.title});
-  final String title;
+  final String? title;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -26,7 +27,7 @@ class CustomCategoryAppBar extends StatelessWidget {
                 ),
               ),
               Text(
-                title,
+                title ?? StringsManager.unavailable,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const Icon(

@@ -60,14 +60,16 @@ class GroceryItemGridView extends StatelessWidget {
               delegate: SliverChildBuilderDelegate(
                 childCount: state.categoryItems.length,
                 (context, index) => GroceryItem(
-                    name: state.categoryItems[index].name!,
-                    price: state.categoryItems[index].price.toString(),
-                    imageLink: state.categoryItems[index].thumbnail == null
-                        ? ""
-                        : "${Env.BACKEND_BASE_URL}${state.categoryItems[index].thumbnail}",
-                    quantity:
-                        "${state.categoryItems[index].quantity}${state.categoryItems[index].quantityType}",
-                        offerPrice: state.categoryItems[index].offerPrice,),
+                  id: state.categoryItems[index].id,
+                  name: state.categoryItems[index].name,
+                  price: state.categoryItems[index].price.toString(),
+                  imageLink: state.categoryItems[index].thumbnail == null
+                      ? ""
+                      : "${Env.BACKEND_BASE_URL}${state.categoryItems[index].thumbnail}",
+                  quantity:
+                      "${state.categoryItems[index].quantity}${state.categoryItems[index].quantityType}",
+                  offerPrice: state.categoryItems[index].offerPrice,
+                ),
               ));
         }
         return const SliverToBoxAdapter();

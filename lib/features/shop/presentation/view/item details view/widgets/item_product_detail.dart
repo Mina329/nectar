@@ -8,8 +8,11 @@ import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';
 
 class ItemProductDetail extends StatelessWidget {
-  const ItemProductDetail({super.key});
-
+  const ItemProductDetail({
+    super.key,
+    required this.description,
+  });
+  final String? description;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,14 +32,16 @@ class ItemProductDetail extends StatelessWidget {
                 fontWeight: FontWeight.w600),
           ),
           collapsed: Text(
-            "Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet.",
+            description == null || description == "" ? "" : description!,
             maxLines: 1,
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 fontFamily: AssetsManager.gilroyMedium,
                 fontWeight: FontWeight.w400),
           ),
           expanded: Text(
-            "Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet.",
+            description == null || description == ""
+                ? StringsManager.noDescription.tr()
+                : description!,
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 fontFamily: AssetsManager.gilroyMedium,
                 fontWeight: FontWeight.w400),

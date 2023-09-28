@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/app_router.dart';
+import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/core/widgets/custom_loading_indicator.dart';
 
 import '../../../../../../core/utils/assets_manager.dart';
@@ -16,7 +18,9 @@ class GroceryItem extends StatelessWidget {
     required this.price,
     required this.offerPrice,
     required this.imageLink,
+    required this.id,
   });
+  final String? id;
   final String? name;
   final String? quantity;
   final String? price;
@@ -26,9 +30,7 @@ class GroceryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(
-          AppRouter.kItemDetailsView,
-        );
+        GoRouter.of(context).push(AppRouter.kItemDetailsView, extra: id);
       },
       child: Container(
         height: 255.h,
@@ -54,29 +56,41 @@ class GroceryItem extends StatelessWidget {
             SizedBox(
               width: 140.w,
               height: 135.h,
-              child: Image.network(imageLink ?? "", width: 140.w, height: 135.h,
-                  errorBuilder: (context, error, stackTrace) {
-                try {
-                  throw error;
-                } catch (e) {}
-                return const Icon(
-                  Icons.error,
-                  color: Colors.red,
-                );
-              }, loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) {
-                  return child;
-                } else {
-                  return const CustomCircularIndicator();
-                }
-              }),
+              child: imageLink == null
+                  ? Image.asset(
+                      AssetsManager.errorAlt,
+                      width: 140.w,
+                      height: 135.h,
+                    )
+                  : Image.network(
+                      imageLink!,
+                      width: 140.w,
+                      height: 135.h,
+                      errorBuilder: (context, error, stackTrace) {
+                        try {
+                          throw error;
+                        } catch (e) {}
+                        return Image.asset(
+                          AssetsManager.errorAlt,
+                          width: 140.w,
+                          height: 135.h,
+                        );
+                      },
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        } else {
+                          return const CustomCircularIndicator();
+                        }
+                      },
+                    ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: 15.w,
               ),
               child: Text(
-                '${name!}\n',
+                '${name ?? StringsManager.unavailable.tr()}\n',
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleSmall,

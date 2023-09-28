@@ -17,9 +17,11 @@ class ExploreViewBody extends StatelessWidget {
     return RefreshIndicator(
       color: ColorManager.green,
       edgeOffset: 70,
-
       onRefresh: () async {
         BlocProvider.of<CategoriesCubit>(context).fetchCategories();
+        return Future.delayed(
+          const Duration(seconds: 1),
+        );
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 25.w),

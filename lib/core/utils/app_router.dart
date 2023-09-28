@@ -14,6 +14,7 @@ import 'package:nectar/features/explore/data/repos/explore_repo.dart';
 import 'package:nectar/features/explore/presentation/view%20model/category_items_cubit/category_items_cubit.dart';
 import 'package:nectar/features/explore/presentation/view/category%20details%20view/category_details_view.dart';
 import 'package:nectar/features/home/presentation/view/home_view.dart';
+import 'package:nectar/features/shop/presentation/view%20model/item_details_cubit/item_details_cubit.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
 import '../../features/account/presentation/view/about_view.dart';
 import '../../features/account/presentation/view/promo_code_view.dart';
@@ -28,7 +29,8 @@ import '../../features/my_details/presentation/view/my_details_view.dart';
 import '../../features/orders/presentation/view/orders_view.dart';
 import '../../features/onboarding/presentation/view/onboarding_view.dart';
 import '../../features/payment_method/presentation/view/payment_method_view.dart';
-import '../../features/shop/data/section_info_model/section_info_model.dart';
+import '../../features/shop/data/models/section_info_model/section_info_model.dart';
+import '../../features/shop/data/repos/shop_repo.dart';
 import '../../features/shop/presentation/view/item details view/item_details_view.dart';
 import '../../features/shop/presentation/view/section details view/section_details_view.dart';
 
@@ -75,27 +77,36 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kItemDetailsView,
-        pageBuilder: (context, state) => screenTransition(
-          state,
-          const ItemDetailsView(),
-        ),
+        pageBuilder: (context, state) {
+          String itemId = state.extra as String;
+          return screenTransition(
+            state,
+            BlocProvider(
+              create: (context) => ItemDetailsCubit(
+                getIt.get<ShopRepo>(),
+              )..getItemById(itemId),
+              child: const ItemDetailsView(),
+            ),
+          );
+        },
       ),
       GoRoute(
-          path: kCategoryDetailsView,
-          pageBuilder: (context, state) {
-            CategoryModel category = state.extra as CategoryModel;
-            return screenTransition(
-              state,
-              BlocProvider(
-                create: (context) => CategoryItemsCubit(
-                  getIt.get<ExploreRepo>(),
-                )..fetchCategoryItems(category.id!),
-                child: CategoryDetailsView(
-                  category: category,
-                ),
+        path: kCategoryDetailsView,
+        pageBuilder: (context, state) {
+          CategoryModel category = state.extra as CategoryModel;
+          return screenTransition(
+            state,
+            BlocProvider(
+              create: (context) => CategoryItemsCubit(
+                getIt.get<ExploreRepo>(),
+              )..fetchCategoryItems(category.id!),
+              child: CategoryDetailsView(
+                category: category,
               ),
-            );
-          }),
+            ),
+          );
+        },
+      ),
       GoRoute(
         path: kOrdersView,
         pageBuilder: (context, state) => screenTransition(

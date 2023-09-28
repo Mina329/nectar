@@ -1,4 +1,4 @@
-import '../../../explore/data/models/category_item_model/category_item_model.dart';
+import '../../../../explore/data/models/category_item_model/category_item_model.dart';
 
 class SectionInfoModel {
   final String name;

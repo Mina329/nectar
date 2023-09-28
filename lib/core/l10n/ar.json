@@ -88,5 +88,9 @@
   "registered": "لديك حساب بالفعل ؟",
   "signOut": "تسجيل الخروج",
   "somethingWrong": "حدث خطأ ما",
-  "empty": "عذرًا، لا يوجد شيء هنا!"
+  "empty": "عذرًا، لا يوجد شيء هنا!",
+  "unavailable": "غير متاح",
+  "anonymousUser": "مستخدم مجهول",
+  "noDescription": "ناسف، لا يوجد وصف",
+  "noReviews": "ناسف، لا يوجد مراجعات"
 }

@@ -2,15 +2,21 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nectar/core/utils/assets_manager.dart';
+import 'package:nectar/features/shop/data/models/grocery_item_model/image.dart'
+    as image_model;
 
 import '../../../../../../core/utils/color_manager.dart';
+import '../../../../../../core/widgets/custom_loading_indicator.dart';
 
 class ItemImageSection extends StatefulWidget {
-  const ItemImageSection({super.key});
-
+  const ItemImageSection({
+    Key? key,
+    required this.images,
+  }) : super(key: key);
+  final List<image_model.Image>? images;
   @override
-  State<ItemImageSection> createState() =>
-      _ItemImageSectionState();
+  State<ItemImageSection> createState() => _ItemImageSectionState();
 }
 
 class _ItemImageSectionState extends State<ItemImageSection> {
@@ -66,13 +72,26 @@ class _ItemImageSectionState extends State<ItemImageSection> {
     return PageView.builder(
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
-      itemCount: 3,
+      itemCount: widget.images!.isEmpty ? 1 : widget.images!.length,
       controller: _pageController,
       itemBuilder: (context, index) => Center(
         child: SizedBox(
           width: 364.w,
           height: 250.h,
-          child: Image.asset("assets/images/banana.png"),
+          child: widget.images!.isEmpty
+              ? Image.asset(AssetsManager.errorAlt)
+              : Image.network(
+                  widget.images![index].image!,
+                  errorBuilder: (context, error, stackTrace) =>
+                      Image.asset(AssetsManager.errorAlt),
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    } else {
+                      return const CustomCircularIndicator();
+                    }
+                  },
+                ),
         ),
       ),
     );
@@ -84,7 +103,7 @@ class _ItemImageSectionState extends State<ItemImageSection> {
       left: 0,
       right: 0,
       child: DotsIndicator(
-        dotsCount: 3,
+        dotsCount: widget.images!.isEmpty ? 1 : widget.images!.length,
         position: _currentPage,
         decorator: DotsDecorator(
           activeColor: Theme.of(context).brightness == Brightness.light

@@ -19,7 +19,8 @@ class SectionDetailsGridView extends StatelessWidget {
       delegate: SliverChildBuilderDelegate(
         childCount: items.length,
         (context, index) => GroceryItem(
-          name: items[index].name!,
+          id: items[index].id,
+          name: items[index].name,
           price: items[index].price.toString(),
           imageLink: items[index].thumbnail ?? "",
           quantity: "${items[index].quantity}${items[index].quantityType}",

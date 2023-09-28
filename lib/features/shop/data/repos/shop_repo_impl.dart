@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:nectar/core/errors/failure.dart';
 import 'package:nectar/core/utils/api_service.dart';
 import 'package:nectar/features/explore/data/models/category_item_model/category_item_model.dart';
+import 'package:nectar/features/shop/data/models/grocery_item_model/grocery_item_model.dart';
 import 'package:nectar/features/shop/data/repos/shop_repo.dart';
 
 class ShopRepoImpl extends ShopRepo {
@@ -19,6 +20,28 @@ class ShopRepoImpl extends ShopRepo {
         items.add(CategoryItemModel.fromJson(item));
       }
       return right(items);
+    } catch (e) {
+      if (e is DioException) {
+        return left(
+          ServerFailure.fromDioException(
+            e,
+          ),
+        );
+      }
+      return left(
+        ServerFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, GroceryItemModel>> fetchItemById(String id) async {
+    try {
+      var data = await apiService.get(endPoint: "api/v1/items/$id");
+
+      return right(GroceryItemModel.fromJson(data['data']));
     } catch (e) {
       if (e is DioException) {
         return left(

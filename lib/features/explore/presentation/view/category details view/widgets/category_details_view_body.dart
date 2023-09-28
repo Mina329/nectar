@@ -20,12 +20,13 @@ class CategoryDetailsViewBody extends StatelessWidget {
         onRefresh: () async {
           BlocProvider.of<CategoryItemsCubit>(context)
               .fetchCategoryItems(category.id!);
+          return Future.delayed(const Duration(seconds: 1));
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            CustomCategoryAppBar(title: category.name!),
+            CustomCategoryAppBar(title: category.name),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.w),
@@ -42,6 +43,9 @@ class CategoryDetailsViewBody extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
+            SizedBox(
+              height: 20.h,
             ),
           ],
         ),

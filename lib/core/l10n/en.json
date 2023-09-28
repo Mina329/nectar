@@ -88,5 +88,10 @@
   "registered": "Already have an account ?",
   "signOut": "Sign Out",
   "somethingWrong": "Something went wrong",
-  "empty": "Oops, Nothing Here!"
+  "empty": "Oops, Nothing Here!",
+  "unavailable": "Unavailable",
+  "anonymousUser": "Anonymous User",
+  "noDescription": "No description",
+  "noReviews": "No reviews"
+
 }

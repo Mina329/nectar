@@ -11,7 +11,7 @@ import '../../../../../../core/l10n/locales.dart';
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/strings_manager.dart';
-import '../../../../data/section_info_model/section_info_model.dart';
+import '../../../../data/models/section_info_model/section_info_model.dart';
 import 'category_groceries_section_item.dart';
 import 'grocery_item.dart';
 import 'grocery_section_shimmer.dart';
@@ -64,9 +64,9 @@ class GroceriesSection extends StatelessWidget {
                                       BlocProvider.of<CategoriesCubit>(context)
                                           .colors
                                           .length],
-                              name: categoriesState.categories[index].name!,
+                              name: categoriesState.categories[index].name,
                               imageLink:
-                                  categoriesState.categories[index].image!,
+                                  categoriesState.categories[index].image,
                               category: categoriesState.categories[index],
                             ),
                           ),
@@ -116,9 +116,9 @@ class GroceriesSection extends StatelessWidget {
                                       BlocProvider.of<CategoriesCubit>(context)
                                           .colors
                                           .length],
-                              name: categoriesState.categories[index].name!,
+                              name: categoriesState.categories[index].name,
                               imageLink:
-                                  categoriesState.categories[index].image!,
+                                  categoriesState.categories[index].image,
                               category: categoriesState.categories[index],
                             ),
                           ),
@@ -187,9 +187,9 @@ class GroceriesSection extends StatelessWidget {
                                       BlocProvider.of<CategoriesCubit>(context)
                                           .colors
                                           .length],
-                              name: categoriesState.categories[index].name!,
+                              name: categoriesState.categories[index].name,
                               imageLink:
-                                  categoriesState.categories[index].image!,
+                                  categoriesState.categories[index].image,
                               category: categoriesState.categories[index],
                             ),
                           ),
@@ -211,6 +211,7 @@ class GroceriesSection extends StatelessWidget {
                                 ? EdgeInsets.only(right: 15.w)
                                 : EdgeInsets.only(left: 15.w),
                             child: GroceryItem(
+                              id: allItemState.items[index].id,
                               name: allItemState.items[index].name,
                               price: "${allItemState.items[index].price}",
                               imageLink: allItemState.items[index].thumbnail,

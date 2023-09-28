@@ -50,6 +50,7 @@ class BestSellingSection extends StatelessWidget {
                     ? EdgeInsets.only(right: 15.w)
                     : EdgeInsets.only(left: 15.w),
                 child: const GroceryItem(
+                  id: "",
                     name: "Banana",
                     price: "50.00",
                     imageLink:

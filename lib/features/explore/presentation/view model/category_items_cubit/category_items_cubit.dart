@@ -9,9 +9,12 @@ part 'category_items_state.dart';
 class CategoryItemsCubit extends Cubit<CategoryItemsState> {
   CategoryItemsCubit(this.exploreRepo) : super(CategoryItemsInitial());
   final ExploreRepo exploreRepo;
-
+  bool first = true;
   Future<void> fetchCategoryItems(String id) async {
-    emit(CategoryItemsLoading());
+    if (first) {
+      emit(CategoryItemsLoading());
+      first = false;
+    }
     var result = await exploreRepo.fetchCategoryItems(id);
     result.fold(
       (failure) => emit(
