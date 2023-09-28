@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nectar/features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 import 'package:nectar/features/shop/data/repos/shop_repo.dart';
 import 'package:nectar/features/shop/presentation/view%20model/exclusive_offers_cubit/exclusive_offers_cubit.dart';
+import 'package:nectar/features/shop/presentation/view%20model/groceries_section_cubit/groceries_section_cubit.dart';
 import '../../../../core/utils/service_locator.dart';
 import '../../../../core/widgets/custom_navigation_bar.dart';
 import '../../../account/presentation/view/account_view.dart';
@@ -28,7 +29,17 @@ class _HomeViewState extends State<HomeView> {
           create: (context) => ExclusiveOffersCubit(
             getIt.get<ShopRepo>(),
           )..getExclusiveOffersItems(),
-        )
+        ),
+        BlocProvider(
+          create: (context) => CategoriesCubit(
+            getIt.get<ExploreRepo>(),
+          )..fetchCategories(),
+        ),
+        BlocProvider(
+          create: (context) => GroceriesSectionCubit(
+            getIt.get<ShopRepo>(),
+          )..getAllItems(),
+        ),
       ],
       child: const ShopView(),
     ),

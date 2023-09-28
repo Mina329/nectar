@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/app_router.dart';
-import 'package:nectar/core/utils/env.dart';
 
 import '../../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../data/models/category_model/category_model.dart';
@@ -41,19 +40,19 @@ class CategoryItem extends StatelessWidget {
             SizedBox(
               width: 111.w,
               height: 74.h,
-              child: Image.network(
-                "${Env.BACKEND_BASE_URL}${category.image}",
-                width: 111.w,
-                height: 74.h,
-                errorBuilder: (context, error, stackTrace) {
-                  return const Icon(
-                    Icons.error,
-                    color: Colors.red,
-                  );
-                },
-                loadingBuilder: (context, child, loadingProgress) =>
-                    const CustomCircularIndicator(),
-              ),
+              child: Image.network(category.image!, width: 111.w, height: 74.h,
+                  errorBuilder: (context, error, stackTrace) {
+                return const Icon(
+                  Icons.error,
+                  color: Colors.red,
+                );
+              }, loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) {
+                  return child;
+                } else {
+                  return const CustomCircularIndicator();
+                }
+              }),
             ),
             SizedBox(
               height: 27.h,

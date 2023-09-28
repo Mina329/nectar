@@ -17,11 +17,11 @@ class GroceryItem extends StatelessWidget {
     required this.offerPrice,
     required this.imageLink,
   });
-  final String name;
-  final String quantity;
-  final String price;
+  final String? name;
+  final String? quantity;
+  final String? price;
   final double? offerPrice;
-  final String imageLink;
+  final String? imageLink;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -54,29 +54,29 @@ class GroceryItem extends StatelessWidget {
             SizedBox(
               width: 140.w,
               height: 135.h,
-              child: Image.network(
-                imageLink,
-                width: 140.w,
-                height: 135.h,
-                errorBuilder: (context, error, stackTrace) {
-                  try {
-                    throw error;
-                  } catch (e) {}
-                  return const Icon(
-                    Icons.error,
-                    color: Colors.red,
-                  );
-                },
-                loadingBuilder: (context, child, loadingProgress) =>
-                    const CustomCircularIndicator(),
-              ),
+              child: Image.network(imageLink ?? "", width: 140.w, height: 135.h,
+                  errorBuilder: (context, error, stackTrace) {
+                try {
+                  throw error;
+                } catch (e) {}
+                return const Icon(
+                  Icons.error,
+                  color: Colors.red,
+                );
+              }, loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) {
+                  return child;
+                } else {
+                  return const CustomCircularIndicator();
+                }
+              }),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: 15.w,
               ),
               child: Text(
-                name,
+                '${name!}\n',
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleSmall,
@@ -91,7 +91,7 @@ class GroceryItem extends StatelessWidget {
                 horizontal: 15.w,
               ),
               child: Text(
-                quantity,
+                quantity ?? "",
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     fontFamily: AssetsManager.gilroyMedium,
                     fontWeight: FontWeight.w500),
@@ -102,35 +102,48 @@ class GroceryItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (offerPrice != null)
-                        Text(
-                          "$offerPrice L.E.",
-                          style:
-                              Theme.of(context).textTheme.labelMedium!.copyWith(
-                                    fontFamily: AssetsManager.gilroySemiBold,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18.sp,
-                                  ),
-                        ),
-                      Text(
-                        "$price L.E.",
-                        style: offerPrice == null
-                            ? Theme.of(context).textTheme.labelMedium!.copyWith(
+                  SizedBox(
+                    width: 90.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (offerPrice != null)
+                          Text(
+                            "$offerPrice L.E.",
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium!
+                                .copyWith(
                                   fontFamily: AssetsManager.gilroySemiBold,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18.sp,
-                                )
-                            : Theme.of(context).textTheme.labelMedium!.copyWith(
-                                  fontFamily: AssetsManager.gilroySemiBold,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 11.sp,
-                                  decoration: TextDecoration.lineThrough,
                                 ),
-                      ),
-                    ],
+                          ),
+                        Text(
+                          "$price L.E.",
+                          overflow: TextOverflow.ellipsis,
+                          style: offerPrice == null
+                              ? Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .copyWith(
+                                    fontFamily: AssetsManager.gilroySemiBold,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18.sp,
+                                  )
+                              : Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .copyWith(
+                                    fontFamily: AssetsManager.gilroySemiBold,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 11.sp,
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     width: 40.w,

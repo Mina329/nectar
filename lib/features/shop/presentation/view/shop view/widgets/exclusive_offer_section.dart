@@ -78,8 +78,9 @@ class ExclusiveOfferSection extends StatelessWidget {
                       child: GroceryItem(
                         name: state.items[index].name!,
                         price: "${state.items[index].price}",
-                        imageLink: state.items[index].thumbnail!,
-                        quantity: "${state.items[index].quantity}",
+                        imageLink: state.items[index].thumbnail,
+                        quantity:
+                            "${state.items[index].quantity} ${state.items[index].quantityType}",
                         offerPrice: state.items[index].offerPrice,
                       ),
                     ),
