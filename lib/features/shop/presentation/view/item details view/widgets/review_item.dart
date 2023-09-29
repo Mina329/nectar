@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -25,17 +26,12 @@ class ReviewItem extends StatelessWidget {
           child: ClipOval(
             child: image == null
                 ? Image.asset(AssetsManager.errorAlt)
-                : Image.network(
-                    image!,
-                    errorBuilder: (context, error, stackTrace) =>
+                : CachedNetworkImage(
+                    imageUrl: image!,
+                    errorWidget: (context, error, stackTrace) =>
                         Image.asset(AssetsManager.errorAlt),
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) {
-                        return child;
-                      } else {
-                        return const CustomCircularIndicator();
-                      }
-                    },
+                    placeholder: (context, url) =>
+                        const CustomCircularIndicator(),
                   ),
           ),
         ),

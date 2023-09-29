@@ -7,14 +7,14 @@ import 'package:nectar/features/shop/data/models/grocery_item_model/grocery_item
 import 'package:nectar/features/shop/data/repos/shop_repo.dart';
 
 class ShopRepoImpl extends ShopRepo {
-  final ApiService apiService;
+  final ApiService _apiService;
 
-  ShopRepoImpl(this.apiService);
+  ShopRepoImpl(this._apiService);
   @override
   Future<Either<Failure, List<CategoryItemModel>>>
       fetchAllGroceryItems() async {
     try {
-      var data = await apiService.get(endPoint: 'api/v1/items');
+      var data = await _apiService.get(endPoint: 'api/v1/items');
       List<CategoryItemModel> items = [];
       for (var item in data['data']) {
         items.add(CategoryItemModel.fromJson(item));
@@ -39,7 +39,7 @@ class ShopRepoImpl extends ShopRepo {
   @override
   Future<Either<Failure, GroceryItemModel>> fetchItemById(String id) async {
     try {
-      var data = await apiService.get(endPoint: "api/v1/items/$id");
+      var data = await _apiService.get(endPoint: "api/v1/items/$id");
 
       return right(GroceryItemModel.fromJson(data['data']));
     } catch (e) {

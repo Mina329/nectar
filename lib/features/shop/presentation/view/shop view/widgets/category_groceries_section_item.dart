@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,25 +47,17 @@ class CategoryGroceriesSectionItem extends StatelessWidget {
                         AssetsManager.errorAlt,
                         width: 100.w,
                       )
-                    : Image.network(
-                        imageLink!,
+                    : CachedNetworkImage(
+                        imageUrl: imageLink!,
                         width: 100.w,
-                        errorBuilder: (context, error, stackTrace) {
-                          try {
-                            throw error;
-                          } catch (e) {}
+                        errorWidget: (context, error, stackTrace) {
                           return Image.asset(
                             AssetsManager.errorAlt,
                             width: 100.w,
                           );
                         },
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          } else {
-                            return const CustomCircularIndicator();
-                          }
-                        },
+                        placeholder: (context, url) =>
+                            const CustomCircularIndicator(),
                       ),
               ),
             ),

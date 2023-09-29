@@ -9,6 +9,9 @@ import 'package:nectar/features/explore/data/repos/explore_repo_impl.dart';
 import 'package:nectar/features/shop/data/repos/shop_repo.dart';
 import 'package:nectar/features/shop/data/repos/shop_repo_impl.dart';
 
+import '../../features/favourite/data/repos/favourite_repo.dart';
+import '../../features/favourite/data/repos/favourite_repo_impl.dart';
+
 final getIt = GetIt.instance;
 void setupServiceLocator() {
   getIt.registerSingleton<ApiService>(
@@ -27,5 +30,8 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<ExploreRepo>(
     ExploreRepoImpl(getIt.get<ApiService>()),
+  );
+  getIt.registerSingleton<FavouriteRepo>(
+    FavouriteRepoImpl(getIt.get<ApiService>()),
   );
 }

@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/widgets/item_shimmer.dart';
 import 'package:nectar/features/explore/presentation/view%20model/categories_cubit/categories_cubit.dart';
@@ -26,6 +27,7 @@ class GroceriesSection extends StatelessWidget {
         if (categoriesState is CategoriesLoading) {
           return const GrocerySectionShimmer();
         } else if (categoriesState is CategoriesFailure) {
+          Fluttertoast.showToast(msg: categoriesState.errMessage);
           return const SliverToBoxAdapter();
         } else if (categoriesState is CategoriesSuccess) {
           return BlocBuilder<GroceriesSectionCubit, GroceriesSectionState>(
@@ -83,6 +85,7 @@ class GroceriesSection extends StatelessWidget {
                   ),
                 );
               } else if (allItemState is GroceriesSectionFailure) {
+                Fluttertoast.showToast(msg: allItemState.errMessage);
                 return SliverToBoxAdapter(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

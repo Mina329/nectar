@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -48,24 +49,19 @@ class CategoryItem extends StatelessWidget {
                       width: 111.w,
                       height: 74.h,
                     )
-                  : Image.network(
-                      category.image!,
+                  : CachedNetworkImage(
+                      imageUrl: category.image!,
                       width: 111.w,
                       height: 74.h,
-                      errorBuilder: (context, error, stackTrace) {
+                      errorWidget: (context, url, error) {
                         return Image.asset(
                           AssetsManager.errorAlt,
                           width: 111.w,
                           height: 74.h,
                         );
                       },
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) {
-                          return child;
-                        } else {
-                          return const CustomCircularIndicator();
-                        }
-                      },
+                      placeholder: (context, url) =>
+                          const CustomCircularIndicator(),
                     ),
             ),
             SizedBox(

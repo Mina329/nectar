@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/l10n/locales.dart';
 import 'package:nectar/core/utils/app_router.dart';
@@ -22,6 +23,7 @@ class ExclusiveOfferSection extends StatelessWidget {
         if (state is ExclusiveOffersLoading) {
           return const SectionsShimmer();
         } else if (state is ExclusiveOffersFailure) {
+          Fluttertoast.showToast(msg: state.errMessage);
           return const SliverToBoxAdapter();
         } else if (state is ExclusiveOffersSuccess) {
           return SliverToBoxAdapter(

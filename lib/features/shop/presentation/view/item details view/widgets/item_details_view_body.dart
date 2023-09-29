@@ -45,6 +45,8 @@ class ItemDetailsViewBody extends StatelessWidget {
                   Center(
                     child: SvgPicture.asset(
                       AssetsManager.error,
+                      width: 300.w,
+                      height: 500.h,
                     ),
                   )
                 ],

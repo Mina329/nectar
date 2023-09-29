@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -158,7 +159,7 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
               children: [
                 if (widget.offerPrice != null)
                   Text(
-                    "${widget.offerPrice} L.E.",
+                    "${widget.offerPrice} ${StringsManager.currency.tr()}",
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           fontFamily: AssetsManager.gilroyBold,
@@ -166,7 +167,7 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
                         ),
                   ),
                 Text(
-                  "${widget.price ?? 0} L.E.",
+                  "${widget.price ?? 0} ${StringsManager.currency.tr()}",
                   textAlign: TextAlign.end,
                   style: widget.offerPrice == null
                       ? Theme.of(context).textTheme.headlineMedium!.copyWith(

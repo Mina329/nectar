@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -80,17 +81,12 @@ class _ItemImageSectionState extends State<ItemImageSection> {
           height: 250.h,
           child: widget.images!.isEmpty
               ? Image.asset(AssetsManager.errorAlt)
-              : Image.network(
-                  widget.images![index].image!,
-                  errorBuilder: (context, error, stackTrace) =>
+              : CachedNetworkImage(
+                  imageUrl: widget.images![index].image!,
+                  errorWidget: (context, error, stackTrace) =>
                       Image.asset(AssetsManager.errorAlt),
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) {
-                      return child;
-                    } else {
-                      return const CustomCircularIndicator();
-                    }
-                  },
+                  placeholder: (context, url) =>
+                      const CustomCircularIndicator(),
                 ),
         ),
       ),

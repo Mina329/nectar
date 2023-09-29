@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -62,27 +63,19 @@ class GroceryItem extends StatelessWidget {
                       width: 140.w,
                       height: 135.h,
                     )
-                  : Image.network(
-                      imageLink!,
+                  : CachedNetworkImage(
+                      imageUrl: imageLink!,
                       width: 140.w,
                       height: 135.h,
-                      errorBuilder: (context, error, stackTrace) {
-                        try {
-                          throw error;
-                        } catch (e) {}
+                      errorWidget: (context, error, stackTrace) {
                         return Image.asset(
                           AssetsManager.errorAlt,
                           width: 140.w,
                           height: 135.h,
                         );
                       },
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) {
-                          return child;
-                        } else {
-                          return const CustomCircularIndicator();
-                        }
-                      },
+                      placeholder: (context, url) =>
+                          const CustomCircularIndicator(),
                     ),
             ),
             Padding(
@@ -123,7 +116,7 @@ class GroceryItem extends StatelessWidget {
                       children: [
                         if (offerPrice != null)
                           Text(
-                            "$offerPrice L.E.",
+                            "$offerPrice ${StringsManager.currency.tr()}",
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context)
                                 .textTheme
@@ -135,7 +128,7 @@ class GroceryItem extends StatelessWidget {
                                 ),
                           ),
                         Text(
-                          "$price L.E.",
+                          "$price ${StringsManager.currency.tr()}",
                           overflow: TextOverflow.ellipsis,
                           style: offerPrice == null
                               ? Theme.of(context)

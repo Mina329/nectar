@@ -92,5 +92,6 @@
   "unavailable": "غير متاح",
   "anonymousUser": "مستخدم مجهول",
   "noDescription": "ناسف، لا يوجد وصف",
-  "noReviews": "ناسف، لا يوجد مراجعات"
+  "noReviews": "ناسف، لا يوجد مراجعات",
+  "currency": "ج.م"
 }
