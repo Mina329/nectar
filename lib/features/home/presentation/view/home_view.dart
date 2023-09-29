@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nectar/features/favourite/presentation/view%20model/favourite_items_cubit/favourite_items_cubit.dart';
 import 'package:nectar/features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 import 'package:nectar/features/shop/data/repos/shop_repo.dart';
+import 'package:nectar/features/shop/presentation/view%20model/city_country_cubit/city_country_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/exclusive_offers_cubit/exclusive_offers_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/groceries_section_cubit/groceries_section_cubit.dart';
+import '../../../../core/cache/cache_helper.dart';
+import '../../../../core/cache/cache_keys_values.dart';
 import '../../../../core/utils/service_locator.dart';
 import '../../../../core/widgets/custom_navigation_bar.dart';
 import '../../../account/presentation/view/account_view.dart';
@@ -42,6 +45,14 @@ class _HomeViewState extends State<HomeView> {
             getIt.get<ShopRepo>(),
           )..getAllItems(),
         ),
+        BlocProvider(
+          create: (context) => CityCountryCubit(
+            getIt.get<ShopRepo>(),
+          )..getCityCountry(
+              CacheData.getData(key: CacheKeys.kLANGUAGE) == CacheValues.ARABIC
+                  ? "ar"
+                  : "en"),
+        )
       ],
       child: const ShopView(),
     ),

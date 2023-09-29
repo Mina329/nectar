@@ -35,4 +35,30 @@ class ApiService {
     );
     return response.data;
   }
+
+  Future<Response> post(
+      {required String endPoint,
+      required Map<String, dynamic> requestData}) async {
+    var response = await _dio.post(
+      "${Env.BACKEND_BASE_URL}$endPoint",
+      data: requestData,
+      options: Options(
+        headers: headers,
+      ),
+    );
+    return response;
+  }
+
+  Future<Response> delete(
+      {required String endPoint,
+      required Map<String, dynamic> requestData}) async {
+    var response = await _dio.delete(
+      "${Env.BACKEND_BASE_URL}$endPoint",
+      data: requestData,
+      options: Options(
+        headers: headers,
+      ),
+    );
+    return response;
+  }
 }

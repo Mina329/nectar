@@ -9,12 +9,8 @@ part 'favourite_items_state.dart';
 class FavouriteItemsCubit extends Cubit<FavouriteItemsState> {
   FavouriteItemsCubit(this.favouriteRepo) : super(FavouriteItemsInitial());
   final FavouriteRepo favouriteRepo;
-  bool first = true;
   Future<void> getFavouriteItems() async {
-    if (first) {
-      emit(FavouriteItemsLoading());
-      first = false;
-    }
+    emit(FavouriteItemsLoading());
     var result = await favouriteRepo.fetchFavouriteItems();
     result.fold(
       (failure) => emit(

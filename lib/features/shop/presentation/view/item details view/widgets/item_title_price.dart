@@ -1,22 +1,31 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/core/widgets/custom_rounded_square_widget.dart';
+import 'package:nectar/features/shop/presentation/view%20model/favourite_cubit/favourite_cubit.dart';
 
 import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';
+import '../../../../../../core/widgets/custom_loading_indicator.dart';
 
 class ItemTitlePrice extends StatefulWidget {
   const ItemTitlePrice({
-    super.key,
+    Key? key,
+    required this.id,
     required this.name,
     required this.quantity,
     required this.price,
-    required this.favourite,
     this.offerPrice,
-  });
+    required this.favourite,
+  }) : super(key: key);
+  final String? id;
   final String? name;
   final String? quantity;
   final double? price;
@@ -59,45 +68,78 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
                 softWrap: true,
               ),
             ),
-            InkWell(
-              highlightColor: Colors.transparent,
-              splashColor: Colors.transparent,
-              onHighlightChanged: (value) {
-                setState(() {
-                  isHighlighted = !isHighlighted;
-                });
+            BlocListener<FavouriteCubit, FavouriteState>(
+              listener: (context, state) {
+                if (state is FavouriteLoading) {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (BuildContext context) {
+                      return const CustomLoadingIndicator();
+                    },
+                  );
+                } else if (state is AddFavouriteFailure) {
+                  GoRouter.of(context).pop();
+                  Fluttertoast.showToast(msg: state.errMessage);
+                } else if (state is AddFavouriteSuccess) {
+                  GoRouter.of(context).pop();
+                  setState(() {
+                    favourite = true;
+                  });
+                } else if (state is RemoveFavouriteFailure) {
+                  GoRouter.of(context).pop();
+                  Fluttertoast.showToast(msg: state.errMessage);
+                } else if (state is RemoveFavouriteSuccess) {
+                  GoRouter.of(context).pop();
+                  setState(() {
+                    favourite = false;
+                  });
+                }
               },
-              onTap: () {
-                setState(() {
-                  favourite = !favourite;
-                });
-              },
-              child: AnimatedContainer(
-                margin: EdgeInsets.all(isHighlighted ? 0 : 2.5),
-                height: isHighlighted ? 50.h : 45.h,
-                width: isHighlighted ? 50.w : 45.w,
-                curve: Curves.fastLinearToSlowEaseIn,
-                duration: const Duration(milliseconds: 300),
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      blurRadius: 20,
-                      offset: const Offset(5, 10),
-                    ),
-                  ],
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-                child: favourite
-                    ? Icon(
-                        Icons.favorite,
-                        color: Colors.pink.withOpacity(1.0),
-                      )
-                    : Icon(
-                        Icons.favorite_border,
-                        color: Colors.black.withOpacity(0.6),
+              child: InkWell(
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                onHighlightChanged: (value) {
+                  setState(() {
+                    isHighlighted = !isHighlighted;
+                  });
+                },
+                onTap: () {
+                  if (favourite) {
+                    BlocProvider.of<FavouriteCubit>(context)
+                        .removeFavouriteItem(widget.id!);
+                  } else {
+                    BlocProvider.of<FavouriteCubit>(context)
+                        .addFavouriteItem(widget.id!);
+                  }
+                },
+                child: AnimatedContainer(
+                  margin: EdgeInsets.all(isHighlighted ? 0 : 2.5),
+                  height: isHighlighted ? 50.h : 45.h,
+                  width: isHighlighted ? 50.w : 45.w,
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  duration: const Duration(milliseconds: 300),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 20,
+                        offset: const Offset(5, 10),
                       ),
+                    ],
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: favourite
+                      ? Icon(
+                          Icons.favorite,
+                          color: Colors.pink.withOpacity(1.0),
+                        )
+                      : Icon(
+                          Icons.favorite_border,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                ),
               ),
             ),
           ],

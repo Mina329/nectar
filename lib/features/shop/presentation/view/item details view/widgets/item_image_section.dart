@@ -1,21 +1,27 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/features/shop/data/models/grocery_item_model/image.dart'
     as image_model;
 
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/widgets/custom_loading_indicator.dart';
+import '../../../../../favourite/presentation/view model/favourite_items_cubit/favourite_items_cubit.dart';
 
 class ItemImageSection extends StatefulWidget {
   const ItemImageSection({
     Key? key,
     required this.images,
+    required this.fromFavourite,
   }) : super(key: key);
   final List<image_model.Image>? images;
+  final bool fromFavourite;
   @override
   State<ItemImageSection> createState() => _ItemImageSectionState();
 }
@@ -120,6 +126,9 @@ class _ItemImageSectionState extends State<ItemImageSection> {
       top: 50.h,
       child: IconButton(
         onPressed: () {
+          if (widget.fromFavourite) {
+          BlocProvider.of<FavouriteItemsCubit>(context).getFavouriteItems();
+        }
           GoRouter.of(context).pop();
         },
         icon: const Icon(

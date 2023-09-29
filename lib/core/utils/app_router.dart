@@ -25,12 +25,14 @@ import '../../features/delivery_address/presentation/view/delivery_address_view.
 import '../../features/delivery_address/presentation/view/google_map_view.dart';
 import '../../features/delivery_address/presentation/view/search_address_view.dart';
 import '../../features/explore/data/models/category_model/category_model.dart';
+import '../../features/favourite/data/models/favourite_to_details_model.dart';
 import '../../features/my_details/presentation/view/my_details_view.dart';
 import '../../features/orders/presentation/view/orders_view.dart';
 import '../../features/onboarding/presentation/view/onboarding_view.dart';
 import '../../features/payment_method/presentation/view/payment_method_view.dart';
 import '../../features/shop/data/models/section_info_model/section_info_model.dart';
 import '../../features/shop/data/repos/shop_repo.dart';
+import '../../features/shop/presentation/view model/favourite_cubit/favourite_cubit.dart';
 import '../../features/shop/presentation/view/item details view/item_details_view.dart';
 import '../../features/shop/presentation/view/section details view/section_details_view.dart';
 
@@ -78,14 +80,28 @@ abstract class AppRouter {
       GoRoute(
         path: kItemDetailsView,
         pageBuilder: (context, state) {
-          String itemId = state.extra as String;
+          FavouriteToDetailsModel model =
+              state.extra as FavouriteToDetailsModel;
           return screenTransition(
             state,
-            BlocProvider(
-              create: (context) => ItemDetailsCubit(
-                getIt.get<ShopRepo>(),
-              )..getItemById(itemId),
-              child: const ItemDetailsView(),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => ItemDetailsCubit(
+                    getIt.get<ShopRepo>(),
+                  )..getItemById(model.id),
+                ),
+                BlocProvider(
+                  create: (context) => FavouriteCubit(
+                    getIt.get<ShopRepo>(),
+                  ),
+                ),
+                if (model.favouriteItemsCubit != null)
+                  BlocProvider.value(
+                    value: model.favouriteItemsCubit!,
+                  ),
+              ],
+              child:  ItemDetailsView(fromFavourite: model.favouriteItemsCubit != null ),
             ),
           );
         },

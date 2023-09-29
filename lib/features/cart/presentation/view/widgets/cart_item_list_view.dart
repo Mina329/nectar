@@ -16,7 +16,7 @@ class CartItemListView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 25.w),
           child: GestureDetector(
               onTap: () {
-                GoRouter.of(context).push(AppRouter.kItemDetailsView,extra: 'id');
+                GoRouter.of(context).push(AppRouter.kItemDetailsView,extra: 'FavouritetoDetailmodel');
               },
               child: const CartItem()),
         ),

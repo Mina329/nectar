@@ -19,6 +19,7 @@ class ItemDetailsSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ItemTitlePrice(
+              id: item.id,
               name: item.name,
               price: item.price,
               quantity: "${item.quantity} ${item.quantityType}",

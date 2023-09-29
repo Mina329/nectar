@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
+import 'package:nectar/features/favourite/data/models/favourite_to_details_model.dart';
 import 'package:nectar/features/favourite/presentation/view%20model/favourite_items_cubit/favourite_items_cubit.dart';
 
 import '../../../../../core/utils/app_router.dart';
@@ -62,8 +63,15 @@ class FavouriteItemListView extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 25.w),
                     child: GestureDetector(
                       onTap: () {
-                        GoRouter.of(context).push(AppRouter.kItemDetailsView,
-                            extra: state.favouriteItems[index].id!);
+                        final favouriteItemCubit =
+                            BlocProvider.of<FavouriteItemsCubit>(context);
+                        GoRouter.of(context).push(
+                          AppRouter.kItemDetailsView,
+                          extra: FavouriteToDetailsModel(
+                            state.favouriteItems[index].id!,
+                            favouriteItemCubit,
+                          ),
+                        );
                       },
                       child: FavouriteItem(
                         image: state.favouriteItems[index].thumbnail,

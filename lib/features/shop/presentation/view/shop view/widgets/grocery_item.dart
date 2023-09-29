@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/core/widgets/custom_loading_indicator.dart';
+import 'package:nectar/features/favourite/data/models/favourite_to_details_model.dart';
 
 import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';
@@ -31,7 +32,8 @@ class GroceryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(AppRouter.kItemDetailsView, extra: id);
+        GoRouter.of(context).push(AppRouter.kItemDetailsView,
+            extra: FavouriteToDetailsModel(id!, null));
       },
       child: Container(
         height: 255.h,
@@ -56,7 +58,7 @@ class GroceryItem extends StatelessWidget {
             ),
             SizedBox(
               width: 140.w,
-              height: 135.h,
+              height: 130.h,
               child: imageLink == null
                   ? Image.asset(
                       AssetsManager.errorAlt,
