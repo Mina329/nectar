@@ -14,7 +14,9 @@ import 'package:nectar/features/explore/data/repos/explore_repo.dart';
 import 'package:nectar/features/explore/presentation/view%20model/category_items_cubit/category_items_cubit.dart';
 import 'package:nectar/features/explore/presentation/view/category%20details%20view/category_details_view.dart';
 import 'package:nectar/features/home/presentation/view/home_view.dart';
+import 'package:nectar/features/shop/presentation/view%20model/groceries_section_details_cubit/groceries_section_details_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/item_details_cubit/item_details_cubit.dart';
+import 'package:nectar/features/shop/presentation/view/groceries%20section%20view/groceries_section_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
 import '../../features/account/presentation/view/about_view.dart';
 import '../../features/account/presentation/view/promo_code_view.dart';
@@ -30,11 +32,15 @@ import '../../features/my_details/presentation/view/my_details_view.dart';
 import '../../features/orders/presentation/view/orders_view.dart';
 import '../../features/onboarding/presentation/view/onboarding_view.dart';
 import '../../features/payment_method/presentation/view/payment_method_view.dart';
-import '../../features/shop/data/models/section_info_model/section_info_model.dart';
 import '../../features/shop/data/repos/shop_repo.dart';
+import '../../features/shop/presentation/view model/best_selling_details_cubit/best_selling_details_cubit.dart';
+import '../../features/shop/presentation/view model/exclusive_offer_details_cubit/exclusive_offer_details_cubit.dart';
 import '../../features/shop/presentation/view model/favourite_cubit/favourite_cubit.dart';
+import '../../features/shop/presentation/view/best selling view/best_selling_view.dart';
+import '../../features/shop/presentation/view/exclusive offer view/exclusive_offer_view.dart';
 import '../../features/shop/presentation/view/item details view/item_details_view.dart';
-import '../../features/shop/presentation/view/section details view/section_details_view.dart';
+import '../cache/cache_helper.dart';
+import '../cache/cache_keys_values.dart';
 
 abstract class AppRouter {
   static const kSplashView = "/";
@@ -55,7 +61,9 @@ abstract class AppRouter {
   static const kLoginView = "/loginView";
   static const kPhoneAuthView = "/phoneAuthView";
   static const kPhoneVerifyView = "/phoneVerifyView";
-  static const kSectionDetailsView = "/sectionDetailsView";
+  static const kExclusiveOfferView = "/exclusiveOfferView";
+  static const kBestSellingView = "/bestSellingView";
+  static const kGroceriesSectionView = "/groceriesSectionView";
 
   static final router = GoRouter(
     routes: [
@@ -89,7 +97,12 @@ abstract class AppRouter {
                 BlocProvider(
                   create: (context) => ItemDetailsCubit(
                     getIt.get<ShopRepo>(),
-                  )..getItemById(model.id),
+                  )..getItemById(
+                      model.id,
+                      CacheData.getData(key: CacheKeys.kLANGUAGE) ==
+                              CacheValues.ARABIC
+                          ? "ar"
+                          : "en"),
                 ),
                 BlocProvider(
                   create: (context) => FavouriteCubit(
@@ -101,7 +114,8 @@ abstract class AppRouter {
                     value: model.favouriteItemsCubit!,
                   ),
               ],
-              child:  ItemDetailsView(fromFavourite: model.favouriteItemsCubit != null ),
+              child: ItemDetailsView(
+                  fromFavourite: model.favouriteItemsCubit != null),
             ),
           );
         },
@@ -257,17 +271,41 @@ abstract class AppRouter {
         ),
       ),
       GoRoute(
-          path: kSectionDetailsView,
-          pageBuilder: (context, state) {
-            SectionInfoModel model = state.extra as SectionInfoModel;
-            return screenTransition(
-              state,
-              SectionDetailsView(
-                name: model.name,
-                items: model.items,
-              ),
-            );
-          }),
+        path: kExclusiveOfferView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          BlocProvider(
+            create: (context) => ExclusiveOfferDetailsCubit(
+              getIt.get<ShopRepo>(),
+            ),
+            child: const ExclusiveOfferView(),
+          ),
+        ),
+      ),
+      GoRoute(
+        path: kBestSellingView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          BlocProvider(
+            create: (context) => BestSellingDetailsCubit(
+              getIt.get<ShopRepo>(),
+            ),
+            child: const BestSellingView(),
+          ),
+        ),
+      ),
+      GoRoute(
+        path: kGroceriesSectionView,
+        pageBuilder: (context, state) => screenTransition(
+          state,
+          BlocProvider(
+            create: (context) => GroceriesSectionDetailsCubit(
+              getIt.get<ShopRepo>(),
+            ),
+            child: const GroceriesSectionView(),
+          ),
+        ),
+      ),
     ],
   );
 }

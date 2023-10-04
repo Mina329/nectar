@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nectar/features/explore/data/models/category_item_model/category_item_model.dart';
 import 'package:nectar/features/shop/data/repos/shop_repo.dart';
+
+import '../../../data/models/thumbnail_grocery_item_model/thumbnail_grocery_item_model/thumbnail_grocery_item_model.dart';
 
 part 'exclusive_offers_state.dart';
 
@@ -15,17 +16,12 @@ class ExclusiveOffersCubit extends Cubit<ExclusiveOffersState> {
       emit(ExclusiveOffersLoading());
       first = false;
     }
-    var result = await shopRepo.fetchAllGroceryItems(language, false);
-    List<CategoryItemModel> offersItems = [];
+    var result = await shopRepo.fetchAllGroceryItems(
+        language: language, orderBy: "offerPrice", perPage: "20", page: "1");
     result.fold((failure) {
       emit(ExclusiveOffersFailure(failure.errMessage));
     }, (items) {
-      for (var item in items) {
-        if (item.offerPrice != null) {
-          offersItems.add(item);
-        }
-      }
-      emit(ExclusiveOffersSuccess(offersItems));
+      emit(ExclusiveOffersSuccess(items));
     });
   }
 }

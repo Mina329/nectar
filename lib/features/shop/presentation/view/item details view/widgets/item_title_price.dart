@@ -1,9 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,6 +12,7 @@ import 'package:nectar/features/shop/presentation/view%20model/favourite_cubit/f
 import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/widgets/custom_loading_indicator.dart';
+import '../../../../../../core/widgets/custom_toast_widget.dart';
 
 class ItemTitlePrice extends StatefulWidget {
   const ItemTitlePrice({
@@ -24,6 +23,7 @@ class ItemTitlePrice extends StatefulWidget {
     required this.price,
     this.offerPrice,
     required this.favourite,
+    required this.category,
   }) : super(key: key);
   final String? id;
   final String? name;
@@ -31,7 +31,7 @@ class ItemTitlePrice extends StatefulWidget {
   final double? price;
   final double? offerPrice;
   final bool? favourite;
-
+  final String? category;
   @override
   State<ItemTitlePrice> createState() => _ItemTitlePriceState();
 }
@@ -58,14 +58,46 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
           children: [
             SizedBox(
               width: 300.w,
-              child: Text(
-                widget.name ?? StringsManager.unavailable,
-                maxLines: 3,
-                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                    fontFamily: AssetsManager.gilroyBold,
-                    fontWeight: FontWeight.w700),
-                overflow: TextOverflow.ellipsis,
-                softWrap: true,
+              child: Row(
+                children: [
+                  Text(
+                    widget.name ?? StringsManager.unavailable,
+                    maxLines: 3,
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                        fontFamily: AssetsManager.gilroyBold,
+                        fontWeight: FontWeight.w700),
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: true,
+                  ),
+                  if (widget.category != null)
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                  if (widget.category != null)
+                    Container(
+                      height: 25.h,
+                      decoration: BoxDecoration(
+                        color: ColorManager.green.withOpacity(0.7),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(
+                            15,
+                          ),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 5.h),
+                        child: Text(
+                          widget.category!,
+                          overflow: TextOverflow.ellipsis,
+                          style:
+                              Theme.of(context).textTheme.labelLarge!.copyWith(
+                                    fontSize: 16.sp,
+                                  ),
+                        ),
+                      ),
+                    )
+                ],
               ),
             ),
             BlocListener<FavouriteCubit, FavouriteState>(
@@ -80,17 +112,103 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
                   );
                 } else if (state is AddFavouriteFailure) {
                   GoRouter.of(context).pop();
-                  Fluttertoast.showToast(msg: state.errMessage);
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    ScaffoldMessenger.of(context)
+                      ..clearSnackBars()
+                      ..showSnackBar(
+                        SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          dismissDirection: DismissDirection.none,
+                          duration: const Duration(seconds: 1),
+                          margin: EdgeInsets.only(
+                              bottom:
+                                  MediaQuery.of(context).size.height - 150.h,
+                              right: 20,
+                              left: 20),
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          content: CustomToastWidget(
+                            description: state.errMessage,
+                            type: ToastType.failure,
+                          ),
+                        ),
+                      );
+                  });
                 } else if (state is AddFavouriteSuccess) {
                   GoRouter.of(context).pop();
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    ScaffoldMessenger.of(context)
+                      ..clearSnackBars()
+                      ..showSnackBar(
+                        SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          dismissDirection: DismissDirection.none,
+                          duration: const Duration(seconds: 1),
+                          margin: EdgeInsets.only(
+                              bottom:
+                                  MediaQuery.of(context).size.height - 150.h,
+                              right: 20,
+                              left: 20),
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          content: CustomToastWidget(
+                            description: state.succeesMessage,
+                            type: ToastType.success,
+                          ),
+                        ),
+                      );
+                  });
                   setState(() {
                     favourite = true;
                   });
                 } else if (state is RemoveFavouriteFailure) {
                   GoRouter.of(context).pop();
-                  Fluttertoast.showToast(msg: state.errMessage);
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    ScaffoldMessenger.of(context)
+                      ..clearSnackBars()
+                      ..showSnackBar(
+                        SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          dismissDirection: DismissDirection.none,
+                          duration: const Duration(seconds: 1),
+                          margin: EdgeInsets.only(
+                              bottom:
+                                  MediaQuery.of(context).size.height - 150.h,
+                              right: 20,
+                              left: 20),
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          content: CustomToastWidget(
+                            description: state.errMessage,
+                            type: ToastType.failure,
+                          ),
+                        ),
+                      );
+                  });
                 } else if (state is RemoveFavouriteSuccess) {
                   GoRouter.of(context).pop();
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    ScaffoldMessenger.of(context)
+                      ..clearSnackBars()
+                      ..showSnackBar(
+                        SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          dismissDirection: DismissDirection.none,
+                          duration: const Duration(seconds: 1),
+                          margin: EdgeInsets.only(
+                              bottom:
+                                  MediaQuery.of(context).size.height - 150.h,
+                              right: 20,
+                              left: 20),
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          content: CustomToastWidget(
+                            description: state.succeesMessage,
+                            type: ToastType.success,
+                          ),
+                        ),
+                      );
+                  });
                   setState(() {
                     favourite = false;
                   });
@@ -199,7 +317,7 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
             ),
             Column(
               children: [
-                if (widget.offerPrice != null)
+                if (widget.offerPrice != 0)
                   Text(
                     "${widget.offerPrice} ${StringsManager.currency.tr()}",
                     overflow: TextOverflow.ellipsis,
@@ -211,7 +329,7 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
                 Text(
                   "${widget.price ?? 0} ${StringsManager.currency.tr()}",
                   textAlign: TextAlign.end,
-                  style: widget.offerPrice == null
+                  style: widget.offerPrice == 0
                       ? Theme.of(context).textTheme.headlineMedium!.copyWith(
                             fontFamily: AssetsManager.gilroyBold,
                             fontWeight: FontWeight.w800,

@@ -28,8 +28,8 @@ mixin _$GroceryItemModel {
   String? get description => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
   double? get offerPrice => throw _privateConstructorUsedError;
-  int? get quantity => throw _privateConstructorUsedError;
-  String? get quantityType => throw _privateConstructorUsedError;
+  int? get qty => throw _privateConstructorUsedError;
+  String? get qtyType => throw _privateConstructorUsedError;
   Brand? get brand => throw _privateConstructorUsedError;
   Category? get category => throw _privateConstructorUsedError;
   List<Image>? get images => throw _privateConstructorUsedError;
@@ -57,8 +57,8 @@ abstract class $GroceryItemModelCopyWith<$Res> {
       String? description,
       double? price,
       double? offerPrice,
-      int? quantity,
-      String? quantityType,
+      int? qty,
+      String? qtyType,
       Brand? brand,
       Category? category,
       List<Image>? images,
@@ -90,8 +90,8 @@ class _$GroceryItemModelCopyWithImpl<$Res, $Val extends GroceryItemModel>
     Object? description = freezed,
     Object? price = freezed,
     Object? offerPrice = freezed,
-    Object? quantity = freezed,
-    Object? quantityType = freezed,
+    Object? qty = freezed,
+    Object? qtyType = freezed,
     Object? brand = freezed,
     Object? category = freezed,
     Object? images = freezed,
@@ -131,13 +131,13 @@ class _$GroceryItemModelCopyWithImpl<$Res, $Val extends GroceryItemModel>
           ? _value.offerPrice
           : offerPrice // ignore: cast_nullable_to_non_nullable
               as double?,
-      quantity: freezed == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
+      qty: freezed == qty
+          ? _value.qty
+          : qty // ignore: cast_nullable_to_non_nullable
               as int?,
-      quantityType: freezed == quantityType
-          ? _value.quantityType
-          : quantityType // ignore: cast_nullable_to_non_nullable
+      qtyType: freezed == qtyType
+          ? _value.qtyType
+          : qtyType // ignore: cast_nullable_to_non_nullable
               as String?,
       brand: freezed == brand
           ? _value.brand
@@ -204,8 +204,8 @@ abstract class _$$_GroceryItemModelCopyWith<$Res>
       String? description,
       double? price,
       double? offerPrice,
-      int? quantity,
-      String? quantityType,
+      int? qty,
+      String? qtyType,
       Brand? brand,
       Category? category,
       List<Image>? images,
@@ -237,8 +237,8 @@ class __$$_GroceryItemModelCopyWithImpl<$Res>
     Object? description = freezed,
     Object? price = freezed,
     Object? offerPrice = freezed,
-    Object? quantity = freezed,
-    Object? quantityType = freezed,
+    Object? qty = freezed,
+    Object? qtyType = freezed,
     Object? brand = freezed,
     Object? category = freezed,
     Object? images = freezed,
@@ -278,13 +278,13 @@ class __$$_GroceryItemModelCopyWithImpl<$Res>
           ? _value.offerPrice
           : offerPrice // ignore: cast_nullable_to_non_nullable
               as double?,
-      quantity: freezed == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
+      qty: freezed == qty
+          ? _value.qty
+          : qty // ignore: cast_nullable_to_non_nullable
               as int?,
-      quantityType: freezed == quantityType
-          ? _value.quantityType
-          : quantityType // ignore: cast_nullable_to_non_nullable
+      qtyType: freezed == qtyType
+          ? _value.qtyType
+          : qtyType // ignore: cast_nullable_to_non_nullable
               as String?,
       brand: freezed == brand
           ? _value.brand
@@ -322,8 +322,8 @@ class _$_GroceryItemModel implements _GroceryItemModel {
       this.description,
       this.price,
       this.offerPrice,
-      this.quantity,
-      this.quantityType,
+      this.qty,
+      this.qtyType,
       this.brand,
       this.category,
       final List<Image>? images,
@@ -352,9 +352,9 @@ class _$_GroceryItemModel implements _GroceryItemModel {
   @override
   final double? offerPrice;
   @override
-  final int? quantity;
+  final int? qty;
   @override
-  final String? quantityType;
+  final String? qtyType;
   @override
   final Brand? brand;
   @override
@@ -384,7 +384,7 @@ class _$_GroceryItemModel implements _GroceryItemModel {
 
   @override
   String toString() {
-    return 'GroceryItemModel(id: $id, categoryId: $categoryId, brandId: $brandId, name: $name, thumbnail: $thumbnail, description: $description, price: $price, offerPrice: $offerPrice, quantity: $quantity, quantityType: $quantityType, brand: $brand, category: $category, images: $images, reviews: $reviews, isFavorite: $isFavorite)';
+    return 'GroceryItemModel(id: $id, categoryId: $categoryId, brandId: $brandId, name: $name, thumbnail: $thumbnail, description: $description, price: $price, offerPrice: $offerPrice, qty: $qty, qtyType: $qtyType, brand: $brand, category: $category, images: $images, reviews: $reviews, isFavorite: $isFavorite)';
   }
 
   @override
@@ -404,10 +404,8 @@ class _$_GroceryItemModel implements _GroceryItemModel {
             (identical(other.price, price) || other.price == price) &&
             (identical(other.offerPrice, offerPrice) ||
                 other.offerPrice == offerPrice) &&
-            (identical(other.quantity, quantity) ||
-                other.quantity == quantity) &&
-            (identical(other.quantityType, quantityType) ||
-                other.quantityType == quantityType) &&
+            (identical(other.qty, qty) || other.qty == qty) &&
+            (identical(other.qtyType, qtyType) || other.qtyType == qtyType) &&
             (identical(other.brand, brand) || other.brand == brand) &&
             (identical(other.category, category) ||
                 other.category == category) &&
@@ -429,8 +427,8 @@ class _$_GroceryItemModel implements _GroceryItemModel {
       description,
       price,
       offerPrice,
-      quantity,
-      quantityType,
+      qty,
+      qtyType,
       brand,
       category,
       const DeepCollectionEquality().hash(_images),
@@ -461,8 +459,8 @@ abstract class _GroceryItemModel implements GroceryItemModel {
       final String? description,
       final double? price,
       final double? offerPrice,
-      final int? quantity,
-      final String? quantityType,
+      final int? qty,
+      final String? qtyType,
       final Brand? brand,
       final Category? category,
       final List<Image>? images,
@@ -489,9 +487,9 @@ abstract class _GroceryItemModel implements GroceryItemModel {
   @override
   double? get offerPrice;
   @override
-  int? get quantity;
+  int? get qty;
   @override
-  String? get quantityType;
+  String? get qtyType;
   @override
   Brand? get brand;
   @override

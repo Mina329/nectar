@@ -12,7 +12,7 @@ final class ExclusiveOffersInitial extends ExclusiveOffersState {}
 final class ExclusiveOffersLoading extends ExclusiveOffersState {}
 
 final class ExclusiveOffersSuccess extends ExclusiveOffersState {
-  final List<CategoryItemModel> items;
+  final List<ThumbnailGroceryItemModel> items;
 
   const ExclusiveOffersSuccess(this.items);
 }

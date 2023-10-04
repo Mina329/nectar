@@ -11,12 +11,12 @@ class ItemDetailsCubit extends Cubit<ItemDetailsState> {
   final ShopRepo shopRepo;
   bool first = true;
 
-  Future<void> getItemById(String id) async {
+  Future<void> getItemById(String id, String language) async {
     if (first) {
       emit(ItemDetailsLoading());
       first = false;
     }
-    var result = await shopRepo.fetchItemById(id);
+    var result = await shopRepo.fetchItemById(id: id, language: language);
     result.fold(
       (failure) {
         emit(

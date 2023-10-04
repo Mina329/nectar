@@ -3,27 +3,30 @@ import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:nectar/core/errors/failure.dart';
 import 'package:nectar/core/utils/api_service.dart';
-import 'package:nectar/features/explore/data/models/category_item_model/category_item_model.dart';
 import 'package:nectar/features/shop/data/models/grocery_item_model/grocery_item_model.dart';
 import 'package:nectar/features/shop/data/repos/shop_repo.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../delivery_address/data/models/placemark/placemark.dart';
+import '../models/thumbnail_grocery_item_model/thumbnail_grocery_item_model/thumbnail_grocery_item_model.dart';
 
 class ShopRepoImpl extends ShopRepo {
   final ApiService _apiService;
 
   ShopRepoImpl(this._apiService);
   @override
-  Future<Either<Failure, List<CategoryItemModel>>> fetchAllGroceryItems(
-      String language, bool bestSeliing) async {
+  Future<Either<Failure, List<ThumbnailGroceryItemModel>>> fetchAllGroceryItems(
+      {required String language,
+      required String? orderBy,
+      required String page,
+      required String perPage}) async {
     try {
       var data = await _apiService.get(
           endPoint:
-              'api/v1/items?lang=$language${bestSeliing ? '&orderBy=orderCount' : ''}');
-      List<CategoryItemModel> items = [];
-      for (var item in data['data']) {
-        items.add(CategoryItemModel.fromJson(item));
+              'api/v1/items?lang=$language${orderBy != null ? '&orderBy=$orderBy' : ''}&page=$page&perPage=$perPage');
+      List<ThumbnailGroceryItemModel> items = [];
+      for (var item in data['data']['items']) {
+        items.add(ThumbnailGroceryItemModel.fromJson(item));
       }
       return right(items);
     } catch (e) {
@@ -43,16 +46,20 @@ class ShopRepoImpl extends ShopRepo {
   }
 
   @override
-  Future<Either<Failure, GroceryItemModel>> fetchItemById(String id) async {
+  Future<Either<Failure, GroceryItemModel>> fetchItemById({
+    required String id,
+    required String language,
+  }) async {
     try {
-      var data = await _apiService.get(endPoint: "api/v1/items/$id");
+      var data =
+          await _apiService.get(endPoint: "api/v1/items/$id?lang=$language");
 
       return right(GroceryItemModel.fromJson(data['data']));
     } catch (e) {
       if (e is DioException) {
         return left(
-          ServerFailure.fromDioException(
-            e,
+          ServerFailure(
+            e.message!,
           ),
         );
       }
@@ -74,8 +81,8 @@ class ShopRepoImpl extends ShopRepo {
     } catch (e) {
       if (e is DioException) {
         return left(
-          ServerFailure.fromDioException(
-            e,
+          ServerFailure(
+            e.response!.data['message'],
           ),
         );
       }
@@ -97,7 +104,7 @@ class ShopRepoImpl extends ShopRepo {
       if (e is DioException) {
         return left(
           ServerFailure.fromDioException(
-            e,
+            e.response!.data['message'],
           ),
         );
       }

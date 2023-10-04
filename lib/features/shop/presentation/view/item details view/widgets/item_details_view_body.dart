@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/core/utils/color_manager.dart';
@@ -11,6 +10,9 @@ import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/core/widgets/custom_elevated_btn.dart';
 import 'package:nectar/features/favourite/presentation/view%20model/favourite_items_cubit/favourite_items_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/item_details_cubit/item_details_cubit.dart';
+import '../../../../../../core/cache/cache_helper.dart';
+import '../../../../../../core/cache/cache_keys_values.dart';
+import '../../../../../../core/widgets/custom_toast_widget.dart';
 import 'item_details_section.dart';
 import 'item_details_view_shimmer.dart';
 import 'item_image_section.dart';
@@ -33,7 +35,27 @@ class ItemDetailsViewBody extends StatelessWidget {
             if (state is ItemDetailsLoading) {
               return const ItemDetailsViewShimmers();
             } else if (state is ItemDetailsFailure) {
-              Fluttertoast.showToast(msg: state.errMessage);
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                ScaffoldMessenger.of(context)
+                  ..clearSnackBars()
+                  ..showSnackBar(
+                    SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      dismissDirection: DismissDirection.none,
+                      duration: const Duration(seconds: 1),
+                      margin: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).size.height - 150.h,
+                          right: 20,
+                          left: 20),
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      content: CustomToastWidget(
+                        description: state.errMessage,
+                        type: ToastType.failure,
+                      ),
+                    ),
+                  );
+              });
               return Padding(
                 padding: EdgeInsets.only(
                   top: 50.h,
@@ -65,13 +87,18 @@ class ItemDetailsViewBody extends StatelessWidget {
               return RefreshIndicator(
                 color: ColorManager.green,
                 onRefresh: () async {
-                  await BlocProvider.of<ItemDetailsCubit>(context)
-                      .getItemById(state.item.id!);
+                  await BlocProvider.of<ItemDetailsCubit>(context).getItemById(
+                      state.item.id!,
+                      CacheData.getData(key: CacheKeys.kLANGUAGE) ==
+                              CacheValues.ARABIC
+                          ? "ar"
+                          : "en");
                   return Future.delayed(const Duration(seconds: 1));
                 },
                 child: CustomScrollView(
                   slivers: [
                     ItemImageSection(
+                      thumbnailImage: state.item.thumbnail,
                       images: state.item.images,
                       fromFavourite: fromFavourite,
                     ),

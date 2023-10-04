@@ -125,7 +125,7 @@ class FavouriteItem extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (offerPrice != null)
+            if (offerPrice != 0)
               SizedBox(
                 width: 60.w,
                 child: Text(
@@ -145,7 +145,7 @@ class FavouriteItem extends StatelessWidget {
                 "$price ${StringsManager.currency.tr()}",
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
-                style: offerPrice == null
+                style: offerPrice == 0
                     ? Theme.of(context).textTheme.labelMedium!.copyWith(
                           fontFamily: AssetsManager.gilroySemiBold,
                           fontWeight: FontWeight.w600,

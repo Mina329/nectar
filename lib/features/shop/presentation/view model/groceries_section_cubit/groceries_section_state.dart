@@ -12,7 +12,7 @@ final class GroceriesSectionInitial extends GroceriesSectionState {}
 final class GroceriesSectionLoading extends GroceriesSectionState {}
 
 final class GroceriesSectionSuccess extends GroceriesSectionState {
-  final List<CategoryItemModel> items;
+  final List<ThumbnailGroceryItemModel> items;
 
   const GroceriesSectionSuccess(this.items);
 }

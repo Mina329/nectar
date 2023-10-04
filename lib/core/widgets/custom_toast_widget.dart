@@ -76,17 +76,26 @@ enum ToastType {
   failure,
 }
 /*
-ScaffoldMessenger.of(context)
-              ..clearSnackBars()
-              ..showSnackBar(
-                const SnackBar(
-                  behavior: SnackBarBehavior.floating,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  content: CustomToastWidget(
-                    description: "there is an error",
-                    type: ToastType.success,
-                  ),
-                ),
-              );
+WidgetsBinding.instance.addPostFrameCallback((_) {
+                    ScaffoldMessenger.of(context)
+                      ..clearSnackBars()
+                      ..showSnackBar(
+                        SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          dismissDirection: DismissDirection.none,
+                          duration: const Duration(seconds: 1),
+                          margin: EdgeInsets.only(
+                              bottom:
+                                  MediaQuery.of(context).size.height - 150.h,
+                              right: 20,
+                              left: 20),
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          content: CustomToastWidget(
+                            description: state.succeesMessage,
+                            type: ToastType.success,
+                          ),
+                        ),
+                      );
+                  });
 */

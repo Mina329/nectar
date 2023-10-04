@@ -19,8 +19,10 @@ class ItemImageSection extends StatefulWidget {
     Key? key,
     required this.images,
     required this.fromFavourite,
+    required this.thumbnailImage,
   }) : super(key: key);
   final List<image_model.Image>? images;
+  final String? thumbnailImage;
   final bool fromFavourite;
   @override
   State<ItemImageSection> createState() => _ItemImageSectionState();
@@ -38,6 +40,11 @@ class _ItemImageSectionState extends State<ItemImageSection> {
         _currentPage = _pageController.page!.round();
       });
     });
+    modifiedImages = List<image_model.Image>.from(widget.images ?? []);
+    if (widget.thumbnailImage != null) {
+      modifiedImages.insert(
+          0, image_model.Image(id: null, image: widget.thumbnailImage));
+    }
   }
 
   @override
@@ -46,6 +53,7 @@ class _ItemImageSectionState extends State<ItemImageSection> {
     super.dispose();
   }
 
+  late List<image_model.Image> modifiedImages;
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -79,16 +87,16 @@ class _ItemImageSectionState extends State<ItemImageSection> {
     return PageView.builder(
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
-      itemCount: widget.images!.isEmpty ? 1 : widget.images!.length,
+      itemCount: modifiedImages.isEmpty ? 1 : modifiedImages.length,
       controller: _pageController,
       itemBuilder: (context, index) => Center(
         child: SizedBox(
           width: 364.w,
           height: 250.h,
-          child: widget.images!.isEmpty
+          child: modifiedImages.isEmpty
               ? Image.asset(AssetsManager.errorAlt)
               : CachedNetworkImage(
-                  imageUrl: widget.images![index].image!,
+                  imageUrl: modifiedImages[index].image!,
                   errorWidget: (context, error, stackTrace) =>
                       Image.asset(AssetsManager.errorAlt),
                   placeholder: (context, url) =>
@@ -105,7 +113,7 @@ class _ItemImageSectionState extends State<ItemImageSection> {
       left: 0,
       right: 0,
       child: DotsIndicator(
-        dotsCount: widget.images!.isEmpty ? 1 : widget.images!.length,
+        dotsCount: modifiedImages.isEmpty ? 1 : modifiedImages.length,
         position: _currentPage,
         decorator: DotsDecorator(
           activeColor: Theme.of(context).brightness == Brightness.light
@@ -127,8 +135,8 @@ class _ItemImageSectionState extends State<ItemImageSection> {
       child: IconButton(
         onPressed: () {
           if (widget.fromFavourite) {
-          BlocProvider.of<FavouriteItemsCubit>(context).getFavouriteItems();
-        }
+            BlocProvider.of<FavouriteItemsCubit>(context).getFavouriteItems();
+          }
           GoRouter.of(context).pop();
         },
         icon: const Icon(

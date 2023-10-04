@@ -16,8 +16,8 @@ _$_GroceryItemModel _$$_GroceryItemModelFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String?,
       price: (json['price'] as num?)?.toDouble(),
       offerPrice: (json['offerPrice'] as num?)?.toDouble(),
-      quantity: json['quantity'] as int?,
-      quantityType: json['quantityType'] as String?,
+      qty: json['qty'] as int?,
+      qtyType: json['qtyType'] as String?,
       brand: json['brand'] == null
           ? null
           : Brand.fromJson(json['brand'] as Map<String, dynamic>),
@@ -43,8 +43,8 @@ Map<String, dynamic> _$$_GroceryItemModelToJson(_$_GroceryItemModel instance) =>
       'description': instance.description,
       'price': instance.price,
       'offerPrice': instance.offerPrice,
-      'quantity': instance.quantity,
-      'quantityType': instance.quantityType,
+      'qty': instance.qty,
+      'qtyType': instance.qtyType,
       'brand': instance.brand,
       'category': instance.category,
       'images': instance.images,

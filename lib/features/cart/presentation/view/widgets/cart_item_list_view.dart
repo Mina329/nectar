@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/app_router.dart';
+import '../../../../favourite/data/models/favourite_to_details_model.dart';
 import 'cart_item.dart';
 
 class CartItemListView extends StatelessWidget {
@@ -16,7 +17,7 @@ class CartItemListView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 25.w),
           child: GestureDetector(
               onTap: () {
-                GoRouter.of(context).push(AppRouter.kItemDetailsView,extra: 'FavouritetoDetailmodel');
+                GoRouter.of(context).push(AppRouter.kItemDetailsView,extra: FavouriteToDetailsModel("dsaonbodnasnd", null));
               },
               child: const CartItem()),
         ),

@@ -11,7 +11,6 @@ import '../../../../../../core/l10n/locales.dart';
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/strings_manager.dart';
-import '../../../../data/models/section_info_model/section_info_model.dart';
 import 'category_groceries_section_item.dart';
 import 'grocery_item.dart';
 import 'grocery_section_shimmer.dart';
@@ -145,11 +144,7 @@ class GroceriesSection extends StatelessWidget {
                           TextButton(
                             onPressed: () {
                               GoRouter.of(context).push(
-                                AppRouter.kSectionDetailsView,
-                                extra: SectionInfoModel(
-                                  StringsManager.groceries.tr(),
-                                  allItemState.items,
-                                ),
+                                AppRouter.kGroceriesSectionView,
                               );
                             },
                             child: Text(
@@ -217,7 +212,7 @@ class GroceriesSection extends StatelessWidget {
                                 price: "${allItemState.items[index].price}",
                                 imageLink: allItemState.items[index].thumbnail,
                                 quantity:
-                                    "${allItemState.items[index].quantity} ${allItemState.items[index].quantityType}",
+                                    allItemState.items[index].qtyType ?? '',
                                 offerPrice:
                                     allItemState.items[index].offerPrice,
                               ),

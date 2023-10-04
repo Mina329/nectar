@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import '../../main.dart';
+import '../cache/cache_helper.dart';
+import '../cache/cache_keys_values.dart';
 import 'env.dart';
 
 class ApiService {
@@ -7,6 +9,10 @@ class ApiService {
   ApiService(this._dio);
   final headers = {
     'Authorization': "Bearer $testToken",
+    'Accept-language':
+        CacheData.getData(key: CacheKeys.kLANGUAGE) == CacheValues.ARABIC
+            ? "ar"
+            : "en"
   };
   Future<Map<String, dynamic>> getGeoCoding(
       {required String latitude,

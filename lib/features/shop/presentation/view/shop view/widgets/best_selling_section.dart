@@ -10,7 +10,6 @@ import '../../../../../../core/l10n/locales.dart';
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/strings_manager.dart';
-import '../../../../data/models/section_info_model/section_info_model.dart';
 import 'grocery_item.dart';
 
 class BestSellingSection extends StatelessWidget {
@@ -42,11 +41,7 @@ class BestSellingSection extends StatelessWidget {
                     TextButton(
                       onPressed: () {
                         GoRouter.of(context).push(
-                          AppRouter.kSectionDetailsView,
-                          extra: SectionInfoModel(
-                            StringsManager.bestSelling.tr(),
-                            state.items,
-                          ),
+                          AppRouter.kBestSellingView,
                         );
                       },
                       child: Text(
@@ -81,8 +76,7 @@ class BestSellingSection extends StatelessWidget {
                         name: state.items[index].name,
                         price: "${state.items[index].price}",
                         imageLink: state.items[index].thumbnail,
-                        quantity:
-                            "${state.items[index].quantity} ${state.items[index].quantityType}",
+                        quantity: state.items[index].qtyType ?? '',
                         offerPrice: state.items[index].offerPrice,
                       ),
                     ),

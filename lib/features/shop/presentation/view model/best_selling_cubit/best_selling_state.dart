@@ -12,7 +12,7 @@ final class BestSellingInitial extends BestSellingState {}
 final class BestSellingLoading extends BestSellingState {}
 
 final class BestSellingSuccess extends BestSellingState {
-  final List<CategoryItemModel> items;
+  final List<ThumbnailGroceryItemModel> items;
 
   const BestSellingSuccess(this.items);
 }

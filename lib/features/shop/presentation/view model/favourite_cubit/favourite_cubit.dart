@@ -17,7 +17,7 @@ class FavouriteCubit extends Cubit<FavouriteState> {
         ),
       ),
       (response) => emit(
-        AddFavouriteSuccess(),
+        AddFavouriteSuccess(response.data['message']),
       ),
     );
   }
@@ -32,7 +32,7 @@ class FavouriteCubit extends Cubit<FavouriteState> {
         ),
       ),
       (response) => emit(
-        RemoveFavouriteSuccess(),
+        RemoveFavouriteSuccess(response.data['message']),
       ),
     );
   }

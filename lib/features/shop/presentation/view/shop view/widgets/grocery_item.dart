@@ -119,7 +119,7 @@ class GroceryItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (offerPrice != null)
+                        if (offerPrice != 0)
                           Text(
                             "$offerPrice ${StringsManager.currency.tr()}",
                             overflow: TextOverflow.ellipsis,
@@ -135,7 +135,7 @@ class GroceryItem extends StatelessWidget {
                         Text(
                           "$price ${StringsManager.currency.tr()}",
                           overflow: TextOverflow.ellipsis,
-                          style: offerPrice == null
+                          style: offerPrice == 0
                               ? Theme.of(context)
                                   .textTheme
                                   .labelMedium!
