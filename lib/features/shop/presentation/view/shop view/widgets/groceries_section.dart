@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/widgets/item_shimmer.dart';
 import 'package:nectar/features/explore/presentation/view%20model/categories_cubit/categories_cubit.dart';
@@ -27,7 +26,6 @@ class GroceriesSection extends StatelessWidget {
         if (categoriesState is CategoriesLoading) {
           return const GrocerySectionShimmer();
         } else if (categoriesState is CategoriesFailure) {
-          Fluttertoast.showToast(msg: categoriesState.errMessage);
           return const SliverToBoxAdapter();
         } else if (categoriesState is CategoriesSuccess) {
           return BlocBuilder<GroceriesSectionCubit, GroceriesSectionState>(
@@ -85,7 +83,6 @@ class GroceriesSection extends StatelessWidget {
                   ),
                 );
               } else if (allItemState is GroceriesSectionFailure) {
-                Fluttertoast.showToast(msg: allItemState.errMessage);
                 return SliverToBoxAdapter(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,33 +198,36 @@ class GroceriesSection extends StatelessWidget {
                       SizedBox(
                         height: 20.h,
                       ),
-                      SizedBox(
-                        height: 255.h,
-                        child: ListView.builder(
-                          itemCount: allItemState.items.length > 10
-                              ? 10
-                              : allItemState.items.length,
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => Padding(
-                            padding: context.locale == ENGLISH_LOCALE
-                                ? EdgeInsets.only(right: 15.w)
-                                : EdgeInsets.only(left: 15.w),
-                            child: GroceryItem(
-                              id: allItemState.items[index].id,
-                              name: allItemState.items[index].name,
-                              price: "${allItemState.items[index].price}",
-                              imageLink: allItemState.items[index].thumbnail,
-                              quantity:
-                                  "${allItemState.items[index].quantity} ${allItemState.items[index].quantityType}",
-                              offerPrice: allItemState.items[index].offerPrice,
+                      if (allItemState.items.isNotEmpty)
+                        SizedBox(
+                          height: 255.h,
+                          child: ListView.builder(
+                            itemCount: allItemState.items.length > 10
+                                ? 10
+                                : allItemState.items.length,
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => Padding(
+                              padding: context.locale == ENGLISH_LOCALE
+                                  ? EdgeInsets.only(right: 15.w)
+                                  : EdgeInsets.only(left: 15.w),
+                              child: GroceryItem(
+                                id: allItemState.items[index].id,
+                                name: allItemState.items[index].name,
+                                price: "${allItemState.items[index].price}",
+                                imageLink: allItemState.items[index].thumbnail,
+                                quantity:
+                                    "${allItemState.items[index].quantity} ${allItemState.items[index].quantityType}",
+                                offerPrice:
+                                    allItemState.items[index].offerPrice,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 40.h,
-                      ),
+                      if (allItemState.items.isNotEmpty)
+                        SizedBox(
+                          height: 40.h,
+                        ),
                     ],
                   ),
                 );

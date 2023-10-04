@@ -1,15 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nectar/core/utils/strings_manager.dart';
 
 class CustomToastWidget extends StatelessWidget {
   const CustomToastWidget({
     super.key,
-    required this.title,
     required this.description,
     required this.type,
   });
-  final String title;
   final String description;
   final ToastType type;
 
@@ -19,7 +19,7 @@ class CustomToastWidget extends StatelessWidget {
       padding: EdgeInsets.all(16.w),
       height: 90.h,
       decoration: BoxDecoration(
-        color: type == ToastType.failure ? Colors.red : Colors.green,
+        color: type == ToastType.failure ? Colors.red.withOpacity(0.7) : Colors.green.withOpacity(0.7),
         borderRadius: const BorderRadius.all(
           Radius.circular(
             20,
@@ -45,7 +45,9 @@ class CustomToastWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  type == ToastType.failure
+                      ? StringsManager.error.tr()
+                      : StringsManager.success.tr(),
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge!
@@ -82,7 +84,6 @@ ScaffoldMessenger.of(context)
                   backgroundColor: Colors.transparent,
                   elevation: 0,
                   content: CustomToastWidget(
-                    title: "ops",
                     description: "there is an error",
                     type: ToastType.success,
                   ),

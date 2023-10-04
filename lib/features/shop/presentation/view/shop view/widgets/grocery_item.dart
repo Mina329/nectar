@@ -65,19 +65,22 @@ class GroceryItem extends StatelessWidget {
                       width: 140.w,
                       height: 135.h,
                     )
-                  : CachedNetworkImage(
-                      imageUrl: imageLink!,
-                      width: 140.w,
-                      height: 135.h,
-                      errorWidget: (context, error, stackTrace) {
-                        return Image.asset(
-                          AssetsManager.errorAlt,
-                          width: 140.w,
-                          height: 135.h,
-                        );
-                      },
-                      placeholder: (context, url) =>
-                          const CustomCircularIndicator(),
+                  : Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: CachedNetworkImage(
+                        imageUrl: imageLink!,
+                        width: 140.w,
+                        height: 135.h,
+                        errorWidget: (context, error, stackTrace) {
+                          return Image.asset(
+                            AssetsManager.errorAlt,
+                            width: 140.w,
+                            height: 135.h,
+                          );
+                        },
+                        placeholder: (context, url) =>
+                            const CustomCircularIndicator(),
+                      ),
                     ),
             ),
             Padding(
@@ -85,7 +88,7 @@ class GroceryItem extends StatelessWidget {
                 horizontal: 15.w,
               ),
               child: Text(
-                '${name ?? StringsManager.unavailable.tr()}\n',
+                name ?? StringsManager.unavailable.tr(),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleSmall,

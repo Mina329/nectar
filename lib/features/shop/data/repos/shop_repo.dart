@@ -7,7 +7,8 @@ import '../../../delivery_address/data/models/placemark/placemark.dart';
 import '../models/grocery_item_model/grocery_item_model.dart';
 
 abstract class ShopRepo {
-  Future<Either<Failure, List<CategoryItemModel>>> fetchAllGroceryItems();
+  Future<Either<Failure, List<CategoryItemModel>>> fetchAllGroceryItems(
+      String language, bool bestSeliing);
   Future<Either<Failure, GroceryItemModel>> fetchItemById(String id);
   Future<Either<Failure, Response>> postAddFavouriteItem(String id);
   Future<Either<Failure, Response>> deleteRemoveFavouriteItem(String id);

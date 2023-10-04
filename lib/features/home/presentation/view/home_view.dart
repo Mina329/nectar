@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nectar/features/favourite/presentation/view%20model/favourite_items_cubit/favourite_items_cubit.dart';
 import 'package:nectar/features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 import 'package:nectar/features/shop/data/repos/shop_repo.dart';
+import 'package:nectar/features/shop/presentation/view%20model/best_selling_cubit/best_selling_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/city_country_cubit/city_country_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/exclusive_offers_cubit/exclusive_offers_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/groceries_section_cubit/groceries_section_cubit.dart';
@@ -33,7 +34,11 @@ class _HomeViewState extends State<HomeView> {
         BlocProvider(
           create: (context) => ExclusiveOffersCubit(
             getIt.get<ShopRepo>(),
-          )..getExclusiveOffersItems(),
+          )..getExclusiveOffersItems(
+              language: CacheData.getData(key: CacheKeys.kLANGUAGE) ==
+                      CacheValues.ARABIC
+                  ? "ar"
+                  : "en"),
         ),
         BlocProvider(
           create: (context) => CategoriesCubit(
@@ -43,7 +48,20 @@ class _HomeViewState extends State<HomeView> {
         BlocProvider(
           create: (context) => GroceriesSectionCubit(
             getIt.get<ShopRepo>(),
-          )..getAllItems(),
+          )..getAllItems(
+              language: CacheData.getData(key: CacheKeys.kLANGUAGE) ==
+                      CacheValues.ARABIC
+                  ? "ar"
+                  : "en"),
+        ),
+        BlocProvider(
+          create: (context) => BestSellingCubit(
+            getIt.get<ShopRepo>(),
+          )..getBestSellingItems(
+              language: CacheData.getData(key: CacheKeys.kLANGUAGE) ==
+                      CacheValues.ARABIC
+                  ? "ar"
+                  : "en"),
         ),
         BlocProvider(
           create: (context) => CityCountryCubit(

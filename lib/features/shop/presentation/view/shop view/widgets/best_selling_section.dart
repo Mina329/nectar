@@ -1,10 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:nectar/features/shop/presentation/view%20model/best_selling_cubit/best_selling_cubit.dart';
+import 'package:nectar/features/shop/presentation/view/shop%20view/widgets/sections_shimmer.dart';
 
 import '../../../../../../core/l10n/locales.dart';
+import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/strings_manager.dart';
+import '../../../../data/models/section_info_model/section_info_model.dart';
 import 'grocery_item.dart';
 
 class BestSellingSection extends StatelessWidget {
@@ -12,56 +18,82 @@ class BestSellingSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                StringsManager.bestSelling.tr(),
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  StringsManager.seeAll.tr(),
-                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? ColorManager.green
-                            : ColorManager.greySmall,
+    return BlocBuilder<BestSellingCubit, BestSellingState>(
+      builder: (context, state) {
+        if (state is BestSellingLoading) {
+          return const SectionsShimmer();
+        } else if (state is BestSellingFailure) {
+          return const SliverToBoxAdapter();
+        } else if (state is BestSellingSuccess) {
+          if (state.items.isEmpty) {
+            return const SliverToBoxAdapter();
+          }
+          return SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      StringsManager.bestSelling.tr(),
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        GoRouter.of(context).push(
+                          AppRouter.kSectionDetailsView,
+                          extra: SectionInfoModel(
+                            StringsManager.bestSelling.tr(),
+                            state.items,
+                          ),
+                        );
+                      },
+                      child: Text(
+                        StringsManager.seeAll.tr(),
+                        style:
+                            Theme.of(context).textTheme.labelMedium!.copyWith(
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.light
+                                      ? ColorManager.green
+                                      : ColorManager.greySmall,
+                                ),
                       ),
+                    )
+                  ],
                 ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          SizedBox(
-            height: 255.h,
-            child: ListView.builder(
-              itemCount: 10,
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => Padding(
-                padding: context.locale == ENGLISH_LOCALE
-                    ? EdgeInsets.only(right: 15.w)
-                    : EdgeInsets.only(left: 15.w),
-                child: const GroceryItem(
-                  id: "",
-                    name: "Banana",
-                    price: "50.00",
-                    imageLink:
-                        "https://groceries-backend-7ncm.onrender.com/public/items/a2f0739b-e8c8-4220-ac62-4fabe60e5151/thumbnail.png",
-                    quantity: "0.5 kg",
-                    offerPrice: null),
-              ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                SizedBox(
+                  height: 255.h,
+                  child: ListView.builder(
+                    itemCount:
+                        state.items.length > 10 ? 10 : state.items.length,
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => Padding(
+                      padding: context.locale == ENGLISH_LOCALE
+                          ? EdgeInsets.only(right: 15.w)
+                          : EdgeInsets.only(left: 15.w),
+                      child: GroceryItem(
+                        id: state.items[index].id,
+                        name: state.items[index].name,
+                        price: "${state.items[index].price}",
+                        imageLink: state.items[index].thumbnail,
+                        quantity:
+                            "${state.items[index].quantity} ${state.items[index].quantityType}",
+                        offerPrice: state.items[index].offerPrice,
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
+          );
+        }
+        return const SliverToBoxAdapter();
+      },
     );
   }
 }

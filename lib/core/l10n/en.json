@@ -93,5 +93,6 @@
   "anonymousUser": "Anonymous User",
   "noDescription": "No description",
   "noReviews": "No reviews",
-  "currency": "£"
+  "currency": "£",
+  "success": "Operation was successful"
 }

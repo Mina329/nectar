@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/features/shop/presentation/view%20model/city_country_cubit/city_country_cubit.dart';
 import 'package:shimmer/shimmer.dart';
@@ -44,7 +43,6 @@ class CustomShopAppBar extends StatelessWidget {
                   ),
                 );
               } else if (state is CityCountryFailure) {
-                Fluttertoast.showToast(msg: state.errMessage);
                 return Container();
               } else if (state is CityCountrySuccess) {
                 return Row(

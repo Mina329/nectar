@@ -94,4 +94,5 @@ abstract class StringsManager {
   static const noDescription = "noDescription";
   static const noReviews = "noReviews";
   static const currency = "currency";
+  static const success = "success";
 }

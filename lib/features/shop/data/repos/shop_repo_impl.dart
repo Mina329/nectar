@@ -15,10 +15,12 @@ class ShopRepoImpl extends ShopRepo {
 
   ShopRepoImpl(this._apiService);
   @override
-  Future<Either<Failure, List<CategoryItemModel>>>
-      fetchAllGroceryItems() async {
+  Future<Either<Failure, List<CategoryItemModel>>> fetchAllGroceryItems(
+      String language, bool bestSeliing) async {
     try {
-      var data = await _apiService.get(endPoint: 'api/v1/items');
+      var data = await _apiService.get(
+          endPoint:
+              'api/v1/items?lang=$language${bestSeliing ? '&orderBy=orderCount' : ''}');
       List<CategoryItemModel> items = [];
       for (var item in data['data']) {
         items.add(CategoryItemModel.fromJson(item));

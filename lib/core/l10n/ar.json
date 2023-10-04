@@ -93,5 +93,6 @@
   "anonymousUser": "مستخدم مجهول",
   "noDescription": "ناسف، لا يوجد وصف",
   "noReviews": "ناسف، لا يوجد مراجعات",
-  "currency": "ج.م"
+  "currency": "ج.م",
+  "success": "تمت العملية بنجاح"
 }
