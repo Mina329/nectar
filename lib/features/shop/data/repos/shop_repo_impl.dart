@@ -32,8 +32,8 @@ class ShopRepoImpl extends ShopRepo {
     } catch (e) {
       if (e is DioException) {
         return left(
-          ServerFailure.fromDioException(
-            e,
+          ServerFailure(
+            e.response!.data['message'],
           ),
         );
       }
@@ -59,7 +59,7 @@ class ShopRepoImpl extends ShopRepo {
       if (e is DioException) {
         return left(
           ServerFailure(
-            e.message!,
+            e.response!.data['message'],
           ),
         );
       }

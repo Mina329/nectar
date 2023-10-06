@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/color_manager.dart';
 
 import '../../../../../core/utils/strings_manager.dart';
-import '../../../../account/presentation/view/widgets/custom_account_list_items_app_bar.dart';
+import '../../../../account/presentation/view/account view/widgets/custom_account_list_items_app_bar.dart';
 
 class PaymentMethodViewBody extends StatefulWidget {
   const PaymentMethodViewBody({Key? key}) : super(key: key);

@@ -3,16 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nectar/core/l10n/locales.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
+import 'package:nectar/features/account/data/models/account_model/account_model/account_model.dart';
 
 import '../../../../../core/utils/color_manager.dart';
 
 class MyDetailsForm extends StatelessWidget {
-  const MyDetailsForm({super.key, required this.formKey});
+  const MyDetailsForm(
+      {super.key,
+      required this.formKey,
+      required this.account,
+      required this.onSaveFirstName,
+      required this.onSaveLastName,
+      required this.onSaveDateOfBirth});
   final GlobalKey<FormState> formKey;
-
+  final AccountModel account;
+  final Function(String?) onSaveFirstName;
+  final Function(String?) onSaveLastName;
+  final Function(String?) onSaveDateOfBirth;
   @override
   Widget build(BuildContext context) {
-    final TextEditingController dateInputController = TextEditingController();
+    final TextEditingController dateInputController = TextEditingController(
+        text: account.dayOfBirth == null
+            ? ''
+            : DateFormat('dd MMMM yyyy',
+                    context.locale == ENGLISH_LOCALE ? "en" : "ar")
+                .format(account.dayOfBirth!));
 
     late DateTime? selectedDate;
     return Form(
@@ -22,6 +37,9 @@ class MyDetailsForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(
+              height: 20.h,
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.w),
               child: Text(
@@ -44,7 +62,7 @@ class MyDetailsForm extends StatelessWidget {
                   ),
                 ),
               ),
-              initialValue: "minaemil329@gmail.com",
+              initialValue: account.email,
               enabled: false,
             ),
             SizedBox(
@@ -72,7 +90,7 @@ class MyDetailsForm extends StatelessWidget {
                   ),
                 ),
               ),
-              initialValue: "01280080910",
+              initialValue: account.phoneNumber,
               enabled: false,
             ),
             SizedBox(
@@ -89,6 +107,7 @@ class MyDetailsForm extends StatelessWidget {
               height: 5.h,
             ),
             TextFormField(
+              initialValue: account.firstName,
               decoration: InputDecoration(
                 hintText: StringsManager.firstName.tr(),
                 filled: true,
@@ -106,7 +125,7 @@ class MyDetailsForm extends StatelessWidget {
                 }
                 return null;
               },
-              onSaved: (value) {},
+              onSaved: onSaveFirstName,
             ),
             SizedBox(
               height: 20.h,
@@ -122,6 +141,7 @@ class MyDetailsForm extends StatelessWidget {
               height: 5.h,
             ),
             TextFormField(
+              initialValue: account.lastName,
               decoration: InputDecoration(
                 hintText: StringsManager.lastName.tr(),
                 filled: true,
@@ -139,7 +159,7 @@ class MyDetailsForm extends StatelessWidget {
                 }
                 return null;
               },
-              onSaved: (value) {},
+              onSaved: onSaveLastName,
             ),
             SizedBox(
               height: 20.h,
@@ -199,7 +219,7 @@ class MyDetailsForm extends StatelessWidget {
                 }
               },
               readOnly: true,
-              onSaved: (value) {},
+              onSaved: onSaveDateOfBirth,
             ),
           ],
         ),

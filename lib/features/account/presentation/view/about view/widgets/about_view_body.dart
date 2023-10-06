@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/utils/strings_manager.dart';
+import '../../../../../../core/utils/strings_manager.dart';
 import 'about_list_view.dart';
-import 'custom_account_list_items_app_bar.dart';
+import '../../account view/widgets/custom_account_list_items_app_bar.dart';
 
 class AboutViewBody extends StatelessWidget {
   const AboutViewBody({super.key});

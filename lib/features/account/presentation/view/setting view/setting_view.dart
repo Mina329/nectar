@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nectar/features/account/presentation/view/widgets/setting_view_body.dart';
+import 'package:nectar/features/account/presentation/view/setting%20view/widgets/setting_view_body.dart';
 
 class SettingView extends StatelessWidget {
   const SettingView({super.key});

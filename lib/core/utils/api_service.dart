@@ -55,10 +55,39 @@ class ApiService {
     return response;
   }
 
+  Future<Response> postImg(
+      {required String endPoint, required FormData requestData}) async {
+    var response = await _dio.post(
+      "${Env.BACKEND_BASE_URL}$endPoint",
+      data: requestData,
+      options: Options(
+        headers: {
+          ...headers,
+          'accept': '*/*',
+          'Content-Type': 'multipart/form-data',
+        },
+      ),
+    );
+    return response;
+  }
+
   Future<Response> delete(
       {required String endPoint,
       required Map<String, dynamic> requestData}) async {
     var response = await _dio.delete(
+      "${Env.BACKEND_BASE_URL}$endPoint",
+      data: requestData,
+      options: Options(
+        headers: headers,
+      ),
+    );
+    return response;
+  }
+
+  Future<Response> patch(
+      {required String endPoint,
+      required Map<String, dynamic> requestData}) async {
+    var response = await _dio.patch(
       "${Env.BACKEND_BASE_URL}$endPoint",
       data: requestData,
       options: Options(

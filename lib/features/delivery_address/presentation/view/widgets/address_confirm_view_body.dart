@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/features/delivery_address/presentation/view/widgets/save_address_button.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/location_bloc/location_bloc.dart';
-import '../../../../account/presentation/view/widgets/custom_account_list_items_app_bar.dart';
+import '../../../../account/presentation/view/account view/widgets/custom_account_list_items_app_bar.dart';
 import '../../../data/models/placemark/placemark.dart';
 import 'address_confirmation_form.dart';
 import 'area_card.dart';

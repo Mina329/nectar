@@ -8,10 +8,10 @@ import 'package:nectar/core/cache/cache_helper.dart';
 import 'package:nectar/core/cache/cache_keys_values.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
-import 'package:nectar/features/account/presentation/view/widgets/custom_account_list_items_app_bar.dart';
-import 'package:nectar/features/account/presentation/view/widgets/setting_item.dart';
+import 'package:nectar/features/account/presentation/view/account%20view/widgets/custom_account_list_items_app_bar.dart';
+import 'package:nectar/features/account/presentation/view/setting%20view/widgets/setting_item.dart';
 import 'package:nectar/main.dart';
-import '../../../../../core/utils/app_router.dart';
+import '../../../../../../core/utils/app_router.dart';
 
 class SettingViewBody extends StatefulWidget {
   const SettingViewBody({super.key});

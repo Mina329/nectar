@@ -96,11 +96,6 @@ class CartViewBody extends StatelessWidget {
             onTap: () {},
           ),
           CheckoutSheetItem(
-            title: StringsManager.promoCode.tr(),
-            func: const Icon(Icons.receipt_outlined),
-            onTap: () {},
-          ),
-          CheckoutSheetItem(
             title: StringsManager.totalPrice.tr(),
             func: Text(
               "\$15",

@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/service_locator.dart';
-import 'package:nectar/features/account/presentation/view/setting_view.dart';
+import 'package:nectar/features/account/presentation/view/setting%20view/setting_view.dart';
 import 'package:nectar/features/auth/data/repos/auth_repo.dart';
 import 'package:nectar/features/auth/presentation/view%20model/google_auth_cubit/google_auth_cubit.dart';
-import 'package:nectar/features/delivery_address/data/repos/delivery_address_repo_impl.dart';
 import 'package:nectar/features/delivery_address/presentation/view/address_confirm_view.dart';
 import 'package:nectar/features/delivery_address/presentation/view/widgets/google_map_app_bar.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/location_bloc/location_bloc.dart';
@@ -14,15 +13,18 @@ import 'package:nectar/features/explore/data/repos/explore_repo.dart';
 import 'package:nectar/features/explore/presentation/view%20model/category_items_cubit/category_items_cubit.dart';
 import 'package:nectar/features/explore/presentation/view/category%20details%20view/category_details_view.dart';
 import 'package:nectar/features/home/presentation/view/home_view.dart';
+import 'package:nectar/features/my_details/data/repos/my_details_repo.dart';
+import 'package:nectar/features/my_details/presentation/view%20model/my_details_cubit/my_details_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/groceries_section_details_cubit/groceries_section_details_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/item_details_cubit/item_details_cubit.dart';
 import 'package:nectar/features/shop/presentation/view/groceries%20section%20view/groceries_section_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
-import '../../features/account/presentation/view/about_view.dart';
-import '../../features/account/presentation/view/promo_code_view.dart';
+import '../../features/account/data/models/account_item_list_navigation_model/account_item_list_navigation_model.dart';
+import '../../features/account/presentation/view/about view/about_view.dart';
 import '../../features/auth/presentation/view/login view/login_view.dart';
 import '../../features/auth/presentation/view/phone auth view/phone_auth_view.dart';
 import '../../features/auth/presentation/view/phone verify view/phone_verify_view.dart';
+import '../../features/delivery_address/data/repos/delivery_address_repo.dart';
 import '../../features/delivery_address/presentation/view/delivery_address_view.dart';
 import '../../features/delivery_address/presentation/view/google_map_view.dart';
 import '../../features/delivery_address/presentation/view/search_address_view.dart';
@@ -56,7 +58,6 @@ abstract class AppRouter {
   static const kAddressConfirmView = "/addressConfirmView";
   static const kSearchAddressView = "/searchAddressView";
   static const kPaymentMethodView = "/paymentMethodView";
-  static const kPromoCodeView = "/promoCodeView";
   static const kAboutView = "/aboutView";
   static const kLoginView = "/loginView";
   static const kPhoneAuthView = "/phoneAuthView";
@@ -152,12 +153,28 @@ abstract class AppRouter {
         ),
       ),
       GoRoute(
-        path: kMyDetailsView,
-        pageBuilder: (context, state) => screenTransition(
-          state,
-          const MyDetailsView(),
-        ),
-      ),
+          path: kMyDetailsView,
+          pageBuilder: (context, state) {
+            AccountItemListNavigationModel model =
+                state.extra as AccountItemListNavigationModel;
+            return screenTransition(
+              state,
+              MultiBlocProvider(
+                providers: [
+                  BlocProvider.value(
+                    value: model.bloc,
+                  ),
+                  BlocProvider(
+                    create: (context) =>
+                        MyDetailsCubit(getIt.get<MyDetailsRepo>()),
+                  )
+                ],
+                child: MyDetailsView(
+                  accountModel: model.account,
+                ),
+              ),
+            );
+          }),
       GoRoute(
         path: kDeliveryAddressView,
         pageBuilder: (context, state) => screenTransition(
@@ -166,7 +183,7 @@ abstract class AppRouter {
             providers: [
               BlocProvider(
                 create: (context) => LocationBloc(
-                  getIt.get<DeliveryAddressRepoImpl>(),
+                  getIt.get<DeliveryAddressRepo>(),
                 ),
               )
             ],
@@ -210,7 +227,7 @@ abstract class AppRouter {
               providers: [
                 BlocProvider(
                   create: (context) => SearchAddressCubit(
-                    getIt.get<DeliveryAddressRepoImpl>(),
+                    getIt.get<DeliveryAddressRepo>(),
                     passingObjects.controller,
                   ),
                 ),
@@ -226,13 +243,6 @@ abstract class AppRouter {
         pageBuilder: (context, state) => screenTransition(
           state,
           const PaymentMethodView(),
-        ),
-      ),
-      GoRoute(
-        path: kPromoCodeView,
-        pageBuilder: (context, state) => screenTransition(
-          state,
-          const PromoCodeView(),
         ),
       ),
       GoRoute(

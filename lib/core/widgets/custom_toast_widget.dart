@@ -17,7 +17,7 @@ class CustomToastWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16.w),
-      height: 90.h,
+      height: 110.h,
       decoration: BoxDecoration(
         color: type == ToastType.failure ? Colors.red.withOpacity(0.7) : Colors.green.withOpacity(0.7),
         borderRadius: const BorderRadius.all(

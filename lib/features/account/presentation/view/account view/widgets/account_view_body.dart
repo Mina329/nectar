@@ -2,33 +2,63 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/cache/cache_helper.dart';
 import 'package:nectar/core/cache/cache_keys_values.dart';
 import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/widgets/custom_elevated_btn.dart';
-import 'package:nectar/features/account/presentation/view/widgets/account_list_item.dart';
-import 'package:nectar/features/account/presentation/view/widgets/profile_card.dart';
+import 'package:nectar/features/account/presentation/view%20model/account_info_cubit/account_info_cubit.dart';
+import 'package:nectar/features/account/presentation/view/account%20view/widgets/profile_card.dart';
 import 'package:nectar/features/auth/presentation/view%20model/google_auth_cubit/google_auth_cubit.dart';
-
-import '../../../../../core/utils/strings_manager.dart';
-import '../../../../../core/widgets/custom_loading_indicator.dart';
+import '../../../../../../core/utils/assets_manager.dart';
+import '../../../../../../core/utils/strings_manager.dart';
+import '../../../../../../core/widgets/custom_loading_indicator.dart';
+import 'account_list_item_list_view.dart';
+import 'account_shimmer.dart';
 
 class AccountViewBody extends StatelessWidget {
   const AccountViewBody({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            const ProfileCard(),
-            AccountListItemListView(),
-          ],
+        BlocBuilder<AccountInfoCubit, AccountInfoState>(
+          builder: (context, state) {
+            if (state is AccountInfoLoading) {
+              return const AccountShimmer();
+            } else if (state is AccountInfoFailure) {
+              return Padding(
+                padding: EdgeInsets.only(
+                  top: 50.h,
+                  left: 25.w,
+                  right: 25.w,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: SvgPicture.asset(
+                        AssetsManager.error,
+                        width: 300.w,
+                        height: 500.h,
+                      ),
+                    )
+                  ],
+                ),
+              );
+            } else if (state is AccountInfoSuccess) {
+              return CustomScrollView(
+                physics: const BouncingScrollPhysics(),
+                slivers: [
+                  ProfileCard(account: state.account),
+                  AccountListItemListView(accountModel: state.account)
+                ],
+              );
+            }
+            return Container();
+          },
         ),
         Positioned(
             bottom: 25.h,
@@ -53,7 +83,9 @@ class AccountViewBody extends StatelessWidget {
                     GoRouter.of(context).pop();
                     await CacheData.setData(
                         key: CacheKeys.kSIGNED, value: CacheValues.NOT_SIGNED);
-                    GoRouter.of(context).go(AppRouter.kLoginView);
+                    if (context.mounted) {
+                      GoRouter.of(context).go(AppRouter.kLoginView);
+                    }
                   }
                 },
                 child: CustomElevatedBtn(
@@ -66,49 +98,6 @@ class AccountViewBody extends StatelessWidget {
               ),
             )),
       ],
-    );
-  }
-}
-
-class AccountListItemListView extends StatelessWidget {
-  AccountListItemListView({super.key});
-  final List<String> titleList = [
-    StringsManager.orders.tr(),
-    StringsManager.myDetails.tr(),
-    StringsManager.deliveryAddress.tr(),
-    StringsManager.paymentMethod.tr(),
-    StringsManager.promoCode.tr(),
-    StringsManager.about.tr(),
-  ];
-  final List<IconData?> iconsList = [
-    Icons.shopping_bag_outlined,
-    FontAwesomeIcons.addressCard,
-    Icons.location_on_outlined,
-    Icons.payment,
-    Icons.receipt_outlined,
-    Icons.error_outline
-  ];
-  final List<String> routerList = [
-    AppRouter.kOrdersView,
-    AppRouter.kMyDetailsView,
-    AppRouter.kDeliveryAddressView,
-    AppRouter.kPaymentMethodView,
-    AppRouter.kPromoCodeView,
-    AppRouter.kAboutView,
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        childCount: titleList.length,
-        (context, index) => AccountListItem(
-          leadingIcon: iconsList[index],
-          title: titleList[index],
-          onTap: () {
-            GoRouter.of(context).push(routerList[index]);
-          },
-        ),
-      ),
     );
   }
 }

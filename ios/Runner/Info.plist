@@ -55,7 +55,10 @@
 	<string>We need your location</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need your location</string>
-
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need your Gallery</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We need your Camera</string>
 	</array>
 </dict>
 </plist>

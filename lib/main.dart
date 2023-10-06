@@ -5,15 +5,18 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:nectar/core/cache/cache_keys_values.dart';
 import 'package:nectar/core/l10n/locales.dart';
 import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/core/utils/theme_manager.dart';
+import 'package:path_provider/path_provider.dart';
 import 'core/cache/cache_helper.dart';
 import 'core/utils/service_locator.dart';
 
-String testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVzSW4iOiIxMmgiLCJpZCI6IjZkMTZkMTgwLWEwYTItNGViOS04NzRiLTYxZDM0ZDIyM2E5MCIsImlhdCI6MTY5NTYzMzAxOH0.0OQPSPzlfFyZYjWKnVjuwlUToZA-YvN0RU5AJua62_Q";
+String testToken =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVzSW4iOiIxMmgiLCJpZCI6IjZkMTZkMTgwLWEwYTItNGViOS04NzRiLTYxZDM0ZDIyM2E5MCIsImlhdCI6MTY5NTYzMzAxOH0.0OQPSPzlfFyZYjWKnVjuwlUToZA-YvN0RU5AJua62_Q";
 bool enableDevicePreview = false;
 final ValueNotifier<ThemeMode> notifier = ValueNotifier(
     CacheData.getData(key: CacheKeys.kDARKMODE) == CacheValues.DARK
@@ -24,7 +27,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheData.casheIntialization();
   await dotenv.load();
-
+  HydratedBloc.storage = await HydratedStorage.build(
+      storageDirectory: await getApplicationDocumentsDirectory());
   setupServiceLocator();
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));

@@ -1,80 +1,117 @@
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nectar/core/widgets/custom_elevated_btn.dart';
-import 'package:nectar/features/account/presentation/view%20model/account_info_cubit/account_info_cubit.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:nectar/features/my_details/presentation/view%20model/my_details_cubit/my_details_cubit.dart';
 
+import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/strings_manager.dart';
 import '../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../../core/widgets/custom_toast_widget.dart';
 import '../../../../account/data/models/account_model/account_model/account_model.dart';
-import '../../../../account/presentation/view/account view/widgets/custom_account_list_items_app_bar.dart';
-import 'my_details_form.dart';
-import 'my_details_img.dart';
+import '../../../../account/presentation/view model/account_info_cubit/account_info_cubit.dart';
 
-// ignore: must_be_immutable
-class MyDetailsViewBody extends StatelessWidget {
-  MyDetailsViewBody({super.key, required this.account});
-  static GlobalKey<FormState> formKey = GlobalKey<FormState>();
+class MyDetailsImg extends StatefulWidget {
+  const MyDetailsImg({super.key, required this.account});
   final AccountModel account;
-  String? firstName;
-  String? lastName;
-  String? dateOfBirth;
+  @override
+  State<MyDetailsImg> createState() => _MyDetailsImgState();
+}
+
+class _MyDetailsImgState extends State<MyDetailsImg> {
+  File? _imageFile;
+  Future<void> _getImage(ImageSource source) async {
+    final pickedFile = await ImagePicker().pickImage(source: source);
+
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              CustomAccountListItemsAppBar(
-                title: StringsManager.myDetails.tr(),
-                backArrowOnPressed: () {
-                  GoRouter.of(context).pop();
-                },
-              ),
-              const Divider(),
-              Expanded(
-                  child: ListView(
-                padding: EdgeInsets.zero,
-                physics: const BouncingScrollPhysics(),
-                children: [
-                  MyDetailsImg(account: account),
-                  MyDetailsForm(
-                    formKey: formKey,
-                    account: account,
-                    onSaveFirstName: (value) {
-                      firstName = value;
-                    },
-                    onSaveDateOfBirth: (value) {
-                      if (value != null) {
-                        dateOfBirth =
-                            DateFormat('dd MMMM yyyy').parse(value).toString();
-                      } else {
-                        dateOfBirth = null;
-                      }
-                    },
-                    onSaveLastName: (value) {
-                      lastName = value;
-                    },
+    return GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(30),
+            ),
+          ),
+          builder: (context) => Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 30.w,
+              vertical: 30.h,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context).pop();
+                    _getImage(ImageSource.gallery);
+                  },
+                  child: Icon(
+                    Icons.image,
+                    color: ColorManager.green,
+                    size: 50.sp,
                   ),
-                ],
-              )),
-              SizedBox(
-                height: 100.h,
-              )
-            ],
+                ),
+                GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context).pop();
+                    _getImage(ImageSource.camera);
+                  },
+                  child: Icon(
+                    Icons.camera_alt,
+                    color: ColorManager.green,
+                    size: 50.sp,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+      child: Stack(
+        children: [
+          Center(
+            child: CircleAvatar(
+              radius: 64.w,
+              backgroundColor: ColorManager.green,
+              backgroundImage: _imageFile != null
+                  ? FileImage(_imageFile!)
+                  : (widget.account.profilePicture != null
+                      ? CachedNetworkImageProvider(
+                          widget.account.profilePicture!)
+                      : null) as ImageProvider<Object>?,
+            ),
           ),
           Positioned(
-              bottom: 25.h,
-              left: 25.w,
-              right: 25.w,
-              child: SizedBox(
-                width: double.infinity,
-                height: 67.h,
+            left: 207.w,
+            bottom: 0,
+            child: CircleAvatar(
+              radius: 16,
+              backgroundColor: ColorManager.green,
+              child: Icon(
+                Icons.add_a_photo,
+                size: 20.sp,
+                color: ColorManager.whiteText,
+              ),
+            ),
+          ),
+          if (_imageFile != null)
+            Positioned(
+                right: 40.w,
+                top: 40.h,
                 child: BlocListener<MyDetailsCubit, MyDetailsState>(
                   listener: (context, state) {
                     if (state is MyDetailsLoading) {
@@ -85,7 +122,7 @@ class MyDetailsViewBody extends StatelessWidget {
                           return const CustomLoadingIndicator();
                         },
                       );
-                    } else if (state is MyDetailsInfoFailure) {
+                    } else if (state is MyDetailsImgFailure) {
                       GoRouter.of(context).pop();
                       GoRouter.of(context).pop();
                       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -110,7 +147,7 @@ class MyDetailsViewBody extends StatelessWidget {
                             ),
                           );
                       });
-                    } else if (state is MyDetailsInfoSuccess) {
+                    } else if (state is MyDetailsImgSuccess) {
                       GoRouter.of(context).pop();
                       GoRouter.of(context).pop();
                       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -139,19 +176,19 @@ class MyDetailsViewBody extends StatelessWidget {
                           .getUserProfile();
                     }
                   },
-                  child: CustomElevatedBtn(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          formKey.currentState!.save();
-                          BlocProvider.of<MyDetailsCubit>(context)
-                              .updateProfileInfo(
-                                  firstName, lastName, dateOfBirth);
-                        }
-                      },
-                      txt: StringsManager.save.tr(),
-                      style: Theme.of(context).textTheme.labelLarge!),
-                ),
-              ))
+                  child: TextButton(
+                    onPressed: () {
+                      BlocProvider.of<MyDetailsCubit>(context)
+                          .updateProfileImg(_imageFile!);
+                    },
+                    child: Text(
+                      StringsManager.save.tr(),
+                      style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                            color: ColorManager.green,
+                          ),
+                    ),
+                  ),
+                ))
         ],
       ),
     );

@@ -25,7 +25,6 @@ abstract class StringsManager {
   static const myDetails = "myDetails";
   static const deliveryAddress = "deliveryAddress";
   static const paymentMethod = "paymentMethod";
-  static const promoCode = "promoCode";
   static const notification = "notification";
   static const about = "about";
   static const orderId = "orderId:";

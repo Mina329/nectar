@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nectar/features/account/data/repos/account_repo.dart';
+import 'package:nectar/features/account/presentation/view%20model/account_info_cubit/account_info_cubit.dart';
 import 'package:nectar/features/favourite/presentation/view%20model/favourite_items_cubit/favourite_items_cubit.dart';
 import 'package:nectar/features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 import 'package:nectar/features/shop/data/repos/shop_repo.dart';
@@ -11,7 +13,9 @@ import '../../../../core/cache/cache_helper.dart';
 import '../../../../core/cache/cache_keys_values.dart';
 import '../../../../core/utils/service_locator.dart';
 import '../../../../core/widgets/custom_navigation_bar.dart';
-import '../../../account/presentation/view/account_view.dart';
+import '../../../account/presentation/view/account view/account_view.dart';
+import '../../../auth/data/repos/auth_repo.dart';
+import '../../../auth/presentation/view model/google_auth_cubit/google_auth_cubit.dart';
 import '../../../cart/presentation/view/cart_view.dart';
 import '../../../explore/data/repos/explore_repo.dart';
 import '../../../explore/presentation/view model/categories_cubit/categories_cubit.dart';
@@ -87,7 +91,21 @@ class _HomeViewState extends State<HomeView> {
       )..getFavouriteItems(),
       child: const FavouriteView(),
     ),
-    NavigationBarAccount: const AccountView(),
+    NavigationBarAccount: MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AccountInfoCubit(
+            getIt.get<AccountRepo>(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => GoogleAuthCubit(
+            getIt.get<AuthRepo>(),
+          ),
+        )
+      ],
+      child: const AccountView(),
+    ),
   };
 
   late PageController pageController;

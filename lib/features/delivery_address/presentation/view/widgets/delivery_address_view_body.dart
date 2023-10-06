@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/strings_manager.dart';
-import '../../../../account/presentation/view/widgets/custom_account_list_items_app_bar.dart';
+import '../../../../account/presentation/view/account view/widgets/custom_account_list_items_app_bar.dart';
 import 'add_address_button.dart';
 import 'delivery_address_list_view.dart';
 
