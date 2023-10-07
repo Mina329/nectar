@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nectar/features/delivery_address/presentation/view/widgets/search_address_view_body.dart';
+import 'package:nectar/features/delivery_address/presentation/view/search%20address%20view/widgets/search_address_view_body.dart';
 
 class SearchAddressView extends StatelessWidget {
   const SearchAddressView({super.key});

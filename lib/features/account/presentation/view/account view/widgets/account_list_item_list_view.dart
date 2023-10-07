@@ -39,14 +39,6 @@ class AccountListItemListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    extras = [
-      null,
-      AccountItemListNavigationModel(
-          BlocProvider.of<AccountInfoCubit>(context), accountModel),
-      null,
-      null,
-      null
-    ];
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         childCount: titleList.length,
@@ -54,7 +46,9 @@ class AccountListItemListView extends StatelessWidget {
           leadingIcon: iconsList[index],
           title: titleList[index],
           onTap: () {
-            GoRouter.of(context).push(routerList[index], extra: extras[index]);
+            GoRouter.of(context).push(routerList[index],
+                extra: AccountItemListNavigationModel(
+                    BlocProvider.of<AccountInfoCubit>(context), accountModel));
           },
         ),
       ),

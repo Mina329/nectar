@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../core/errors/failure.dart';
@@ -11,4 +12,6 @@ abstract class DeliveryAddressRepo {
       String latitude, String longitude, String language);
   Future<Either<Failure, SearchAddressSuggestion>> fetchSearchAddressSuggestion(
       String latitude, String longitude, String query);
+  Future<Either<Failure, Response>> deleteAddress(
+      String id);
 }

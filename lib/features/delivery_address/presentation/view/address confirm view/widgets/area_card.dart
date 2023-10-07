@@ -7,9 +7,9 @@ import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/location_bloc/location_bloc.dart';
 
-import '../../../../../core/cache/cache_helper.dart';
-import '../../../../../core/cache/cache_keys_values.dart';
-import '../../../../../core/utils/color_manager.dart';
+import '../../../../../../core/cache/cache_helper.dart';
+import '../../../../../../core/cache/cache_keys_values.dart';
+import '../../../../../../core/utils/color_manager.dart';
 
 class AreaCard extends StatelessWidget {
   const AreaCard({super.key, required this.placeName});

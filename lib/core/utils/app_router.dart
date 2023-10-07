@@ -5,8 +5,9 @@ import 'package:nectar/core/utils/service_locator.dart';
 import 'package:nectar/features/account/presentation/view/setting%20view/setting_view.dart';
 import 'package:nectar/features/auth/data/repos/auth_repo.dart';
 import 'package:nectar/features/auth/presentation/view%20model/google_auth_cubit/google_auth_cubit.dart';
-import 'package:nectar/features/delivery_address/presentation/view/address_confirm_view.dart';
-import 'package:nectar/features/delivery_address/presentation/view/widgets/google_map_app_bar.dart';
+import 'package:nectar/features/delivery_address/presentation/view/address%20confirm%20view/address_confirm_view.dart';
+import 'package:nectar/features/delivery_address/presentation/view/google%20map%20view/widgets/google_map_app_bar.dart';
+import 'package:nectar/features/delivery_address/presentation/view_model/delivery_address_cubit/delivery_address_cubit.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/location_bloc/location_bloc.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/search_address_cubit/search_address_cubit.dart';
 import 'package:nectar/features/explore/data/repos/explore_repo.dart';
@@ -25,9 +26,10 @@ import '../../features/auth/presentation/view/login view/login_view.dart';
 import '../../features/auth/presentation/view/phone auth view/phone_auth_view.dart';
 import '../../features/auth/presentation/view/phone verify view/phone_verify_view.dart';
 import '../../features/delivery_address/data/repos/delivery_address_repo.dart';
-import '../../features/delivery_address/presentation/view/delivery_address_view.dart';
-import '../../features/delivery_address/presentation/view/google_map_view.dart';
-import '../../features/delivery_address/presentation/view/search_address_view.dart';
+import '../../features/delivery_address/presentation/view/delivery address view/delivery_address_view.dart';
+import '../../features/delivery_address/presentation/view/google map view/google_map_view.dart';
+import '../../features/delivery_address/presentation/view/search address view/search_address_view.dart';
+import '../../features/delivery_address/presentation/view_model/address_cubit/address_cubit.dart';
 import '../../features/explore/data/models/category_model/category_model.dart';
 import '../../features/favourite/data/models/favourite_to_details_model.dart';
 import '../../features/my_details/presentation/view/my_details_view.dart';
@@ -176,21 +178,39 @@ abstract class AppRouter {
             );
           }),
       GoRoute(
-        path: kDeliveryAddressView,
-        pageBuilder: (context, state) => screenTransition(
-          state,
-          MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => LocationBloc(
-                  getIt.get<DeliveryAddressRepo>(),
+          path: kDeliveryAddressView,
+          pageBuilder: (context, state) {
+            AccountItemListNavigationModel model =
+                state.extra as AccountItemListNavigationModel;
+            return screenTransition(
+              state,
+              MultiBlocProvider(
+                providers: [
+                  BlocProvider.value(
+                    value: model.bloc,
+                  ),
+                  BlocProvider(
+                    create: (context) => LocationBloc(
+                      getIt.get<DeliveryAddressRepo>(),
+                    ),
+                  ),
+                  BlocProvider(
+                    create: (context) => DeliveryAddressCubit(
+                      getIt.get<DeliveryAddressRepo>(),
+                    )..getAddresses(model.account.addresses!),
+                  ),
+                  BlocProvider(
+                    create: (context) => AddressCubit(
+                      getIt.get<DeliveryAddressRepo>(),
+                    ),
+                  )
+                ],
+                child: DeliveryAddressView(
+                  accountModel: model.account,
                 ),
-              )
-            ],
-            child: const DeliveryAddressView(),
-          ),
-        ),
-      ),
+              ),
+            );
+          }),
       GoRoute(
         path: kGoogleMapView,
         pageBuilder: (context, state) {

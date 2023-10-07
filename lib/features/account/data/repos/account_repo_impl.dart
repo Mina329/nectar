@@ -15,7 +15,7 @@ class AccountRepoImpl extends AccountRepo {
   @override
   Future<Either<Failure, AccountModel>> fetchUserProfile() async {
     try {
-      var data = await _apiService.get(endPoint: 'api/v1/profile');
+      var data = await _apiService.get(endPoint: 'api/v1/profile?');
       return right(
         AccountModel.fromJson(
           data['data'],

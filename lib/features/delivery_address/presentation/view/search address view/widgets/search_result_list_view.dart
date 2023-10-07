@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:nectar/features/delivery_address/presentation/view/widgets/search_address_item.dart';
+import 'package:nectar/features/delivery_address/presentation/view/search%20address%20view/widgets/search_address_item.dart';
 
-import '../../view_model/location_bloc/location_bloc.dart';
-import '../../view_model/search_address_cubit/search_address_cubit.dart';
+import '../../../view_model/location_bloc/location_bloc.dart';
+import '../../../view_model/search_address_cubit/search_address_cubit.dart';
 
 class SearchResultListView extends StatelessWidget {
   const SearchResultListView({

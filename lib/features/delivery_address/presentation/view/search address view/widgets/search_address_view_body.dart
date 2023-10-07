@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nectar/features/delivery_address/presentation/view/widgets/search_result_list_view.dart';
+import 'package:nectar/features/delivery_address/presentation/view/search%20address%20view/widgets/search_result_list_view.dart';
 import 'address_search_bar.dart';
 
 class SearchAddressViewBody extends StatelessWidget {

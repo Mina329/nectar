@@ -18,7 +18,7 @@ final class FavouriteItemsFailure extends FavouriteItemsState {
 }
 
 final class FavouriteItemsSuccess extends FavouriteItemsState {
-  final List<CategoryItemModel> favouriteItems;
+  final List<ThumbnailGroceryItemModel> favouriteItems;
 
   const FavouriteItemsSuccess(this.favouriteItems);
 }

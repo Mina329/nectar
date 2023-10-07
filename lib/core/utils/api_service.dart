@@ -34,7 +34,7 @@ class ApiService {
 
   Future<Map<String, dynamic>> get({required String endPoint}) async {
     var response = await _dio.get(
-      "${Env.BACKEND_BASE_URL}$endPoint",
+      "${Env.BACKEND_BASE_URL}${endPoint}lang=${CacheData.getData(key: CacheKeys.kLANGUAGE) == CacheValues.ARABIC ? "ar" : "en"}",
       options: Options(
         headers: headers,
       ),

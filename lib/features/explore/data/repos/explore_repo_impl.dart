@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:nectar/core/utils/api_service.dart';
-import 'package:nectar/features/explore/data/models/category_item_model/category_item_model.dart';
 import 'package:nectar/features/explore/data/repos/explore_repo.dart';
 
 import '../../../../core/errors/failure.dart';
+import '../../../shop/data/models/thumbnail_grocery_item_model/thumbnail_grocery_item_model/thumbnail_grocery_item_model.dart';
 import '../models/category_model/category_model.dart';
 
 class ExploreRepoImpl extends ExploreRepo {
@@ -15,7 +15,7 @@ class ExploreRepoImpl extends ExploreRepo {
   @override
   Future<Either<Failure, List<CategoryModel>>> fetchCategories() async {
     try {
-      var data = await _apiService.get(endPoint: "api/v1/categories");
+      var data = await _apiService.get(endPoint: "api/v1/categories?");
       List<CategoryModel> categories = [];
       for (var item in data["data"]) {
         categories.add(CategoryModel.fromJson(item));
@@ -38,12 +38,14 @@ class ExploreRepoImpl extends ExploreRepo {
   }
 
   @override
-  Future<Either<Failure, List<CategoryItemModel>>> fetchCategoryItems(String categoryId) async {
+  Future<Either<Failure, List<ThumbnailGroceryItemModel>>> fetchCategoryItems(
+      String categoryId) async {
     try {
-      var data = await _apiService.get(endPoint: "api/v1/categories/$categoryId/items");
-      List<CategoryItemModel> categoryItems = [];
+      var data = await _apiService.get(
+          endPoint: "api/v1/categories/$categoryId/items?");
+      List<ThumbnailGroceryItemModel> categoryItems = [];
       for (var item in data["data"]) {
-        categoryItems.add(CategoryItemModel.fromJson(item));
+        categoryItems.add(ThumbnailGroceryItemModel.fromJson(item));
       }
       return right(categoryItems);
     } catch (e) {

@@ -23,7 +23,7 @@ class ShopRepoImpl extends ShopRepo {
     try {
       var data = await _apiService.get(
           endPoint:
-              'api/v1/items?lang=$language${orderBy != null ? '&orderBy=$orderBy' : ''}&page=$page&perPage=$perPage');
+              'api/v1/items?${orderBy != null ? '&orderBy=$orderBy' : ''}&page=$page&perPage=$perPage&');
       List<ThumbnailGroceryItemModel> items = [];
       for (var item in data['data']['items']) {
         items.add(ThumbnailGroceryItemModel.fromJson(item));
@@ -52,7 +52,7 @@ class ShopRepoImpl extends ShopRepo {
   }) async {
     try {
       var data =
-          await _apiService.get(endPoint: "api/v1/items/$id?lang=$language");
+          await _apiService.get(endPoint: "api/v1/items/$id?");
 
       return right(GroceryItemModel.fromJson(data['data']));
     } catch (e) {

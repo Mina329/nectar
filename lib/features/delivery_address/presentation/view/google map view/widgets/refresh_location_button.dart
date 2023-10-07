@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../../../../core/utils/color_manager.dart';
-import '../../view_model/location_bloc/location_bloc.dart';
+import '../../../../../../core/utils/color_manager.dart';
+import '../../../view_model/location_bloc/location_bloc.dart';
 
 class RereshLocationButton extends StatelessWidget {
   const RereshLocationButton({

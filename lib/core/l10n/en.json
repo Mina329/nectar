@@ -94,5 +94,6 @@
   "noDescription": "No description",
   "noReviews": "No reviews",
   "currency": "£",
-  "success": "Operation was successful"
+  "success": "Operation was successful",
+  "delete": "Delete"
 }

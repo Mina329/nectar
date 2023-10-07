@@ -18,7 +18,7 @@ final class CategoryItemsFailure extends CategoryItemsState {
 }
 
 final class CategoryItemsSuccess extends CategoryItemsState {
-  final List<CategoryItemModel> categoryItems;
+  final List<ThumbnailGroceryItemModel> categoryItems;
 
   const CategoryItemsSuccess(this.categoryItems);
 }

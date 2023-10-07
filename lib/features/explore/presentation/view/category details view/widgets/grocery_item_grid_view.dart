@@ -53,8 +53,7 @@ class GroceryItemGridView extends StatelessWidget {
                   imageLink: state.categoryItems[index].thumbnail == null
                       ? ""
                       : "${Env.BACKEND_BASE_URL}${state.categoryItems[index].thumbnail}",
-                  quantity:
-                      "${state.categoryItems[index].quantity}${state.categoryItems[index].quantityType}",
+                  quantity: "${state.categoryItems[index].qtyType}",
                   offerPrice: state.categoryItems[index].offerPrice,
                 ),
               ));

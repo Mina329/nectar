@@ -78,8 +78,7 @@ class FavouriteItemListView extends StatelessWidget {
                         name: state.favouriteItems[index].name,
                         price: state.favouriteItems[index].price,
                         offerPrice: state.favouriteItems[index].offerPrice,
-                        quantity:
-                            "${state.favouriteItems[index].quantity} ${state.favouriteItems[index].quantityType}",
+                        quantity: "${state.favouriteItems[index].qtyType}",
                       ),
                     ),
                   );
