@@ -9,10 +9,10 @@ sealed class AddressState extends Equatable {
 
 final class AddressInitial extends AddressState {}
 
-final class AddAddressSuccessextends extends AddressState {
-  final String successMessage;
+final class AddAddressSuccess extends AddressState {
+  final Response response;
 
-  const AddAddressSuccessextends(this.successMessage);
+  const AddAddressSuccess(this.response);
 }
 
 final class AddAddressFailure extends AddressState {

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../data/repos/delivery_address_repo.dart';
@@ -21,6 +22,34 @@ class AddressCubit extends Cubit<AddressState> {
       (response) => emit(
         DeleteAddressSuccess(
           response.data['message'],
+        ),
+      ),
+    );
+  }
+
+  Future<void> addAddress(
+      {required String? buildingNumber,
+      required String? floorNumber,
+      required String? apartmentNumber,
+      required double? lat,
+      required double? lng}) async {
+    emit(AddressLoading());
+    var result = await _deliveryAddressRepo.postAddAddress(
+      buildingNumber,
+      floorNumber,
+      apartmentNumber,
+      lat,
+      lng,
+    );
+    result.fold(
+      (failure) => emit(
+        AddAddressFailure(
+          failure.errMessage,
+        ),
+      ),
+      (response) => emit(
+        AddAddressSuccess(
+          response,
         ),
       ),
     );

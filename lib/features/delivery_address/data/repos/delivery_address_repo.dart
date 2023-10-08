@@ -12,6 +12,7 @@ abstract class DeliveryAddressRepo {
       String latitude, String longitude, String language);
   Future<Either<Failure, SearchAddressSuggestion>> fetchSearchAddressSuggestion(
       String latitude, String longitude, String query);
-  Future<Either<Failure, Response>> deleteAddress(
-      String id);
+  Future<Either<Failure, Response>> deleteAddress(String id);
+  Future<Either<Failure, Response>> postAddAddress(String? buildingNumber,
+      String? floorNumber, String? apartmentNumber, double? lat, double? lng);
 }

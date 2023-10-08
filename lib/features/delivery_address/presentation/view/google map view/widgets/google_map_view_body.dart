@@ -35,7 +35,6 @@ class _GoogleMapViewBodyState extends State<GoogleMapViewBody> {
           GoRouter.of(context).pushReplacement(AppRouter.kAddressConfirmView,
               extra: locationBloc);
         } else {
-          BlocProvider.of<LocationBloc>(context).add(MapVisibility());
           GoRouter.of(context).pop();
         }
         return false;

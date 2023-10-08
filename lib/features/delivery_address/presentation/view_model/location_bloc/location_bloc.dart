@@ -46,7 +46,9 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
       } else if (event is GetPlacemark) {
         emit(PlacemarkLoading());
         var result = await deliveryAddressRepo.fetchLocationPlacemark(
-            event.latitude.toString(), event.longitude.toString(),event.language);
+            event.latitude.toString(),
+            event.longitude.toString(),
+            event.language);
         result.fold(
           (failure) => emit(
             PlacemarkFailure(failure.errMessage),
@@ -58,10 +60,6 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
             );
           },
         );
-      } else if (event is MapVisibility) {
-        emit(MapVisibilityLoading());
-        await Future.delayed(const Duration(seconds: 1));
-        emit(MapVisibilitySuccess());
       }
     });
   }

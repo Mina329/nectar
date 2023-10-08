@@ -112,103 +112,25 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
                   );
                 } else if (state is AddFavouriteFailure) {
                   GoRouter.of(context).pop();
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    ScaffoldMessenger.of(context)
-                      ..clearSnackBars()
-                      ..showSnackBar(
-                        SnackBar(
-                          behavior: SnackBarBehavior.floating,
-                          dismissDirection: DismissDirection.none,
-                          duration: const Duration(seconds: 1),
-                          margin: EdgeInsets.only(
-                              bottom:
-                                  MediaQuery.of(context).size.height - 150.h,
-                              right: 20,
-                              left: 20),
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                          content: CustomToastWidget(
-                            description: state.errMessage,
-                            type: ToastType.failure,
-                          ),
-                        ),
-                      );
-                  });
+                  CustomToastWidget.buildCustomToast(
+                      context, state.errMessage, ToastType.failure, 150.h);
                 } else if (state is AddFavouriteSuccess) {
                   GoRouter.of(context).pop();
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    ScaffoldMessenger.of(context)
-                      ..clearSnackBars()
-                      ..showSnackBar(
-                        SnackBar(
-                          behavior: SnackBarBehavior.floating,
-                          dismissDirection: DismissDirection.none,
-                          duration: const Duration(seconds: 1),
-                          margin: EdgeInsets.only(
-                              bottom:
-                                  MediaQuery.of(context).size.height - 150.h,
-                              right: 20,
-                              left: 20),
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                          content: CustomToastWidget(
-                            description: state.succeesMessage,
-                            type: ToastType.success,
-                          ),
-                        ),
-                      );
-                  });
+                  CustomToastWidget.buildCustomToast(
+                      context, state.succeesMessage, ToastType.success, 150.h);
+
                   setState(() {
                     favourite = true;
                   });
                 } else if (state is RemoveFavouriteFailure) {
                   GoRouter.of(context).pop();
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    ScaffoldMessenger.of(context)
-                      ..clearSnackBars()
-                      ..showSnackBar(
-                        SnackBar(
-                          behavior: SnackBarBehavior.floating,
-                          dismissDirection: DismissDirection.none,
-                          duration: const Duration(seconds: 1),
-                          margin: EdgeInsets.only(
-                              bottom:
-                                  MediaQuery.of(context).size.height - 150.h,
-                              right: 20,
-                              left: 20),
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                          content: CustomToastWidget(
-                            description: state.errMessage,
-                            type: ToastType.failure,
-                          ),
-                        ),
-                      );
-                  });
+                  CustomToastWidget.buildCustomToast(
+                      context, state.errMessage, ToastType.failure, 150.h);
                 } else if (state is RemoveFavouriteSuccess) {
                   GoRouter.of(context).pop();
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    ScaffoldMessenger.of(context)
-                      ..clearSnackBars()
-                      ..showSnackBar(
-                        SnackBar(
-                          behavior: SnackBarBehavior.floating,
-                          dismissDirection: DismissDirection.none,
-                          duration: const Duration(seconds: 1),
-                          margin: EdgeInsets.only(
-                              bottom:
-                                  MediaQuery.of(context).size.height - 150.h,
-                              right: 20,
-                              left: 20),
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                          content: CustomToastWidget(
-                            description: state.succeesMessage,
-                            type: ToastType.success,
-                          ),
-                        ),
-                      );
-                  });
+                  CustomToastWidget.buildCustomToast(
+                      context, state.succeesMessage, ToastType.success, 150.h);
+
                   setState(() {
                     favourite = false;
                   });

@@ -8,10 +8,14 @@ class AddressConfirmationForm extends StatelessWidget {
       {super.key,
       required this.formKey,
       required this.streetName,
-      required this.buildingNumber});
+      required this.buildingNumber, required this.onSavedBuildingNumber, required this.onSavedAppartmentNumber, required this.onSavedFloor});
   final GlobalKey<FormState> formKey;
   final String streetName;
   final String buildingNumber;
+  final Function(String?) onSavedBuildingNumber;
+  final Function(String?) onSavedAppartmentNumber;
+  final Function(String?) onSavedFloor;
+
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -56,7 +60,7 @@ class AddressConfirmationForm extends StatelessWidget {
                   }
                   return null;
                 },
-                onSaved: (value) {},
+                onSaved: onSavedBuildingNumber,
               ),
               SizedBox(
                 height: 10.h,
@@ -103,7 +107,7 @@ class AddressConfirmationForm extends StatelessWidget {
                             }
                             return null;
                           },
-                          onSaved: (value) {},
+                          onSaved: onSavedAppartmentNumber,
                         ),
                       ),
                     ],
@@ -147,7 +151,7 @@ class AddressConfirmationForm extends StatelessWidget {
                             }
                             return null;
                           },
-                          onSaved: (value) {},
+                          onSaved: onSavedFloor,
                         ),
                       ),
                     ],
@@ -169,6 +173,7 @@ class AddressConfirmationForm extends StatelessWidget {
               ),
               TextFormField(
                 initialValue: streetName,
+                enabled: false,
                 style: Theme.of(context)
                     .textTheme
                     .headlineMedium!
@@ -191,7 +196,6 @@ class AddressConfirmationForm extends StatelessWidget {
                   }
                   return null;
                 },
-                onSaved: (value) {},
               ),
               SizedBox(
                 height: 20.h,

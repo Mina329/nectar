@@ -21,12 +21,6 @@ class CustomGoogleMap extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LocationBloc, LocationState>(
       builder: (context, state) {
-        if (state is MapVisibilityLoading) {
-          return Visibility(
-            visible: false,
-            child: buildGoogleMap(context),
-          );
-        }
         return Visibility(
           visible: true,
           child: buildGoogleMap(context),

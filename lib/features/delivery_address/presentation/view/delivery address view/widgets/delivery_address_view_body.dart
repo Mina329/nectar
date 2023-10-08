@@ -26,10 +26,17 @@ class DeliveryAddressViewBody extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.w),
-              child: const CustomScrollView(
-                physics: BouncingScrollPhysics(),
+              child: CustomScrollView(
+                physics: const BouncingScrollPhysics(),
                 slivers: [
-                  DeliveryAddressListView(),
+                  SliverToBoxAdapter(
+                      child: Center(
+                    child: Text(
+                      StringsManager.swipe.tr(),
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  )),
+                  const DeliveryAddressListView(),
                 ],
               ),
             ),

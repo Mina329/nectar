@@ -95,5 +95,6 @@
   "noReviews": "No reviews",
   "currency": "£",
   "success": "Operation was successful",
-  "delete": "Delete"
+  "delete": "Delete",
+  "swipe" : "Swipe to Delete"
 }

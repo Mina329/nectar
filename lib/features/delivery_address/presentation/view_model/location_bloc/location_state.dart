@@ -44,6 +44,3 @@ final class PlacemarkFailure extends LocationState {
 
   PlacemarkFailure(this.errMessage);
 }
-
-final class MapVisibilityLoading extends LocationState{}
-final class MapVisibilitySuccess extends LocationState{}

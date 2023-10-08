@@ -15,4 +15,3 @@ class GetPlacemark extends LocationEvent {
   GetPlacemark(this.latitude, this.longitude, this.language);
 }
 
-class MapVisibility extends LocationEvent{}

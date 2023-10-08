@@ -93,4 +93,38 @@ class DeliveryAddressRepoImpl extends DeliveryAddressRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, Response>> postAddAddress(
+      String? buildingNumber,
+      String? floorNumber,
+      String? apartmentNumber,
+      double? lat,
+      double? lng) async {
+    try {
+      Map<String, dynamic> requestData = {
+        "lat": lat,
+        "lng": lng,
+        "apartmentNumber": apartmentNumber,
+        "floorNumber": floorNumber,
+        "buildingNumber": buildingNumber
+      };
+      var data = await _apiService.post(
+          endPoint: "api/v1/profile/addresses", requestData: requestData);
+      return right(data);
+    } catch (e) {
+      if (e is DioException) {
+        return left(
+          ServerFailure(
+            e.response!.data['message'],
+          ),
+        );
+      }
+      return left(
+        ServerFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
 }

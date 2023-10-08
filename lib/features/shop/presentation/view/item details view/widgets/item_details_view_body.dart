@@ -35,27 +35,8 @@ class ItemDetailsViewBody extends StatelessWidget {
             if (state is ItemDetailsLoading) {
               return const ItemDetailsViewShimmers();
             } else if (state is ItemDetailsFailure) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                ScaffoldMessenger.of(context)
-                  ..clearSnackBars()
-                  ..showSnackBar(
-                    SnackBar(
-                      behavior: SnackBarBehavior.floating,
-                      dismissDirection: DismissDirection.none,
-                      duration: const Duration(seconds: 1),
-                      margin: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).size.height - 150.h,
-                          right: 20,
-                          left: 20),
-                      backgroundColor: Colors.transparent,
-                      elevation: 0,
-                      content: CustomToastWidget(
-                        description: state.errMessage,
-                        type: ToastType.failure,
-                      ),
-                    ),
-                  );
-              });
+              CustomToastWidget.buildCustomToast(
+                  context, state.errMessage, ToastType.failure, 150.h);
               return Padding(
                 padding: EdgeInsets.only(
                   top: 50.h,

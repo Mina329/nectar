@@ -19,7 +19,9 @@ class CustomToastWidget extends StatelessWidget {
       padding: EdgeInsets.all(16.w),
       height: 110.h,
       decoration: BoxDecoration(
-        color: type == ToastType.failure ? Colors.red.withOpacity(0.7) : Colors.green.withOpacity(0.7),
+        color: type == ToastType.failure
+            ? Colors.red.withOpacity(0.7)
+            : Colors.green.withOpacity(0.7),
         borderRadius: const BorderRadius.all(
           Radius.circular(
             20,
@@ -68,6 +70,31 @@ class CustomToastWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  static buildCustomToast(
+      BuildContext context, String msg, ToastType type, double height) {
+    return WidgetsBinding.instance.addPostFrameCallback((_) {
+      ScaffoldMessenger.of(context)
+        ..clearSnackBars()
+        ..showSnackBar(
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
+            dismissDirection: DismissDirection.none,
+            duration: const Duration(seconds: 1),
+            margin: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height - height,
+                right: 20,
+                left: 20),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            content: CustomToastWidget(
+              description: msg,
+              type: type,
+            ),
+          ),
+        );
+    });
   }
 }
 

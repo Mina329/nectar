@@ -25,6 +25,7 @@ import '../../features/account/presentation/view/about view/about_view.dart';
 import '../../features/auth/presentation/view/login view/login_view.dart';
 import '../../features/auth/presentation/view/phone auth view/phone_auth_view.dart';
 import '../../features/auth/presentation/view/phone verify view/phone_verify_view.dart';
+import '../../features/delivery_address/data/models/address_delivery_navigation_model/address_delivery_navigation_model.dart';
 import '../../features/delivery_address/data/repos/delivery_address_repo.dart';
 import '../../features/delivery_address/presentation/view/delivery address view/delivery_address_view.dart';
 import '../../features/delivery_address/presentation/view/google map view/google_map_view.dart';
@@ -214,11 +215,25 @@ abstract class AppRouter {
       GoRoute(
         path: kGoogleMapView,
         pageBuilder: (context, state) {
-          LocationBloc bloc = state.extra as LocationBloc;
+          AddressDeliveryNavigationModel model =
+              state.extra as AddressDeliveryNavigationModel;
           return screenTransition(
             state,
-            BlocProvider.value(
-              value: bloc,
+            MultiBlocProvider(
+              providers: [
+                BlocProvider.value(
+                  value: model.locationBloc,
+                ),
+                BlocProvider.value(
+                  value: model.accountInfoCubit,
+                ),
+                BlocProvider.value(
+                  value: model.addressCubit,
+                ),
+                BlocProvider.value(
+                  value: model.deliveryAddressCubit,
+                ),
+              ],
               child: const GoogleMapView(),
             ),
           );
@@ -227,11 +242,25 @@ abstract class AppRouter {
       GoRoute(
         path: kAddressConfirmView,
         pageBuilder: (context, state) {
-          LocationBloc bloc = state.extra as LocationBloc;
+          AddressDeliveryNavigationModel model =
+              state.extra as AddressDeliveryNavigationModel;
           return screenTransition(
             state,
-            BlocProvider.value(
-              value: bloc,
+            MultiBlocProvider(
+              providers: [
+                BlocProvider.value(
+                  value: model.locationBloc,
+                ),
+                BlocProvider.value(
+                  value: model.accountInfoCubit,
+                ),
+                BlocProvider.value(
+                  value: model.addressCubit,
+                ),
+                BlocProvider.value(
+                  value: model.deliveryAddressCubit,
+                ),
+              ],
               child: const AddressConfirmView(),
             ),
           );

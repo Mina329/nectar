@@ -7,10 +7,14 @@ import 'package:go_router/go_router.dart';
 import 'package:nectar/core/cache/cache_helper.dart';
 import 'package:nectar/core/cache/cache_keys_values.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
+import 'package:nectar/features/delivery_address/presentation/view_model/delivery_address_cubit/delivery_address_cubit.dart';
 
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/widgets/custom_elevated_btn.dart';
 import '../../../../../../core/widgets/custom_loading_indicator.dart';
+import '../../../../../account/presentation/view model/account_info_cubit/account_info_cubit.dart';
+import '../../../../data/models/address_delivery_navigation_model/address_delivery_navigation_model.dart';
+import '../../../view_model/address_cubit/address_cubit.dart';
 import '../../../view_model/location_bloc/location_bloc.dart';
 
 class ConfirmMapButton extends StatelessWidget {
@@ -38,11 +42,14 @@ class ConfirmMapButton extends StatelessWidget {
                 },
               );
             } else if (state is PlacemarkSuccess) {
-              final locationBloc = BlocProvider.of<LocationBloc>(context);
-
-              GoRouter.of(context).pushReplacement(
-                  AppRouter.kAddressConfirmView,
-                  extra: locationBloc);
+              GoRouter.of(context)
+                  .pushReplacement(AppRouter.kAddressConfirmView,
+                      extra: AddressDeliveryNavigationModel(
+                        BlocProvider.of<LocationBloc>(context),
+                        BlocProvider.of<AddressCubit>(context),
+                        BlocProvider.of<AccountInfoCubit>(context),
+                        BlocProvider.of<DeliveryAddressCubit>(context),
+                      ));
             } else if (state is PlacemarkFailure) {
               GoRouter.of(context).pop();
               Fluttertoast.showToast(msg: state.errMessage);

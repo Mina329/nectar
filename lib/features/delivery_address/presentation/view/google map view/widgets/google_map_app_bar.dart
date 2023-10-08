@@ -46,7 +46,6 @@ class GoogleMapAppBar extends StatelessWidget {
                         AppRouter.kAddressConfirmView,
                         extra: locationBloc);
                   } else {
-                    BlocProvider.of<LocationBloc>(context).add(MapVisibility());
                     GoRouter.of(context).pop();
                   }
                 },
@@ -68,8 +67,8 @@ class GoogleMapAppBar extends StatelessWidget {
                   PassingObjects pass = PassingObjects(
                       bloc: locationBloc, controller: controller);
 
-                  GoRouter.of(context).push(AppRouter.kSearchAddressView,
-                      extra: pass);
+                  GoRouter.of(context)
+                      .push(AppRouter.kSearchAddressView, extra: pass);
                 },
                 icon: const Icon(
                   Icons.search,
