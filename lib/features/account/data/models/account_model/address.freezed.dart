@@ -27,6 +27,7 @@ mixin _$Address {
   String? get floorNumber => throw _privateConstructorUsedError;
   double? get lat => throw _privateConstructorUsedError;
   double? get lng => throw _privateConstructorUsedError;
+  bool? get isDefault => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +46,8 @@ abstract class $AddressCopyWith<$Res> {
       String? apartmentNumber,
       String? floorNumber,
       double? lat,
-      double? lng});
+      double? lng,
+      bool? isDefault});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
     Object? floorNumber = freezed,
     Object? lat = freezed,
     Object? lng = freezed,
+    Object? isDefault = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -98,6 +101,10 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
           ? _value.lng
           : lng // ignore: cast_nullable_to_non_nullable
               as double?,
+      isDefault: freezed == isDefault
+          ? _value.isDefault
+          : isDefault // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -116,7 +123,8 @@ abstract class _$$_AddressCopyWith<$Res> implements $AddressCopyWith<$Res> {
       String? apartmentNumber,
       String? floorNumber,
       double? lat,
-      double? lng});
+      double? lng,
+      bool? isDefault});
 }
 
 /// @nodoc
@@ -136,6 +144,7 @@ class __$$_AddressCopyWithImpl<$Res>
     Object? floorNumber = freezed,
     Object? lat = freezed,
     Object? lng = freezed,
+    Object? isDefault = freezed,
   }) {
     return _then(_$_Address(
       id: freezed == id
@@ -166,6 +175,10 @@ class __$$_AddressCopyWithImpl<$Res>
           ? _value.lng
           : lng // ignore: cast_nullable_to_non_nullable
               as double?,
+      isDefault: freezed == isDefault
+          ? _value.isDefault
+          : isDefault // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -180,7 +193,8 @@ class _$_Address implements _Address {
       this.apartmentNumber,
       this.floorNumber,
       this.lat,
-      this.lng});
+      this.lng,
+      this.isDefault});
 
   factory _$_Address.fromJson(Map<String, dynamic> json) =>
       _$$_AddressFromJson(json);
@@ -199,10 +213,12 @@ class _$_Address implements _Address {
   final double? lat;
   @override
   final double? lng;
+  @override
+  final bool? isDefault;
 
   @override
   String toString() {
-    return 'Address(id: $id, userId: $userId, buildingNumber: $buildingNumber, apartmentNumber: $apartmentNumber, floorNumber: $floorNumber, lat: $lat, lng: $lng)';
+    return 'Address(id: $id, userId: $userId, buildingNumber: $buildingNumber, apartmentNumber: $apartmentNumber, floorNumber: $floorNumber, lat: $lat, lng: $lng, isDefault: $isDefault)';
   }
 
   @override
@@ -219,13 +235,15 @@ class _$_Address implements _Address {
             (identical(other.floorNumber, floorNumber) ||
                 other.floorNumber == floorNumber) &&
             (identical(other.lat, lat) || other.lat == lat) &&
-            (identical(other.lng, lng) || other.lng == lng));
+            (identical(other.lng, lng) || other.lng == lng) &&
+            (identical(other.isDefault, isDefault) ||
+                other.isDefault == isDefault));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, userId, buildingNumber,
-      apartmentNumber, floorNumber, lat, lng);
+      apartmentNumber, floorNumber, lat, lng, isDefault);
 
   @JsonKey(ignore: true)
   @override
@@ -249,7 +267,8 @@ abstract class _Address implements Address {
       final String? apartmentNumber,
       final String? floorNumber,
       final double? lat,
-      final double? lng}) = _$_Address;
+      final double? lng,
+      final bool? isDefault}) = _$_Address;
 
   factory _Address.fromJson(Map<String, dynamic> json) = _$_Address.fromJson;
 
@@ -267,6 +286,8 @@ abstract class _Address implements Address {
   double? get lat;
   @override
   double? get lng;
+  @override
+  bool? get isDefault;
   @override
   @JsonKey(ignore: true)
   _$$_AddressCopyWith<_$_Address> get copyWith =>

@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:nectar/core/errors/failure.dart';
 import 'package:nectar/core/utils/api_service.dart';
 
-import 'package:nectar/features/account/data/models/account_model/account_model/account_model.dart';
+import 'package:nectar/features/account/data/models/account_model/account_model.dart';
 
 import 'account_repo.dart';
 

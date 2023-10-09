@@ -54,4 +54,21 @@ class AddressCubit extends Cubit<AddressState> {
       ),
     );
   }
+
+  Future<void> setDefaultAddress(String id) async {
+    emit(DefaultAddressLoading());
+    var result = await _deliveryAddressRepo.patchDefaultAddress(id);
+    result.fold(
+      (failure) => emit(
+        DefaultAddressFailure(
+          failure.errMessage,
+        ),
+      ),
+      (response) => emit(
+        DefaultAddressSuccess(
+          response,
+        ),
+      ),
+    );
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:nectar/features/account/data/models/account_model/account_model/account_model.dart';
+import 'package:nectar/features/account/data/models/account_model/account_model.dart';
 
 import '../../../data/repos/account_repo.dart';
 

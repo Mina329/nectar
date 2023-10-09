@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/features/account/data/models/account_item_list_navigation_model/account_item_list_navigation_model.dart';
-import 'package:nectar/features/account/data/models/account_model/account_model/account_model.dart';
+import 'package:nectar/features/account/data/models/account_model/account_model.dart';
 import 'package:nectar/features/account/presentation/view%20model/account_info_cubit/account_info_cubit.dart';
 
 import '../../../../../../core/utils/app_router.dart';

@@ -15,4 +15,5 @@ abstract class DeliveryAddressRepo {
   Future<Either<Failure, Response>> deleteAddress(String id);
   Future<Either<Failure, Response>> postAddAddress(String? buildingNumber,
       String? floorNumber, String? apartmentNumber, double? lat, double? lng);
+  Future<Either<Failure, String>> patchDefaultAddress(String id);
 }

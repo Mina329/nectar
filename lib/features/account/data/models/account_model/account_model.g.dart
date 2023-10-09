@@ -21,8 +21,12 @@ _$_AccountModel _$$_AccountModelFromJson(Map<String, dynamic> json) =>
       addresses: (json['addresses'] as List<dynamic>?)
           ?.map((e) => Address.fromJson(e as Map<String, dynamic>))
           .toList(),
-      preferedAddressId: json['preferedAddressId'] as String?,
-      preferedPayment: json['preferedPayment'] as String?,
+      reviews: (json['reviews'] as List<dynamic>?)
+          ?.map((e) => Review.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      carts: (json['carts'] as List<dynamic>?)
+          ?.map((e) => Cart.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_AccountModelToJson(_$_AccountModel instance) =>
@@ -36,6 +40,6 @@ Map<String, dynamic> _$$_AccountModelToJson(_$_AccountModel instance) =>
       'profilePicture': instance.profilePicture,
       'role': instance.role,
       'addresses': instance.addresses,
-      'preferedAddressId': instance.preferedAddressId,
-      'preferedPayment': instance.preferedPayment,
+      'reviews': instance.reviews,
+      'carts': instance.carts,
     };

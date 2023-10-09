@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nectar/core/l10n/locales.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
-import 'package:nectar/features/account/data/models/account_model/account_model/account_model.dart';
+import 'package:nectar/features/account/data/models/account_model/account_model.dart';
 
 import '../../../../../core/utils/color_manager.dart';
 

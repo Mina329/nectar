@@ -13,7 +13,7 @@ import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/strings_manager.dart';
 import '../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../../core/widgets/custom_toast_widget.dart';
-import '../../../../account/data/models/account_model/account_model/account_model.dart';
+import 'package:nectar/features/account/data/models/account_model/account_model.dart';
 import '../../../../account/presentation/view model/account_info_cubit/account_info_cubit.dart';
 
 class MyDetailsImg extends StatefulWidget {

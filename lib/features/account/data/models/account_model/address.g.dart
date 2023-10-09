@@ -14,6 +14,7 @@ _$_Address _$$_AddressFromJson(Map<String, dynamic> json) => _$_Address(
       floorNumber: json['floorNumber'] as String?,
       lat: (json['lat'] as num?)?.toDouble(),
       lng: (json['lng'] as num?)?.toDouble(),
+      isDefault: json['isDefault'] as bool?,
     );
 
 Map<String, dynamic> _$$_AddressToJson(_$_Address instance) =>
@@ -25,4 +26,5 @@ Map<String, dynamic> _$$_AddressToJson(_$_Address instance) =>
       'floorNumber': instance.floorNumber,
       'lat': instance.lat,
       'lng': instance.lng,
+      'isDefault': instance.isDefault,
     };

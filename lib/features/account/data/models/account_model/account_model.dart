@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'address.dart';
+import 'cart.dart';
+import 'review.dart';
 
 part 'account_model.freezed.dart';
 part 'account_model.g.dart';
@@ -17,8 +19,8 @@ class AccountModel with _$AccountModel {
 		String? profilePicture,
 		String? role,
 		List<Address>? addresses,
-    String? preferedAddressId,
-    String? preferedPayment,
+		List<Review>? reviews,
+		List<Cart>? carts,
 	}) = _AccountModel;
 
 	factory AccountModel.fromJson(Map<String, dynamic> json) => _$AccountModelFromJson(json);

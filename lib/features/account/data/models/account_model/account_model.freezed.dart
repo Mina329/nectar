@@ -29,8 +29,8 @@ mixin _$AccountModel {
   String? get profilePicture => throw _privateConstructorUsedError;
   String? get role => throw _privateConstructorUsedError;
   List<Address>? get addresses => throw _privateConstructorUsedError;
-  String? get preferedAddressId => throw _privateConstructorUsedError;
-  String? get preferedPayment => throw _privateConstructorUsedError;
+  List<Review>? get reviews => throw _privateConstructorUsedError;
+  List<Cart>? get carts => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,8 +54,8 @@ abstract class $AccountModelCopyWith<$Res> {
       String? profilePicture,
       String? role,
       List<Address>? addresses,
-      String? preferedAddressId,
-      String? preferedPayment});
+      List<Review>? reviews,
+      List<Cart>? carts});
 }
 
 /// @nodoc
@@ -80,8 +80,8 @@ class _$AccountModelCopyWithImpl<$Res, $Val extends AccountModel>
     Object? profilePicture = freezed,
     Object? role = freezed,
     Object? addresses = freezed,
-    Object? preferedAddressId = freezed,
-    Object? preferedPayment = freezed,
+    Object? reviews = freezed,
+    Object? carts = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -120,14 +120,14 @@ class _$AccountModelCopyWithImpl<$Res, $Val extends AccountModel>
           ? _value.addresses
           : addresses // ignore: cast_nullable_to_non_nullable
               as List<Address>?,
-      preferedAddressId: freezed == preferedAddressId
-          ? _value.preferedAddressId
-          : preferedAddressId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      preferedPayment: freezed == preferedPayment
-          ? _value.preferedPayment
-          : preferedPayment // ignore: cast_nullable_to_non_nullable
-              as String?,
+      reviews: freezed == reviews
+          ? _value.reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as List<Review>?,
+      carts: freezed == carts
+          ? _value.carts
+          : carts // ignore: cast_nullable_to_non_nullable
+              as List<Cart>?,
     ) as $Val);
   }
 }
@@ -150,8 +150,8 @@ abstract class _$$_AccountModelCopyWith<$Res>
       String? profilePicture,
       String? role,
       List<Address>? addresses,
-      String? preferedAddressId,
-      String? preferedPayment});
+      List<Review>? reviews,
+      List<Cart>? carts});
 }
 
 /// @nodoc
@@ -174,8 +174,8 @@ class __$$_AccountModelCopyWithImpl<$Res>
     Object? profilePicture = freezed,
     Object? role = freezed,
     Object? addresses = freezed,
-    Object? preferedAddressId = freezed,
-    Object? preferedPayment = freezed,
+    Object? reviews = freezed,
+    Object? carts = freezed,
   }) {
     return _then(_$_AccountModel(
       id: freezed == id
@@ -214,14 +214,14 @@ class __$$_AccountModelCopyWithImpl<$Res>
           ? _value._addresses
           : addresses // ignore: cast_nullable_to_non_nullable
               as List<Address>?,
-      preferedAddressId: freezed == preferedAddressId
-          ? _value.preferedAddressId
-          : preferedAddressId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      preferedPayment: freezed == preferedPayment
-          ? _value.preferedPayment
-          : preferedPayment // ignore: cast_nullable_to_non_nullable
-              as String?,
+      reviews: freezed == reviews
+          ? _value._reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as List<Review>?,
+      carts: freezed == carts
+          ? _value._carts
+          : carts // ignore: cast_nullable_to_non_nullable
+              as List<Cart>?,
     ));
   }
 }
@@ -239,9 +239,11 @@ class _$_AccountModel implements _AccountModel {
       this.profilePicture,
       this.role,
       final List<Address>? addresses,
-      this.preferedAddressId,
-      this.preferedPayment})
-      : _addresses = addresses;
+      final List<Review>? reviews,
+      final List<Cart>? carts})
+      : _addresses = addresses,
+        _reviews = reviews,
+        _carts = carts;
 
   factory _$_AccountModel.fromJson(Map<String, dynamic> json) =>
       _$$_AccountModelFromJson(json);
@@ -272,14 +274,29 @@ class _$_AccountModel implements _AccountModel {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<Review>? _reviews;
   @override
-  final String? preferedAddressId;
+  List<Review>? get reviews {
+    final value = _reviews;
+    if (value == null) return null;
+    if (_reviews is EqualUnmodifiableListView) return _reviews;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Cart>? _carts;
   @override
-  final String? preferedPayment;
+  List<Cart>? get carts {
+    final value = _carts;
+    if (value == null) return null;
+    if (_carts is EqualUnmodifiableListView) return _carts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'AccountModel(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phoneNumber: $phoneNumber, dayOfBirth: $dayOfBirth, profilePicture: $profilePicture, role: $role, addresses: $addresses, preferedAddressId: $preferedAddressId, preferedPayment: $preferedPayment)';
+    return 'AccountModel(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phoneNumber: $phoneNumber, dayOfBirth: $dayOfBirth, profilePicture: $profilePicture, role: $role, addresses: $addresses, reviews: $reviews, carts: $carts)';
   }
 
   @override
@@ -302,10 +319,8 @@ class _$_AccountModel implements _AccountModel {
             (identical(other.role, role) || other.role == role) &&
             const DeepCollectionEquality()
                 .equals(other._addresses, _addresses) &&
-            (identical(other.preferedAddressId, preferedAddressId) ||
-                other.preferedAddressId == preferedAddressId) &&
-            (identical(other.preferedPayment, preferedPayment) ||
-                other.preferedPayment == preferedPayment));
+            const DeepCollectionEquality().equals(other._reviews, _reviews) &&
+            const DeepCollectionEquality().equals(other._carts, _carts));
   }
 
   @JsonKey(ignore: true)
@@ -321,8 +336,8 @@ class _$_AccountModel implements _AccountModel {
       profilePicture,
       role,
       const DeepCollectionEquality().hash(_addresses),
-      preferedAddressId,
-      preferedPayment);
+      const DeepCollectionEquality().hash(_reviews),
+      const DeepCollectionEquality().hash(_carts));
 
   @JsonKey(ignore: true)
   @override
@@ -349,8 +364,8 @@ abstract class _AccountModel implements AccountModel {
       final String? profilePicture,
       final String? role,
       final List<Address>? addresses,
-      final String? preferedAddressId,
-      final String? preferedPayment}) = _$_AccountModel;
+      final List<Review>? reviews,
+      final List<Cart>? carts}) = _$_AccountModel;
 
   factory _AccountModel.fromJson(Map<String, dynamic> json) =
       _$_AccountModel.fromJson;
@@ -374,9 +389,9 @@ abstract class _AccountModel implements AccountModel {
   @override
   List<Address>? get addresses;
   @override
-  String? get preferedAddressId;
+  List<Review>? get reviews;
   @override
-  String? get preferedPayment;
+  List<Cart>? get carts;
   @override
   @JsonKey(ignore: true)
   _$$_AccountModelCopyWith<_$_AccountModel> get copyWith =>

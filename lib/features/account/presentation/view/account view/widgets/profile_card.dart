@@ -11,7 +11,7 @@ import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../data/models/account_item_list_navigation_model/account_item_list_navigation_model.dart';
-import '../../../../data/models/account_model/account_model/account_model.dart';
+import 'package:nectar/features/account/data/models/account_model/account_model.dart';
 import '../../../view model/account_info_cubit/account_info_cubit.dart';
 
 class ProfileCard extends StatelessWidget {

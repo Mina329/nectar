@@ -10,7 +10,7 @@ import 'package:nectar/features/my_details/presentation/view%20model/my_details_
 import '../../../../../core/utils/strings_manager.dart';
 import '../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../../core/widgets/custom_toast_widget.dart';
-import '../../../../account/data/models/account_model/account_model/account_model.dart';
+import 'package:nectar/features/account/data/models/account_model/account_model.dart';
 import '../../../../account/presentation/view/account view/widgets/custom_account_list_items_app_bar.dart';
 import 'my_details_form.dart';
 import 'my_details_img.dart';

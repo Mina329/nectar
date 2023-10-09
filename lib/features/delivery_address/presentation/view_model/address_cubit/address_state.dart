@@ -34,3 +34,17 @@ final class DeleteAddressFailure extends AddressState {
 
   const DeleteAddressFailure(this.errMessage);
 }
+
+final class DefaultAddressLoading extends AddressState {}
+
+final class DefaultAddressFailure extends AddressState {
+  final String errMessage;
+
+  const DefaultAddressFailure(this.errMessage);
+}
+
+final class DefaultAddressSuccess extends AddressState {
+  final String successMessage;
+
+  const DefaultAddressSuccess(this.successMessage);
+}

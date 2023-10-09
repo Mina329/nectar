@@ -4,7 +4,7 @@ import 'package:nectar/features/delivery_address/data/repos/delivery_address_rep
 
 import '../../../../../core/cache/cache_helper.dart';
 import '../../../../../core/cache/cache_keys_values.dart';
-import '../../../../account/data/models/account_model/account_model/address.dart';
+import '../../../../account/data/models/account_model/address.dart';
 import '../../../data/models/address_model/address_model.dart';
 
 part 'delivery_address_state.dart';
@@ -26,9 +26,11 @@ class DeliveryAddressCubit extends Cubit<DeliveryAddressState> {
               ? "ar"
               : "en");
       result.fold((failure) => null, (placemark) {
-        addressesData.add(
+        addressesData.insert(
+          0,
           AddressModel(
             id: address.id,
+            isDefault: address.isDefault,
             appartmentNumber: address.apartmentNumber,
             buildingNumber: address.buildingNumber,
             floor: address.floorNumber,
@@ -61,8 +63,10 @@ class DeliveryAddressCubit extends Cubit<DeliveryAddressState> {
             ? "ar"
             : "en");
     result.fold((failure) => null, (placemark) {
-      addressesData.add(
+      addressesData.insert(
+        0,
         AddressModel(
+          isDefault: false,
           id: id,
           appartmentNumber: apartmentNumber,
           buildingNumber: buildingNumber,

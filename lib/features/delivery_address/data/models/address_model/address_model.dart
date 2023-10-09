@@ -6,9 +6,11 @@ class AddressModel {
   final String? buildingNumber;
   final String? floor;
   final String? appartmentNumber;
+  final bool? isDefault;
 
   AddressModel(
-      {required this.id,
+      {required this.isDefault,
+      required this.id,
       required this.district,
       required this.gorvernorate,
       required this.street,
