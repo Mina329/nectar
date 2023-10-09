@@ -9,16 +9,21 @@ sealed class CategoryItemsState extends Equatable {
 
 final class CategoryItemsInitial extends CategoryItemsState {}
 
-final class CategoryItemsLoading extends CategoryItemsState {}
+final class CategoryItemsLoaded extends CategoryItemsState {
+  final List<ThumbnailGroceryItemModel> items;
+
+  const CategoryItemsLoaded(this.items);
+}
+
+final class CategoryItemsLoading extends CategoryItemsState {
+  final List<ThumbnailGroceryItemModel> oldItems;
+  final bool isFirstFetch;
+
+  const CategoryItemsLoading(this.oldItems, {required this.isFirstFetch});
+}
 
 final class CategoryItemsFailure extends CategoryItemsState {
   final String errMessage;
 
   const CategoryItemsFailure(this.errMessage);
-}
-
-final class CategoryItemsSuccess extends CategoryItemsState {
-  final List<ThumbnailGroceryItemModel> categoryItems;
-
-  const CategoryItemsSuccess(this.categoryItems);
 }

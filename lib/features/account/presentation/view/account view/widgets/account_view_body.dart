@@ -56,7 +56,11 @@ class AccountViewBody extends StatelessWidget {
                   AccountListItemListView(accountModel: state.account)
                 ],
               );
+            }else if(state is AccountInfoInitial){
+              BlocProvider.of<AccountInfoCubit>(context).getUserProfile();
+              return const AccountShimmer();
             }
+
             return Container();
           },
         ),

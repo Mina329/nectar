@@ -5,6 +5,10 @@ import '../models/category_model/category_model.dart';
 
 abstract class ExploreRepo {
   Future<Either<Failure, List<CategoryModel>>> fetchCategories();
-  Future<Either<Failure, List<ThumbnailGroceryItemModel>>> fetchCategoryItems(
-      String categoryId);
+  Future<Either<Failure, List<ThumbnailGroceryItemModel>>>
+      fetchCategoryGroceryItems({
+    required String page,
+    required String perPage,
+    required String categoryId,
+  });
 }

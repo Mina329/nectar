@@ -17,7 +17,7 @@ class GroceriesSectionCubit extends Cubit<GroceriesSectionState> {
       first = false;
     }
     var result = await shopRepo.fetchAllGroceryItems(
-        language: language, orderBy: null, perPage: "20", page: "1");
+        orderBy: null, perPage: "20", page: "1");
     result.fold(
       (failure) {
         emit(

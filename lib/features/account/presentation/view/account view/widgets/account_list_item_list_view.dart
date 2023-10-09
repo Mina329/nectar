@@ -17,24 +17,20 @@ class AccountListItemListView extends StatelessWidget {
     StringsManager.orders.tr(),
     StringsManager.myDetails.tr(),
     StringsManager.deliveryAddress.tr(),
-    StringsManager.paymentMethod.tr(),
     StringsManager.about.tr(),
   ];
   final List<IconData?> iconsList = [
     Icons.shopping_bag_outlined,
     FontAwesomeIcons.addressCard,
     Icons.location_on_outlined,
-    Icons.payment,
     Icons.error_outline
   ];
   final List<String> routerList = [
     AppRouter.kOrdersView,
     AppRouter.kMyDetailsView,
     AppRouter.kDeliveryAddressView,
-    AppRouter.kPaymentMethodView,
     AppRouter.kAboutView,
   ];
-  late final List<Object?> extras;
   final AccountModel accountModel;
 
   @override

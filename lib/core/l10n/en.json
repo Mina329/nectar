@@ -41,7 +41,7 @@
   "checkout": "Checkout",
   "selectMethod": "Select Method",
   "termsAndConditions": "By placing an order you agree to our Terms And Conditions",
-  "placeOrder": "Place Order",
+  "placeOrder": "Go To Payment",
   "email": "Email",
   "phoneNumber": "Phone Number",
   "firstName": "First Name",
@@ -96,5 +96,5 @@
   "currency": "£",
   "success": "Operation was successful",
   "delete": "Delete",
-  "swipe" : "Swipe to Delete"
+  "swipe": "Swipe to Delete"
 }

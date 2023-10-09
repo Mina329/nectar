@@ -11,9 +11,7 @@ _$_GroceryItemModel _$$_GroceryItemModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String?,
       categoryId: json['categoryId'] as String?,
       brandId: json['brandId'] as String?,
-      name: json['name'] as String?,
       thumbnail: json['thumbnail'] as String?,
-      description: json['description'] as String?,
       price: (json['price'] as num?)?.toDouble(),
       offerPrice: (json['offerPrice'] as num?)?.toDouble(),
       qty: json['qty'] as int?,
@@ -30,6 +28,8 @@ _$_GroceryItemModel _$$_GroceryItemModelFromJson(Map<String, dynamic> json) =>
       reviews: (json['reviews'] as List<dynamic>?)
           ?.map((e) => Review.fromJson(e as Map<String, dynamic>))
           .toList(),
+      name: json['name'] as String?,
+      description: json['description'] as String?,
       isFavorite: json['isFavorite'] as bool?,
     );
 
@@ -38,9 +38,7 @@ Map<String, dynamic> _$$_GroceryItemModelToJson(_$_GroceryItemModel instance) =>
       'id': instance.id,
       'categoryId': instance.categoryId,
       'brandId': instance.brandId,
-      'name': instance.name,
       'thumbnail': instance.thumbnail,
-      'description': instance.description,
       'price': instance.price,
       'offerPrice': instance.offerPrice,
       'qty': instance.qty,
@@ -49,5 +47,7 @@ Map<String, dynamic> _$$_GroceryItemModelToJson(_$_GroceryItemModel instance) =>
       'category': instance.category,
       'images': instance.images,
       'reviews': instance.reviews,
+      'name': instance.name,
+      'description': instance.description,
       'isFavorite': instance.isFavorite,
     };

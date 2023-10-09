@@ -9,3 +9,8 @@ class ShopView extends StatelessWidget {
     return const ShopViewBody();
   }
 }
+enum SectionType{
+  bestSelling,
+  exclusiveOffer,
+  groceries
+}

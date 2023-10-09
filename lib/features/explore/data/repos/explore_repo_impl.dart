@@ -38,21 +38,26 @@ class ExploreRepoImpl extends ExploreRepo {
   }
 
   @override
-  Future<Either<Failure, List<ThumbnailGroceryItemModel>>> fetchCategoryItems(
-      String categoryId) async {
+  Future<Either<Failure, List<ThumbnailGroceryItemModel>>>
+      fetchCategoryGroceryItems({
+    required String page,
+    required String perPage,
+    required String categoryId,
+  }) async {
     try {
       var data = await _apiService.get(
-          endPoint: "api/v1/categories/$categoryId/items?");
-      List<ThumbnailGroceryItemModel> categoryItems = [];
-      for (var item in data["data"]) {
-        categoryItems.add(ThumbnailGroceryItemModel.fromJson(item));
+          endPoint:
+              'api/v1/items?page=$page&perPage=$perPage&category=$categoryId&');
+      List<ThumbnailGroceryItemModel> items = [];
+      for (var item in data['data']['items']) {
+        items.add(ThumbnailGroceryItemModel.fromJson(item));
       }
-      return right(categoryItems);
+      return right(items);
     } catch (e) {
       if (e is DioException) {
         return left(
-          ServerFailure.fromDioException(
-            e,
+          ServerFailure(
+            e.response!.data['message'],
           ),
         );
       }

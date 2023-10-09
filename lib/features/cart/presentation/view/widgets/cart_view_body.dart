@@ -91,11 +91,6 @@ class CartViewBody extends StatelessWidget {
             onTap: () {},
           ),
           CheckoutSheetItem(
-            title: StringsManager.paymentMethod.tr(),
-            func: const Icon(Icons.payment),
-            onTap: () {},
-          ),
-          CheckoutSheetItem(
             title: StringsManager.totalPrice.tr(),
             func: Text(
               "\$15",

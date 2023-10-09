@@ -16,9 +16,7 @@ import 'package:nectar/features/explore/presentation/view/category%20details%20v
 import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/my_details/data/repos/my_details_repo.dart';
 import 'package:nectar/features/my_details/presentation/view%20model/my_details_cubit/my_details_cubit.dart';
-import 'package:nectar/features/shop/presentation/view%20model/groceries_section_details_cubit/groceries_section_details_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/item_details_cubit/item_details_cubit.dart';
-import 'package:nectar/features/shop/presentation/view/groceries%20section%20view/groceries_section_view.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
 import '../../features/account/data/models/account_item_list_navigation_model/account_item_list_navigation_model.dart';
 import '../../features/account/presentation/view/about view/about_view.dart';
@@ -36,14 +34,12 @@ import '../../features/favourite/data/models/favourite_to_details_model.dart';
 import '../../features/my_details/presentation/view/my_details_view.dart';
 import '../../features/orders/presentation/view/orders_view.dart';
 import '../../features/onboarding/presentation/view/onboarding_view.dart';
-import '../../features/payment_method/presentation/view/payment_method_view.dart';
 import '../../features/shop/data/repos/shop_repo.dart';
-import '../../features/shop/presentation/view model/best_selling_details_cubit/best_selling_details_cubit.dart';
-import '../../features/shop/presentation/view model/exclusive_offer_details_cubit/exclusive_offer_details_cubit.dart';
 import '../../features/shop/presentation/view model/favourite_cubit/favourite_cubit.dart';
-import '../../features/shop/presentation/view/best selling view/best_selling_view.dart';
-import '../../features/shop/presentation/view/exclusive offer view/exclusive_offer_view.dart';
+import '../../features/shop/presentation/view model/section_details_cubit/section_details_cubit.dart';
 import '../../features/shop/presentation/view/item details view/item_details_view.dart';
+import '../../features/shop/presentation/view/section view/section_view.dart';
+import '../../features/shop/presentation/view/shop view/shop_view.dart';
 import '../cache/cache_helper.dart';
 import '../cache/cache_keys_values.dart';
 
@@ -60,14 +56,11 @@ abstract class AppRouter {
   static const kGoogleMapView = "/googleMapView";
   static const kAddressConfirmView = "/addressConfirmView";
   static const kSearchAddressView = "/searchAddressView";
-  static const kPaymentMethodView = "/paymentMethodView";
   static const kAboutView = "/aboutView";
   static const kLoginView = "/loginView";
   static const kPhoneAuthView = "/phoneAuthView";
   static const kPhoneVerifyView = "/phoneVerifyView";
-  static const kExclusiveOfferView = "/exclusiveOfferView";
-  static const kBestSellingView = "/bestSellingView";
-  static const kGroceriesSectionView = "/groceriesSectionView";
+  static const kSectionView = "/sectionView";
 
   static final router = GoRouter(
     routes: [
@@ -133,7 +126,7 @@ abstract class AppRouter {
             BlocProvider(
               create: (context) => CategoryItemsCubit(
                 getIt.get<ExploreRepo>(),
-              )..fetchCategoryItems(category.id!),
+              )..loadItems(category.id!),
               child: CategoryDetailsView(
                 category: category,
               ),
@@ -287,13 +280,7 @@ abstract class AppRouter {
           );
         },
       ),
-      GoRoute(
-        path: kPaymentMethodView,
-        pageBuilder: (context, state) => screenTransition(
-          state,
-          const PaymentMethodView(),
-        ),
-      ),
+      
       GoRoute(
         path: kAboutView,
         pageBuilder: (context, state) => screenTransition(
@@ -330,41 +317,18 @@ abstract class AppRouter {
         ),
       ),
       GoRoute(
-        path: kExclusiveOfferView,
-        pageBuilder: (context, state) => screenTransition(
-          state,
-          BlocProvider(
-            create: (context) => ExclusiveOfferDetailsCubit(
-              getIt.get<ShopRepo>(),
-            ),
-            child: const ExclusiveOfferView(),
-          ),
-        ),
-      ),
-      GoRoute(
-        path: kBestSellingView,
-        pageBuilder: (context, state) => screenTransition(
-          state,
-          BlocProvider(
-            create: (context) => BestSellingDetailsCubit(
-              getIt.get<ShopRepo>(),
-            ),
-            child: const BestSellingView(),
-          ),
-        ),
-      ),
-      GoRoute(
-        path: kGroceriesSectionView,
-        pageBuilder: (context, state) => screenTransition(
-          state,
-          BlocProvider(
-            create: (context) => GroceriesSectionDetailsCubit(
-              getIt.get<ShopRepo>(),
-            ),
-            child: const GroceriesSectionView(),
-          ),
-        ),
-      ),
+          path: kSectionView,
+          pageBuilder: (context, state) {
+            SectionType type = state.extra as SectionType;
+            return screenTransition(
+              state,
+              BlocProvider(
+                create: (context) =>
+                    SectionDetailsCubit(getIt.get<ShopRepo>(), type),
+                child: const SectionView(),
+              ),
+            );
+          }),
     ],
   );
 }

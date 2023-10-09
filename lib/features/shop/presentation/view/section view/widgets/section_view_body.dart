@@ -1,32 +1,28 @@
 import 'dart:async';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:nectar/features/shop/presentation/view%20model/section_details_cubit/section_details_cubit.dart';
 
-import '../../../../../../core/cache/cache_helper.dart';
-import '../../../../../../core/cache/cache_keys_values.dart';
-import '../../../../../../core/utils/strings_manager.dart';
+import '../../../../../../core/utils/assets_manager.dart';
+import '../../../../../../core/widgets/custom_empty_widget.dart';
 import '../../../../../../core/widgets/custom_loading_indicator.dart';
+import '../../../../../../core/widgets/custom_toast_widget.dart';
 import '../../../../../explore/presentation/view/category details view/widgets/custom_category_app_bar.dart';
 import '../../../../../explore/presentation/view/category details view/widgets/grocery_item_grid_view.dart';
 import '../../../../data/models/thumbnail_grocery_item_model/thumbnail_grocery_item_model/thumbnail_grocery_item_model.dart';
-import '../../../view model/best_selling_details_cubit/best_selling_details_cubit.dart';
 import '../../shop view/widgets/grocery_item.dart';
 
-class BestSellingViewBody extends StatelessWidget {
-  BestSellingViewBody({super.key});
+class SectionViewBody extends StatelessWidget {
+  SectionViewBody({super.key});
   final ScrollController scrollController = ScrollController();
   void setupScrollController(context) {
     scrollController.addListener(() {
       if (scrollController.position.atEdge) {
         if (scrollController.position.pixels != 0) {
-          BlocProvider.of<BestSellingDetailsCubit>(context).loadItems(
-            CacheData.getData(key: CacheKeys.kLANGUAGE) == CacheValues.ARABIC
-                ? "ar"
-                : "en",
-          );
+          BlocProvider.of<SectionDetailsCubit>(context).loadItems();
         }
       }
     });
@@ -35,17 +31,15 @@ class BestSellingViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     setupScrollController(context);
-    BlocProvider.of<BestSellingDetailsCubit>(context).loadItems(
-      CacheData.getData(key: CacheKeys.kLANGUAGE) == CacheValues.ARABIC
-          ? "ar"
-          : "en",
-    );
+    BlocProvider.of<SectionDetailsCubit>(context).loadItems();
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          CustomCategoryAppBar(title: StringsManager.bestSelling.tr()),
+          CustomCategoryAppBar(
+              title: BlocProvider.of<SectionDetailsCubit>(context).sectionName[
+                  BlocProvider.of<SectionDetailsCubit>(context).sectionType]),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.w),
@@ -54,19 +48,42 @@ class BestSellingViewBody extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 physics: const BouncingScrollPhysics(),
                 slivers: [
-                  BlocBuilder<BestSellingDetailsCubit, BestSellingDetailsState>(
+                  BlocBuilder<SectionDetailsCubit, SectionDetailsState>(
                     builder: (context, state) {
-                      if (state is BestSellingDetailsLoading &&
+                      if (state is SectionDetailsFailure) {
+                        CustomToastWidget.buildCustomToast(context,
+                            state.errMessage, ToastType.failure, 200.h);
+                        return SliverToBoxAdapter(
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Center(
+                              child: SvgPicture.asset(
+                                AssetsManager.error,
+                                width: 300.w,
+                                height: 500.h,
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                      if (state is SectionDetailsLoading &&
                           state.isFirstFetch) {
                         return const ItemGridShimmer();
                       }
                       List<ThumbnailGroceryItemModel> items = [];
                       bool isloading = false;
-                      if (state is BestSellingDetailsLoading) {
+                      if (state is SectionDetailsLoading) {
                         items = state.oldItems;
                         isloading = true;
-                      } else if (state is BestSellingDetailsLoaded) {
+                      } else if (state is SectionDetailsSuccess) {
                         items = state.items;
+                      }
+                      if (items.isEmpty) {
+                        return const SliverFillRemaining(
+                          child: Center(
+                            child: CustomEmptyWidget(),
+                          ),
+                        );
                       }
                       return SliverGrid(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

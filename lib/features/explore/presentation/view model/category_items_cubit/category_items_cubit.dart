@@ -1,5 +1,5 @@
+import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../shop/data/models/thumbnail_grocery_item_model/thumbnail_grocery_item_model/thumbnail_grocery_item_model.dart';
 import '../../../data/repos/explore_repo.dart';
@@ -7,26 +7,36 @@ import '../../../data/repos/explore_repo.dart';
 part 'category_items_state.dart';
 
 class CategoryItemsCubit extends Cubit<CategoryItemsState> {
-  CategoryItemsCubit(this.exploreRepo) : super(CategoryItemsInitial());
-  final ExploreRepo exploreRepo;
-  bool first = true;
-  Future<void> fetchCategoryItems(String id) async {
-    if (first) {
-      emit(CategoryItemsLoading());
-      first = false;
+  CategoryItemsCubit(this._exploreRepo) : super(CategoryItemsInitial());
+  final ExploreRepo _exploreRepo;
+  int page = 1;
+
+  Future<void> loadItems(String categoryId) async {
+    if (state is CategoryItemsLoading) return;
+    final currentState = state;
+    List<ThumbnailGroceryItemModel> oldItems = [];
+    if (currentState is CategoryItemsLoaded) {
+      oldItems = currentState.items;
     }
-    var result = await exploreRepo.fetchCategoryItems(id);
-    result.fold(
-      (failure) => emit(
-        CategoryItemsFailure(
-          failure.errMessage,
-        ),
-      ),
-      (categoryItems) => emit(
-        CategoryItemsSuccess(
-          categoryItems,
-        ),
-      ),
+    emit(
+      CategoryItemsLoading(oldItems, isFirstFetch: page == 1),
     );
+    var result = await _exploreRepo.fetchCategoryGroceryItems(
+        page: "$page", perPage: "15", categoryId: categoryId);
+    result.fold(
+        (failure) => emit(
+              CategoryItemsFailure(
+                failure.errMessage,
+              ),
+            ), (newItems) {
+      page++;
+      final items = (state as CategoryItemsLoading).oldItems;
+      items.addAll(newItems);
+      emit(
+        CategoryItemsLoaded(
+          items,
+        ),
+      );
+    });
   }
 }

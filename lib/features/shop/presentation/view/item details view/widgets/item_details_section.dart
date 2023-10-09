@@ -25,7 +25,7 @@ class ItemDetailsSection extends StatelessWidget {
               quantity: item.qtyType ?? '',
               favourite: item.isFavorite,
               offerPrice: item.offerPrice,
-              category: item.category?.name,
+              category: item.category?.details?[0].name,
             ),
             const Divider(),
             ItemProductDetail(description: item.description),

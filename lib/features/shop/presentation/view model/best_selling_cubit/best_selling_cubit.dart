@@ -16,7 +16,7 @@ class BestSellingCubit extends Cubit<BestSellingState> {
       first = false;
     }
     var result = await shopRepo.fetchAllGroceryItems(
-        language: language, orderBy: "orderCount", perPage: "20", page: "1");
+        orderBy: "orderCount", perPage: "20", page: "1");
     result.fold((failure) {
       emit(
         BestSellingFailure(

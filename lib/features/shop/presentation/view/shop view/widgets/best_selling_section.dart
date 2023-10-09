@@ -10,6 +10,7 @@ import '../../../../../../core/l10n/locales.dart';
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/strings_manager.dart';
+import '../shop_view.dart';
 import 'grocery_item.dart';
 
 class BestSellingSection extends StatelessWidget {
@@ -40,9 +41,8 @@ class BestSellingSection extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        GoRouter.of(context).push(
-                          AppRouter.kBestSellingView,
-                        );
+                        GoRouter.of(context).push(AppRouter.kSectionView,
+                            extra: SectionType.bestSelling);
                       },
                       child: Text(
                         StringsManager.seeAll.tr(),

@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nectar/core/widgets/item_shimmer.dart';
 import 'package:nectar/features/explore/presentation/view%20model/categories_cubit/categories_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/groceries_section_cubit/groceries_section_cubit.dart';
+import 'package:nectar/features/shop/presentation/view/shop%20view/shop_view.dart';
 
 import '../../../../../../core/l10n/locales.dart';
 import '../../../../../../core/utils/app_router.dart';
@@ -143,9 +144,8 @@ class GroceriesSection extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
-                              GoRouter.of(context).push(
-                                AppRouter.kGroceriesSectionView,
-                              );
+                              GoRouter.of(context).push(AppRouter.kSectionView,
+                                  extra: SectionType.groceries);
                             },
                             child: Text(
                               StringsManager.seeAll.tr(),

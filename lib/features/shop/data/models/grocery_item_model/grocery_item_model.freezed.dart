@@ -23,9 +23,7 @@ mixin _$GroceryItemModel {
   String? get id => throw _privateConstructorUsedError;
   String? get categoryId => throw _privateConstructorUsedError;
   String? get brandId => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
   double? get offerPrice => throw _privateConstructorUsedError;
   int? get qty => throw _privateConstructorUsedError;
@@ -34,6 +32,8 @@ mixin _$GroceryItemModel {
   Category? get category => throw _privateConstructorUsedError;
   List<Image>? get images => throw _privateConstructorUsedError;
   List<Review>? get reviews => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   bool? get isFavorite => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,9 +52,7 @@ abstract class $GroceryItemModelCopyWith<$Res> {
       {String? id,
       String? categoryId,
       String? brandId,
-      String? name,
       String? thumbnail,
-      String? description,
       double? price,
       double? offerPrice,
       int? qty,
@@ -63,6 +61,8 @@ abstract class $GroceryItemModelCopyWith<$Res> {
       Category? category,
       List<Image>? images,
       List<Review>? reviews,
+      String? name,
+      String? description,
       bool? isFavorite});
 
   $BrandCopyWith<$Res>? get brand;
@@ -85,9 +85,7 @@ class _$GroceryItemModelCopyWithImpl<$Res, $Val extends GroceryItemModel>
     Object? id = freezed,
     Object? categoryId = freezed,
     Object? brandId = freezed,
-    Object? name = freezed,
     Object? thumbnail = freezed,
-    Object? description = freezed,
     Object? price = freezed,
     Object? offerPrice = freezed,
     Object? qty = freezed,
@@ -96,6 +94,8 @@ class _$GroceryItemModelCopyWithImpl<$Res, $Val extends GroceryItemModel>
     Object? category = freezed,
     Object? images = freezed,
     Object? reviews = freezed,
+    Object? name = freezed,
+    Object? description = freezed,
     Object? isFavorite = freezed,
   }) {
     return _then(_value.copyWith(
@@ -111,17 +111,9 @@ class _$GroceryItemModelCopyWithImpl<$Res, $Val extends GroceryItemModel>
           ? _value.brandId
           : brandId // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
       thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
               as String?,
       price: freezed == price
           ? _value.price
@@ -155,6 +147,14 @@ class _$GroceryItemModelCopyWithImpl<$Res, $Val extends GroceryItemModel>
           ? _value.reviews
           : reviews // ignore: cast_nullable_to_non_nullable
               as List<Review>?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
       isFavorite: freezed == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
@@ -199,9 +199,7 @@ abstract class _$$_GroceryItemModelCopyWith<$Res>
       {String? id,
       String? categoryId,
       String? brandId,
-      String? name,
       String? thumbnail,
-      String? description,
       double? price,
       double? offerPrice,
       int? qty,
@@ -210,6 +208,8 @@ abstract class _$$_GroceryItemModelCopyWith<$Res>
       Category? category,
       List<Image>? images,
       List<Review>? reviews,
+      String? name,
+      String? description,
       bool? isFavorite});
 
   @override
@@ -232,9 +232,7 @@ class __$$_GroceryItemModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? categoryId = freezed,
     Object? brandId = freezed,
-    Object? name = freezed,
     Object? thumbnail = freezed,
-    Object? description = freezed,
     Object? price = freezed,
     Object? offerPrice = freezed,
     Object? qty = freezed,
@@ -243,6 +241,8 @@ class __$$_GroceryItemModelCopyWithImpl<$Res>
     Object? category = freezed,
     Object? images = freezed,
     Object? reviews = freezed,
+    Object? name = freezed,
+    Object? description = freezed,
     Object? isFavorite = freezed,
   }) {
     return _then(_$_GroceryItemModel(
@@ -258,17 +258,9 @@ class __$$_GroceryItemModelCopyWithImpl<$Res>
           ? _value.brandId
           : brandId // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
       thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
               as String?,
       price: freezed == price
           ? _value.price
@@ -302,6 +294,14 @@ class __$$_GroceryItemModelCopyWithImpl<$Res>
           ? _value._reviews
           : reviews // ignore: cast_nullable_to_non_nullable
               as List<Review>?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
       isFavorite: freezed == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
@@ -317,9 +317,7 @@ class _$_GroceryItemModel implements _GroceryItemModel {
       {this.id,
       this.categoryId,
       this.brandId,
-      this.name,
       this.thumbnail,
-      this.description,
       this.price,
       this.offerPrice,
       this.qty,
@@ -328,6 +326,8 @@ class _$_GroceryItemModel implements _GroceryItemModel {
       this.category,
       final List<Image>? images,
       final List<Review>? reviews,
+      this.name,
+      this.description,
       this.isFavorite})
       : _images = images,
         _reviews = reviews;
@@ -342,11 +342,7 @@ class _$_GroceryItemModel implements _GroceryItemModel {
   @override
   final String? brandId;
   @override
-  final String? name;
-  @override
   final String? thumbnail;
-  @override
-  final String? description;
   @override
   final double? price;
   @override
@@ -380,11 +376,15 @@ class _$_GroceryItemModel implements _GroceryItemModel {
   }
 
   @override
+  final String? name;
+  @override
+  final String? description;
+  @override
   final bool? isFavorite;
 
   @override
   String toString() {
-    return 'GroceryItemModel(id: $id, categoryId: $categoryId, brandId: $brandId, name: $name, thumbnail: $thumbnail, description: $description, price: $price, offerPrice: $offerPrice, qty: $qty, qtyType: $qtyType, brand: $brand, category: $category, images: $images, reviews: $reviews, isFavorite: $isFavorite)';
+    return 'GroceryItemModel(id: $id, categoryId: $categoryId, brandId: $brandId, thumbnail: $thumbnail, price: $price, offerPrice: $offerPrice, qty: $qty, qtyType: $qtyType, brand: $brand, category: $category, images: $images, reviews: $reviews, name: $name, description: $description, isFavorite: $isFavorite)';
   }
 
   @override
@@ -396,11 +396,8 @@ class _$_GroceryItemModel implements _GroceryItemModel {
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId) &&
             (identical(other.brandId, brandId) || other.brandId == brandId) &&
-            (identical(other.name, name) || other.name == name) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.offerPrice, offerPrice) ||
                 other.offerPrice == offerPrice) &&
@@ -411,6 +408,9 @@ class _$_GroceryItemModel implements _GroceryItemModel {
                 other.category == category) &&
             const DeepCollectionEquality().equals(other._images, _images) &&
             const DeepCollectionEquality().equals(other._reviews, _reviews) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.isFavorite, isFavorite) ||
                 other.isFavorite == isFavorite));
   }
@@ -422,9 +422,7 @@ class _$_GroceryItemModel implements _GroceryItemModel {
       id,
       categoryId,
       brandId,
-      name,
       thumbnail,
-      description,
       price,
       offerPrice,
       qty,
@@ -433,6 +431,8 @@ class _$_GroceryItemModel implements _GroceryItemModel {
       category,
       const DeepCollectionEquality().hash(_images),
       const DeepCollectionEquality().hash(_reviews),
+      name,
+      description,
       isFavorite);
 
   @JsonKey(ignore: true)
@@ -454,9 +454,7 @@ abstract class _GroceryItemModel implements GroceryItemModel {
       {final String? id,
       final String? categoryId,
       final String? brandId,
-      final String? name,
       final String? thumbnail,
-      final String? description,
       final double? price,
       final double? offerPrice,
       final int? qty,
@@ -465,6 +463,8 @@ abstract class _GroceryItemModel implements GroceryItemModel {
       final Category? category,
       final List<Image>? images,
       final List<Review>? reviews,
+      final String? name,
+      final String? description,
       final bool? isFavorite}) = _$_GroceryItemModel;
 
   factory _GroceryItemModel.fromJson(Map<String, dynamic> json) =
@@ -477,11 +477,7 @@ abstract class _GroceryItemModel implements GroceryItemModel {
   @override
   String? get brandId;
   @override
-  String? get name;
-  @override
   String? get thumbnail;
-  @override
-  String? get description;
   @override
   double? get price;
   @override
@@ -498,6 +494,10 @@ abstract class _GroceryItemModel implements GroceryItemModel {
   List<Image>? get images;
   @override
   List<Review>? get reviews;
+  @override
+  String? get name;
+  @override
+  String? get description;
   @override
   bool? get isFavorite;
   @override

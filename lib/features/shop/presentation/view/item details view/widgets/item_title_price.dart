@@ -75,7 +75,7 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
                     ),
                   if (widget.category != null)
                     Container(
-                      height: 25.h,
+                      height: 35.h,
                       decoration: BoxDecoration(
                         color: ColorManager.green.withOpacity(0.7),
                         borderRadius: const BorderRadius.all(
@@ -87,13 +87,15 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 10.w, vertical: 5.h),
-                        child: Text(
-                          widget.category!,
-                          overflow: TextOverflow.ellipsis,
-                          style:
-                              Theme.of(context).textTheme.labelLarge!.copyWith(
-                                    fontSize: 16.sp,
-                                  ),
+                        child: Center(
+                          child: Text(
+                            widget.category!,
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                                Theme.of(context).textTheme.labelLarge!.copyWith(
+                                      fontSize: 16.sp,
+                                    ),
+                          ),
                         ),
                       ),
                     )

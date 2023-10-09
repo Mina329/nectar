@@ -16,8 +16,7 @@ class ShopRepoImpl extends ShopRepo {
   ShopRepoImpl(this._apiService);
   @override
   Future<Either<Failure, List<ThumbnailGroceryItemModel>>> fetchAllGroceryItems(
-      {required String language,
-      required String? orderBy,
+      {required String? orderBy,
       required String page,
       required String perPage}) async {
     try {
@@ -51,8 +50,7 @@ class ShopRepoImpl extends ShopRepo {
     required String language,
   }) async {
     try {
-      var data =
-          await _apiService.get(endPoint: "api/v1/items/$id?");
+      var data = await _apiService.get(endPoint: "api/v1/items/$id?");
 
       return right(GroceryItemModel.fromJson(data['data']));
     } catch (e) {

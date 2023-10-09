@@ -9,6 +9,7 @@ import 'package:nectar/features/shop/presentation/view%20model/exclusive_offers_
 import 'package:nectar/features/shop/presentation/view/shop%20view/widgets/sections_shimmer.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/strings_manager.dart';
+import '../shop_view.dart';
 import 'grocery_item.dart';
 
 class ExclusiveOfferSection extends StatelessWidget {
@@ -42,9 +43,8 @@ class ExclusiveOfferSection extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        GoRouter.of(context).push(
-                          AppRouter.kExclusiveOfferView,
-                        );
+                        GoRouter.of(context).push(AppRouter.kSectionView,
+                            extra: SectionType.exclusiveOffer);
                       },
                       child: Text(
                         StringsManager.seeAll.tr(),

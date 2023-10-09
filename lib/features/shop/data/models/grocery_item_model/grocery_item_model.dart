@@ -14,9 +14,7 @@ class GroceryItemModel with _$GroceryItemModel {
 		String? id,
 		String? categoryId,
 		String? brandId,
-		String? name,
 		String? thumbnail,
-		String? description,
 		double? price,
 		double? offerPrice,
 		int? qty,
@@ -25,6 +23,8 @@ class GroceryItemModel with _$GroceryItemModel {
 		Category? category,
 		List<Image>? images,
 		List<Review>? reviews,
+		String? name,
+		String? description,
 		bool? isFavorite,
 	}) = _GroceryItemModel;
 

@@ -17,7 +17,7 @@ class ExclusiveOffersCubit extends Cubit<ExclusiveOffersState> {
       first = false;
     }
     var result = await shopRepo.fetchAllGroceryItems(
-        language: language, orderBy: "offerPrice", perPage: "20", page: "1");
+        orderBy: "offerPrice", perPage: "20", page: "1");
     result.fold((failure) {
       emit(ExclusiveOffersFailure(failure.errMessage));
     }, (items) {

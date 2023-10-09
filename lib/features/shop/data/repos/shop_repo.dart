@@ -8,8 +8,7 @@ import '../models/thumbnail_grocery_item_model/thumbnail_grocery_item_model/thum
 
 abstract class ShopRepo {
   Future<Either<Failure, List<ThumbnailGroceryItemModel>>> fetchAllGroceryItems(
-      {required String language,
-      required String? orderBy,
+      {required String? orderBy,
       required String perPage,
       required String page});
   Future<Either<Failure, GroceryItemModel>> fetchItemById({
