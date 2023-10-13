@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nectar/features/account/data/repos/account_repo.dart';
 import 'package:nectar/features/account/presentation/view%20model/account_info_cubit/account_info_cubit.dart';
+import 'package:nectar/features/cart/data/repos/cart_repo.dart';
+import 'package:nectar/features/cart/presentation/view%20model/cart_cubit/cart_cubit.dart';
+import 'package:nectar/features/favourite/presentation/view%20model/add_favourite_items_to_cart_cubit/add_favourite_items_to_cart_cubit.dart';
 import 'package:nectar/features/favourite/presentation/view%20model/favourite_items_cubit/favourite_items_cubit.dart';
 import 'package:nectar/features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 import 'package:nectar/features/shop/data/repos/shop_repo.dart';
@@ -16,6 +19,7 @@ import '../../../../core/widgets/custom_navigation_bar.dart';
 import '../../../account/presentation/view/account view/account_view.dart';
 import '../../../auth/data/repos/auth_repo.dart';
 import '../../../auth/presentation/view model/google_auth_cubit/google_auth_cubit.dart';
+import '../../../cart/presentation/view model/cart_items_cubit/cart_items_cubit.dart';
 import '../../../cart/presentation/view/cart_view.dart';
 import '../../../explore/data/repos/explore_repo.dart';
 import '../../../explore/presentation/view model/categories_cubit/categories_cubit.dart';
@@ -38,11 +42,7 @@ class _HomeViewState extends State<HomeView> {
         BlocProvider(
           create: (context) => ExclusiveOffersCubit(
             getIt.get<ShopRepo>(),
-          )..getExclusiveOffersItems(
-              language: CacheData.getData(key: CacheKeys.kLANGUAGE) ==
-                      CacheValues.ARABIC
-                  ? "ar"
-                  : "en"),
+          )..getExclusiveOffersItems(),
         ),
         BlocProvider(
           create: (context) => CategoriesCubit(
@@ -52,20 +52,12 @@ class _HomeViewState extends State<HomeView> {
         BlocProvider(
           create: (context) => GroceriesSectionCubit(
             getIt.get<ShopRepo>(),
-          )..getAllItems(
-              language: CacheData.getData(key: CacheKeys.kLANGUAGE) ==
-                      CacheValues.ARABIC
-                  ? "ar"
-                  : "en"),
+          )..getAllItems(),
         ),
         BlocProvider(
           create: (context) => BestSellingCubit(
             getIt.get<ShopRepo>(),
-          )..getBestSellingItems(
-              language: CacheData.getData(key: CacheKeys.kLANGUAGE) ==
-                      CacheValues.ARABIC
-                  ? "ar"
-                  : "en"),
+          )..getBestSellingItems(),
         ),
         BlocProvider(
           create: (context) => CityCountryCubit(
@@ -74,7 +66,12 @@ class _HomeViewState extends State<HomeView> {
               CacheData.getData(key: CacheKeys.kLANGUAGE) == CacheValues.ARABIC
                   ? "ar"
                   : "en"),
-        )
+        ),
+        BlocProvider(
+          create: (context) => CartItemsCubit(
+            getIt.get<CartRepo>(),
+          ),
+        ),
       ],
       child: const ShopView(),
     ),
@@ -84,11 +81,34 @@ class _HomeViewState extends State<HomeView> {
       )..fetchCategories(),
       child: const ExploreView(),
     ),
-    NavigationBarCart: const CartView(),
-    NavigationBarFavourite: BlocProvider(
-      create: (context) => FavouriteItemsCubit(
-        getIt.get<FavouriteRepo>(),
-      )..getFavouriteItems(),
+    NavigationBarCart: MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => CartCubit(
+            getIt.get<CartRepo>(),
+          )..getCart(),
+        ),
+        BlocProvider(
+          create: (context) => CartItemsCubit(
+            getIt.get<CartRepo>(),
+          ),
+        ),
+      ],
+      child: const CartView(),
+    ),
+    NavigationBarFavourite: MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => FavouriteItemsCubit(
+            getIt.get<FavouriteRepo>(),
+          )..getFavouriteItems(),
+        ),
+        BlocProvider(
+          create: (context) => AddFavouriteItemsToCartCubit(
+            getIt.get<CartRepo>(),
+          ),
+        )
+      ],
       child: const FavouriteView(),
     ),
     NavigationBarAccount: MultiBlocProvider(

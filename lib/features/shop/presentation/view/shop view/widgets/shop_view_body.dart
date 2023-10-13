@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nectar/core/widgets/custom_search_bar.dart';
-import '../../../../../../core/cache/cache_helper.dart';
-import '../../../../../../core/cache/cache_keys_values.dart';
+import 'package:nectar/features/cart/presentation/view%20model/cart_items_cubit/cart_items_cubit.dart';
 import '../../../../../../core/utils/color_manager.dart';
+import '../../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../../explore/presentation/view model/categories_cubit/categories_cubit.dart';
 import '../../../view model/best_selling_cubit/best_selling_cubit.dart';
 import '../../../view model/exclusive_offers_cubit/exclusive_offers_cubit.dart';
@@ -27,22 +28,10 @@ class ShopViewBody extends StatelessWidget {
         edgeOffset: 70,
         onRefresh: () async {
           BlocProvider.of<ExclusiveOffersCubit>(context)
-              .getExclusiveOffersItems(
-                  language: CacheData.getData(key: CacheKeys.kLANGUAGE) ==
-                          CacheValues.ARABIC
-                      ? "ar"
-                      : "en");
+              .getExclusiveOffersItems();
           BlocProvider.of<CategoriesCubit>(context).fetchCategories();
-          BlocProvider.of<GroceriesSectionCubit>(context).getAllItems(
-              language: CacheData.getData(key: CacheKeys.kLANGUAGE) ==
-                      CacheValues.ARABIC
-                  ? "ar"
-                  : "en");
-          BlocProvider.of<BestSellingCubit>(context).getBestSellingItems(
-              language: CacheData.getData(key: CacheKeys.kLANGUAGE) ==
-                      CacheValues.ARABIC
-                  ? "ar"
-                  : "en");
+          BlocProvider.of<GroceriesSectionCubit>(context).getAllItems();
+          BlocProvider.of<BestSellingCubit>(context).getBestSellingItems();
           return Future.delayed(const Duration(seconds: 1));
         },
         child: CustomScrollView(
@@ -55,6 +44,21 @@ class ShopViewBody extends StatelessWidget {
                 height: 20.h,
               ),
             ),
+            BlocListener<CartItemsCubit, CartItemsState>(
+                listener: (context, state) {
+                  if (state is CartItemsLoading) {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return const CustomLoadingIndicator();
+                      },
+                    );
+                  } else {
+                    GoRouter.of(context).pop();
+                  }
+                },
+                child: const SliverToBoxAdapter()),
             const BannerListView(),
             const ExclusiveOfferSection(),
             SliverToBoxAdapter(

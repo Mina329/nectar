@@ -11,13 +11,17 @@ class ExclusiveOffersCubit extends Cubit<ExclusiveOffersState> {
   final ShopRepo shopRepo;
   bool first = true;
 
-  Future<void> getExclusiveOffersItems({required String language}) async {
+  Future<void> getExclusiveOffersItems() async {
     if (first) {
       emit(ExclusiveOffersLoading());
       first = false;
     }
     var result = await shopRepo.fetchAllGroceryItems(
-        orderBy: "offerPrice", perPage: "20", page: "1");
+      filter: 'offerPrice%3E0',
+      orderBy: "offerPrice",
+      perPage: "20",
+      page: "1",
+    );
     result.fold((failure) {
       emit(ExclusiveOffersFailure(failure.errMessage));
     }, (items) {

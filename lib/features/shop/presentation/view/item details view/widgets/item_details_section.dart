@@ -7,8 +7,14 @@ import 'item_reviews_section.dart';
 import 'item_title_price.dart';
 
 class ItemDetailsSection extends StatelessWidget {
-  const ItemDetailsSection({super.key, required this.item});
+  const ItemDetailsSection({
+    super.key,
+    required this.item,
+    required this.onCounterChanged,
+  });
   final GroceryItemModel item;
+  final ValueChanged<int> onCounterChanged;
+
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -19,6 +25,7 @@ class ItemDetailsSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ItemTitlePrice(
+              onCounterChanged: onCounterChanged,
               id: item.id,
               name: item.name,
               price: item.price,

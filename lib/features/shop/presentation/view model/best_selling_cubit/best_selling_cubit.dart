@@ -10,7 +10,7 @@ class BestSellingCubit extends Cubit<BestSellingState> {
   BestSellingCubit(this.shopRepo) : super(BestSellingInitial());
   final ShopRepo shopRepo;
   bool first = true;
-  Future<void> getBestSellingItems({required String language}) async {
+  Future<void> getBestSellingItems() async {
     if (first) {
       emit(BestSellingLoading());
       first = false;

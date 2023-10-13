@@ -68,9 +68,9 @@ class FavouriteItemListView extends StatelessWidget {
                         GoRouter.of(context).push(
                           AppRouter.kItemDetailsView,
                           extra: FavouriteToDetailsModel(
-                            state.favouriteItems[index].id!,
-                            favouriteItemCubit,
-                          ),
+                              state.favouriteItems[index].id!,
+                              favouriteItemCubit,
+                              null),
                         );
                       },
                       child: FavouriteItem(

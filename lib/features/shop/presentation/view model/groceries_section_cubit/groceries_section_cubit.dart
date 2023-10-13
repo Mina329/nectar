@@ -11,7 +11,7 @@ class GroceriesSectionCubit extends Cubit<GroceriesSectionState> {
   final ShopRepo shopRepo;
   bool first = true;
 
-  Future<void> getAllItems({required String language}) async {
+  Future<void> getAllItems() async {
     if (first) {
       emit(GroceriesSectionLoading());
       first = false;

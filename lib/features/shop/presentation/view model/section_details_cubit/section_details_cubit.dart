@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
+import 'package:nectar/core/errors/failure.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 
 import '../../../data/models/thumbnail_grocery_item_model/thumbnail_grocery_item_model/thumbnail_grocery_item_model.dart';
@@ -38,11 +40,22 @@ class SectionDetailsCubit extends Cubit<SectionDetailsState> {
     emit(
       SectionDetailsLoading(oldItems, isFirstFetch: page == 1),
     );
-    var result = await shopRepo.fetchAllGroceryItems(
-      orderBy: orderBy[sectionType],
-      perPage: "15",
-      page: "$page",
-    );
+    Either<Failure, List<ThumbnailGroceryItemModel>> result;
+    if (sectionType == SectionType.exclusiveOffer) {
+      result = await shopRepo.fetchAllGroceryItems(
+        orderBy: null,
+        filter: 'offerPrice%3E0',
+        perPage: "15",
+        page: "$page",
+      );
+    } else {
+      result = await shopRepo.fetchAllGroceryItems(
+        orderBy: orderBy[sectionType],
+        perPage: "15",
+        page: "$page",
+      );
+    }
+
     result.fold(
         (failure) => emit(
               SectionDetailsFailure(

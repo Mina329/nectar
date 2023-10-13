@@ -18,11 +18,12 @@ class ShopRepoImpl extends ShopRepo {
   Future<Either<Failure, List<ThumbnailGroceryItemModel>>> fetchAllGroceryItems(
       {required String? orderBy,
       required String page,
+      String? filter,
       required String perPage}) async {
     try {
       var data = await _apiService.get(
           endPoint:
-              'api/v1/items?${orderBy != null ? '&orderBy=$orderBy' : ''}&page=$page&perPage=$perPage&');
+              'api/v1/items?${orderBy != null ? '&orderBy=$orderBy' : ''}&page=$page&perPage=$perPage&${filter != null ? 'filter=$filter&' : ''}');
       List<ThumbnailGroceryItemModel> items = [];
       for (var item in data['data']['items']) {
         items.add(ThumbnailGroceryItemModel.fromJson(item));

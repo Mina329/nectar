@@ -5,6 +5,8 @@ import 'package:nectar/features/account/data/repos/account_repo.dart';
 import 'package:nectar/features/account/data/repos/account_repo_impl.dart';
 import 'package:nectar/features/auth/data/repos/auth_repo.dart';
 import 'package:nectar/features/auth/data/repos/auth_repo_impl.dart';
+import 'package:nectar/features/cart/data/repos/cart_repo.dart';
+import 'package:nectar/features/cart/data/repos/cart_repo_impl.dart';
 import 'package:nectar/features/delivery_address/data/repos/delivery_address_repo_impl.dart';
 import 'package:nectar/features/explore/data/repos/explore_repo.dart';
 import 'package:nectar/features/explore/data/repos/explore_repo_impl.dart';
@@ -44,5 +46,8 @@ Future<void> setupServiceLocator() async {
   );
   getIt.registerSingleton<MyDetailsRepo>(
     MyDetailsRepoImpl(getIt.get<ApiService>()),
+  );
+  getIt.registerSingleton<CartRepo>(
+    CartRepoImpl(getIt.get<ApiService>()),
   );
 }

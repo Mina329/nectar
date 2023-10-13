@@ -1,11 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/l10n/locales.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/core/widgets/custom_elevated_btn.dart';
 import '../../../../../core/widgets/custom_app_bar.dart';
+import '../../../../../core/widgets/custom_loading_indicator.dart';
+import '../../view model/cart_items_cubit/cart_items_cubit.dart';
 import 'cart_item_list_view.dart';
 import 'cart_total_price.dart';
 import '../../../../../core/widgets/custom_positioned_button.dart';
@@ -26,6 +29,26 @@ class CartViewBody extends StatelessWidget {
             ),
             const SliverToBoxAdapter(
               child: Divider(),
+            ),
+            SliverToBoxAdapter(
+              child: Center(
+                child: BlocListener<CartItemsCubit, CartItemsState>(
+                  listener: (context, state) {
+                    if (state is CartItemsLoading) {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return const CustomLoadingIndicator();
+                        },
+                      );
+                    } else {
+                      GoRouter.of(context).pop();
+                    }
+                  },
+                  child: Container(),
+                ),
+              ),
             ),
             const CartItemListView(),
             SliverToBoxAdapter(

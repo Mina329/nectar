@@ -137,6 +137,7 @@ class ItemDetailsViewShimmers extends StatelessWidget {
                               width: 5.w,
                             ),
                             CustomRoundedSquareWidget(
+                              onTap: null,
                               child: Container(),
                             ),
                             SizedBox(

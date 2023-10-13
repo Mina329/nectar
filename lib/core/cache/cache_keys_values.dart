@@ -3,6 +3,7 @@ class CacheKeys {
   static String kDARKMODE = "darkMode";
   static String kONBOARDING = "firstTime";
   static String kSIGNED = "signed";
+  static String kCARTID = "cartId";
 }
 
 class CacheValues {

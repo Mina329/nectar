@@ -1,5 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nectar/core/utils/strings_manager.dart';
+import 'package:nectar/features/cart/presentation/view%20model/cart_cubit/cart_cubit.dart';
 import '../../../../../core/utils/color_manager.dart';
 
 class CartTotalPrice extends StatelessWidget {
@@ -23,14 +27,11 @@ class CartTotalPrice extends StatelessWidget {
           ),
         ),
         child: Center(
-          child: Text(
-            "\$12.96",
-            style: Theme.of(context)
-                .textTheme
-                .labelLarge!
-                .copyWith(fontSize: 12.sp),
-          ),
-        ),
+            child: Text(
+          "${BlocProvider.of<CartCubit>(context).totalPrice} ${StringsManager.currency.tr()}",
+          style:
+              Theme.of(context).textTheme.labelLarge!.copyWith(fontSize: 12.sp),
+        )),
       ),
     );
   }

@@ -37,6 +37,10 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   await EasyLocalization.ensureInitialized();
+  if (CacheData.getData(key: CacheKeys.kCARTID) == null) {
+    CacheData.setData(
+        key: CacheKeys.kCARTID, value: "fa336f5b-b06e-4111-a210-6cfbe106862f");
+  }
   if (CacheData.getData(key: CacheKeys.kDARKMODE) == null) {
     CacheData.setData(key: CacheKeys.kDARKMODE, value: CacheValues.LIGHT);
   }

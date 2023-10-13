@@ -24,7 +24,9 @@ class ItemTitlePrice extends StatefulWidget {
     this.offerPrice,
     required this.favourite,
     required this.category,
+    required this.onCounterChanged,
   }) : super(key: key);
+  final ValueChanged<int> onCounterChanged;
   final String? id;
   final String? name;
   final String? quantity;
@@ -91,10 +93,12 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
                           child: Text(
                             widget.category!,
                             overflow: TextOverflow.ellipsis,
-                            style:
-                                Theme.of(context).textTheme.labelLarge!.copyWith(
-                                      fontSize: 16.sp,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge!
+                                .copyWith(
+                                  fontSize: 16.sp,
+                                ),
                           ),
                         ),
                       ),
@@ -206,6 +210,7 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
                     setState(() {
                       if (counter > 1) {
                         counter--;
+                        widget.onCounterChanged(counter);
                       }
                     });
                   },
@@ -217,6 +222,7 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
                   ),
                 ),
                 CustomRoundedSquareWidget(
+                  onTap: null,
                   child: Center(
                     child: Text(
                       "$counter",
@@ -228,6 +234,7 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
                   onPressed: () {
                     setState(() {
                       counter++;
+                      widget.onCounterChanged(counter);
                     });
                   },
                   icon: Icon(

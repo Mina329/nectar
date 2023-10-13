@@ -6,13 +6,14 @@ import '../utils/color_manager.dart';
 class CustomAddActionButton extends StatelessWidget {
   const CustomAddActionButton({
     super.key,
+    required this.onTap,
   });
-
+  final Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       heroTag: null,
-      onPressed: () {},
+      onPressed: onTap,
       backgroundColor: Theme.of(context).brightness == Brightness.light
           ? ColorManager.greenPrimary
           : ColorManager.greyLarge,

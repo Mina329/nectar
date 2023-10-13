@@ -23,6 +23,8 @@ import '../../features/account/presentation/view/about view/about_view.dart';
 import '../../features/auth/presentation/view/login view/login_view.dart';
 import '../../features/auth/presentation/view/phone auth view/phone_auth_view.dart';
 import '../../features/auth/presentation/view/phone verify view/phone_verify_view.dart';
+import '../../features/cart/data/repos/cart_repo.dart';
+import '../../features/cart/presentation/view model/cart_items_cubit/cart_items_cubit.dart';
 import '../../features/delivery_address/data/models/address_delivery_navigation_model/address_delivery_navigation_model.dart';
 import '../../features/delivery_address/data/repos/delivery_address_repo.dart';
 import '../../features/delivery_address/presentation/view/delivery address view/delivery_address_view.dart';
@@ -110,9 +112,20 @@ abstract class AppRouter {
                   BlocProvider.value(
                     value: model.favouriteItemsCubit!,
                   ),
+                BlocProvider(
+                  create: (context) => CartItemsCubit(
+                    getIt.get<CartRepo>(),
+                  ),
+                ),
+                if (model.cartCubit != null)
+                  BlocProvider.value(
+                    value: model.cartCubit!,
+                  ),
               ],
               child: ItemDetailsView(
-                  fromFavourite: model.favouriteItemsCubit != null),
+                fromFavourite: model.favouriteItemsCubit != null,
+                fromCart: model.cartCubit != null,
+              ),
             ),
           );
         },
@@ -123,10 +136,19 @@ abstract class AppRouter {
           CategoryModel category = state.extra as CategoryModel;
           return screenTransition(
             state,
-            BlocProvider(
-              create: (context) => CategoryItemsCubit(
-                getIt.get<ExploreRepo>(),
-              )..loadItems(category.id!),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => CartItemsCubit(
+                    getIt.get<CartRepo>(),
+                  ),
+                ),
+                BlocProvider(
+                  create: (context) => CategoryItemsCubit(
+                    getIt.get<ExploreRepo>(),
+                  )..loadItems(category.id!),
+                )
+              ],
               child: CategoryDetailsView(
                 category: category,
               ),
@@ -280,7 +302,6 @@ abstract class AppRouter {
           );
         },
       ),
-      
       GoRoute(
         path: kAboutView,
         pageBuilder: (context, state) => screenTransition(
@@ -322,9 +343,20 @@ abstract class AppRouter {
             SectionType type = state.extra as SectionType;
             return screenTransition(
               state,
-              BlocProvider(
-                create: (context) =>
-                    SectionDetailsCubit(getIt.get<ShopRepo>(), type),
+              MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => CartItemsCubit(
+                      getIt.get<CartRepo>(),
+                    ),
+                  ),
+                  BlocProvider(
+                    create: (context) => SectionDetailsCubit(
+                      getIt.get<ShopRepo>(),
+                      type,
+                    ),
+                  ),
+                ],
                 child: const SectionView(),
               ),
             );

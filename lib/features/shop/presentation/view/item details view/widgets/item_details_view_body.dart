@@ -8,20 +8,30 @@ import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/core/utils/color_manager.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/core/widgets/custom_elevated_btn.dart';
+import 'package:nectar/features/cart/presentation/view%20model/cart_cubit/cart_cubit.dart';
+import 'package:nectar/features/cart/presentation/view%20model/cart_items_cubit/cart_items_cubit.dart';
 import 'package:nectar/features/favourite/presentation/view%20model/favourite_items_cubit/favourite_items_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/item_details_cubit/item_details_cubit.dart';
 import '../../../../../../core/cache/cache_helper.dart';
 import '../../../../../../core/cache/cache_keys_values.dart';
+import '../../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../../../core/widgets/custom_toast_widget.dart';
 import 'item_details_section.dart';
 import 'item_details_view_shimmer.dart';
 import 'item_image_section.dart';
 
 class ItemDetailsViewBody extends StatelessWidget {
-  const ItemDetailsViewBody({super.key, required this.fromFavourite});
+  const ItemDetailsViewBody({
+    super.key,
+    required this.fromFavourite,
+    required this.fromCart,
+  });
   final bool fromFavourite;
+  final bool fromCart;
   @override
   Widget build(BuildContext context) {
+    int counterValue = 1;
+
     return WillPopScope(
       onWillPop: () async {
         if (fromFavourite) {
@@ -89,6 +99,9 @@ class ItemDetailsViewBody extends StatelessWidget {
                       ),
                     ),
                     ItemDetailsSection(
+                      onCounterChanged: (value) {
+                        counterValue = value;
+                      },
                       item: state.item,
                     ),
                     SliverFillRemaining(
@@ -100,10 +113,45 @@ class ItemDetailsViewBody extends StatelessWidget {
                           child: SizedBox(
                             height: 70.h,
                             width: 370.w,
-                            child: CustomElevatedBtn(
-                              onPressed: () {},
-                              txt: StringsManager.addToCart.tr(),
-                              style: Theme.of(context).textTheme.labelLarge!,
+                            child: BlocListener<CartItemsCubit, CartItemsState>(
+                              listener: (context, state) {
+                                if (state is CartItemsLoading) {
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (BuildContext context) {
+                                      return const CustomLoadingIndicator();
+                                    },
+                                  );
+                                } else if (state is AddCartItemsSuccess) {
+                                  GoRouter.of(context).pop();
+                                  CustomToastWidget.buildCustomToast(
+                                      context,
+                                      state.successMessage,
+                                      ToastType.success,
+                                      200.h);
+                                  if (fromCart) {
+                                    BlocProvider.of<CartCubit>(context)
+                                        .getCart();
+                                  }
+                                } else if (state is AddCartItemsFailure) {
+                                  GoRouter.of(context).pop();
+                                  CustomToastWidget.buildCustomToast(
+                                      context,
+                                      state.errMessage,
+                                      ToastType.failure,
+                                      200.h);
+                                }
+                              },
+                              child: CustomElevatedBtn(
+                                onPressed: () {
+                                  BlocProvider.of<CartItemsCubit>(context)
+                                      .addItemsToCart(
+                                          state.item.id!, counterValue);
+                                },
+                                txt: StringsManager.addToCart.tr(),
+                                style: Theme.of(context).textTheme.labelLarge!,
+                              ),
                             ),
                           ),
                         ),

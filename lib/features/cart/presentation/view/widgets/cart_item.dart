@@ -1,13 +1,39 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import '../../../../../core/utils/assets_manager.dart';
 import '../../../../../core/utils/color_manager.dart';
-import '../../../../../core/widgets/custom_rounded_square_widget.dart';
+import '../../../../../core/utils/strings_manager.dart';
+import '../../../../../core/widgets/custom_loading_indicator.dart';
+import 'cart_item_action_buttons.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({super.key});
+  const CartItem({
+    Key? key,
+    required this.id,
+    required this.name,
+    required this.qtyType,
+    required this.qty,
+    required this.price,
+    required this.offerPrice,
+    required this.imageLink,
+    required this.onMinusTap,
+    required this.onPlusTap,
+    required this.oncloseTap,
+  }) : super(key: key);
 
+  final String? id;
+  final String? name;
+  final String? qtyType;
+  final int? qty;
+  final double? price;
+  final double? offerPrice;
+  final String? imageLink;
+  final Function()? onMinusTap;
+  final Function()? onPlusTap;
+  final Function()? oncloseTap;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -42,7 +68,7 @@ class CartItem extends StatelessWidget {
                       SizedBox(
                         height: 10.h,
                       ),
-                      _buildActionButtonsWithPrice(context)
+                      _buildActionButtonsWithPrice(context, id, qty)
                     ],
                   ),
                 )
@@ -58,71 +84,76 @@ class CartItem extends StatelessWidget {
     );
   }
 
-  Image _buildImage() {
-    return Image.asset(
-      "assets/images/banana.png",
-      height: 96.h,
-      width: 100.w,
-    );
+  Widget _buildImage() {
+    return imageLink == null
+        ? Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
+            child: Image.asset(
+              AssetsManager.errorAlt,
+              width: 86.w,
+              height: 90.h,
+            ),
+          )
+        : Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
+            child: CachedNetworkImage(
+              imageUrl: imageLink!,
+              width: 86.w,
+              height: 90.h,
+              errorWidget: (context, url, error) {
+                return Image.asset(
+                  AssetsManager.errorAlt,
+                  width: 86.w,
+                  height: 90.h,
+                );
+              },
+              placeholder: (context, url) => const CustomCircularIndicator(),
+            ),
+          );
   }
 
-  SizedBox _buildActionButtonsWithPrice(BuildContext context) {
+  SizedBox _buildActionButtonsWithPrice(
+      BuildContext context, String? itemId, int? quantity) {
     return SizedBox(
       height: 47.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          _buildActionButtons(context),
-          Text(
-            "\$4.99",
-            style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                  fontFamily: AssetsManager.gilroySemiBold,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18.sp,
+          CartItemActionButtons(
+            quantity: quantity!,
+            onMinusTap: onMinusTap,
+            onPlusTap: onPlusTap,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (offerPrice != 0)
+                Text(
+                  "${offerPrice.toString()} ${StringsManager.currency.tr()}",
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                        fontFamily: AssetsManager.gilroySemiBold,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18.sp,
+                      ),
                 ),
-          )
-        ],
-      ),
-    );
-  }
-
-  SizedBox _buildActionButtons(BuildContext context) {
-    return SizedBox(
-      height: 47.h,
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () {},
-            child: CustomRoundedSquareWidget(
-              child: Icon(
-                FontAwesomeIcons.minus,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? ColorManager.greySmall
-                    : ColorManager.grayOpacity,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 17.w,
-          ),
-          Text(
-            "1",
-            style: Theme.of(context).textTheme.labelMedium,
-          ),
-          SizedBox(
-            width: 17.w,
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: CustomRoundedSquareWidget(
-              child: Icon(
-                FontAwesomeIcons.plus,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? ColorManager.green
-                    : ColorManager.grayOpacity,
-              ),
-            ),
+              Text(
+                "${price != null ? price.toString() : 0} ${StringsManager.currency.tr()}",
+                style: offerPrice == 0
+                    ? Theme.of(context).textTheme.labelMedium!.copyWith(
+                          fontFamily: AssetsManager.gilroySemiBold,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18.sp,
+                        )
+                    : Theme.of(context).textTheme.labelMedium!.copyWith(
+                          fontFamily: AssetsManager.gilroySemiBold,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14.sp,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+              )
+            ],
           ),
         ],
       ),
@@ -131,7 +162,7 @@ class CartItem extends StatelessWidget {
 
   Text _buildQuantity(BuildContext context) {
     return Text(
-      "1kg, Price",
+      qtyType ?? '',
       textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.bodySmall!.copyWith(
           fontFamily: AssetsManager.gilroyMedium, fontWeight: FontWeight.w500),
@@ -142,13 +173,17 @@ class CartItem extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          "Bell Pepper Red",
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.titleSmall,
+        SizedBox(
+          width: 200.w,
+          child: Text(
+            name ?? StringsManager.unavailable.tr(),
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.start,
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
         ),
-        GestureDetector(
-          onTap: () {},
+        InkWell(
+          onTap: oncloseTap,
           child: const Icon(
             Icons.close,
             color: ColorManager.greySmall,
