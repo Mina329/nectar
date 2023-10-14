@@ -19,13 +19,13 @@ import '../../../../core/widgets/custom_navigation_bar.dart';
 import '../../../account/presentation/view/account view/account_view.dart';
 import '../../../auth/data/repos/auth_repo.dart';
 import '../../../auth/presentation/view model/google_auth_cubit/google_auth_cubit.dart';
-import '../../../cart/presentation/view model/cart_items_cubit/cart_items_cubit.dart';
 import '../../../cart/presentation/view/cart_view.dart';
 import '../../../explore/data/repos/explore_repo.dart';
 import '../../../explore/presentation/view model/categories_cubit/categories_cubit.dart';
 import '../../../explore/presentation/view/explore view/explore_view.dart';
 import '../../../favourite/data/repos/favourite_repo.dart';
 import '../../../favourite/presentation/view/favourite_view.dart';
+import '../../../shop/presentation/view model/add_to_cart_cubit/add_to_cart_cubit.dart';
 import '../../../shop/presentation/view/shop view/shop_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -68,10 +68,10 @@ class _HomeViewState extends State<HomeView> {
                   : "en"),
         ),
         BlocProvider(
-          create: (context) => CartItemsCubit(
+          create: (context) => AddToCartCubit(
             getIt.get<CartRepo>(),
           ),
-        ),
+        )
       ],
       child: const ShopView(),
     ),
@@ -87,11 +87,6 @@ class _HomeViewState extends State<HomeView> {
           create: (context) => CartCubit(
             getIt.get<CartRepo>(),
           )..getCart(),
-        ),
-        BlocProvider(
-          create: (context) => CartItemsCubit(
-            getIt.get<CartRepo>(),
-          ),
         ),
       ],
       child: const CartView(),

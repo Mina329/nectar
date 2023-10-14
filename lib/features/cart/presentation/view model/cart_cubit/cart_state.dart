@@ -17,14 +17,8 @@ final class CartFailure extends CartState {
   const CartFailure(this.errMessage);
 }
 
-final class CartSuccess1 extends CartState {
+final class CartSuccess extends CartState {
   final CartModel cart;
 
-  const CartSuccess1(this.cart);
-}
-
-final class CartSuccess2 extends CartState {
-  final CartModel cart;
-
-  const CartSuccess2(this.cart);
+  const CartSuccess(this.cart);
 }

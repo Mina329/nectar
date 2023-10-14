@@ -24,7 +24,6 @@ import '../../features/auth/presentation/view/login view/login_view.dart';
 import '../../features/auth/presentation/view/phone auth view/phone_auth_view.dart';
 import '../../features/auth/presentation/view/phone verify view/phone_verify_view.dart';
 import '../../features/cart/data/repos/cart_repo.dart';
-import '../../features/cart/presentation/view model/cart_items_cubit/cart_items_cubit.dart';
 import '../../features/delivery_address/data/models/address_delivery_navigation_model/address_delivery_navigation_model.dart';
 import '../../features/delivery_address/data/repos/delivery_address_repo.dart';
 import '../../features/delivery_address/presentation/view/delivery address view/delivery_address_view.dart';
@@ -37,6 +36,7 @@ import '../../features/my_details/presentation/view/my_details_view.dart';
 import '../../features/orders/presentation/view/orders_view.dart';
 import '../../features/onboarding/presentation/view/onboarding_view.dart';
 import '../../features/shop/data/repos/shop_repo.dart';
+import '../../features/shop/presentation/view model/add_to_cart_cubit/add_to_cart_cubit.dart';
 import '../../features/shop/presentation/view model/favourite_cubit/favourite_cubit.dart';
 import '../../features/shop/presentation/view model/section_details_cubit/section_details_cubit.dart';
 import '../../features/shop/presentation/view/item details view/item_details_view.dart';
@@ -112,15 +112,15 @@ abstract class AppRouter {
                   BlocProvider.value(
                     value: model.favouriteItemsCubit!,
                   ),
-                BlocProvider(
-                  create: (context) => CartItemsCubit(
-                    getIt.get<CartRepo>(),
-                  ),
-                ),
                 if (model.cartCubit != null)
                   BlocProvider.value(
                     value: model.cartCubit!,
                   ),
+                BlocProvider(
+                  create: (context) => AddToCartCubit(
+                    getIt.get<CartRepo>(),
+                  ),
+                )
               ],
               child: ItemDetailsView(
                 fromFavourite: model.favouriteItemsCubit != null,
@@ -139,14 +139,14 @@ abstract class AppRouter {
             MultiBlocProvider(
               providers: [
                 BlocProvider(
-                  create: (context) => CartItemsCubit(
-                    getIt.get<CartRepo>(),
-                  ),
-                ),
-                BlocProvider(
                   create: (context) => CategoryItemsCubit(
                     getIt.get<ExploreRepo>(),
                   )..loadItems(category.id!),
+                ),
+                BlocProvider(
+                  create: (context) => AddToCartCubit(
+                    getIt.get<CartRepo>(),
+                  ),
                 )
               ],
               child: CategoryDetailsView(
@@ -346,16 +346,16 @@ abstract class AppRouter {
               MultiBlocProvider(
                 providers: [
                   BlocProvider(
-                    create: (context) => CartItemsCubit(
-                      getIt.get<CartRepo>(),
-                    ),
-                  ),
-                  BlocProvider(
                     create: (context) => SectionDetailsCubit(
                       getIt.get<ShopRepo>(),
                       type,
                     ),
                   ),
+                  BlocProvider(
+                    create: (context) => AddToCartCubit(
+                      getIt.get<CartRepo>(),
+                    ),
+                  )
                 ],
                 child: const SectionView(),
               ),

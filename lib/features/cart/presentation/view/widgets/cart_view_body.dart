@@ -2,14 +2,18 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/l10n/locales.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/core/widgets/custom_elevated_btn.dart';
+import 'package:nectar/features/cart/presentation/view%20model/cart_cubit/cart_cubit.dart';
+import '../../../../../core/utils/assets_manager.dart';
 import '../../../../../core/widgets/custom_app_bar.dart';
-import '../../../../../core/widgets/custom_loading_indicator.dart';
-import '../../view model/cart_items_cubit/cart_items_cubit.dart';
+import '../../../../../core/widgets/custom_empty_widget.dart';
+import '../../../../../core/widgets/custom_toast_widget.dart';
 import 'cart_item_list_view.dart';
+import 'cart_item_shimmer.dart';
 import 'cart_total_price.dart';
 import '../../../../../core/widgets/custom_positioned_button.dart';
 import 'checkout_sheet_item.dart';
@@ -30,27 +34,48 @@ class CartViewBody extends StatelessWidget {
             const SliverToBoxAdapter(
               child: Divider(),
             ),
-            SliverToBoxAdapter(
-              child: Center(
-                child: BlocListener<CartItemsCubit, CartItemsState>(
-                  listener: (context, state) {
-                    if (state is CartItemsLoading) {
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (BuildContext context) {
-                          return const CustomLoadingIndicator();
-                        },
-                      );
-                    } else {
-                      GoRouter.of(context).pop();
-                    }
-                  },
-                  child: Container(),
-                ),
-              ),
+            BlocBuilder<CartCubit, CartState>(
+              builder: (context, cartState) {
+                if (cartState is CartLoading) {
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.w),
+                        child: const CartItemShimmer(),
+                      ),
+                      childCount: 10,
+                    ),
+                  );
+                } else if (cartState is CartFailure) {
+                  CustomToastWidget.buildCustomToast(
+                      context, cartState.errMessage, ToastType.failure, 200.h);
+                  return SliverToBoxAdapter(
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(15.h),
+                        child: SvgPicture.asset(
+                          AssetsManager.error,
+                          width: 300.w,
+                          height: 500.h,
+                        ),
+                      ),
+                    ),
+                  );
+                } else if (cartState is CartSuccess) {
+                  if (cartState.cart.items!.isEmpty) {
+                    return const SliverFillRemaining(
+                      child: Center(
+                        child: CustomEmptyWidget(),
+                      ),
+                    );
+                  }
+                  return CartItemListView(
+                    cartModel: cartState.cart,
+                  );
+                }
+                return const SliverToBoxAdapter();
+              },
             ),
-            const CartItemListView(),
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 67.h,

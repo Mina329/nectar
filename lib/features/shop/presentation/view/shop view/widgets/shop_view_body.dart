@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/widgets/custom_search_bar.dart';
-import 'package:nectar/features/cart/presentation/view%20model/cart_items_cubit/cart_items_cubit.dart';
+import 'package:nectar/features/shop/presentation/view%20model/add_to_cart_cubit/add_to_cart_cubit.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../../explore/presentation/view model/categories_cubit/categories_cubit.dart';
@@ -44,21 +44,22 @@ class ShopViewBody extends StatelessWidget {
                 height: 20.h,
               ),
             ),
-            BlocListener<CartItemsCubit, CartItemsState>(
-                listener: (context, state) {
-                  if (state is CartItemsLoading) {
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (BuildContext context) {
-                        return const CustomLoadingIndicator();
-                      },
-                    );
-                  } else {
-                    GoRouter.of(context).pop();
-                  }
-                },
-                child: const SliverToBoxAdapter()),
+            BlocListener<AddToCartCubit, AddToCartState>(
+              listener: (context, state) {
+                if (state is AddToCartLoading) {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (BuildContext context) {
+                      return const CustomLoadingIndicator();
+                    },
+                  );
+                } else {
+                  GoRouter.of(context).pop();
+                }
+              },
+              child: const SliverToBoxAdapter(),
+            ),
             const BannerListView(),
             const ExclusiveOfferSection(),
             SliverToBoxAdapter(

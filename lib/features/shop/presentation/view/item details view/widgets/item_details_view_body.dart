@@ -9,8 +9,8 @@ import 'package:nectar/core/utils/color_manager.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/core/widgets/custom_elevated_btn.dart';
 import 'package:nectar/features/cart/presentation/view%20model/cart_cubit/cart_cubit.dart';
-import 'package:nectar/features/cart/presentation/view%20model/cart_items_cubit/cart_items_cubit.dart';
 import 'package:nectar/features/favourite/presentation/view%20model/favourite_items_cubit/favourite_items_cubit.dart';
+import 'package:nectar/features/shop/presentation/view%20model/add_to_cart_cubit/add_to_cart_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/item_details_cubit/item_details_cubit.dart';
 import '../../../../../../core/cache/cache_helper.dart';
 import '../../../../../../core/cache/cache_keys_values.dart';
@@ -113,9 +113,9 @@ class ItemDetailsViewBody extends StatelessWidget {
                           child: SizedBox(
                             height: 70.h,
                             width: 370.w,
-                            child: BlocListener<CartItemsCubit, CartItemsState>(
+                            child: BlocListener<AddToCartCubit, AddToCartState>(
                               listener: (context, state) {
-                                if (state is CartItemsLoading) {
+                                if (state is AddToCartLoading) {
                                   showDialog(
                                     context: context,
                                     barrierDismissible: false,
@@ -123,31 +123,32 @@ class ItemDetailsViewBody extends StatelessWidget {
                                       return const CustomLoadingIndicator();
                                     },
                                   );
-                                } else if (state is AddCartItemsSuccess) {
+                                } else if (state is AddToCartFailure) {
                                   GoRouter.of(context).pop();
                                   CustomToastWidget.buildCustomToast(
-                                      context,
-                                      state.successMessage,
-                                      ToastType.success,
-                                      200.h);
+                                    context,
+                                    state.errMessage,
+                                    ToastType.failure,
+                                    200.h,
+                                  );
+                                } else if (state is AddToCartSuccess) {
+                                  GoRouter.of(context).pop();
+                                  CustomToastWidget.buildCustomToast(
+                                    context,
+                                    state.successMessage,
+                                    ToastType.success,
+                                    200.h,
+                                  );
                                   if (fromCart) {
                                     BlocProvider.of<CartCubit>(context)
                                         .getCart();
                                   }
-                                } else if (state is AddCartItemsFailure) {
-                                  GoRouter.of(context).pop();
-                                  CustomToastWidget.buildCustomToast(
-                                      context,
-                                      state.errMessage,
-                                      ToastType.failure,
-                                      200.h);
                                 }
                               },
                               child: CustomElevatedBtn(
                                 onPressed: () {
-                                  BlocProvider.of<CartItemsCubit>(context)
-                                      .addItemsToCart(
-                                          state.item.id!, counterValue);
+                                  BlocProvider.of<AddToCartCubit>(context)
+                                      .addToCart(state.item.id!, counterValue);
                                 },
                                 txt: StringsManager.addToCart.tr(),
                                 style: Theme.of(context).textTheme.labelLarge!,

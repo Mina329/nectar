@@ -8,8 +8,8 @@ import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/core/widgets/custom_loading_indicator.dart';
 import 'package:nectar/core/widgets/custom_toast_widget.dart';
-import 'package:nectar/features/cart/presentation/view%20model/cart_items_cubit/cart_items_cubit.dart';
 import 'package:nectar/features/favourite/data/models/favourite_to_details_model.dart';
+import 'package:nectar/features/shop/presentation/view%20model/add_to_cart_cubit/add_to_cart_cubit.dart';
 
 import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';
@@ -163,20 +163,28 @@ class GroceryItem extends StatelessWidget {
                   SizedBox(
                     width: 40.w,
                     height: 40.h,
-                    child: BlocListener<CartItemsCubit, CartItemsState>(
+                    child: BlocListener<AddToCartCubit, AddToCartState>(
                       listener: (context, state) {
-                        if (state is AddCartItemsFailure) {
-                          CustomToastWidget.buildCustomToast(context,
-                              state.errMessage, ToastType.failure, 200.h);
-                        } else if (state is AddCartItemsSuccess) {
-                          CustomToastWidget.buildCustomToast(context,
-                              state.successMessage, ToastType.success, 200.h);
+                        if (state is AddToCartFailure) {
+                          CustomToastWidget.buildCustomToast(
+                            context,
+                            state.errMessage,
+                            ToastType.failure,
+                            200.h,
+                          );
+                        } else if (state is AddToCartSuccess) {
+                          CustomToastWidget.buildCustomToast(
+                            context,
+                            state.successMessage,
+                            ToastType.success,
+                            200.h,
+                          );
                         }
                       },
                       child: CustomAddActionButton(
                         onTap: () {
-                          BlocProvider.of<CartItemsCubit>(context)
-                              .addItemsToCart(id!, 1);
+                          BlocProvider.of<AddToCartCubit>(context)
+                              .addToCart(id!, 1);
                         },
                       ),
                     ),
