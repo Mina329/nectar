@@ -50,6 +50,7 @@ class SectionDetailsCubit extends Cubit<SectionDetailsState> {
       );
     } else {
       result = await shopRepo.fetchAllGroceryItems(
+        filter: null,
         orderBy: orderBy[sectionType],
         perPage: "15",
         page: "$page",

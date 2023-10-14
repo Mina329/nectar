@@ -42,7 +42,7 @@ class _HomeViewState extends State<HomeView> {
         BlocProvider(
           create: (context) => ExclusiveOffersCubit(
             getIt.get<ShopRepo>(),
-          )..getExclusiveOffersItems(),
+          )..getExclusiveOffersItems(filter: null),
         ),
         BlocProvider(
           create: (context) => CategoriesCubit(
@@ -52,12 +52,12 @@ class _HomeViewState extends State<HomeView> {
         BlocProvider(
           create: (context) => GroceriesSectionCubit(
             getIt.get<ShopRepo>(),
-          )..getAllItems(),
+          )..getAllItems(filter: null),
         ),
         BlocProvider(
           create: (context) => BestSellingCubit(
             getIt.get<ShopRepo>(),
-          )..getBestSellingItems(),
+          )..getBestSellingItems(filter: null),
         ),
         BlocProvider(
           create: (context) => CityCountryCubit(
@@ -75,10 +75,19 @@ class _HomeViewState extends State<HomeView> {
       ],
       child: const ShopView(),
     ),
-    NavigationBarExplore: BlocProvider(
-      create: (context) => CategoriesCubit(
-        getIt.get<ExploreRepo>(),
-      )..fetchCategories(),
+    NavigationBarExplore: MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => CategoriesCubit(
+            getIt.get<ExploreRepo>(),
+          )..fetchCategories(),
+        ),
+        BlocProvider(
+          create: (context) => AddToCartCubit(
+            getIt.get<CartRepo>(),
+          ),
+        )
+      ],
       child: const ExploreView(),
     ),
     NavigationBarCart: MultiBlocProvider(

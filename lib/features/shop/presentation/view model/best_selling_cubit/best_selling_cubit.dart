@@ -9,14 +9,14 @@ part 'best_selling_state.dart';
 class BestSellingCubit extends Cubit<BestSellingState> {
   BestSellingCubit(this.shopRepo) : super(BestSellingInitial());
   final ShopRepo shopRepo;
-  bool first = true;
-  Future<void> getBestSellingItems() async {
-    if (first) {
-      emit(BestSellingLoading());
-      first = false;
-    }
+  Future<void> getBestSellingItems({required String? filter}) async {
+    emit(BestSellingLoading());
     var result = await shopRepo.fetchAllGroceryItems(
-        orderBy: "orderCount", perPage: "20", page: "1");
+      filter: filter != null ? "name~$filter" : null,
+      orderBy: "orderCount",
+      perPage: "20",
+      page: "1",
+    );
     result.fold((failure) {
       emit(
         BestSellingFailure(

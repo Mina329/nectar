@@ -11,4 +11,10 @@ abstract class ExploreRepo {
     required String perPage,
     required String categoryId,
   });
+  Future<Either<Failure, List<ThumbnailGroceryItemModel>>>
+      fetchSearchItems({
+    required String page,
+    required String perPage,
+    required String query,
+  });
 }

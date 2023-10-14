@@ -18,7 +18,7 @@ class ShopRepoImpl extends ShopRepo {
   Future<Either<Failure, List<ThumbnailGroceryItemModel>>> fetchAllGroceryItems(
       {required String? orderBy,
       required String page,
-      String? filter,
+      required String? filter,
       required String perPage}) async {
     try {
       var data = await _apiService.get(

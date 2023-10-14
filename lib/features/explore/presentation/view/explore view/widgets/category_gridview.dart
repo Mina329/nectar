@@ -7,9 +7,14 @@ import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/features/explore/presentation/view%20model/categories_cubit/categories_cubit.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../../../core/widgets/custom_empty_widget.dart';
+import '../../../../../../core/widgets/custom_loading_indicator.dart';
+import '../../../../../shop/data/models/thumbnail_grocery_item_model/thumbnail_grocery_item_model/thumbnail_grocery_item_model.dart';
+import '../../../../../shop/presentation/view/shop view/widgets/grocery_item.dart';
+import '../../category details view/widgets/item_grid_shimmer.dart';
 import 'category_item.dart';
 import 'category_shimmer.dart';
 
+// ignore: must_be_immutable
 class CategoryGridView extends StatelessWidget {
   const CategoryGridView({super.key});
 
@@ -68,7 +73,50 @@ class CategoryGridView extends StatelessWidget {
                 ),
               ));
         }
-        return const SliverToBoxAdapter();
+        if (state is SearchItemsLoading && state.isFirstFetch) {
+          return const ItemGridShimmer();
+        }
+        List<ThumbnailGroceryItemModel> items = [];
+        bool isloading = false;
+        if (state is SearchItemsLoading) {
+          items = state.oldItems;
+          isloading = true;
+        } else if (state is SearchItemsSuccess) {
+          items = state.items;
+        }
+
+        if (items.isEmpty) {
+          return const SliverFillRemaining(
+            child: Center(
+              child: CustomEmptyWidget(),
+            ),
+          );
+        }
+        return SliverGrid(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: 173.w / 255.h,
+            crossAxisCount: 2,
+            mainAxisSpacing: 14.h,
+            crossAxisSpacing: 14.w,
+          ),
+          delegate: SliverChildBuilderDelegate(
+            childCount: items.length + (isloading ? 1 : 0),
+            (context, index) {
+              if (index < items.length) {
+                return GroceryItem(
+                  id: items[index].id,
+                  name: items[index].name,
+                  price: items[index].price.toString(),
+                  imageLink: items[index].thumbnail ?? "",
+                  quantity: items[index].qtyType ?? '',
+                  offerPrice: items[index].offerPrice,
+                );
+              } else {
+                return const CustomCircularIndicator();
+              }
+            },
+          ),
+        );
       },
     );
   }

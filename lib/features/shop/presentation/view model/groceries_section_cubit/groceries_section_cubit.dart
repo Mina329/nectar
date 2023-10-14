@@ -9,15 +9,15 @@ part 'groceries_section_state.dart';
 class GroceriesSectionCubit extends Cubit<GroceriesSectionState> {
   GroceriesSectionCubit(this.shopRepo) : super(GroceriesSectionInitial());
   final ShopRepo shopRepo;
-  bool first = true;
 
-  Future<void> getAllItems() async {
-    if (first) {
-      emit(GroceriesSectionLoading());
-      first = false;
-    }
+  Future<void> getAllItems({required String? filter}) async {
+    emit(GroceriesSectionLoading());
     var result = await shopRepo.fetchAllGroceryItems(
-        orderBy: null, perPage: "20", page: "1");
+      filter: filter != null ? "name~$filter" : null,
+      orderBy: null,
+      perPage: "20",
+      page: "1",
+    );
     result.fold(
       (failure) {
         emit(

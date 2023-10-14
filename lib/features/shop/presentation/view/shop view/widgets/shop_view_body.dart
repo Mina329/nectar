@@ -4,9 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/widgets/custom_search_bar.dart';
 import 'package:nectar/features/shop/presentation/view%20model/add_to_cart_cubit/add_to_cart_cubit.dart';
-import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/widgets/custom_loading_indicator.dart';
-import '../../../../../explore/presentation/view model/categories_cubit/categories_cubit.dart';
 import '../../../view model/best_selling_cubit/best_selling_cubit.dart';
 import '../../../view model/exclusive_offers_cubit/exclusive_offers_cubit.dart';
 import '../../../view model/groceries_section_cubit/groceries_section_cubit.dart';
@@ -23,59 +21,57 @@ class ShopViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 25.w),
-      child: RefreshIndicator(
-        color: ColorManager.green,
-        edgeOffset: 70,
-        onRefresh: () async {
-          BlocProvider.of<ExclusiveOffersCubit>(context)
-              .getExclusiveOffersItems();
-          BlocProvider.of<CategoriesCubit>(context).fetchCategories();
-          BlocProvider.of<GroceriesSectionCubit>(context).getAllItems();
-          BlocProvider.of<BestSellingCubit>(context).getBestSellingItems();
-          return Future.delayed(const Duration(seconds: 1));
-        },
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            const CustomShopAppBar(),
-            const CustomSearchBar(),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 20.h,
-              ),
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          const CustomShopAppBar(),
+          CustomSearchBar(
+            onChanged: (p0) {
+              BlocProvider.of<ExclusiveOffersCubit>(context)
+                  .getExclusiveOffersItems(filter: p0);
+              BlocProvider.of<GroceriesSectionCubit>(context)
+                  .getAllItems(filter: p0);
+              BlocProvider.of<BestSellingCubit>(context)
+                  .getBestSellingItems(filter: p0);
+            },
+            flag: false,
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 20.h,
             ),
-            BlocListener<AddToCartCubit, AddToCartState>(
-              listener: (context, state) {
-                if (state is AddToCartLoading) {
-                  showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (BuildContext context) {
-                      return const CustomLoadingIndicator();
-                    },
-                  );
-                } else {
-                  GoRouter.of(context).pop();
-                }
-              },
-              child: const SliverToBoxAdapter(),
+          ),
+          BlocListener<AddToCartCubit, AddToCartState>(
+            listener: (context, state) {
+              if (state is AddToCartLoading) {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) {
+                    return const CustomLoadingIndicator();
+                  },
+                );
+              } else {
+                GoRouter.of(context).pop();
+              }
+            },
+            child: const SliverToBoxAdapter(),
+          ),
+          const BannerListView(),
+          const ExclusiveOfferSection(),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 30.h,
             ),
-            const BannerListView(),
-            const ExclusiveOfferSection(),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 30.h,
-              ),
+          ),
+          const BestSellingSection(),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 30.h,
             ),
-            const BestSellingSection(),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 30.h,
-              ),
-            ),
-            const GroceriesSection()
-          ],
-        ),
+          ),
+          const GroceriesSection()
+        ],
       ),
     );
   }

@@ -19,6 +19,12 @@ class _AddressSearchBarState extends State<AddressSearchBar> {
   final fieldText = TextEditingController();
   bool showSuffixIcon = false;
   @override
+  void dispose() {
+    fieldText.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 105.h,

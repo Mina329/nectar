@@ -22,3 +22,21 @@ final class CategoriesSuccess extends CategoriesState {
 
   const CategoriesSuccess(this.categories);
 }
+
+final class SearchItemsLoading extends CategoriesState {
+  final List<ThumbnailGroceryItemModel> oldItems;
+  final bool isFirstFetch;
+  const SearchItemsLoading(this.oldItems, {required this.isFirstFetch});
+}
+
+final class SearchItemsFailure extends CategoriesState {
+  final String errMessage;
+
+  const SearchItemsFailure(this.errMessage);
+}
+
+final class SearchItemsSuccess extends CategoriesState {
+  final List<ThumbnailGroceryItemModel> items;
+
+  const SearchItemsSuccess(this.items);
+}

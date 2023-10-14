@@ -68,4 +68,34 @@ class ExploreRepoImpl extends ExploreRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, List<ThumbnailGroceryItemModel>>> fetchSearchItems(
+      {required String page,
+      required String perPage,
+      required String query}) async {
+    try {
+      var data = await _apiService.get(
+          endPoint:
+              'api/v1/items?filter=name~$query&page=$page&perPage=$perPage&');
+      List<ThumbnailGroceryItemModel> items = [];
+      for (var item in data['data']['items']) {
+        items.add(ThumbnailGroceryItemModel.fromJson(item));
+      }
+      return right(items);
+    } catch (e) {
+      if (e is DioException) {
+        return left(
+          ServerFailure(
+            e.response!.data['message'],
+          ),
+        );
+      }
+      return left(
+        ServerFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
 }

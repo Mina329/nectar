@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nectar/core/utils/color_manager.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/delivery_address_cubit/delivery_address_cubit.dart';
 import '../../../../../../core/utils/strings_manager.dart';
 import '../../../../../../core/widgets/custom_empty_widget.dart';
@@ -113,6 +114,7 @@ class DeliveryAddressListViewState extends State<DeliveryAddressListView> {
                     ),
                     child: RadioListTile<String>(
                       contentPadding: const EdgeInsets.all(0),
+                      fillColor: const MaterialStatePropertyAll(ColorManager.green),
                       title: DeliveryAddressItem(
                         address: address,
                       ),

@@ -9,15 +9,11 @@ part 'exclusive_offers_state.dart';
 class ExclusiveOffersCubit extends Cubit<ExclusiveOffersState> {
   ExclusiveOffersCubit(this.shopRepo) : super(ExclusiveOffersInitial());
   final ShopRepo shopRepo;
-  bool first = true;
 
-  Future<void> getExclusiveOffersItems() async {
-    if (first) {
-      emit(ExclusiveOffersLoading());
-      first = false;
-    }
+  Future<void> getExclusiveOffersItems({required String? filter}) async {
+    emit(ExclusiveOffersLoading());
     var result = await shopRepo.fetchAllGroceryItems(
-      filter: 'offerPrice%3E0',
+      filter: 'offerPrice%3E0${filter != null ? "%2Cname~$filter" : ""}',
       orderBy: "offerPrice",
       perPage: "20",
       page: "1",
