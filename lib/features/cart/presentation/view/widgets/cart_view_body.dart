@@ -88,13 +88,7 @@ class CartViewBody extends StatelessWidget {
         BlocListener<CheckoutCubit, CheckoutState>(
           listener: (context, state) async {
             if (state is CheckoutLoading) {
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext context) {
-                  return const CustomLoadingIndicator();
-                },
-              );
+              CustomLoadingIndicator.buildLoadingIndicator(context);
             } else if (state is CheckoutFailure) {
               GoRouter.of(context).pop();
               CustomToastWidget.buildCustomToast(

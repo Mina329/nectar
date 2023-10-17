@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../../../../core/utils/color_manager.dart';
+import '../../../../../../core/widgets/custom_toast_widget.dart';
 import '../../../view_model/location_bloc/location_bloc.dart';
 
 class RereshLocationButton extends StatelessWidget {
@@ -44,7 +44,8 @@ class RereshLocationButton extends StatelessWidget {
                 ),
               );
             } else if (state is RefreshMyCurrentLocationFailure) {
-              Fluttertoast.showToast(msg: state.errMessage);
+              CustomToastWidget.buildCustomToast(context,
+                            state.errMessage, ToastType.failure, 200.h);
             }
           },
           child: IconButton(

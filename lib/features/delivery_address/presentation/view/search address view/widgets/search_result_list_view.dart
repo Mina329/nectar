@@ -22,7 +22,7 @@ class SearchResultListView extends StatelessWidget {
             return Expanded(
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) => GestureDetector(
+                itemBuilder: (context, index) => InkWell(
                   onTap: () async {
                     await selectNewLocation(context, state, index);
                   },

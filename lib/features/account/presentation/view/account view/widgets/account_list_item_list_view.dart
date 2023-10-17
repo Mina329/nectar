@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/features/account/data/models/account_item_list_navigation_model/account_item_list_navigation_model.dart';
@@ -35,17 +37,34 @@ class AccountListItemListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        childCount: titleList.length,
-        (context, index) => AccountListItem(
-          leadingIcon: iconsList[index],
-          title: titleList[index],
-          onTap: () {
-            GoRouter.of(context).push(routerList[index],
-                extra: AccountItemListNavigationModel(
-                    BlocProvider.of<AccountInfoCubit>(context), accountModel));
-          },
+    return AnimationLimiter(
+      child: SliverList(
+        delegate: SliverChildBuilderDelegate(
+          childCount: titleList.length,
+          (context, index) => AnimationConfiguration.staggeredList(
+            position: index,
+            duration: const Duration(milliseconds: 375),
+            child: SlideAnimation(
+              horizontalOffset: 50.w,
+              child: FadeInAnimation(
+                child: Column(
+                  children: [
+                    AccountListItem(
+                      leadingIcon: iconsList[index],
+                      title: titleList[index],
+                      onTap: () {
+                        GoRouter.of(context).push(routerList[index],
+                            extra: AccountItemListNavigationModel(
+                                BlocProvider.of<AccountInfoCubit>(context),
+                                accountModel));
+                      },
+                    ),
+                    const Divider()
+                  ],
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );

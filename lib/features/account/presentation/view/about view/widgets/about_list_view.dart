@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 import 'about_item.dart';
 
@@ -23,15 +25,26 @@ class AboutListView extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-          (context, index) => AboutItem(
-                imageUrl: imageUrls[index],
-                name: names[index],
-                email: emails[index],
-                role: roles[index],
-              ),
-          childCount: imageUrls.length),
+    return AnimationLimiter(
+      child: SliverList(
+        delegate: SliverChildBuilderDelegate(
+            (context, index) => AnimationConfiguration.staggeredList(
+                  position: index,
+                  duration: const Duration(milliseconds: 375),
+                  child: SlideAnimation(
+                    verticalOffset: 50.h,
+                    child: FadeInAnimation(
+                      child: AboutItem(
+                        imageUrl: imageUrls[index],
+                        name: names[index],
+                        email: emails[index],
+                        role: roles[index],
+                      ),
+                    ),
+                  ),
+                ),
+            childCount: imageUrls.length),
+      ),
     );
   }
 }

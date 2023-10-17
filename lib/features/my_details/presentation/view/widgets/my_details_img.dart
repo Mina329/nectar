@@ -115,13 +115,7 @@ class _MyDetailsImgState extends State<MyDetailsImg> {
                 child: BlocListener<MyDetailsCubit, MyDetailsState>(
                   listener: (context, state) {
                     if (state is MyDetailsLoading) {
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (BuildContext context) {
-                          return const CustomLoadingIndicator();
-                        },
-                      );
+                      CustomLoadingIndicator.buildLoadingIndicator(context);
                     } else if (state is MyDetailsImgFailure) {
                       GoRouter.of(context).pop();
                       GoRouter.of(context).pop();

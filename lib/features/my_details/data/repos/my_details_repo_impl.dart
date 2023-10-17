@@ -55,7 +55,6 @@ class MyDetailsRepoImpl extends MyDetailsRepo {
       return right(data);
     } catch (e) {
       if (e is DioException) {
-        print(e.toString());
         return left(
           ServerFailure(
             e.toString(),

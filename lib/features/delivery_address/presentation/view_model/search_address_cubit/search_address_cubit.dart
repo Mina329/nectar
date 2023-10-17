@@ -21,7 +21,6 @@ class SearchAddressCubit extends Cubit<SearchAddressState> {
         latitude, longitude, query);
     result.fold(
       (failure) {
-        print(failure.errMessage);
         emit(
           SearchAddressFailure(
             failure.errMessage,

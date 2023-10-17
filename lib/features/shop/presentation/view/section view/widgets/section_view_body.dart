@@ -3,9 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:nectar/features/shop/presentation/view%20model/add_to_cart_cubit/add_to_cart_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/section_details_cubit/section_details_cubit.dart';
 
 import '../../../../../../core/utils/assets_manager.dart';
@@ -87,20 +86,7 @@ class SectionViewBody extends StatelessWidget {
                           ),
                         );
                       }
-                      return BlocListener<AddToCartCubit, AddToCartState>(
-                        listener: (context, state) {
-                          if (state is AddToCartLoading) {
-                            showDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (BuildContext context) {
-                                return const CustomLoadingIndicator();
-                              },
-                            );
-                          } else {
-                            GoRouter.of(context).pop();
-                          }
-                        },
+                      return AnimationLimiter(
                         child: SliverGrid(
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
@@ -113,13 +99,23 @@ class SectionViewBody extends StatelessWidget {
                             childCount: items.length + (isloading ? 1 : 0),
                             (context, index) {
                               if (index < items.length) {
-                                return GroceryItem(
-                                  id: items[index].id,
-                                  name: items[index].name,
-                                  price: items[index].price.toString(),
-                                  imageLink: items[index].thumbnail ?? "",
-                                  quantity: items[index].qtyType ?? '',
-                                  offerPrice: items[index].offerPrice,
+                                return AnimationConfiguration.staggeredGrid(
+                                  columnCount: 2,
+                                  position: index,
+                                  duration: const Duration(milliseconds: 375),
+                                  child: SlideAnimation(
+                                    verticalOffset: 50.h,
+                                    child: FadeInAnimation(
+                                      child: GroceryItem(
+                                        id: items[index].id,
+                                        name: items[index].name,
+                                        price: items[index].price.toString(),
+                                        imageLink: items[index].thumbnail ?? "",
+                                        quantity: items[index].qtyType ?? '',
+                                        offerPrice: items[index].offerPrice,
+                                      ),
+                                    ),
+                                  ),
                                 );
                               } else {
                                 Timer(const Duration(milliseconds: 30), () {

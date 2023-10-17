@@ -56,7 +56,7 @@ class ItemDetailsViewBody extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         GoRouter.of(context).pop();
                       },
@@ -116,13 +116,8 @@ class ItemDetailsViewBody extends StatelessWidget {
                             child: BlocListener<AddToCartCubit, AddToCartState>(
                               listener: (context, state) {
                                 if (state is AddToCartLoading) {
-                                  showDialog(
-                                    context: context,
-                                    barrierDismissible: false,
-                                    builder: (BuildContext context) {
-                                      return const CustomLoadingIndicator();
-                                    },
-                                  );
+                                  CustomLoadingIndicator.buildLoadingIndicator(
+                                      context);
                                 } else if (state is AddToCartFailure) {
                                   GoRouter.of(context).pop();
                                   CustomToastWidget.buildCustomToast(

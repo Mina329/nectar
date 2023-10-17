@@ -15,25 +15,25 @@ class CategoryItem extends StatelessWidget {
   final Color color;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        GoRouter.of(context).push(
-          AppRouter.kCategoryDetailsView,
-          extra: category,
-        );
-      },
-      child: Container(
-        width: 175.w,
-        height: 200.h,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: color.withOpacity(0.7),
-          ),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(15),
-          ),
-          color: color.withOpacity(0.1),
+    return Container(
+      width: 175.w,
+      height: 200.h,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: color.withOpacity(0.7),
         ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(15),
+        ),
+        color: color.withOpacity(0.1),
+      ),
+      child: InkWell(
+        onTap: () {
+          GoRouter.of(context).push(
+            AppRouter.kCategoryDetailsView,
+            extra: category,
+          );
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

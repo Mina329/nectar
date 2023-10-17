@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/cache/cache_helper.dart';
@@ -90,81 +91,110 @@ class _SettingViewBodyState extends State<SettingViewBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          CustomAccountListItemsAppBar(
-            title: StringsManager.settings.tr(),
-            backArrowOnPressed: () {
-              GoRouter.of(context).pop();
-            },
+      body: SingleChildScrollView(
+        child: AnimationLimiter(
+          child: Column(
+            children: AnimationConfiguration.toStaggeredList(
+              duration: const Duration(milliseconds: 375),
+              childAnimationBuilder: (widget) => SlideAnimation(
+                horizontalOffset: 50.w,
+                child: FadeInAnimation(
+                  child: widget,
+                ),
+              ),
+              children: [
+                CustomAccountListItemsAppBar(
+                  title: StringsManager.settings.tr(),
+                  backArrowOnPressed: () {
+                    GoRouter.of(context).pop();
+                  },
+                ),
+                const Divider(),
+                SettingItem(
+                  title: StringsManager.language.tr(),
+                  value: CacheData.getData(key: CacheKeys.kLANGUAGE) ==
+                          CacheValues.ARABIC
+                      ? StringsManager.arabic.tr()
+                      : StringsManager.english.tr(),
+                  onTap: () {
+                    _showDynamicDialog(
+                      context: context,
+                      dialogTitle: StringsManager.language.tr(),
+                      options: [
+                        StringsManager.english.tr(),
+                        StringsManager.arabic.tr()
+                      ],
+                      groupValue: CacheData.getData(key: CacheKeys.kLANGUAGE) ==
+                              CacheValues.ARABIC
+                          ? StringsManager.arabic.tr()
+                          : StringsManager.english.tr(),
+                      onChanged: (p0) {
+                        if (p0 == StringsManager.arabic.tr()) {
+                          CacheData.setData(
+                              key: CacheKeys.kLANGUAGE,
+                              value: CacheValues.ARABIC);
+                          Phoenix.rebirth(context);
+                          GoRouter.of(context).go(AppRouter.kSplashView);
+                        } else if (p0 == StringsManager.english.tr()) {
+                          CacheData.setData(
+                              key: CacheKeys.kLANGUAGE,
+                              value: CacheValues.ENGLISH);
+                          Phoenix.rebirth(context);
+                          GoRouter.of(context).go(AppRouter.kSplashView);
+                        }
+                      },
+                    );
+                  },
+                ),
+                SizedBox(
+                  width: 250.w,
+                  child: const Divider(),
+                ),
+                SettingItem(
+                  title: StringsManager.theme.tr(),
+                  value: Theme.of(context).brightness == Brightness.dark
+                      ? StringsManager.dark.tr()
+                      : StringsManager.light.tr(),
+                  onTap: () {
+                    _showDynamicDialog(
+                      context: context,
+                      dialogTitle: StringsManager.theme.tr(),
+                      options: [
+                        StringsManager.light.tr(),
+                        StringsManager.dark.tr()
+                      ],
+                      groupValue: themeValue,
+                      onChanged: (p0) {
+                        if (p0 == StringsManager.light.tr()) {
+                          CacheData.setData(
+                              key: CacheKeys.kDARKMODE,
+                              value: CacheValues.LIGHT);
+                          notifier.value = ThemeMode.light;
+                        } else if (p0 == StringsManager.dark.tr()) {
+                          CacheData.setData(
+                              key: CacheKeys.kDARKMODE,
+                              value: CacheValues.DARK);
+                          notifier.value = ThemeMode.dark;
+                        }
+                        setState(() {
+                          themeValue =
+                              CacheData.getData(key: CacheKeys.kDARKMODE) ==
+                                      CacheValues.DARK
+                                  ? StringsManager.dark.tr()
+                                  : StringsManager.light.tr();
+                        });
+                      },
+                    );
+                  },
+                ),
+                SizedBox(
+                  width: 250.w,
+                  child: const Divider(),
+                )
+              ],
+            ),
           ),
-          const Divider(),
-          SettingItem(
-            title: StringsManager.language.tr(),
-            value: CacheData.getData(key: CacheKeys.kLANGUAGE) ==
-                    CacheValues.ARABIC
-                ? StringsManager.arabic.tr()
-                : StringsManager.english.tr(),
-            onTap: () {
-              _showDynamicDialog(
-                context: context,
-                dialogTitle: StringsManager.language.tr(),
-                options: [
-                  StringsManager.english.tr(),
-                  StringsManager.arabic.tr()
-                ],
-                groupValue: CacheData.getData(key: CacheKeys.kLANGUAGE) ==
-                        CacheValues.ARABIC
-                    ? StringsManager.arabic.tr()
-                    : StringsManager.english.tr(),
-                onChanged: (p0) {
-                  if (p0 == StringsManager.arabic.tr()) {
-                    CacheData.setData(
-                        key: CacheKeys.kLANGUAGE, value: CacheValues.ARABIC);
-                    Phoenix.rebirth(context);
-                    GoRouter.of(context).go(AppRouter.kSplashView);
-                  } else if (p0 == StringsManager.english.tr()) {
-                    CacheData.setData(
-                        key: CacheKeys.kLANGUAGE, value: CacheValues.ENGLISH);
-                    Phoenix.rebirth(context);
-                    GoRouter.of(context).go(AppRouter.kSplashView);
-                  }
-                },
-              );
-            },
-          ),
-          SettingItem(
-            title: StringsManager.theme.tr(),
-            value: Theme.of(context).brightness == Brightness.dark
-                ? StringsManager.dark.tr()
-                : StringsManager.light.tr(),
-            onTap: () {
-              _showDynamicDialog(
-                context: context,
-                dialogTitle: StringsManager.theme.tr(),
-                options: [StringsManager.light.tr(), StringsManager.dark.tr()],
-                groupValue: themeValue,
-                onChanged: (p0) {
-                  if (p0 == StringsManager.light.tr()) {
-                    CacheData.setData(
-                        key: CacheKeys.kDARKMODE, value: CacheValues.LIGHT);
-                    notifier.value = ThemeMode.light;
-                  } else if (p0 == StringsManager.dark.tr()) {
-                    CacheData.setData(
-                        key: CacheKeys.kDARKMODE, value: CacheValues.DARK);
-                    notifier.value = ThemeMode.dark;
-                  }
-                  setState(() {
-                    themeValue = CacheData.getData(key: CacheKeys.kDARKMODE) ==
-                            CacheValues.DARK
-                        ? StringsManager.dark.tr()
-                        : StringsManager.light.tr();
-                  });
-                },
-              );
-            },
-          ),
-        ],
+        ),
       ),
     );
   }

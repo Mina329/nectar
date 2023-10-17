@@ -46,7 +46,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         onChanged: widget.onChanged,
         decoration: InputDecoration(
           suffixIcon: showSuffixIcon
-              ? GestureDetector(
+              ? InkWell(
                   onTap: () {
                     fieldText.clear();
                     setState(() {

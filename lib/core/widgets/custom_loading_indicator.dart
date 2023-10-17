@@ -19,6 +19,16 @@ class CustomLoadingIndicator extends StatelessWidget {
       ),
     );
   }
+
+  static buildLoadingIndicator(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const CustomLoadingIndicator();
+      },
+    );
+  }
 }
 
 class CustomCircularIndicator extends StatelessWidget {

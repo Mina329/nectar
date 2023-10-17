@@ -15,7 +15,7 @@ class SettingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 25.w),
-      child: GestureDetector(
+      child: InkWell(
         onTap: onTap,
         child: Column(
           children: [
@@ -40,10 +40,6 @@ class SettingItem extends StatelessWidget {
             SizedBox(
               height: 10.h,
             ),
-            SizedBox(
-              width: 250.w,
-              child: const Divider(),
-            )
           ],
         ),
       ),

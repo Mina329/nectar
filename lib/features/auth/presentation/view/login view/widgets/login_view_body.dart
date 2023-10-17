@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/core/utils/color_manager.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/core/utils/styles_manager.dart';
+import 'package:nectar/core/widgets/custom_toast_widget.dart';
 import 'package:nectar/features/auth/presentation/view%20model/google_auth_cubit/google_auth_cubit.dart';
 
 import '../../../../../../core/utils/app_router.dart';
@@ -70,7 +70,8 @@ class LoginViewBody extends StatelessWidget {
                         );
                       } else if (state is GoogleLogInAuthFailure) {
                         GoRouter.of(context).pop();
-                        Fluttertoast.showToast(msg: state.errMessage);
+                        CustomToastWidget.buildCustomToast(context,
+                            state.errMessage, ToastType.failure, 200.h);
                       } else if (state is GoogleLogInAuthSuccess) {
                         state.account.authentication
                             .then((value) => print(value.accessToken));

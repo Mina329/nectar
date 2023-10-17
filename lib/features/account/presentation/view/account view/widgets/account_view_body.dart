@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/cache/cache_helper.dart';
 import 'package:nectar/core/cache/cache_keys_values.dart';
 import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/widgets/custom_elevated_btn.dart';
+import 'package:nectar/core/widgets/custom_toast_widget.dart';
 import 'package:nectar/features/account/presentation/view%20model/account_info_cubit/account_info_cubit.dart';
 import 'package:nectar/features/account/presentation/view/account%20view/widgets/profile_card.dart';
 import 'package:nectar/features/auth/presentation/view%20model/google_auth_cubit/google_auth_cubit.dart';
@@ -56,7 +56,7 @@ class AccountViewBody extends StatelessWidget {
                   AccountListItemListView(accountModel: state.account)
                 ],
               );
-            }else if(state is AccountInfoInitial){
+            } else if (state is AccountInfoInitial) {
               BlocProvider.of<AccountInfoCubit>(context).getUserProfile();
               return const AccountShimmer();
             }
@@ -73,16 +73,11 @@ class AccountViewBody extends StatelessWidget {
               child: BlocListener<GoogleAuthCubit, GoogleAuthState>(
                 listener: (context, state) async {
                   if (state is GoogleLogOutAuthLoading) {
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (BuildContext context) {
-                        return const CustomLoadingIndicator();
-                      },
-                    );
+                    CustomLoadingIndicator.buildLoadingIndicator(context);
                   } else if (state is GoogleLogOutAuthFailure) {
                     GoRouter.of(context).pop();
-                    Fluttertoast.showToast(msg: state.errMessage);
+                    CustomToastWidget.buildCustomToast(
+                        context, state.errMessage, ToastType.failure, 200.h);
                   } else if (state is GoogleLogOutAuthSuccess) {
                     GoRouter.of(context).pop();
                     await CacheData.setData(

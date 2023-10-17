@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:nectar/core/utils/strings_manager.dart';
 import 'package:nectar/core/widgets/custom_rounded_square_widget.dart';
@@ -11,7 +10,6 @@ import 'package:nectar/features/shop/presentation/view%20model/favourite_cubit/f
 
 import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';
-import '../../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../../../core/widgets/custom_toast_widget.dart';
 
 class ItemTitlePrice extends StatefulWidget {
@@ -108,20 +106,10 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
             ),
             BlocListener<FavouriteCubit, FavouriteState>(
               listener: (context, state) {
-                if (state is FavouriteLoading) {
-                  showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (BuildContext context) {
-                      return const CustomLoadingIndicator();
-                    },
-                  );
-                } else if (state is AddFavouriteFailure) {
-                  GoRouter.of(context).pop();
+                if (state is AddFavouriteFailure) {
                   CustomToastWidget.buildCustomToast(
                       context, state.errMessage, ToastType.failure, 150.h);
                 } else if (state is AddFavouriteSuccess) {
-                  GoRouter.of(context).pop();
                   CustomToastWidget.buildCustomToast(
                       context, state.succeesMessage, ToastType.success, 150.h);
 
@@ -129,11 +117,9 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
                     favourite = true;
                   });
                 } else if (state is RemoveFavouriteFailure) {
-                  GoRouter.of(context).pop();
                   CustomToastWidget.buildCustomToast(
                       context, state.errMessage, ToastType.failure, 150.h);
                 } else if (state is RemoveFavouriteSuccess) {
-                  GoRouter.of(context).pop();
                   CustomToastWidget.buildCustomToast(
                       context, state.succeesMessage, ToastType.success, 150.h);
 

@@ -9,7 +9,6 @@ class NavigationBarCubit extends Cubit<NavigationBarState> {
   void changeIndex(int index) {
     selectedIndex = index;
     changeBody();
-    print(index);
   }
 
   void changeBody() {

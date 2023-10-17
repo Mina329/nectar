@@ -16,7 +16,7 @@ class AuthAppBar extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(bottom: 10.h),
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   FocusScope.of(context).unfocus();
                   Future.delayed(const Duration(seconds: 1));

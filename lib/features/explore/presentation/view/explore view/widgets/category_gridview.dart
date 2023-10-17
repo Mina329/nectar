@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/features/explore/presentation/view%20model/categories_cubit/categories_cubit.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../../../core/widgets/custom_empty_widget.dart';
 import '../../../../../../core/widgets/custom_loading_indicator.dart';
+import '../../../../../../core/widgets/custom_toast_widget.dart';
 import '../../../../../shop/data/models/thumbnail_grocery_item_model/thumbnail_grocery_item_model/thumbnail_grocery_item_model.dart';
 import '../../../../../shop/presentation/view/shop view/widgets/grocery_item.dart';
 import '../../category details view/widgets/item_grid_shimmer.dart';
@@ -38,7 +39,8 @@ class CategoryGridView extends StatelessWidget {
                     child: const CategoryShimmer()),
               ));
         } else if (state is CategoriesFailure) {
-          Fluttertoast.showToast(msg: state.errMessage);
+          CustomToastWidget.buildCustomToast(
+              context, state.errMessage, ToastType.failure, 200.h);
           return SliverToBoxAdapter(
             child: Center(
               child: SvgPicture.asset(
@@ -54,24 +56,36 @@ class CategoryGridView extends StatelessWidget {
               child: CustomEmptyWidget(),
             );
           }
-          return SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 175.w / 200.h,
-                crossAxisCount: 2,
-                mainAxisSpacing: 14.h,
-                crossAxisSpacing: 14.w,
-              ),
-              delegate: SliverChildBuilderDelegate(
-                childCount: state.categories.length,
-                (context, index) => CategoryItem(
-                  category: state.categories[index],
-                  color: BlocProvider.of<CategoriesCubit>(context).colors[
-                      index %
-                          BlocProvider.of<CategoriesCubit>(context)
-                              .colors
-                              .length],
+          return AnimationLimiter(
+            child: SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 175.w / 200.h,
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 14.h,
+                  crossAxisSpacing: 14.w,
                 ),
-              ));
+                delegate: SliverChildBuilderDelegate(
+                  childCount: state.categories.length,
+                  (context, index) => AnimationConfiguration.staggeredGrid(
+                    position: index,
+                    duration: const Duration(milliseconds: 375),
+                    columnCount: 2,
+                    child: SlideAnimation(
+                      child: FadeInAnimation(
+                        child: CategoryItem(
+                          category: state.categories[index],
+                          color:
+                              BlocProvider.of<CategoriesCubit>(context).colors[
+                                  index %
+                                      BlocProvider.of<CategoriesCubit>(context)
+                                          .colors
+                                          .length],
+                        ),
+                      ),
+                    ),
+                  ),
+                )),
+          );
         }
         if (state is SearchItemsLoading && state.isFirstFetch) {
           return const ItemGridShimmer();
@@ -92,29 +106,40 @@ class CategoryGridView extends StatelessWidget {
             ),
           );
         }
-        return SliverGrid(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 173.w / 255.h,
-            crossAxisCount: 2,
-            mainAxisSpacing: 14.h,
-            crossAxisSpacing: 14.w,
-          ),
-          delegate: SliverChildBuilderDelegate(
-            childCount: items.length + (isloading ? 1 : 0),
-            (context, index) {
-              if (index < items.length) {
-                return GroceryItem(
-                  id: items[index].id,
-                  name: items[index].name,
-                  price: items[index].price.toString(),
-                  imageLink: items[index].thumbnail ?? "",
-                  quantity: items[index].qtyType ?? '',
-                  offerPrice: items[index].offerPrice,
-                );
-              } else {
-                return const CustomCircularIndicator();
-              }
-            },
+        return AnimationLimiter(
+          child: SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 173.w / 255.h,
+              crossAxisCount: 2,
+              mainAxisSpacing: 14.h,
+              crossAxisSpacing: 14.w,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              childCount: items.length + (isloading ? 1 : 0),
+              (context, index) {
+                if (index < items.length) {
+                  return AnimationConfiguration.staggeredGrid(
+                    position: index,
+                    duration: const Duration(milliseconds: 375),
+                    columnCount: 2,
+                    child: SlideAnimation(
+                      child: FadeInAnimation(
+                        child: GroceryItem(
+                          id: items[index].id,
+                          name: items[index].name,
+                          price: items[index].price.toString(),
+                          imageLink: items[index].thumbnail ?? "",
+                          quantity: items[index].qtyType ?? '',
+                          offerPrice: items[index].offerPrice,
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  return const CustomCircularIndicator();
+                }
+              },
+            ),
           ),
         );
       },

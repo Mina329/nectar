@@ -78,13 +78,7 @@ class MyDetailsViewBody extends StatelessWidget {
                 child: BlocListener<MyDetailsCubit, MyDetailsState>(
                   listener: (context, state) {
                     if (state is MyDetailsLoading) {
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (BuildContext context) {
-                          return const CustomLoadingIndicator();
-                        },
-                      );
+                      CustomLoadingIndicator.buildLoadingIndicator(context);
                     } else if (state is MyDetailsInfoFailure) {
                       GoRouter.of(context).pop();
                       GoRouter.of(context).pop();

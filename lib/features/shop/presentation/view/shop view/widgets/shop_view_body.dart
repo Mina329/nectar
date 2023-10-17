@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:nectar/core/widgets/custom_search_bar.dart';
-import 'package:nectar/features/shop/presentation/view%20model/add_to_cart_cubit/add_to_cart_cubit.dart';
-import '../../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../view model/best_selling_cubit/best_selling_cubit.dart';
 import '../../../view model/exclusive_offers_cubit/exclusive_offers_cubit.dart';
 import '../../../view model/groceries_section_cubit/groceries_section_cubit.dart';
@@ -40,22 +37,6 @@ class ShopViewBody extends StatelessWidget {
             child: SizedBox(
               height: 20.h,
             ),
-          ),
-          BlocListener<AddToCartCubit, AddToCartState>(
-            listener: (context, state) {
-              if (state is AddToCartLoading) {
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (BuildContext context) {
-                    return const CustomLoadingIndicator();
-                  },
-                );
-              } else {
-                GoRouter.of(context).pop();
-              }
-            },
-            child: const SliverToBoxAdapter(),
           ),
           const BannerListView(),
           const ExclusiveOfferSection(),

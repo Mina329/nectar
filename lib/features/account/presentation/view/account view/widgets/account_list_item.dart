@@ -12,7 +12,7 @@ class AccountListItem extends StatelessWidget {
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -53,7 +53,6 @@ class AccountListItem extends StatelessWidget {
           SizedBox(
             height: 15.h,
           ),
-          const Divider()
         ],
       ),
     );

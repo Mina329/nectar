@@ -117,13 +117,7 @@ class AddressConfirmViewBody extends StatelessWidget {
                 child: BlocListener<AddressCubit, AddressState>(
                   listener: (context, state) {
                     if (state is AddressLoading) {
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (BuildContext context) {
-                          return const CustomLoadingIndicator();
-                        },
-                      );
+                      CustomLoadingIndicator.buildLoadingIndicator(context);
                     } else if (state is AddAddressSuccess) {
                       GoRouter.of(context).pop();
                       CustomToastWidget.buildCustomToast(

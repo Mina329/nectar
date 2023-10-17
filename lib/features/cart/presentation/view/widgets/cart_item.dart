@@ -1,11 +1,8 @@
-
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:nectar/features/cart/presentation/view%20model/cart_item_cubit/cart_item_cubit.dart';
 
 import '../../../../../core/utils/assets_manager.dart';
@@ -43,35 +40,20 @@ class CartItem extends StatelessWidget {
                 SizedBox(
                   height: 133.h,
                   width: 254.w,
-                  child: BlocListener<CartItemCubit, CartItemState>(
-                    listener: (context, state) {
-                      if (state is CartItemLoading) {
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (BuildContext context) {
-                            return const CustomLoadingIndicator();
-                          },
-                        );
-                      } else {
-                        GoRouter.of(context).pop();
-                      }
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildTitleAndClose(context),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        _buildQuantity(context),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        _buildActionButtonsWithPrice(context)
-                      ],
-                    ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildTitleAndClose(context),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      _buildQuantity(context),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      _buildActionButtonsWithPrice(context)
+                    ],
                   ),
                 )
               ],
