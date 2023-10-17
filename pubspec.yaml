@@ -49,6 +49,7 @@ dependencies:
   flutter_phoenix: ^1.1.1
   flutter_screenutil: ^5.9.0
   flutter_slidable: ^3.0.0
+  flutter_stripe: ^9.4.0
   flutter_svg: ^2.0.7
   fluttertoast: ^8.2.2
   font_awesome_flutter: ^10.5.0

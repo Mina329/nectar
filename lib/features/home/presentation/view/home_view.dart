@@ -4,6 +4,7 @@ import 'package:nectar/features/account/data/repos/account_repo.dart';
 import 'package:nectar/features/account/presentation/view%20model/account_info_cubit/account_info_cubit.dart';
 import 'package:nectar/features/cart/data/repos/cart_repo.dart';
 import 'package:nectar/features/cart/presentation/view%20model/cart_cubit/cart_cubit.dart';
+import 'package:nectar/features/cart/presentation/view%20model/checkout_cubit/checkout_cubit.dart';
 import 'package:nectar/features/favourite/presentation/view%20model/add_favourite_items_to_cart_cubit/add_favourite_items_to_cart_cubit.dart';
 import 'package:nectar/features/favourite/presentation/view%20model/favourite_items_cubit/favourite_items_cubit.dart';
 import 'package:nectar/features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
@@ -96,6 +97,11 @@ class _HomeViewState extends State<HomeView> {
           create: (context) => CartCubit(
             getIt.get<CartRepo>(),
           )..getCart(),
+        ),
+        BlocProvider(
+          create: (context) => CheckoutCubit(
+            getIt.get<CartRepo>(),
+          ),
         ),
       ],
       child: const CartView(),

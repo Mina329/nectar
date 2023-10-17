@@ -26,12 +26,23 @@ class CartTotalPrice extends StatelessWidget {
             Radius.circular(5),
           ),
         ),
-        child: Center(
-            child: Text(
-          "${BlocProvider.of<CartCubit>(context).totalPrice} ${StringsManager.currency.tr()}",
-          style:
-              Theme.of(context).textTheme.labelLarge!.copyWith(fontSize: 12.sp),
-        )),
+        child: BlocBuilder<CartCubit, CartState>(
+          builder: (context, state) {
+            if (state is CartSuccess) {
+              return Center(
+                  child: Text(
+                "${BlocProvider.of<CartCubit>(context).totalPrice} ${StringsManager.currency.tr()}",
+                style: Theme.of(context)
+                    .textTheme
+                    .labelLarge!
+                    .copyWith(fontSize: 12.sp),
+              ));
+            } else if (state is CartLoading) {
+              return Container();
+            }
+            return Container();
+          },
+        ),
       ),
     );
   }

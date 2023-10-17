@@ -23,6 +23,14 @@ class CartCubit extends Cubit<CartState> {
       ),
       (cartModel) {
         cart = cartModel;
+        totalPrice = 0;
+        for (var item in cart.items!) {
+          if (item.item!.offerPrice != 0) {
+            totalPrice += item.item!.offerPrice! * item.qty!;
+            continue;
+          }
+          totalPrice += item.item!.price! * item.qty!;
+        }
         emit(
           CartSuccess(
             cartModel,
@@ -34,6 +42,7 @@ class CartCubit extends Cubit<CartState> {
 
   Future<void> refreshCart(String id) async {
     emit(CartLoading());
+    await Future.delayed(const Duration(milliseconds: 100));
     List<Item> updatedItems = [];
     for (Item item in cart.items!) {
       if (item.item!.id == id) {
@@ -42,17 +51,46 @@ class CartCubit extends Cubit<CartState> {
       updatedItems.add(item);
     }
     cart = cart.copyWith(items: updatedItems);
+    totalPrice = 0;
+    for (var item in cart.items!) {
+      if (item.item!.offerPrice != 0) {
+        totalPrice += item.item!.offerPrice! * item.qty!;
+        continue;
+      }
+      totalPrice += item.item!.price! * item.qty!;
+    }
+
     emit(
       CartSuccess(
         cart,
       ),
     );
   }
-// for (var item in cartModel.items!) {
-//           if (item.item!.offerPrice != 0) {
-//             totalPrice += item.item!.offerPrice!;
-//             continue;
-//           }
-//           totalPrice += item.item!.price!;
-//         }
+
+  Future<void> refreshCartWithNewQuantity(String id, int quantity) async {
+    emit(CartLoading());
+    List<Item> updatedItems = [];
+    for (Item item in cart.items!) {
+      if (item.item!.id == id) {
+        updatedItems.add(item.copyWith(qty: quantity));
+      } else {
+        updatedItems.add(item);
+      }
+    }
+    cart = cart.copyWith(items: updatedItems);
+    totalPrice = 0;
+    for (var item in cart.items!) {
+      if (item.item!.offerPrice != 0) {
+        totalPrice += item.item!.offerPrice! * item.qty!;
+        continue;
+      }
+      totalPrice += item.item!.price! * item.qty!;
+    }
+
+    emit(
+      CartSuccess(
+        cart,
+      ),
+    );
+  }
 }

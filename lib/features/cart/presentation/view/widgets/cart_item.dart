@@ -1,3 +1,5 @@
+
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -140,20 +142,22 @@ class CartItem extends StatelessWidget {
                 ),
               Text(
                 "${BlocProvider.of<CartItemCubit>(context).item.item!.price != null ? BlocProvider.of<CartItemCubit>(context).item.item!.price.toString() : 0} ${StringsManager.currency.tr()}",
-                style:
-                    BlocProvider.of<CartItemCubit>(context).item.item!.price ==
-                            0
-                        ? Theme.of(context).textTheme.labelMedium!.copyWith(
-                              fontFamily: AssetsManager.gilroySemiBold,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18.sp,
-                            )
-                        : Theme.of(context).textTheme.labelMedium!.copyWith(
-                              fontFamily: AssetsManager.gilroySemiBold,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14.sp,
-                              decoration: TextDecoration.lineThrough,
-                            ),
+                style: BlocProvider.of<CartItemCubit>(context)
+                            .item
+                            .item!
+                            .offerPrice ==
+                        0
+                    ? Theme.of(context).textTheme.labelMedium!.copyWith(
+                          fontFamily: AssetsManager.gilroySemiBold,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18.sp,
+                        )
+                    : Theme.of(context).textTheme.labelMedium!.copyWith(
+                          fontFamily: AssetsManager.gilroySemiBold,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14.sp,
+                          decoration: TextDecoration.lineThrough,
+                        ),
               )
             ],
           ),
@@ -194,6 +198,10 @@ class CartItem extends StatelessWidget {
               if (BlocProvider.of<CartItemCubit>(context).quantity <= 0) {
                 BlocProvider.of<CartCubit>(context).refreshCart(
                     BlocProvider.of<CartItemCubit>(context).item.item!.id!);
+              } else {
+                BlocProvider.of<CartCubit>(context).refreshCartWithNewQuantity(
+                    BlocProvider.of<CartItemCubit>(context).item.item!.id!,
+                    BlocProvider.of<CartItemCubit>(context).quantity);
               }
             }
           },

@@ -4,6 +4,7 @@ import 'package:nectar/core/cache/cache_helper.dart';
 import 'package:nectar/core/errors/failure.dart';
 import 'package:nectar/core/utils/api_service.dart';
 import 'package:nectar/features/cart/data/models/cart_model/cart_model.dart';
+import 'package:nectar/features/cart/data/models/checkout_model/checkout_model.dart';
 
 import '../../../../core/cache/cache_keys_values.dart';
 import 'cart_repo.dart';
@@ -108,6 +109,35 @@ class CartRepoImpl extends CartRepo {
         requestData: {},
       );
       return right(data);
+    } catch (e) {
+      if (e is DioException) {
+        return left(
+          ServerFailure(
+            e.response!.data['message'],
+          ),
+        );
+      }
+      return left(
+        ServerFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, CheckoutModel>> checkoutCart() async {
+    try {
+      var data = await _apiService.post(
+        endPoint:
+            'api/v1/profile/carts/${CacheData.getData(key: CacheKeys.kCARTID)}/checkout',
+        requestData: {},
+      );
+      return right(
+        CheckoutModel.fromJson(
+          data.data['data'],
+        ),
+      );
     } catch (e) {
       if (e is DioException) {
         return left(

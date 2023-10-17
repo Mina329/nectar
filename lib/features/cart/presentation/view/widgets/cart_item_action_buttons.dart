@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,6 +27,10 @@ class CartItemActionButtons extends StatelessWidget {
             if (BlocProvider.of<CartItemCubit>(context).quantity <= 0) {
               BlocProvider.of<CartCubit>(context).refreshCart(
                   BlocProvider.of<CartItemCubit>(context).item.item!.id!);
+            } else {
+              BlocProvider.of<CartCubit>(context).refreshCartWithNewQuantity(
+                  BlocProvider.of<CartItemCubit>(context).item.item!.id!,
+                  BlocProvider.of<CartItemCubit>(context).quantity);
             }
           }
         },
