@@ -29,12 +29,13 @@ class ItemImageSection extends StatefulWidget {
 }
 
 class _ItemImageSectionState extends State<ItemImageSection> {
-  final PageController _pageController = PageController();
+  late PageController _pageController;
   int _currentPage = 0;
 
   @override
   void initState() {
     super.initState();
+    _pageController = PageController();
     _pageController.addListener(() {
       setState(() {
         _currentPage = _pageController.page!.round();

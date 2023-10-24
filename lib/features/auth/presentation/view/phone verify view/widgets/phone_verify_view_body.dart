@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/cache/cache_helper.dart';
 import 'package:nectar/core/cache/cache_keys_values.dart';
 import 'package:nectar/core/utils/app_router.dart';
+import 'package:nectar/features/auth/presentation/view%20model/phone_auth_cubit/phone_auth_cubit.dart';
 import 'package:nectar/features/auth/presentation/view/phone%20auth%20view/widgets/auth_app_bar.dart';
 import 'package:nectar/features/auth/presentation/view/phone%20verify%20view/widgets/otp_form.dart';
 import 'package:nectar/main.dart';
@@ -26,7 +28,6 @@ class _PhoneVerifyViewBodyState extends State<PhoneVerifyViewBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: buildForwardButton(context),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 25.w),
         child: Stack(
@@ -79,12 +80,15 @@ class _PhoneVerifyViewBodyState extends State<PhoneVerifyViewBody> {
                           setState(() {
                             isEnabled = false;
                           });
+                          BlocProvider.of<PhoneAuthCubit>(context).resend();
                         }
                       : null,
                   child: Text(
                     StringsManager.resendCode.tr(),
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: isEnabled ? ColorManager.green : ColorManager.greySmall,
+                          color: isEnabled
+                              ? ColorManager.green
+                              : ColorManager.greySmall,
                           fontSize: 18.sp,
                         ),
                   ),
@@ -97,9 +101,11 @@ class _PhoneVerifyViewBodyState extends State<PhoneVerifyViewBody> {
 
   FloatingActionButton buildForwardButton(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () async{
+      onPressed: () async {
         await CacheData.setData(key: CacheKeys.kSIGNED, value: testToken);
-        GoRouter.of(context).go(AppRouter.kHomeView);
+        if (context.mounted) {
+          GoRouter.of(context).go(AppRouter.kHomeView, extra: 0);
+        }
       },
       backgroundColor: ColorManager.green,
       child: const Center(

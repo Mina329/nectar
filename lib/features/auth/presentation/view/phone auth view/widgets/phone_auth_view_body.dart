@@ -1,11 +1,18 @@
+import 'dart:developer';
+
 import 'package:country_flags/country_flags.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/utils/color_manager.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
+import 'package:nectar/core/widgets/custom_loading_indicator.dart';
+import 'package:nectar/features/auth/presentation/view%20model/phone_auth_cubit/phone_auth_cubit.dart';
+
+import '../../../../../../core/utils/app_router.dart';
 
 class PhoneAuthViewBody extends StatefulWidget {
   const PhoneAuthViewBody({super.key});
@@ -15,7 +22,12 @@ class PhoneAuthViewBody extends StatefulWidget {
 }
 
 class _PhoneAuthViewBodyState extends State<PhoneAuthViewBody> {
-  final controller = TextEditingController();
+  late TextEditingController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController();
+  }
 
   bool validate = true;
 
@@ -92,7 +104,8 @@ class _PhoneAuthViewBodyState extends State<PhoneAuthViewBody> {
                         maxLength: 10,
                         decoration: InputDecoration(
                           counterText: "",
-                          errorText: validate ? null : "Invalid data",
+                          errorText:
+                              validate ? null : StringsManager.invalidData.tr(),
                           focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: ColorManager.green),
                           ),
@@ -116,22 +129,47 @@ class _PhoneAuthViewBodyState extends State<PhoneAuthViewBody> {
     super.dispose();
   }
 
-  FloatingActionButton buildForwardButton(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {
-        if (controller.text.length != 10) {
-          setState(() {
-            validate = false;
-          });
-        } else {
-          GoRouter.of(context).push(AppRouter.kPhoneVerifyView);
+  Widget buildForwardButton(BuildContext context) {
+    return BlocListener<PhoneAuthCubit, PhoneAuthState>(
+      listener: (context, state) {
+        if (state is SendOTPSuccess) {
+          GoRouter.of(context).pop();
+          GoRouter.of(context).push(
+            AppRouter.kPhoneVerifyView,
+            extra: BlocProvider.of<PhoneAuthCubit>(context),
+          );
+        } else if (state is SendOTPFailure) {
+          GoRouter.of(context).pop();
+          log(state.errMessage);
+          Fluttertoast.showToast(msg: state.errMessage);
+        } else if (state is SendOTPLoading) {
+          CustomLoadingIndicator.buildLoadingIndicator(context);
         }
       },
-      backgroundColor: ColorManager.green,
-      child: const Center(
-        child: Icon(
-          Icons.arrow_forward_ios_rounded,
-          color: ColorManager.whiteText,
+      child: FloatingActionButton(
+        onPressed: () async {
+          if (controller.text.length != 10) {
+            setState(() {
+              validate = false;
+            });
+          } else {
+            await CustomPhoneConfirmationDialog.buildConfirmationDialog(
+              context,
+              () {
+                BlocProvider.of<PhoneAuthCubit>(context).sendOTP(
+                  '+20${controller.text}',
+                );
+              },
+              '+20${controller.text}',
+            );
+          }
+        },
+        backgroundColor: ColorManager.green,
+        child: const Center(
+          child: Icon(
+            Icons.arrow_forward_ios_rounded,
+            color: ColorManager.whiteText,
+          ),
         ),
       ),
     );

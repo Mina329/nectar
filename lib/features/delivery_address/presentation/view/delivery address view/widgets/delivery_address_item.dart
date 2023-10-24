@@ -8,9 +8,8 @@ import '../../../../data/models/address_model/address_model.dart';
 
 // ignore: must_be_immutable
 class DeliveryAddressItem extends StatelessWidget {
-  DeliveryAddressItem({super.key, required this.address});
+  const DeliveryAddressItem({super.key, required this.address});
   final AddressModel address;
-  SlidableController? controller;
   @override
   Widget build(BuildContext context) {
     return SizedBox(

@@ -5,6 +5,7 @@ part 'navigation_bar_state.dart';
 
 class NavigationBarCubit extends Cubit<NavigationBarState> {
   NavigationBarCubit() : super(NavigationBarShop());
+  late PageController savedPageController;
   int selectedIndex = 0;
   void changeIndex(int index) {
     selectedIndex = index;

@@ -96,4 +96,7 @@ abstract class StringsManager {
   static const success = "success";
   static const delete = "delete";
   static const swipe = "swipe";
+  static const wrongCode = "wrongCode";
+  static const numberConfirm = "numberConfirm";
+  static const cancel = "cancel";
 }

@@ -16,9 +16,28 @@ import '../../../../../explore/presentation/view/category details view/widgets/i
 import '../../../../data/models/thumbnail_grocery_item_model/thumbnail_grocery_item_model/thumbnail_grocery_item_model.dart';
 import '../../shop view/widgets/grocery_item.dart';
 
-class SectionViewBody extends StatelessWidget {
-  SectionViewBody({super.key});
-  final ScrollController scrollController = ScrollController();
+class SectionViewBody extends StatefulWidget {
+  const SectionViewBody({super.key});
+
+  @override
+  State<SectionViewBody> createState() => _SectionViewBodyState();
+}
+
+class _SectionViewBodyState extends State<SectionViewBody> {
+  late ScrollController scrollController;
+  @override
+  void initState() {
+    super.initState();
+    scrollController = ScrollController();
+    setupScrollController(context);
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
   void setupScrollController(context) {
     scrollController.addListener(() {
       if (scrollController.position.atEdge) {
@@ -31,7 +50,6 @@ class SectionViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setupScrollController(context);
     BlocProvider.of<SectionDetailsCubit>(context).loadItems();
     return Scaffold(
       body: Column(

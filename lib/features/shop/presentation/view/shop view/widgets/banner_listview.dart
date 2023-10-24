@@ -8,16 +8,17 @@ class BannerListView extends StatefulWidget {
   const BannerListView({Key? key}) : super(key: key);
 
   @override
-  _BannerListViewState createState() => _BannerListViewState();
+  BannerListViewState createState() => BannerListViewState();
 }
 
-class _BannerListViewState extends State<BannerListView> {
-  final PageController _pageController = PageController();
+class BannerListViewState extends State<BannerListView> {
+  late PageController _pageController;
   int _currentPage = 0;
 
   @override
   void initState() {
     super.initState();
+    _pageController = PageController();
     _pageController.addListener(() {
       setState(() {
         _currentPage = _pageController.page!.round();
@@ -38,7 +39,7 @@ class _BannerListViewState extends State<BannerListView> {
               itemCount: 3,
               controller: _pageController,
               itemBuilder: (context, index) => Padding(
-                padding:  EdgeInsets.only(right: 10.w),
+                padding: EdgeInsets.only(right: 10.w),
                 child: BannerItem(index: index),
               ),
             ),

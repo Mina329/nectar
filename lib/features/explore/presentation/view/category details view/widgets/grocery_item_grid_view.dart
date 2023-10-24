@@ -14,15 +14,36 @@ import '../../../../../shop/data/models/thumbnail_grocery_item_model/thumbnail_g
 import '../../../../../shop/presentation/view/shop view/widgets/grocery_item.dart';
 import 'item_grid_shimmer.dart';
 
-class GroceryItemGridView extends StatelessWidget {
-  GroceryItemGridView({super.key, required this.categoryId});
-  final ScrollController scrollController = ScrollController();
+class GroceryItemGridView extends StatefulWidget {
+  const GroceryItemGridView({super.key, required this.categoryId});
   final String categoryId;
+
+  @override
+  State<GroceryItemGridView> createState() => _GroceryItemGridViewState();
+}
+
+class _GroceryItemGridViewState extends State<GroceryItemGridView> {
+  late ScrollController scrollController;
+  @override
+  void initState() {
+    super.initState();
+    scrollController = ScrollController();
+    setupScrollController(context);
+    BlocProvider.of<CategoryItemsCubit>(context).loadItems(widget.categoryId);
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
   void setupScrollController(context) {
     scrollController.addListener(() {
       if (scrollController.position.atEdge) {
         if (scrollController.position.pixels != 0) {
-          BlocProvider.of<CategoryItemsCubit>(context).loadItems(categoryId);
+          BlocProvider.of<CategoryItemsCubit>(context)
+              .loadItems(widget.categoryId);
         }
       }
     });
@@ -30,8 +51,6 @@ class GroceryItemGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setupScrollController(context);
-    BlocProvider.of<CategoryItemsCubit>(context).loadItems(categoryId);
     return BlocBuilder<CategoryItemsCubit, CategoryItemsState>(
       builder: (context, state) {
         if (state is CategoryItemsFailure) {

@@ -25,6 +25,7 @@ final ValueNotifier<ThemeMode> notifier = ValueNotifier(
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
   await CacheData.casheIntialization();
   await dotenv.load();
   HydratedBloc.storage = await HydratedStorage.build(

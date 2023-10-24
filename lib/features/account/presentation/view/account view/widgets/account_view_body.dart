@@ -15,88 +15,131 @@ import 'package:nectar/features/auth/presentation/view%20model/google_auth_cubit
 import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/utils/strings_manager.dart';
 import '../../../../../../core/widgets/custom_loading_indicator.dart';
+import '../../../../../home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 import 'account_list_item_list_view.dart';
 import 'account_shimmer.dart';
 
-class AccountViewBody extends StatelessWidget {
+class AccountViewBody extends StatefulWidget {
   const AccountViewBody({super.key});
+
+  @override
+  State<AccountViewBody> createState() => _AccountViewBodyState();
+}
+
+class _AccountViewBodyState extends State<AccountViewBody> {
+  late ScrollController _scrollController;
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        BlocBuilder<AccountInfoCubit, AccountInfoState>(
-          builder: (context, state) {
-            if (state is AccountInfoLoading) {
-              return const AccountShimmer();
-            } else if (state is AccountInfoFailure) {
-              return Padding(
-                padding: EdgeInsets.only(
-                  top: 50.h,
-                  left: 25.w,
-                  right: 25.w,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: SvgPicture.asset(
-                        AssetsManager.error,
-                        width: 300.w,
-                        height: 500.h,
-                      ),
-                    )
-                  ],
-                ),
-              );
-            } else if (state is AccountInfoSuccess) {
-              return CustomScrollView(
-                physics: const BouncingScrollPhysics(),
-                slivers: [
-                  ProfileCard(account: state.account),
-                  AccountListItemListView(accountModel: state.account)
-                ],
-              );
-            } else if (state is AccountInfoInitial) {
-              BlocProvider.of<AccountInfoCubit>(context).getUserProfile();
-              return const AccountShimmer();
-            }
+    return WillPopScope(
+      onWillPop: () async {
+        if (_scrollController.offset > 0.0) {
+          _scrollController.animateTo(
+            0.0,
+            duration: const Duration(
+              milliseconds: 500,
+            ),
+            curve: Curves.ease,
+          );
+          return false;
+        } else {
+          BlocProvider.of<NavigationBarCubit>(context)
+              .savedPageController
+              .jumpToPage(0);
+          BlocProvider.of<NavigationBarCubit>(context).changeIndex(0);
 
-            return Container();
-          },
-        ),
-        Positioned(
-            bottom: 25.h,
-            left: 25.w,
-            right: 25.w,
-            child: SizedBox(
-              height: 70.h,
-              child: BlocListener<GoogleAuthCubit, GoogleAuthState>(
-                listener: (context, state) async {
-                  if (state is GoogleLogOutAuthLoading) {
-                    CustomLoadingIndicator.buildLoadingIndicator(context);
-                  } else if (state is GoogleLogOutAuthFailure) {
-                    GoRouter.of(context).pop();
-                    CustomToastWidget.buildCustomToast(
-                        context, state.errMessage, ToastType.failure, 200.h);
-                  } else if (state is GoogleLogOutAuthSuccess) {
-                    GoRouter.of(context).pop();
-                    await CacheData.setData(
-                        key: CacheKeys.kSIGNED, value: CacheValues.NOT_SIGNED);
-                    if (context.mounted) {
-                      GoRouter.of(context).go(AppRouter.kLoginView);
+          return false;
+        }
+      },
+      child: Stack(
+        children: [
+          BlocBuilder<AccountInfoCubit, AccountInfoState>(
+            builder: (context, state) {
+              if (state is AccountInfoLoading) {
+                return const AccountShimmer();
+              } else if (state is AccountInfoFailure) {
+                return Padding(
+                  padding: EdgeInsets.only(
+                    top: 50.h,
+                    left: 25.w,
+                    right: 25.w,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: SvgPicture.asset(
+                          AssetsManager.error,
+                          width: 300.w,
+                          height: 500.h,
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              } else if (state is AccountInfoSuccess) {
+                return CustomScrollView(
+                  controller: _scrollController,
+                  physics: const BouncingScrollPhysics(),
+                  slivers: [
+                    ProfileCard(account: state.account),
+                    AccountListItemListView(accountModel: state.account)
+                  ],
+                );
+              } else if (state is AccountInfoInitial) {
+                BlocProvider.of<AccountInfoCubit>(context).getUserProfile();
+                return const AccountShimmer();
+              }
+
+              return Container();
+            },
+          ),
+          Positioned(
+              bottom: 25.h,
+              left: 25.w,
+              right: 25.w,
+              child: SizedBox(
+                height: 70.h,
+                child: BlocListener<GoogleAuthCubit, GoogleAuthState>(
+                  listener: (context, state) async {
+                    if (state is GoogleLogOutAuthLoading) {
+                      CustomLoadingIndicator.buildLoadingIndicator(context);
+                    } else if (state is GoogleLogOutAuthFailure) {
+                      GoRouter.of(context).pop();
+                      CustomToastWidget.buildCustomToast(
+                          context, state.errMessage, ToastType.failure, 200.h);
+                    } else if (state is GoogleLogOutAuthSuccess) {
+                      GoRouter.of(context).pop();
+                      await CacheData.setData(
+                          key: CacheKeys.kSIGNED,
+                          value: CacheValues.NOT_SIGNED);
+                      if (context.mounted) {
+                        GoRouter.of(context).go(AppRouter.kLoginView);
+                      }
                     }
-                  }
-                },
-                child: CustomElevatedBtn(
-                  onPressed: () {
-                    BlocProvider.of<GoogleAuthCubit>(context).logOut();
                   },
-                  style: Theme.of(context).textTheme.labelLarge!,
-                  txt: StringsManager.signOut.tr(),
+                  child: CustomElevatedBtn(
+                    onPressed: () {
+                      BlocProvider.of<GoogleAuthCubit>(context).logOut();
+                    },
+                    style: Theme.of(context).textTheme.labelLarge!,
+                    txt: StringsManager.signOut.tr(),
+                  ),
                 ),
-              ),
-            )),
-      ],
+              )),
+        ],
+      ),
     );
   }
 }

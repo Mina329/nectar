@@ -23,6 +23,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   @override
   void initState() {
     super.initState();
+    fieldText = TextEditingController();
     fieldText.addListener(() {
       setState(() {
         showSuffixIcon = fieldText.text.isNotEmpty;
@@ -36,7 +37,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
     super.dispose();
   }
 
-  final fieldText = TextEditingController();
+  late TextEditingController fieldText;
   bool showSuffixIcon = false;
   @override
   Widget build(BuildContext context) {

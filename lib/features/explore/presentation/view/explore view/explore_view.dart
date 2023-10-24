@@ -3,9 +3,8 @@ import 'package:nectar/features/explore/presentation/view/explore%20view/widgets
 
 class ExploreView extends StatelessWidget {
   const ExploreView({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return ExploreViewBody();
+    return const ExploreViewBody();
   }
 }

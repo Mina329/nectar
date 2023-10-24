@@ -7,9 +7,7 @@ if (localPropertiesFile.exists()) {
 }
 
 def flutterRoot = localProperties.getProperty('flutter.sdk')
-if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
-}
+
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
@@ -56,16 +54,16 @@ android {
     signingConfigs{
         
         release{
-            keyAlias 'androiddebugkey'
-            keyPassword 'nectar'
-            storeFile file('nectar-keystore.jks')
-            storePassword 'nectar'
+            keyAlias localProperties.getProperty('keystore.alias')
+            keyPassword localProperties.getProperty('keystore.keypass')
+            storeFile file(localProperties.getProperty('keystore.path'))
+            storePassword localProperties.getProperty('keystore.storepass')
         }
         debug{
-            keyAlias 'androiddebugkey'
-            keyPassword 'nectar'
-            storeFile file('nectar-keystore.jks')
-            storePassword 'nectar'
+            keyAlias localProperties.getProperty('keystore.alias')
+            keyPassword localProperties.getProperty('keystore.keypass')
+            storeFile file(localProperties.getProperty('keystore.path'))
+            storePassword localProperties.getProperty('keystore.storepass')
         }
     }
 

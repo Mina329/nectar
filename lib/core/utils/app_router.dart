@@ -5,6 +5,7 @@ import 'package:nectar/core/utils/service_locator.dart';
 import 'package:nectar/features/account/presentation/view/setting%20view/setting_view.dart';
 import 'package:nectar/features/auth/data/repos/auth_repo.dart';
 import 'package:nectar/features/auth/presentation/view%20model/google_auth_cubit/google_auth_cubit.dart';
+import 'package:nectar/features/auth/presentation/view%20model/phone_auth_cubit/phone_auth_cubit.dart';
 import 'package:nectar/features/delivery_address/presentation/view/address%20confirm%20view/address_confirm_view.dart';
 import 'package:nectar/features/delivery_address/presentation/view/google%20map%20view/widgets/google_map_app_bar.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/delivery_address_cubit/delivery_address_cubit.dart';
@@ -32,6 +33,7 @@ import '../../features/delivery_address/presentation/view/search address view/se
 import '../../features/delivery_address/presentation/view_model/address_cubit/address_cubit.dart';
 import '../../features/explore/data/models/category_model/category_model.dart';
 import '../../features/favourite/data/models/favourite_to_details_model.dart';
+import '../../features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 import '../../features/my_details/presentation/view/my_details_view.dart';
 import '../../features/orders/presentation/view/orders_view.dart';
 import '../../features/onboarding/presentation/view/onboarding_view.dart';
@@ -78,12 +80,17 @@ abstract class AppRouter {
         ),
       ),
       GoRoute(
-        path: kHomeView,
-        pageBuilder: (context, state) => screenTransition(
-          state,
-          const HomeView(),
-        ),
-      ),
+          path: kHomeView,
+          pageBuilder: (context, state) {
+            int initialPage = state.extra as int;
+            return screenTransition(
+              state,
+              BlocProvider(
+                create: (context) => NavigationBarCubit(),
+                child: HomeView(initialPage: initialPage),
+              ),
+            );
+          }),
       GoRoute(
         path: kItemDetailsView,
         pageBuilder: (context, state) {
@@ -327,15 +334,24 @@ abstract class AppRouter {
         path: kPhoneAuthView,
         pageBuilder: (context, state) => screenTransition(
           state,
-          const PhoneAuthView(),
+          BlocProvider(
+            create: (context) => PhoneAuthCubit()..init(),
+            child: const PhoneAuthView(),
+          ),
         ),
       ),
       GoRoute(
         path: kPhoneVerifyView,
-        pageBuilder: (context, state) => screenTransition(
-          state,
-          const PhoneVerifyView(),
-        ),
+        pageBuilder: (context, state) {
+          PhoneAuthCubit cubit = state.extra as PhoneAuthCubit;
+          return screenTransition(
+            state,
+            BlocProvider.value(
+              value: cubit,
+              child: const PhoneVerifyView(),
+            ),
+          );
+        },
       ),
       GoRoute(
           path: kSectionView,

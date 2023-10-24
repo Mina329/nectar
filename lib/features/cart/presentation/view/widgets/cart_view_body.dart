@@ -15,147 +15,188 @@ import '../../../../../core/widgets/custom_app_bar.dart';
 import '../../../../../core/widgets/custom_empty_widget.dart';
 import '../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../../core/widgets/custom_toast_widget.dart';
+import '../../../../home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 import 'cart_item_list_view.dart';
 import 'cart_item_shimmer.dart';
 import 'cart_total_price.dart';
 import '../../../../../core/widgets/custom_positioned_button.dart';
 
-class CartViewBody extends StatelessWidget {
+class CartViewBody extends StatefulWidget {
   const CartViewBody({super.key});
 
   @override
+  State<CartViewBody> createState() => _CartViewBodyState();
+}
+
+class _CartViewBodyState extends State<CartViewBody> {
+  late ScrollController _scrollController;
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            CustomAppBar(
-              title: StringsManager.myCart.tr(),
+    return WillPopScope(
+      onWillPop: () async {
+        if (_scrollController.offset > 0.0) {
+          _scrollController.animateTo(
+            0.0,
+            duration: const Duration(
+              milliseconds: 500,
             ),
-            const SliverToBoxAdapter(
-              child: Divider(),
-            ),
-            BlocBuilder<CartCubit, CartState>(
-              builder: (context, cartState) {
-                if (cartState is CartLoading) {
-                  return SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) => Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 25.w),
-                        child: const CartItemShimmer(),
-                      ),
-                      childCount: 10,
-                    ),
-                  );
-                } else if (cartState is CartFailure) {
-                  CustomToastWidget.buildCustomToast(
-                      context, cartState.errMessage, ToastType.failure, 200.h);
-                  return SliverToBoxAdapter(
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(15.h),
-                        child: SvgPicture.asset(
-                          AssetsManager.error,
-                          width: 300.w,
-                          height: 500.h,
+            curve: Curves.ease,
+          );
+          return false;
+        } else {
+          BlocProvider.of<NavigationBarCubit>(context)
+              .savedPageController
+              .jumpToPage(0);
+          BlocProvider.of<NavigationBarCubit>(context).changeIndex(0);
+
+          return false;
+        }
+      },
+      child: Stack(
+        children: [
+          CustomScrollView(
+            controller: _scrollController,
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              CustomAppBar(
+                title: StringsManager.myCart.tr(),
+              ),
+              const SliverToBoxAdapter(
+                child: Divider(),
+              ),
+              BlocBuilder<CartCubit, CartState>(
+                builder: (context, cartState) {
+                  if (cartState is CartLoading) {
+                    return SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) => Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 25.w),
+                          child: const CartItemShimmer(),
                         ),
-                      ),
-                    ),
-                  );
-                } else if (cartState is CartSuccess) {
-                  if (cartState.cart.items!.isEmpty) {
-                    return const SliverFillRemaining(
-                      child: Center(
-                        child: CustomEmptyWidget(),
+                        childCount: 10,
                       ),
                     );
-                  }
-                  return CartItemListView(
-                    cartModel: cartState.cart,
-                  );
-                }
-                return const SliverToBoxAdapter();
-              },
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 67.h,
-              ),
-            ),
-          ],
-        ),
-        BlocListener<CheckoutCubit, CheckoutState>(
-          listener: (context, state) async {
-            if (state is CheckoutLoading) {
-              CustomLoadingIndicator.buildLoadingIndicator(context);
-            } else if (state is CheckoutFailure) {
-              GoRouter.of(context).pop();
-              CustomToastWidget.buildCustomToast(
-                  context, state.errMessage, ToastType.failure, 200.h);
-            } else if (state is CheckoutSuccess) {
-              GoRouter.of(context).pop();
-              Stripe.publishableKey = state.checkoutModel.publishableKey!;
-              await Stripe.instance.initPaymentSheet(
-                paymentSheetParameters: SetupPaymentSheetParameters(
-                  appearance: PaymentSheetAppearance(
-                    colors: PaymentSheetAppearanceColors(
-                      icon: Theme.of(context).brightness == Brightness.light
-                          ? ColorManager.darkBluePrimary
-                          : ColorManager.whiteText,
-                      background: Theme.of(context).scaffoldBackgroundColor,
-                      componentBackground:
-                          Theme.of(context).brightness == Brightness.light
-                              ? ColorManager.whiteBackground
-                              : ColorManager.darkBluePrimary,
-                      componentBorder: ColorManager.borderColorDARK,
-                      componentDivider: ColorManager.borderColorDARK,
-                      componentText:
-                          Theme.of(context).brightness == Brightness.light
-                              ? ColorManager.darkBluePrimary
-                              : ColorManager.whiteText,
-                      primaryText:
-                          Theme.of(context).brightness == Brightness.light
-                              ? ColorManager.darkBluePrimary
-                              : ColorManager.whiteText,
-                      secondaryText:
-                          Theme.of(context).brightness == Brightness.light
-                              ? ColorManager.darkBluePrimary
-                              : ColorManager.whiteText,
-                      placeholderText:
-                          Theme.of(context).brightness == Brightness.light
-                              ? ColorManager.darkBluePrimary
-                              : ColorManager.whiteText,
-                    ),
-                    primaryButton: const PaymentSheetPrimaryButtonAppearance(
-                      colors: PaymentSheetPrimaryButtonTheme(
-                        light: PaymentSheetPrimaryButtonThemeColors(
-                          background: ColorManager.green,
+                  } else if (cartState is CartFailure) {
+                    CustomToastWidget.buildCustomToast(context,
+                        cartState.errMessage, ToastType.failure, 200.h);
+                    return SliverToBoxAdapter(
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(15.h),
+                          child: SvgPicture.asset(
+                            AssetsManager.error,
+                            width: 300.w,
+                            height: 500.h,
+                          ),
                         ),
-                        dark: PaymentSheetPrimaryButtonThemeColors(
-                          background: ColorManager.green,
+                      ),
+                    );
+                  } else if (cartState is CartSuccess) {
+                    if (cartState.cart.items!.isEmpty) {
+                      return const SliverFillRemaining(
+                        child: Center(
+                          child: CustomEmptyWidget(),
+                        ),
+                      );
+                    }
+                    return CartItemListView(
+                      cartModel: cartState.cart,
+                    );
+                  }
+                  return const SliverToBoxAdapter();
+                },
+              ),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 67.h,
+                ),
+              ),
+            ],
+          ),
+          BlocListener<CheckoutCubit, CheckoutState>(
+            listener: (context, state) async {
+              if (state is CheckoutLoading) {
+                CustomLoadingIndicator.buildLoadingIndicator(context);
+              } else if (state is CheckoutFailure) {
+                GoRouter.of(context).pop();
+                CustomToastWidget.buildCustomToast(
+                    context, state.errMessage, ToastType.failure, 200.h);
+              } else if (state is CheckoutSuccess) {
+                GoRouter.of(context).pop();
+                Stripe.publishableKey = state.checkoutModel.publishableKey!;
+                await Stripe.instance.initPaymentSheet(
+                  paymentSheetParameters: SetupPaymentSheetParameters(
+                    appearance: PaymentSheetAppearance(
+                      colors: PaymentSheetAppearanceColors(
+                        icon: Theme.of(context).brightness == Brightness.light
+                            ? ColorManager.darkBluePrimary
+                            : ColorManager.whiteText,
+                        background: Theme.of(context).scaffoldBackgroundColor,
+                        componentBackground:
+                            Theme.of(context).brightness == Brightness.light
+                                ? ColorManager.whiteBackground
+                                : ColorManager.darkBluePrimary,
+                        componentBorder: ColorManager.borderColorDARK,
+                        componentDivider: ColorManager.borderColorDARK,
+                        componentText:
+                            Theme.of(context).brightness == Brightness.light
+                                ? ColorManager.darkBluePrimary
+                                : ColorManager.whiteText,
+                        primaryText:
+                            Theme.of(context).brightness == Brightness.light
+                                ? ColorManager.darkBluePrimary
+                                : ColorManager.whiteText,
+                        secondaryText:
+                            Theme.of(context).brightness == Brightness.light
+                                ? ColorManager.darkBluePrimary
+                                : ColorManager.whiteText,
+                        placeholderText:
+                            Theme.of(context).brightness == Brightness.light
+                                ? ColorManager.darkBluePrimary
+                                : ColorManager.whiteText,
+                      ),
+                      primaryButton: const PaymentSheetPrimaryButtonAppearance(
+                        colors: PaymentSheetPrimaryButtonTheme(
+                          light: PaymentSheetPrimaryButtonThemeColors(
+                            background: ColorManager.green,
+                          ),
+                          dark: PaymentSheetPrimaryButtonThemeColors(
+                            background: ColorManager.green,
+                          ),
                         ),
                       ),
                     ),
+                    paymentIntentClientSecret: state.checkoutModel.clientSecret,
+                    merchantDisplayName: 'Nectar',
                   ),
-                  paymentIntentClientSecret: state.checkoutModel.clientSecret,
-                  merchantDisplayName: 'Nectar',
-                ),
-              );
-              await Stripe.instance.presentPaymentSheet();
-            }
-          },
-          child: CustomPositionedButton(
-            onPressed: () {
-              BlocProvider.of<CheckoutCubit>(context).checkoutCart();
+                );
+                await Stripe.instance.presentPaymentSheet();
+              }
             },
-            txt: StringsManager.goToCheckout.tr(),
+            child: CustomPositionedButton(
+              onPressed: () {
+                BlocProvider.of<CheckoutCubit>(context).checkoutCart();
+              },
+              txt: StringsManager.goToCheckout.tr(),
+            ),
           ),
-        ),
-        CartTotalPrice(
-          isArabic: context.locale == ARABIC_LOCALE,
-        ),
-      ],
+          CartTotalPrice(
+            isArabic: context.locale == ARABIC_LOCALE,
+          ),
+        ],
+      ),
     );
   }
 }

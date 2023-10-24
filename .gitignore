@@ -46,7 +46,4 @@ app.*.map.json
 # Ignore config.dart in the specified path
 lib/core/utils/config.dart
 
-
-
-
-
+nectar.jks

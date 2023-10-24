@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,8 +75,7 @@ class LoginViewBody extends StatelessWidget {
                         CustomToastWidget.buildCustomToast(context,
                             state.errMessage, ToastType.failure, 200.h);
                       } else if (state is GoogleLogInAuthSuccess) {
-                        state.account.authentication
-                            .then((value) => print(value.accessToken));
+                        //log(state.account.serverAuthCode);
                         GoRouter.of(context).pop();
                         GoRouter.of(context).push(AppRouter.kPhoneAuthView);
                       }

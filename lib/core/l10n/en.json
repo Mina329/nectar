@@ -96,5 +96,8 @@
   "currency": "£",
   "success": "Operation was successful",
   "delete": "Delete",
-  "swipe": "Swipe to Delete"
+  "swipe": "Swipe to Delete",
+  "wrongCode": "The Provided Code is wrong",
+  "numberConfirm": "Are you sure this is your number? ",
+  "cancel" : "Cancel"
 }

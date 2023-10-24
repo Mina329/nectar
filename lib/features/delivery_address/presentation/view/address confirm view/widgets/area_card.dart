@@ -10,6 +10,10 @@ import 'package:nectar/features/delivery_address/presentation/view_model/locatio
 import '../../../../../../core/cache/cache_helper.dart';
 import '../../../../../../core/cache/cache_keys_values.dart';
 import '../../../../../../core/utils/color_manager.dart';
+import '../../../../../account/presentation/view model/account_info_cubit/account_info_cubit.dart';
+import '../../../../data/models/address_delivery_navigation_model/address_delivery_navigation_model.dart';
+import '../../../view_model/address_cubit/address_cubit.dart';
+import '../../../view_model/delivery_address_cubit/delivery_address_cubit.dart';
 
 class AreaCard extends StatelessWidget {
   const AreaCard({super.key, required this.placeName});
@@ -61,11 +65,14 @@ class AreaCard extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       BlocProvider.of<LocationBloc>(context).fromChange = true;
-                      final locationBloc =
-                          BlocProvider.of<LocationBloc>(context);
-
                       GoRouter.of(context)
-                          .pushReplacement(AppRouter.kGoogleMapView,extra: locationBloc);
+                          .pushReplacement(AppRouter.kGoogleMapView,
+                              extra: AddressDeliveryNavigationModel(
+                                BlocProvider.of<LocationBloc>(context),
+                                BlocProvider.of<AddressCubit>(context),
+                                BlocProvider.of<AccountInfoCubit>(context),
+                                BlocProvider.of<DeliveryAddressCubit>(context),
+                              ));
                     },
                     child: Text(
                       StringsManager.change.tr(),

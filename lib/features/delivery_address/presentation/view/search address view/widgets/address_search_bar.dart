@@ -16,8 +16,14 @@ class AddressSearchBar extends StatefulWidget {
 }
 
 class _AddressSearchBarState extends State<AddressSearchBar> {
-  final fieldText = TextEditingController();
+  late TextEditingController fieldText;
   bool showSuffixIcon = false;
+  @override
+  void initState() {
+    super.initState();
+    fieldText = TextEditingController();
+  }
+
   @override
   void dispose() {
     fieldText.dispose();
