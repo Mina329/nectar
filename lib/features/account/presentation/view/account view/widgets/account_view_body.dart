@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:nectar/core/cache/cache_helper.dart';
 import 'package:nectar/core/cache/cache_keys_values.dart';
 import 'package:nectar/core/utils/app_router.dart';
@@ -121,9 +122,9 @@ class _AccountViewBodyState extends State<AccountViewBody> {
                           context, state.errMessage, ToastType.failure, 200.h);
                     } else if (state is GoogleLogOutAuthSuccess) {
                       GoRouter.of(context).pop();
-                      await CacheData.setData(
-                          key: CacheKeys.kSIGNED,
-                          value: CacheValues.NOT_SIGNED);
+                      await CacheData.setSecuredData(
+                          key: CacheKeys.kOAUTHTOKEN, value: null);
+                      await HydratedBloc.storage.clear();
                       if (context.mounted) {
                         GoRouter.of(context).go(AppRouter.kLoginView);
                       }

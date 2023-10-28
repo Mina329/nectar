@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +37,11 @@ class CartItemActionButtons extends StatelessWidget {
           children: [
             CustomRoundedSquareWidget(
               onTap: () {
-                BlocProvider.of<CartItemCubit>(context).decrementItem();
+                if (BlocProvider.of<CartItemCubit>(context).quantity == 1) {
+                  BlocProvider.of<CartItemCubit>(context).deleteItem();
+                } else {
+                  BlocProvider.of<CartItemCubit>(context).decrementItem();
+                }
               },
               child: Icon(
                 FontAwesomeIcons.minus,

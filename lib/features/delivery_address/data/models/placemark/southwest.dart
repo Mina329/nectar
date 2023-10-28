@@ -5,10 +5,11 @@ part 'southwest.g.dart';
 
 @freezed
 class Southwest with _$Southwest {
-	factory Southwest({
-		double? lat,
-		double? lng,
-	}) = _Southwest;
+  factory Southwest({
+    double? lat,
+    double? lng,
+  }) = _Southwest;
 
-	factory Southwest.fromJson(Map<String, dynamic> json) => _$SouthwestFromJson(json);
+  factory Southwest.fromJson(Map<String, dynamic> json) =>
+      _$SouthwestFromJson(json);
 }

@@ -5,12 +5,12 @@ part 'rise.g.dart';
 
 @freezed
 class Rise with _$Rise {
-	factory Rise({
-		int? apparent,
-		int? astronomical,
-		int? civil,
-		int? nautical,
-	}) = _Rise;
+  factory Rise({
+    int? apparent,
+    int? astronomical,
+    int? civil,
+    int? nautical,
+  }) = _Rise;
 
-	factory Rise.fromJson(Map<String, dynamic> json) => _$RiseFromJson(json);
+  factory Rise.fromJson(Map<String, dynamic> json) => _$RiseFromJson(json);
 }

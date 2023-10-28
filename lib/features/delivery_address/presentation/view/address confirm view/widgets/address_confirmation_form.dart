@@ -8,7 +8,10 @@ class AddressConfirmationForm extends StatelessWidget {
       {super.key,
       required this.formKey,
       required this.streetName,
-      required this.buildingNumber, required this.onSavedBuildingNumber, required this.onSavedAppartmentNumber, required this.onSavedFloor});
+      required this.buildingNumber,
+      required this.onSavedBuildingNumber,
+      required this.onSavedAppartmentNumber,
+      required this.onSavedFloor});
   final GlobalKey<FormState> formKey;
   final String streetName;
   final String buildingNumber;

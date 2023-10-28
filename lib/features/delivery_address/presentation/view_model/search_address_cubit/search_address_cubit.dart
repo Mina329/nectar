@@ -10,7 +10,8 @@ import '../../../data/repos/delivery_address_repo.dart';
 part 'search_address_state.dart';
 
 class SearchAddressCubit extends Cubit<SearchAddressState> {
-  SearchAddressCubit(this.deliveryAddressRepo, this.controller) : super(SearchAddressInitial());
+  SearchAddressCubit(this.deliveryAddressRepo, this.controller)
+      : super(SearchAddressInitial());
   final DeliveryAddressRepo deliveryAddressRepo;
   final Completer<GoogleMapController> controller;
 

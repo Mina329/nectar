@@ -4,13 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nectar/core/cache/cache_helper.dart';
-import 'package:nectar/core/cache/cache_keys_values.dart';
 import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/features/auth/presentation/view%20model/phone_auth_cubit/phone_auth_cubit.dart';
 import 'package:nectar/features/auth/presentation/view/phone%20auth%20view/widgets/auth_app_bar.dart';
 import 'package:nectar/features/auth/presentation/view/phone%20verify%20view/widgets/otp_form.dart';
-import 'package:nectar/main.dart';
 
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/strings_manager.dart';
@@ -102,10 +99,7 @@ class _PhoneVerifyViewBodyState extends State<PhoneVerifyViewBody> {
   FloatingActionButton buildForwardButton(BuildContext context) {
     return FloatingActionButton(
       onPressed: () async {
-        await CacheData.setData(key: CacheKeys.kSIGNED, value: testToken);
-        if (context.mounted) {
-          GoRouter.of(context).go(AppRouter.kHomeView, extra: 0);
-        }
+        GoRouter.of(context).go(AppRouter.kHomeView, extra: 0);
       },
       backgroundColor: ColorManager.green,
       child: const Center(

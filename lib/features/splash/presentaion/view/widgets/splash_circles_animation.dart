@@ -21,7 +21,7 @@ class UpperCircleAnimation extends StatelessWidget {
       child: AnimatedBuilder(
         animation: circlesAnimationController,
         builder: (context, child) => CustomPaint(
-          painter: CirclePainter(upperCircleAnimation.value,context),
+          painter: CirclePainter(upperCircleAnimation.value, context),
           size: Size.square(120.w),
         ),
       ),
@@ -47,7 +47,7 @@ class LowerCircleAnimation extends StatelessWidget {
       child: AnimatedBuilder(
         animation: circlesAnimationController,
         builder: (context, child) => CustomPaint(
-          painter: CirclePainter(lowerCircleAnimation.value,context),
+          painter: CirclePainter(lowerCircleAnimation.value, context),
           size: Size.square(200.w),
         ),
       ),
@@ -55,13 +55,9 @@ class LowerCircleAnimation extends StatelessWidget {
   }
 }
 
-
-
-
-
 class CirclePainter extends CustomPainter {
   final double _size;
-    BuildContext context;
+  BuildContext context;
 
   CirclePainter(
     this._size,
@@ -70,7 +66,9 @@ class CirclePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
-    paint.color = Theme.of(context).brightness == Brightness.light ? const Color(0xffEDF2E6) : ColorManager.green.withAlpha(30) ;
+    paint.color = Theme.of(context).brightness == Brightness.light
+        ? const Color(0xffEDF2E6)
+        : ColorManager.green.withAlpha(30);
     paint.style = PaintingStyle.fill;
     canvas.drawCircle(Offset(size.width / 2, size.height / 2), _size, paint);
   }

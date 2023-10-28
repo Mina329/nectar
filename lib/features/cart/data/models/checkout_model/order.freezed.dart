@@ -20,11 +20,10 @@ Order _$OrderFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Order {
-  String? get userId => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
-  DateTime? get orderDate => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
-  int? get totalPrice => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get expiresAt => throw _privateConstructorUsedError;
   List<Item>? get items => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,11 +37,10 @@ abstract class $OrderCopyWith<$Res> {
       _$OrderCopyWithImpl<$Res, Order>;
   @useResult
   $Res call(
-      {String? userId,
-      String? id,
-      DateTime? orderDate,
+      {String? id,
       String? status,
-      int? totalPrice,
+      DateTime? createdAt,
+      DateTime? expiresAt,
       List<Item>? items});
 }
 
@@ -59,34 +57,29 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = freezed,
     Object? id = freezed,
-    Object? orderDate = freezed,
     Object? status = freezed,
-    Object? totalPrice = freezed,
+    Object? createdAt = freezed,
+    Object? expiresAt = freezed,
     Object? items = freezed,
   }) {
     return _then(_value.copyWith(
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      orderDate: freezed == orderDate
-          ? _value.orderDate
-          : orderDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      totalPrice: freezed == totalPrice
-          ? _value.totalPrice
-          : totalPrice // ignore: cast_nullable_to_non_nullable
-              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      expiresAt: freezed == expiresAt
+          ? _value.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       items: freezed == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
@@ -102,11 +95,10 @@ abstract class _$$_OrderCopyWith<$Res> implements $OrderCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String? userId,
-      String? id,
-      DateTime? orderDate,
+      {String? id,
       String? status,
-      int? totalPrice,
+      DateTime? createdAt,
+      DateTime? expiresAt,
       List<Item>? items});
 }
 
@@ -119,34 +111,29 @@ class __$$_OrderCopyWithImpl<$Res> extends _$OrderCopyWithImpl<$Res, _$_Order>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = freezed,
     Object? id = freezed,
-    Object? orderDate = freezed,
     Object? status = freezed,
-    Object? totalPrice = freezed,
+    Object? createdAt = freezed,
+    Object? expiresAt = freezed,
     Object? items = freezed,
   }) {
     return _then(_$_Order(
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      orderDate: freezed == orderDate
-          ? _value.orderDate
-          : orderDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      totalPrice: freezed == totalPrice
-          ? _value.totalPrice
-          : totalPrice // ignore: cast_nullable_to_non_nullable
-              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      expiresAt: freezed == expiresAt
+          ? _value.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       items: freezed == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
@@ -159,11 +146,10 @@ class __$$_OrderCopyWithImpl<$Res> extends _$OrderCopyWithImpl<$Res, _$_Order>
 @JsonSerializable()
 class _$_Order implements _Order {
   _$_Order(
-      {this.userId,
-      this.id,
-      this.orderDate,
+      {this.id,
       this.status,
-      this.totalPrice,
+      this.createdAt,
+      this.expiresAt,
       final List<Item>? items})
       : _items = items;
 
@@ -171,15 +157,13 @@ class _$_Order implements _Order {
       _$$_OrderFromJson(json);
 
   @override
-  final String? userId;
-  @override
   final String? id;
-  @override
-  final DateTime? orderDate;
   @override
   final String? status;
   @override
-  final int? totalPrice;
+  final DateTime? createdAt;
+  @override
+  final DateTime? expiresAt;
   final List<Item>? _items;
   @override
   List<Item>? get items {
@@ -192,7 +176,7 @@ class _$_Order implements _Order {
 
   @override
   String toString() {
-    return 'Order(userId: $userId, id: $id, orderDate: $orderDate, status: $status, totalPrice: $totalPrice, items: $items)';
+    return 'Order(id: $id, status: $status, createdAt: $createdAt, expiresAt: $expiresAt, items: $items)';
   }
 
   @override
@@ -200,20 +184,19 @@ class _$_Order implements _Order {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Order &&
-            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.orderDate, orderDate) ||
-                other.orderDate == orderDate) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.totalPrice, totalPrice) ||
-                other.totalPrice == totalPrice) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.expiresAt, expiresAt) ||
+                other.expiresAt == expiresAt) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, id, orderDate, status,
-      totalPrice, const DeepCollectionEquality().hash(_items));
+  int get hashCode => Object.hash(runtimeType, id, status, createdAt, expiresAt,
+      const DeepCollectionEquality().hash(_items));
 
   @JsonKey(ignore: true)
   @override
@@ -231,25 +214,22 @@ class _$_Order implements _Order {
 
 abstract class _Order implements Order {
   factory _Order(
-      {final String? userId,
-      final String? id,
-      final DateTime? orderDate,
+      {final String? id,
       final String? status,
-      final int? totalPrice,
+      final DateTime? createdAt,
+      final DateTime? expiresAt,
       final List<Item>? items}) = _$_Order;
 
   factory _Order.fromJson(Map<String, dynamic> json) = _$_Order.fromJson;
 
   @override
-  String? get userId;
-  @override
   String? get id;
-  @override
-  DateTime? get orderDate;
   @override
   String? get status;
   @override
-  int? get totalPrice;
+  DateTime? get createdAt;
+  @override
+  DateTime? get expiresAt;
   @override
   List<Item>? get items;
   @override

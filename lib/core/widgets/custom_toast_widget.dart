@@ -73,7 +73,7 @@ class CustomToastWidget extends StatelessWidget {
   }
 
   static buildCustomToast(
-      BuildContext context, String msg, ToastType type, double height) {
+      BuildContext context, String msg, ToastType type, double? height) {
     return WidgetsBinding.instance.addPostFrameCallback((_) {
       ScaffoldMessenger.of(context)
         ..clearSnackBars()
@@ -83,7 +83,7 @@ class CustomToastWidget extends StatelessWidget {
             dismissDirection: DismissDirection.none,
             duration: const Duration(seconds: 1),
             margin: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height - height,
+                bottom: MediaQuery.of(context).size.height - 250.h,
                 right: 20,
                 left: 20),
             backgroundColor: Colors.transparent,

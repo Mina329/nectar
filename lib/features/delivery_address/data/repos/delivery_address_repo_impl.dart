@@ -127,13 +127,11 @@ class DeliveryAddressRepoImpl extends DeliveryAddressRepo {
       );
     }
   }
-  
+
   @override
-  Future<Either<Failure, String>> patchDefaultAddress(String id)async {
+  Future<Either<Failure, String>> patchDefaultAddress(String id) async {
     try {
-      Map<String, dynamic> requestData = {
-        "isDefault": true
-      };
+      Map<String, dynamic> requestData = {"isDefault": true};
       var data = await _apiService.patch(
           endPoint: "api/v1/profile/addresses/$id", requestData: requestData);
       return right(data.data['message']);

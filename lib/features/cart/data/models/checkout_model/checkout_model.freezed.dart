@@ -21,8 +21,8 @@ CheckoutModel _$CheckoutModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CheckoutModel {
   Order? get order => throw _privateConstructorUsedError;
-  String? get clientSecret => throw _privateConstructorUsedError;
-  String? get publishableKey => throw _privateConstructorUsedError;
+  String? get cs => throw _privateConstructorUsedError;
+  String? get pk => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $CheckoutModelCopyWith<$Res> {
           CheckoutModel value, $Res Function(CheckoutModel) then) =
       _$CheckoutModelCopyWithImpl<$Res, CheckoutModel>;
   @useResult
-  $Res call({Order? order, String? clientSecret, String? publishableKey});
+  $Res call({Order? order, String? cs, String? pk});
 
   $OrderCopyWith<$Res>? get order;
 }
@@ -55,21 +55,21 @@ class _$CheckoutModelCopyWithImpl<$Res, $Val extends CheckoutModel>
   @override
   $Res call({
     Object? order = freezed,
-    Object? clientSecret = freezed,
-    Object? publishableKey = freezed,
+    Object? cs = freezed,
+    Object? pk = freezed,
   }) {
     return _then(_value.copyWith(
       order: freezed == order
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as Order?,
-      clientSecret: freezed == clientSecret
-          ? _value.clientSecret
-          : clientSecret // ignore: cast_nullable_to_non_nullable
+      cs: freezed == cs
+          ? _value.cs
+          : cs // ignore: cast_nullable_to_non_nullable
               as String?,
-      publishableKey: freezed == publishableKey
-          ? _value.publishableKey
-          : publishableKey // ignore: cast_nullable_to_non_nullable
+      pk: freezed == pk
+          ? _value.pk
+          : pk // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -95,7 +95,7 @@ abstract class _$$_CheckoutModelCopyWith<$Res>
       __$$_CheckoutModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Order? order, String? clientSecret, String? publishableKey});
+  $Res call({Order? order, String? cs, String? pk});
 
   @override
   $OrderCopyWith<$Res>? get order;
@@ -113,21 +113,21 @@ class __$$_CheckoutModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? order = freezed,
-    Object? clientSecret = freezed,
-    Object? publishableKey = freezed,
+    Object? cs = freezed,
+    Object? pk = freezed,
   }) {
     return _then(_$_CheckoutModel(
       order: freezed == order
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as Order?,
-      clientSecret: freezed == clientSecret
-          ? _value.clientSecret
-          : clientSecret // ignore: cast_nullable_to_non_nullable
+      cs: freezed == cs
+          ? _value.cs
+          : cs // ignore: cast_nullable_to_non_nullable
               as String?,
-      publishableKey: freezed == publishableKey
-          ? _value.publishableKey
-          : publishableKey // ignore: cast_nullable_to_non_nullable
+      pk: freezed == pk
+          ? _value.pk
+          : pk // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -136,7 +136,7 @@ class __$$_CheckoutModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_CheckoutModel implements _CheckoutModel {
-  _$_CheckoutModel({this.order, this.clientSecret, this.publishableKey});
+  _$_CheckoutModel({this.order, this.cs, this.pk});
 
   factory _$_CheckoutModel.fromJson(Map<String, dynamic> json) =>
       _$$_CheckoutModelFromJson(json);
@@ -144,13 +144,13 @@ class _$_CheckoutModel implements _CheckoutModel {
   @override
   final Order? order;
   @override
-  final String? clientSecret;
+  final String? cs;
   @override
-  final String? publishableKey;
+  final String? pk;
 
   @override
   String toString() {
-    return 'CheckoutModel(order: $order, clientSecret: $clientSecret, publishableKey: $publishableKey)';
+    return 'CheckoutModel(order: $order, cs: $cs, pk: $pk)';
   }
 
   @override
@@ -159,16 +159,13 @@ class _$_CheckoutModel implements _CheckoutModel {
         (other.runtimeType == runtimeType &&
             other is _$_CheckoutModel &&
             (identical(other.order, order) || other.order == order) &&
-            (identical(other.clientSecret, clientSecret) ||
-                other.clientSecret == clientSecret) &&
-            (identical(other.publishableKey, publishableKey) ||
-                other.publishableKey == publishableKey));
+            (identical(other.cs, cs) || other.cs == cs) &&
+            (identical(other.pk, pk) || other.pk == pk));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, order, clientSecret, publishableKey);
+  int get hashCode => Object.hash(runtimeType, order, cs, pk);
 
   @JsonKey(ignore: true)
   @override
@@ -187,8 +184,8 @@ class _$_CheckoutModel implements _CheckoutModel {
 abstract class _CheckoutModel implements CheckoutModel {
   factory _CheckoutModel(
       {final Order? order,
-      final String? clientSecret,
-      final String? publishableKey}) = _$_CheckoutModel;
+      final String? cs,
+      final String? pk}) = _$_CheckoutModel;
 
   factory _CheckoutModel.fromJson(Map<String, dynamic> json) =
       _$_CheckoutModel.fromJson;
@@ -196,9 +193,9 @@ abstract class _CheckoutModel implements CheckoutModel {
   @override
   Order? get order;
   @override
-  String? get clientSecret;
+  String? get cs;
   @override
-  String? get publishableKey;
+  String? get pk;
   @override
   @JsonKey(ignore: true)
   _$$_CheckoutModelCopyWith<_$_CheckoutModel> get copyWith =>

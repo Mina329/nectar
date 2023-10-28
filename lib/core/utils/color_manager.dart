@@ -14,7 +14,6 @@ class ColorManager {
   static const facebookButton = Color(0xff4A66AC);
   static const loginBackground = Color(0xfffcfcfc);
 
-
 // ############### SCAFFOLD #############
   static const whiteBackground = Color(0xffffffff);
   static const darkBlueBackground = Color(0xff16171b);
@@ -22,7 +21,7 @@ class ColorManager {
   static const darkBluePrimary = Color(0xff1f1f23);
   static const secondaryBackgroundLIGHT = Color(0xffF2F3F2);
   static const secondaryBackgroundDARK = Color(0xff1f1f24);
-  
+
 // ############### WIDGETS #############
 
   static const borderColorLIGHT = Color(0xffE2E2E2);

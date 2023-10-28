@@ -5,10 +5,11 @@ part 'geometry.g.dart';
 
 @freezed
 class Geometry with _$Geometry {
-	factory Geometry({
-		double? lat,
-		double? lng,
-	}) = _Geometry;
+  factory Geometry({
+    double? lat,
+    double? lng,
+  }) = _Geometry;
 
-	factory Geometry.fromJson(Map<String, dynamic> json) => _$GeometryFromJson(json);
+  factory Geometry.fromJson(Map<String, dynamic> json) =>
+      _$GeometryFromJson(json);
 }

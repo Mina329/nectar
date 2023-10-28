@@ -15,8 +15,8 @@ class CartItemCubit extends Cubit<CartItemState> {
 
   Future<void> incrementItem() async {
     emit(CartItemLoading());
-    var result =
-        await cartRepo.addItemsToCart(itemId: item.item!.id!, quantity: 1);
+    var result = await cartRepo.updateItemsToCart(
+        itemId: item.item!.id!, quantity: quantity + 1);
     result.fold(
       (failure) => emit(
         CartItemFailure(
@@ -57,7 +57,8 @@ class CartItemCubit extends Cubit<CartItemState> {
 
   Future<void> deleteItem() async {
     emit(CartItemLoading());
-    var result = await cartRepo.deleteItemFromCart(itemId: item.item!.id!);
+    var result =
+        await cartRepo.updateItemsToCart(itemId: item.item!.id!, quantity: 0);
     result.fold(
       (failure) => emit(
         CartItemFailure(

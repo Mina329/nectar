@@ -18,9 +18,9 @@ final class GoogleLogInAuthFailure extends GoogleAuthState {
 }
 
 final class GoogleLogInAuthSuccess extends GoogleAuthState {
-  final GoogleSignInAccount account;
+  final OauthModel user;
 
-  const GoogleLogInAuthSuccess(this.account);
+  const GoogleLogInAuthSuccess(this.user);
 }
 
 final class GoogleLogOutAuthLoading extends GoogleAuthState {}

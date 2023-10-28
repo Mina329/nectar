@@ -120,7 +120,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
         () => GoRouter.of(context).go(AppRouter.kOnBoardingView),
       );
     } else {
-      if (CacheData.getData(key: CacheKeys.kSIGNED) == CacheValues.NOT_SIGNED) {
+      if (await CacheData.getSecuredData(key: CacheKeys.kOAUTHTOKEN) == null) {
         await Future.delayed(
           const Duration(milliseconds: 3500),
           () => GoRouter.of(context).go(AppRouter.kLoginView),

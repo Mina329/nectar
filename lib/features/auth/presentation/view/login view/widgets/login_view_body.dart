@@ -61,7 +61,7 @@ class LoginViewBody extends StatelessWidget {
                     height: 80.h,
                   ),
                   BlocListener<GoogleAuthCubit, GoogleAuthState>(
-                    listener: (context, state) {
+                    listener: (context, state) async {
                       if (state is GoogleLogInAuthLoading) {
                         showDialog(
                           context: context,
@@ -75,9 +75,19 @@ class LoginViewBody extends StatelessWidget {
                         CustomToastWidget.buildCustomToast(context,
                             state.errMessage, ToastType.failure, 200.h);
                       } else if (state is GoogleLogInAuthSuccess) {
-                        //log(state.account.serverAuthCode);
                         GoRouter.of(context).pop();
-                        GoRouter.of(context).push(AppRouter.kPhoneAuthView);
+
+                        log(state.user.token!);
+                        if (state.user.user?.phoneNumber == null) {
+                          if (context.mounted) {
+                            GoRouter.of(context).push(AppRouter.kPhoneAuthView);
+                          }
+                        } else {
+                          if (context.mounted) {
+                            GoRouter.of(context)
+                                .push(AppRouter.kHomeView, extra: 0);
+                          }
+                        }
                       }
                     },
                     child: LoginButton(
@@ -88,17 +98,6 @@ class LoginViewBody extends StatelessWidget {
                         BlocProvider.of<GoogleAuthCubit>(context).logIn();
                       },
                     ),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  LoginButton(
-                    color: ColorManager.facebookButton,
-                    icon: FontAwesomeIcons.facebook,
-                    txt: StringsManager.facebookLogin.tr(),
-                    onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kPhoneAuthView);
-                    },
                   ),
                 ],
               ),

@@ -13,6 +13,7 @@ import 'package:nectar/core/widgets/custom_loading_indicator.dart';
 import 'package:nectar/features/auth/presentation/view%20model/phone_auth_cubit/phone_auth_cubit.dart';
 
 import '../../../../../../core/utils/app_router.dart';
+import 'auth_app_bar.dart';
 
 class PhoneAuthViewBody extends StatefulWidget {
   const PhoneAuthViewBody({super.key});
@@ -42,11 +43,12 @@ class _PhoneAuthViewBodyState extends State<PhoneAuthViewBody> {
           child: CustomScrollView(
             physics: const BouncingScrollPhysics(),
             slivers: [
-              SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 150.h,
+              const AuthAppBar(),
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 50.h,
+                  ),
                 ),
-              ),
               SliverToBoxAdapter(
                 child: Text(
                   StringsManager.enterMobile.tr(),

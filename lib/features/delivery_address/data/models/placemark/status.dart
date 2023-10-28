@@ -5,10 +5,10 @@ part 'status.g.dart';
 
 @freezed
 class Status with _$Status {
-	factory Status({
-		int? code,
-		String? message,
-	}) = _Status;
+  factory Status({
+    int? code,
+    String? message,
+  }) = _Status;
 
-	factory Status.fromJson(Map<String, dynamic> json) => _$StatusFromJson(json);
+  factory Status.fromJson(Map<String, dynamic> json) => _$StatusFromJson(json);
 }

@@ -30,7 +30,7 @@ Future<void> setupServiceLocator() async {
     DeliveryAddressRepoImpl(getIt.get<ApiService>()),
   );
   getIt.registerSingleton<AuthRepo>(
-    AuthRepoImpl(),
+    AuthRepoImpl(getIt.get<ApiService>()),
   );
   getIt.registerSingleton<ShopRepo>(
     ShopRepoImpl(getIt.get<ApiService>()),

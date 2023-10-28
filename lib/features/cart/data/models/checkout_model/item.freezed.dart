@@ -20,8 +20,8 @@ Item _$ItemFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Item {
-  String? get orderId => throw _privateConstructorUsedError;
   int? get qty => throw _privateConstructorUsedError;
+  Item? get item => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +33,9 @@ abstract class $ItemCopyWith<$Res> {
   factory $ItemCopyWith(Item value, $Res Function(Item) then) =
       _$ItemCopyWithImpl<$Res, Item>;
   @useResult
-  $Res call({String? orderId, int? qty});
+  $Res call({int? qty, Item? item});
+
+  $ItemCopyWith<$Res>? get item;
 }
 
 /// @nodoc
@@ -49,19 +51,31 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderId = freezed,
     Object? qty = freezed,
+    Object? item = freezed,
   }) {
     return _then(_value.copyWith(
-      orderId: freezed == orderId
-          ? _value.orderId
-          : orderId // ignore: cast_nullable_to_non_nullable
-              as String?,
       qty: freezed == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as int?,
+      item: freezed == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as Item?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ItemCopyWith<$Res>? get item {
+    if (_value.item == null) {
+      return null;
+    }
+
+    return $ItemCopyWith<$Res>(_value.item!, (value) {
+      return _then(_value.copyWith(item: value) as $Val);
+    });
   }
 }
 
@@ -71,7 +85,10 @@ abstract class _$$_ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
       __$$_ItemCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? orderId, int? qty});
+  $Res call({int? qty, Item? item});
+
+  @override
+  $ItemCopyWith<$Res>? get item;
 }
 
 /// @nodoc
@@ -83,18 +100,18 @@ class __$$_ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res, _$_Item>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderId = freezed,
     Object? qty = freezed,
+    Object? item = freezed,
   }) {
     return _then(_$_Item(
-      orderId: freezed == orderId
-          ? _value.orderId
-          : orderId // ignore: cast_nullable_to_non_nullable
-              as String?,
       qty: freezed == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as int?,
+      item: freezed == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as Item?,
     ));
   }
 }
@@ -102,18 +119,18 @@ class __$$_ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res, _$_Item>
 /// @nodoc
 @JsonSerializable()
 class _$_Item implements _Item {
-  _$_Item({this.orderId, this.qty});
+  _$_Item({this.qty, this.item});
 
   factory _$_Item.fromJson(Map<String, dynamic> json) => _$$_ItemFromJson(json);
 
   @override
-  final String? orderId;
-  @override
   final int? qty;
+  @override
+  final Item? item;
 
   @override
   String toString() {
-    return 'Item(orderId: $orderId, qty: $qty)';
+    return 'Item(qty: $qty, item: $item)';
   }
 
   @override
@@ -121,13 +138,13 @@ class _$_Item implements _Item {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Item &&
-            (identical(other.orderId, orderId) || other.orderId == orderId) &&
-            (identical(other.qty, qty) || other.qty == qty));
+            (identical(other.qty, qty) || other.qty == qty) &&
+            (identical(other.item, item) || other.item == item));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, orderId, qty);
+  int get hashCode => Object.hash(runtimeType, qty, item);
 
   @JsonKey(ignore: true)
   @override
@@ -144,14 +161,14 @@ class _$_Item implements _Item {
 }
 
 abstract class _Item implements Item {
-  factory _Item({final String? orderId, final int? qty}) = _$_Item;
+  factory _Item({final int? qty, final Item? item}) = _$_Item;
 
   factory _Item.fromJson(Map<String, dynamic> json) = _$_Item.fromJson;
 
   @override
-  String? get orderId;
-  @override
   int? get qty;
+  @override
+  Item? get item;
   @override
   @JsonKey(ignore: true)
   _$$_ItemCopyWith<_$_Item> get copyWith => throw _privateConstructorUsedError;

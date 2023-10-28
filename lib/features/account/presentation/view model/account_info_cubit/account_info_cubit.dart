@@ -25,8 +25,8 @@ class AccountInfoCubit extends HydratedCubit<AccountInfoState> {
       ),
     );
   }
+
   @override
-  
   @override
   AccountInfoState? fromJson(Map<String, dynamic> json) {
     try {

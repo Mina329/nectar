@@ -106,6 +106,7 @@ class _CartViewBodyState extends State<CartViewBody> {
                   } else if (cartState is CartSuccess) {
                     if (cartState.cart.items!.isEmpty) {
                       return const SliverFillRemaining(
+                        hasScrollBody: false,
                         child: Center(
                           child: CustomEmptyWidget(),
                         ),
@@ -117,11 +118,6 @@ class _CartViewBodyState extends State<CartViewBody> {
                   }
                   return const SliverToBoxAdapter();
                 },
-              ),
-              SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 67.h,
-                ),
               ),
             ],
           ),
@@ -135,7 +131,7 @@ class _CartViewBodyState extends State<CartViewBody> {
                     context, state.errMessage, ToastType.failure, 200.h);
               } else if (state is CheckoutSuccess) {
                 GoRouter.of(context).pop();
-                Stripe.publishableKey = state.checkoutModel.publishableKey!;
+                Stripe.publishableKey = state.checkoutModel.pk!;
                 await Stripe.instance.initPaymentSheet(
                   paymentSheetParameters: SetupPaymentSheetParameters(
                     appearance: PaymentSheetAppearance(
@@ -178,7 +174,7 @@ class _CartViewBodyState extends State<CartViewBody> {
                         ),
                       ),
                     ),
-                    paymentIntentClientSecret: state.checkoutModel.clientSecret,
+                    paymentIntentClientSecret: state.checkoutModel.cs,
                     merchantDisplayName: 'Nectar',
                   ),
                 );

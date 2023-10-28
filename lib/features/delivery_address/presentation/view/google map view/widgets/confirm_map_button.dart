@@ -46,8 +46,8 @@ class ConfirmMapButton extends StatelessWidget {
                       ));
             } else if (state is PlacemarkFailure) {
               GoRouter.of(context).pop();
-              CustomToastWidget.buildCustomToast(context,
-                            state.errMessage, ToastType.failure, 200.h);
+              CustomToastWidget.buildCustomToast(
+                  context, state.errMessage, ToastType.failure, 200.h);
             }
           },
           child: CustomElevatedBtn(

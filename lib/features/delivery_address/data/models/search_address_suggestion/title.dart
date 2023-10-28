@@ -5,10 +5,10 @@ part 'title.g.dart';
 
 @freezed
 class Title with _$Title {
-	factory Title({
-		int? start,
-		int? end,
-	}) = _Title;
+  factory Title({
+    int? start,
+    int? end,
+  }) = _Title;
 
-	factory Title.fromJson(Map<String, dynamic> json) => _$TitleFromJson(json);
+  factory Title.fromJson(Map<String, dynamic> json) => _$TitleFromJson(json);
 }

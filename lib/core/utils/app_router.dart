@@ -334,8 +334,19 @@ abstract class AppRouter {
         path: kPhoneAuthView,
         pageBuilder: (context, state) => screenTransition(
           state,
-          BlocProvider(
-            create: (context) => PhoneAuthCubit()..init(),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => PhoneAuthCubit(
+                  getIt.get<AuthRepo>(),
+                )..init(),
+              ),
+              BlocProvider(
+                create: (context) => GoogleAuthCubit(
+                  getIt.get<AuthRepo>(),
+                ),
+              ),
+            ],
             child: const PhoneAuthView(),
           ),
         ),
@@ -346,8 +357,17 @@ abstract class AppRouter {
           PhoneAuthCubit cubit = state.extra as PhoneAuthCubit;
           return screenTransition(
             state,
-            BlocProvider.value(
-              value: cubit,
+            MultiBlocProvider(
+              providers: [
+                BlocProvider.value(
+                  value: cubit,
+                ),
+                BlocProvider(
+                  create: (context) => GoogleAuthCubit(
+                    getIt.get<AuthRepo>(),
+                  ),
+                ),
+              ],
               child: const PhoneVerifyView(),
             ),
           );

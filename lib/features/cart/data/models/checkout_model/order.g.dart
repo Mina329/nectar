@@ -7,23 +7,23 @@ part of 'order.dart';
 // **************************************************************************
 
 _$_Order _$$_OrderFromJson(Map<String, dynamic> json) => _$_Order(
-      userId: json['userId'] as String?,
       id: json['id'] as String?,
-      orderDate: json['orderDate'] == null
-          ? null
-          : DateTime.parse(json['orderDate'] as String),
       status: json['status'] as String?,
-      totalPrice: json['totalPrice'] as int?,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      expiresAt: json['expiresAt'] == null
+          ? null
+          : DateTime.parse(json['expiresAt'] as String),
       items: (json['items'] as List<dynamic>?)
           ?.map((e) => Item.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$$_OrderToJson(_$_Order instance) => <String, dynamic>{
-      'userId': instance.userId,
       'id': instance.id,
-      'orderDate': instance.orderDate?.toIso8601String(),
       'status': instance.status,
-      'totalPrice': instance.totalPrice,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'expiresAt': instance.expiresAt?.toIso8601String(),
       'items': instance.items,
     };

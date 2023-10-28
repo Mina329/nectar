@@ -14,4 +14,3 @@ class GetPlacemark extends LocationEvent {
 
   GetPlacemark(this.latitude, this.longitude, this.language);
 }
-

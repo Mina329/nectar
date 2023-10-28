@@ -13,7 +13,8 @@ class FavouriteRepoImpl extends FavouriteRepo {
 
   FavouriteRepoImpl(this._apiService);
   @override
-  Future<Either<Failure, List<ThumbnailGroceryItemModel>>> fetchFavouriteItems() async {
+  Future<Either<Failure, List<ThumbnailGroceryItemModel>>>
+      fetchFavouriteItems() async {
     try {
       var data = await _apiService.get(endPoint: 'api/v1/profile/favorites?');
       List<ThumbnailGroceryItemModel> favouriteItems = [];

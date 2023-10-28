@@ -5,10 +5,11 @@ part 'northeast.g.dart';
 
 @freezed
 class Northeast with _$Northeast {
-	factory Northeast({
-		double? lat,
-		double? lng,
-	}) = _Northeast;
+  factory Northeast({
+    double? lat,
+    double? lng,
+  }) = _Northeast;
 
-	factory Northeast.fromJson(Map<String, dynamic> json) => _$NortheastFromJson(json);
+  factory Northeast.fromJson(Map<String, dynamic> json) =>
+      _$NortheastFromJson(json);
 }

@@ -21,40 +21,48 @@ class CartItemListView extends StatelessWidget {
     return AnimationLimiter(
       child: SliverList(
         delegate: SliverChildBuilderDelegate(
-          (context, index) => AnimationConfiguration.staggeredList(
-            position: index,
-            duration: const Duration(milliseconds: 375),
-            child: SlideAnimation(
-              horizontalOffset: 50.w,
-              child: FadeInAnimation(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.w),
-                  child: GestureDetector(
-                    onTap: () {
-                      final cartCubit = BlocProvider.of<CartCubit>(context);
-                      GoRouter.of(context).push(
-                        AppRouter.kItemDetailsView,
-                        extra: FavouriteToDetailsModel(
-                          cartModel.items![index].item!.id!,
-                          null,
-                          cartCubit,
+          (context, index) {
+            if (cartModel.items!.length > index) {
+              return AnimationConfiguration.staggeredList(
+                position: index,
+                duration: const Duration(milliseconds: 375),
+                child: SlideAnimation(
+                  horizontalOffset: 50.w,
+                  child: FadeInAnimation(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 25.w),
+                      child: GestureDetector(
+                        onTap: () {
+                          final cartCubit = BlocProvider.of<CartCubit>(context);
+                          GoRouter.of(context).push(
+                            AppRouter.kItemDetailsView,
+                            extra: FavouriteToDetailsModel(
+                              cartModel.items![index].item!.id!,
+                              null,
+                              cartCubit,
+                            ),
+                          );
+                        },
+                        child: BlocProvider(
+                          create: (context) => CartItemCubit(
+                            cartRepo: getIt.get<CartRepo>(),
+                            item: cartModel.items![index],
+                            quantity: cartModel.items![index].qty!,
+                          ),
+                          child: const CartItem(),
                         ),
-                      );
-                    },
-                    child: BlocProvider(
-                      create: (context) => CartItemCubit(
-                        cartRepo: getIt.get<CartRepo>(),
-                        item: cartModel.items![index],
-                        quantity: cartModel.items![index].qty!,
                       ),
-                      child: const CartItem(),
                     ),
                   ),
                 ),
-              ),
-            ),
-          ),
-          childCount: cartModel.items!.length,
+              );
+            } else {
+              return SizedBox(
+                height: 67.h,
+              );
+            }
+          },
+          childCount: cartModel.items!.length + 1,
         ),
       ),
     );

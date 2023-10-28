@@ -11,13 +11,13 @@ _$_CheckoutModel _$$_CheckoutModelFromJson(Map<String, dynamic> json) =>
       order: json['order'] == null
           ? null
           : Order.fromJson(json['order'] as Map<String, dynamic>),
-      clientSecret: json['clientSecret'] as String?,
-      publishableKey: json['publishableKey'] as String?,
+      cs: json['cs'] as String?,
+      pk: json['pk'] as String?,
     );
 
 Map<String, dynamic> _$$_CheckoutModelToJson(_$_CheckoutModel instance) =>
     <String, dynamic>{
       'order': instance.order,
-      'clientSecret': instance.clientSecret,
-      'publishableKey': instance.publishableKey,
+      'cs': instance.cs,
+      'pk': instance.pk,
     };

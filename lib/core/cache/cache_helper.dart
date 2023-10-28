@@ -1,10 +1,13 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:nectar/core/cache/cache_keys_values.dart';
 import 'package:nectar/core/l10n/locales.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheData {
   static late SharedPreferences _sharedPreferences;
+  static const FlutterSecureStorage _secureStorage = FlutterSecureStorage();
   static Future<void> casheIntialization() async {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
@@ -46,5 +49,15 @@ class CacheData {
     return await getData(key: CacheKeys.kLANGUAGE) == CacheValues.ENGLISH
         ? ENGLISH_LOCALE
         : ARABIC_LOCALE;
+  }
+
+  static Future<void> setSecuredData(
+      {required String key, required String? value}) async {
+    await _secureStorage.write(key: key, value: value);
+  }
+
+  static Future<String?> getSecuredData({required String key}) async {
+    String? value = await _secureStorage.read(key: key);
+    return value;
   }
 }

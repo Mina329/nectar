@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'custom_elevated_btn.dart';
 
 class CustomPositionedButton extends StatelessWidget {
-  const CustomPositionedButton({super.key, required this.onPressed, required this.txt});
+  const CustomPositionedButton(
+      {super.key, required this.onPressed, required this.txt});
   final VoidCallback onPressed;
   final String txt;
   @override

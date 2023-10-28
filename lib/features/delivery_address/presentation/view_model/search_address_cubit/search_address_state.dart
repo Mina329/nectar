@@ -8,15 +8,17 @@ sealed class SearchAddressState extends Equatable {
 }
 
 final class SearchAddressInitial extends SearchAddressState {}
+
 final class SearchAddressSuccess extends SearchAddressState {
   final SearchAddressSuggestion suggestions;
 
   const SearchAddressSuccess(this.suggestions);
 }
+
 final class SearchAddressFailure extends SearchAddressState {
   final String errMessage;
 
   const SearchAddressFailure(this.errMessage);
 }
-final class SearchAddressLoading extends SearchAddressState {}
 
+final class SearchAddressLoading extends SearchAddressState {}

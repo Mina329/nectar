@@ -2,6 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../../../core/cache/cache_helper.dart';
+import '../../../../../core/cache/cache_keys_values.dart';
+import '../../../data/models/oauth_model/oauth_model.dart';
 import '../../../data/repos/auth_repo.dart';
 
 part 'google_auth_state.dart';
@@ -18,11 +21,15 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
           failure.errMessage,
         ),
       ),
-      (account) => emit(
-        GoogleLogInAuthSuccess(
-          account,
-        ),
-      ),
+      (user) async {
+        await CacheData.setSecuredData(
+            key: CacheKeys.kOAUTHTOKEN, value: user.token!);
+        return emit(
+          GoogleLogInAuthSuccess(
+            user,
+          ),
+        );
+      },
     );
   }
 

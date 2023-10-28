@@ -22,5 +22,3 @@ final class FavouriteItemsSuccess extends FavouriteItemsState {
 
   const FavouriteItemsSuccess(this.favouriteItems);
 }
-
-

@@ -25,10 +25,10 @@ class GoogleMapThumbnail extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: CacheData.getData(key: CacheKeys.kDARKMODE) ==
-                    CacheValues.DARK
-                ? ColorManager.borderColorDARK
-                : ColorManager.borderColorLIGHT,
+            color:
+                CacheData.getData(key: CacheKeys.kDARKMODE) == CacheValues.DARK
+                    ? ColorManager.borderColorDARK
+                    : ColorManager.borderColorLIGHT,
           ),
           borderRadius: BorderRadius.circular(20),
         ),
@@ -42,8 +42,7 @@ class GoogleMapThumbnail extends StatelessWidget {
               mapType: MapType.normal,
               zoomControlsEnabled: false,
               zoomGesturesEnabled: false,
-              initialCameraPosition:
-                  CameraPosition(target: location, zoom: 18),
+              initialCameraPosition: CameraPosition(target: location, zoom: 18),
               markers: {
                 Marker(
                   markerId: const MarkerId("currentLocation"),

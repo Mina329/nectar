@@ -1,19 +1,23 @@
 import 'package:dio/dio.dart';
-import '../../main.dart';
 import '../cache/cache_helper.dart';
 import '../cache/cache_keys_values.dart';
 import 'env.dart';
 
 class ApiService {
   final Dio _dio;
+  late Map<String, dynamic> headers;
   ApiService(this._dio);
-  final headers = {
-    'Authorization': "Bearer $testToken",
-    'Accept-language':
-        CacheData.getData(key: CacheKeys.kLANGUAGE) == CacheValues.ARABIC
-            ? "ar"
-            : "en"
-  };
+  Future<void> initializeHeaders() async {
+    headers = {
+      'Authorization':
+          "Bearer ${await CacheData.getSecuredData(key: CacheKeys.kOAUTHTOKEN)}",
+      'Accept-language':
+          CacheData.getData(key: CacheKeys.kLANGUAGE) == CacheValues.ARABIC
+              ? "ar"
+              : "en",
+    };
+  }
+
   Future<Map<String, dynamic>> getGeoCoding(
       {required String latitude,
       required String longitude,
@@ -33,6 +37,7 @@ class ApiService {
   }
 
   Future<Map<String, dynamic>> get({required String endPoint}) async {
+    initializeHeaders();
     var response = await _dio.get(
       "${Env.BACKEND_BASE_URL}${endPoint}lang=${CacheData.getData(key: CacheKeys.kLANGUAGE) == CacheValues.ARABIC ? "ar" : "en"}",
       options: Options(
@@ -45,6 +50,7 @@ class ApiService {
   Future<Response> post(
       {required String endPoint,
       required Map<String, dynamic> requestData}) async {
+    initializeHeaders();
     var response = await _dio.post(
       "${Env.BACKEND_BASE_URL}$endPoint",
       data: requestData,
@@ -57,6 +63,7 @@ class ApiService {
 
   Future<Response> postImg(
       {required String endPoint, required FormData requestData}) async {
+    initializeHeaders();
     var response = await _dio.post(
       "${Env.BACKEND_BASE_URL}$endPoint",
       data: requestData,
@@ -74,6 +81,7 @@ class ApiService {
   Future<Response> delete(
       {required String endPoint,
       required Map<String, dynamic> requestData}) async {
+    initializeHeaders();
     var response = await _dio.delete(
       "${Env.BACKEND_BASE_URL}$endPoint",
       data: requestData,
@@ -87,12 +95,23 @@ class ApiService {
   Future<Response> patch(
       {required String endPoint,
       required Map<String, dynamic> requestData}) async {
+    initializeHeaders();
     var response = await _dio.patch(
       "${Env.BACKEND_BASE_URL}$endPoint",
       data: requestData,
       options: Options(
         headers: headers,
       ),
+    );
+    return response;
+  }
+
+  Future<Response> postAuth(
+      {required String endPoint,
+      required Map<String, dynamic> requestData}) async {
+    var response = await _dio.post(
+      "${Env.BACKEND_BASE_URL}$endPoint",
+      data: requestData,
     );
     return response;
   }

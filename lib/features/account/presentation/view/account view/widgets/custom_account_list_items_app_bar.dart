@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAccountListItemsAppBar extends StatelessWidget {
-  const CustomAccountListItemsAppBar({super.key, required this.title, required this.backArrowOnPressed});
+  const CustomAccountListItemsAppBar(
+      {super.key, required this.title, required this.backArrowOnPressed});
   final String title;
   final VoidCallback backArrowOnPressed;
   @override

@@ -5,10 +5,10 @@ part 'item.g.dart';
 
 @freezed
 class Item with _$Item {
-	factory Item({
-		String? orderId,
-		int? qty,
-	}) = _Item;
+  factory Item({
+    int? qty,
+    Item? item,
+  }) = _Item;
 
-	factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
+  factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
 }

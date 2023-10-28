@@ -18,3 +18,13 @@ final class SendOTPFailure extends PhoneAuthState {
 
   const SendOTPFailure(this.errMessage);
 }
+
+final class VerifyOTPLoading extends PhoneAuthState {}
+
+final class VerifyOTPSuccess extends PhoneAuthState {}
+
+final class VerifyOTPFailure extends PhoneAuthState {
+  final String errMessage;
+
+  const VerifyOTPFailure(this.errMessage);
+}

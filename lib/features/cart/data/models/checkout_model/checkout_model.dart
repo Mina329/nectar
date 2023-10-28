@@ -7,11 +7,12 @@ part 'checkout_model.g.dart';
 
 @freezed
 class CheckoutModel with _$CheckoutModel {
-	factory CheckoutModel({
-		Order? order,
-		String? clientSecret,
-		String? publishableKey,
-	}) = _CheckoutModel;
+  factory CheckoutModel({
+    Order? order,
+    String? cs,
+    String? pk,
+  }) = _CheckoutModel;
 
-	factory CheckoutModel.fromJson(Map<String, dynamic> json) => _$CheckoutModelFromJson(json);
+  factory CheckoutModel.fromJson(Map<String, dynamic> json) =>
+      _$CheckoutModelFromJson(json);
 }

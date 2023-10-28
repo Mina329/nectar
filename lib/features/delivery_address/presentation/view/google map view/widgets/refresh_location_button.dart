@@ -44,8 +44,8 @@ class RereshLocationButton extends StatelessWidget {
                 ),
               );
             } else if (state is RefreshMyCurrentLocationFailure) {
-              CustomToastWidget.buildCustomToast(context,
-                            state.errMessage, ToastType.failure, 200.h);
+              CustomToastWidget.buildCustomToast(
+                  context, state.errMessage, ToastType.failure, 200.h);
             }
           },
           child: IconButton(

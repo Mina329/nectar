@@ -7,13 +7,16 @@ import 'dart:math';
 
 import 'package:twilio_flutter/twilio_flutter.dart';
 
+import '../../../data/repos/auth_repo.dart';
+
 part 'phone_auth_state.dart';
 
 class PhoneAuthCubit extends Cubit<PhoneAuthState> {
-  PhoneAuthCubit() : super(PhoneAuthInitial());
+  PhoneAuthCubit(this._authRepo) : super(PhoneAuthInitial());
   String code = '';
   late TwilioFlutter twilioFlutter;
   late String savedPhoneNumber;
+  final AuthRepo _authRepo;
   void init() {
     twilioFlutter = TwilioFlutter(
       accountSid: Env.TWILIO_SID,
@@ -60,11 +63,26 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
     } catch (e) {}
   }
 
-  bool verifyCode(String smsCode) {
+  Future<void> verifyCode(String smsCode) async {
+    emit(VerifyOTPLoading());
     if (smsCode == code) {
-      return true;
+      var data = await _authRepo.addPhoneNumber(phoneNumber: savedPhoneNumber);
+      return data.fold(
+        (l) => emit(
+          VerifyOTPFailure(
+            StringsManager.somethingWrong.tr(),
+          ),
+        ),
+        (r) => emit(
+          VerifyOTPSuccess(),
+        ),
+      );
     } else {
-      return false;
+      return emit(
+        SendOTPFailure(
+          StringsManager.invalidData.tr(),
+        ),
+      );
     }
   }
 }

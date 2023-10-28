@@ -45,6 +45,7 @@ dependencies:
   flutter_google_places: ^0.3.0
   flutter_phoenix: ^1.1.1
   flutter_screenutil: ^5.9.0
+  flutter_secure_storage: ^9.0.0
   flutter_slidable: ^3.0.0
   flutter_staggered_animations: ^1.1.1
   flutter_stripe: ^9.4.0

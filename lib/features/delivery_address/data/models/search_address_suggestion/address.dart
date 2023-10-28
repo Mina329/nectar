@@ -5,9 +5,10 @@ part 'address.g.dart';
 
 @freezed
 class Address with _$Address {
-	factory Address({
-		String? label,
-	}) = _Address;
+  factory Address({
+    String? label,
+  }) = _Address;
 
-	factory Address.fromJson(Map<String, dynamic> json) => _$AddressFromJson(json);
+  factory Address.fromJson(Map<String, dynamic> json) =>
+      _$AddressFromJson(json);
 }

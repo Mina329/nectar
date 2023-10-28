@@ -5,11 +5,11 @@ part 'rate.g.dart';
 
 @freezed
 class Rate with _$Rate {
-	factory Rate({
-		int? limit,
-		int? remaining,
-		int? reset,
-	}) = _Rate;
+  factory Rate({
+    int? limit,
+    int? remaining,
+    int? reset,
+  }) = _Rate;
 
-	factory Rate.fromJson(Map<String, dynamic> json) => _$RateFromJson(json);
+  factory Rate.fromJson(Map<String, dynamic> json) => _$RateFromJson(json);
 }
