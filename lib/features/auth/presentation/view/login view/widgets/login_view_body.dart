@@ -80,12 +80,12 @@ class LoginViewBody extends StatelessWidget {
                         log(state.user.token!);
                         if (state.user.user?.phoneNumber == null) {
                           if (context.mounted) {
-                            GoRouter.of(context).push(AppRouter.kPhoneAuthView);
+                            GoRouter.of(context).go(AppRouter.kPhoneAuthView);
                           }
                         } else {
                           if (context.mounted) {
                             GoRouter.of(context)
-                                .push(AppRouter.kHomeView, extra: 0);
+                                .go(AppRouter.kHomeView, extra: 0);
                           }
                         }
                       }

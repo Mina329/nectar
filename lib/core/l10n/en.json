@@ -30,7 +30,7 @@
   "about": "About",
   "orderId:": "Order ID : ",
   "totalPrice:": "Total Price",
-  "downloadReceipt": "Download Receipt",
+  "downloadReceipt": "Receipt",
   "settings": "Settings",
   "language": "Language",
   "arabic": "العربية",
@@ -93,11 +93,12 @@
   "anonymousUser": "Anonymous User",
   "noDescription": "No description",
   "noReviews": "No reviews",
-  "currency": "£",
+  "currency": "$",
   "success": "Operation was successful",
   "delete": "Delete",
   "swipe": "Swipe to Delete",
   "wrongCode": "The Provided Code is wrong",
   "numberConfirm": "Are you sure this is your number? ",
-  "cancel" : "Cancel"
+  "cancel" : "Cancel",
+  "createdAt" : "Created At"
 }

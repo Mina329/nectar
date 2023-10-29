@@ -99,4 +99,5 @@ abstract class StringsManager {
   static const wrongCode = "wrongCode";
   static const numberConfirm = "numberConfirm";
   static const cancel = "cancel";
+  static const createdAt = "createdAt";
 }

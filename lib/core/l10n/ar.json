@@ -30,7 +30,7 @@
   "about": "حول",
   "orderId:": "رقم الطلب : ",
   "totalPrice:": "السعر الكلى",
-  "downloadReceipt": "تحميل الفاتورة",
+  "downloadReceipt": "الفاتورة",
   "settings": "الاعدادات",
   "language": "اللغة",
   "arabic": "العربية",
@@ -93,11 +93,13 @@
   "anonymousUser": "مستخدم مجهول",
   "noDescription": "ناسف، لا يوجد وصف",
   "noReviews": "ناسف، لا يوجد مراجعات",
-  "currency": "ج.م",
+  "currency": "$",
   "success": "تمت العملية بنجاح",
   "delete": "حذف",
   "swipe": "اسحب الشاشة للحذف",
   "wrongCode": "الرمز المستخدم غير صحيح",
   "numberConfirm": " هل أنت متأكد أن هذا هو رقمك؟",
-  "cancel": "ألغاء"
+  "cancel": "ألغاء",
+  "createdAt" : "صدر فى"
+
 }

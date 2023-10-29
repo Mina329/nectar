@@ -17,6 +17,8 @@ import 'package:nectar/features/explore/presentation/view/category%20details%20v
 import 'package:nectar/features/home/presentation/view/home_view.dart';
 import 'package:nectar/features/my_details/data/repos/my_details_repo.dart';
 import 'package:nectar/features/my_details/presentation/view%20model/my_details_cubit/my_details_cubit.dart';
+import 'package:nectar/features/orders/data/repos/order_repo.dart';
+import 'package:nectar/features/orders/presentation/view%20model/order_details_cubit/order_details_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/item_details_cubit/item_details_cubit.dart';
 import 'package:nectar/features/splash/presentaion/view/splash_view.dart';
 import '../../features/account/data/models/account_item_list_navigation_model/account_item_list_navigation_model.dart';
@@ -35,6 +37,7 @@ import '../../features/explore/data/models/category_model/category_model.dart';
 import '../../features/favourite/data/models/favourite_to_details_model.dart';
 import '../../features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 import '../../features/my_details/presentation/view/my_details_view.dart';
+import '../../features/orders/presentation/view model/orders_cubit/orders_cubit.dart';
 import '../../features/orders/presentation/view/orders_view.dart';
 import '../../features/onboarding/presentation/view/onboarding_view.dart';
 import '../../features/shop/data/repos/shop_repo.dart';
@@ -167,7 +170,21 @@ abstract class AppRouter {
         path: kOrdersView,
         pageBuilder: (context, state) => screenTransition(
           state,
-          const OrdersView(),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => OrdersCubit(
+                  getIt.get<OrderRepo>(),
+                )..getAllOrders(),
+              ),
+              BlocProvider(
+                create: (context) => OrderDetailsCubit(
+                  getIt.get<OrderRepo>(),
+                ),
+              )
+            ],
+            child: const OrdersView(),
+          ),
         ),
       ),
       GoRoute(

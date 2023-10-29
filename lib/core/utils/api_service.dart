@@ -37,7 +37,7 @@ class ApiService {
   }
 
   Future<Map<String, dynamic>> get({required String endPoint}) async {
-    initializeHeaders();
+    await initializeHeaders();
     var response = await _dio.get(
       "${Env.BACKEND_BASE_URL}${endPoint}lang=${CacheData.getData(key: CacheKeys.kLANGUAGE) == CacheValues.ARABIC ? "ar" : "en"}",
       options: Options(
@@ -50,7 +50,7 @@ class ApiService {
   Future<Response> post(
       {required String endPoint,
       required Map<String, dynamic> requestData}) async {
-    initializeHeaders();
+    await initializeHeaders();
     var response = await _dio.post(
       "${Env.BACKEND_BASE_URL}$endPoint",
       data: requestData,
@@ -63,7 +63,7 @@ class ApiService {
 
   Future<Response> postImg(
       {required String endPoint, required FormData requestData}) async {
-    initializeHeaders();
+    await initializeHeaders();
     var response = await _dio.post(
       "${Env.BACKEND_BASE_URL}$endPoint",
       data: requestData,
@@ -81,7 +81,7 @@ class ApiService {
   Future<Response> delete(
       {required String endPoint,
       required Map<String, dynamic> requestData}) async {
-    initializeHeaders();
+    await initializeHeaders();
     var response = await _dio.delete(
       "${Env.BACKEND_BASE_URL}$endPoint",
       data: requestData,
@@ -95,7 +95,7 @@ class ApiService {
   Future<Response> patch(
       {required String endPoint,
       required Map<String, dynamic> requestData}) async {
-    initializeHeaders();
+    await initializeHeaders();
     var response = await _dio.patch(
       "${Env.BACKEND_BASE_URL}$endPoint",
       data: requestData,
