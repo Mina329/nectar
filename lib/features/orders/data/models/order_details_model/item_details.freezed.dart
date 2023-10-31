@@ -21,6 +21,7 @@ ItemDetails _$ItemDetailsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ItemDetails {
   String? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   String? get categoryId => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $ItemDetailsCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
+      String? name,
       String? categoryId,
       String? thumbnail,
       double? price,
@@ -64,6 +66,7 @@ class _$ItemDetailsCopyWithImpl<$Res, $Val extends ItemDetails>
   @override
   $Res call({
     Object? id = freezed,
+    Object? name = freezed,
     Object? categoryId = freezed,
     Object? thumbnail = freezed,
     Object? price = freezed,
@@ -75,6 +78,10 @@ class _$ItemDetailsCopyWithImpl<$Res, $Val extends ItemDetails>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       categoryId: freezed == categoryId
           ? _value.categoryId
@@ -114,6 +121,7 @@ abstract class _$$_ItemDetailsCopyWith<$Res>
   @useResult
   $Res call(
       {String? id,
+      String? name,
       String? categoryId,
       String? thumbnail,
       double? price,
@@ -134,6 +142,7 @@ class __$$_ItemDetailsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? name = freezed,
     Object? categoryId = freezed,
     Object? thumbnail = freezed,
     Object? price = freezed,
@@ -145,6 +154,10 @@ class __$$_ItemDetailsCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       categoryId: freezed == categoryId
           ? _value.categoryId
@@ -179,6 +192,7 @@ class __$$_ItemDetailsCopyWithImpl<$Res>
 class _$_ItemDetails implements _ItemDetails {
   _$_ItemDetails(
       {this.id,
+      this.name,
       this.categoryId,
       this.thumbnail,
       this.price,
@@ -191,6 +205,8 @@ class _$_ItemDetails implements _ItemDetails {
 
   @override
   final String? id;
+  @override
+  final String? name;
   @override
   final String? categoryId;
   @override
@@ -206,7 +222,7 @@ class _$_ItemDetails implements _ItemDetails {
 
   @override
   String toString() {
-    return 'ItemDetails(id: $id, categoryId: $categoryId, thumbnail: $thumbnail, price: $price, offerPrice: $offerPrice, qty: $qty, qtyType: $qtyType)';
+    return 'ItemDetails(id: $id, name: $name, categoryId: $categoryId, thumbnail: $thumbnail, price: $price, offerPrice: $offerPrice, qty: $qty, qtyType: $qtyType)';
   }
 
   @override
@@ -215,6 +231,7 @@ class _$_ItemDetails implements _ItemDetails {
         (other.runtimeType == runtimeType &&
             other is _$_ItemDetails &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId) &&
             (identical(other.thumbnail, thumbnail) ||
@@ -228,8 +245,8 @@ class _$_ItemDetails implements _ItemDetails {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, categoryId, thumbnail, price, offerPrice, qty, qtyType);
+  int get hashCode => Object.hash(runtimeType, id, name, categoryId, thumbnail,
+      price, offerPrice, qty, qtyType);
 
   @JsonKey(ignore: true)
   @override
@@ -248,6 +265,7 @@ class _$_ItemDetails implements _ItemDetails {
 abstract class _ItemDetails implements ItemDetails {
   factory _ItemDetails(
       {final String? id,
+      final String? name,
       final String? categoryId,
       final String? thumbnail,
       final double? price,
@@ -260,6 +278,8 @@ abstract class _ItemDetails implements ItemDetails {
 
   @override
   String? get id;
+  @override
+  String? get name;
   @override
   String? get categoryId;
   @override

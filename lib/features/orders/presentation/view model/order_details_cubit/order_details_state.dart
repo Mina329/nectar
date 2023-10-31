@@ -13,8 +13,8 @@ final class OrderDetailsLoading extends OrderDetailsState {}
 
 final class OrderDetailsSuccess extends OrderDetailsState {
   final OrderDetailsModel orderDetails;
-
-  const OrderDetailsSuccess(this.orderDetails);
+  final AddressModel? addressModel;
+  const OrderDetailsSuccess(this.orderDetails, this.addressModel);
 }
 
 final class OrderDetailsFailure extends OrderDetailsState {

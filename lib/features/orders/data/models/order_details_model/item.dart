@@ -9,7 +9,7 @@ part 'item.g.dart';
 class Item with _$Item {
 	factory Item({
 		int? qty,
-		ItemDetails? itemDetails,
+		ItemDetails? item,
 	}) = _Item;
 
 	factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);

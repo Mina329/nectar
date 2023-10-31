@@ -100,5 +100,6 @@
   "wrongCode": "The Provided Code is wrong",
   "numberConfirm": "Are you sure this is your number? ",
   "cancel" : "Cancel",
-  "createdAt" : "Created At"
+  "createdAt" : "Created At",
+  "invoice" : "Invoice"
 }

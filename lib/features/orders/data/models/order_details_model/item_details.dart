@@ -7,6 +7,7 @@ part 'item_details.g.dart';
 class ItemDetails with _$ItemDetails {
 	factory ItemDetails({
 		String? id,
+    String? name,
 		String? categoryId,
 		String? thumbnail,
 		double? price,

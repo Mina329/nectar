@@ -8,12 +8,12 @@ part of 'item.dart';
 
 _$_Item _$$_ItemFromJson(Map<String, dynamic> json) => _$_Item(
       qty: json['qty'] as int?,
-      itemDetails: json['itemDetails'] == null
+      item: json['item'] == null
           ? null
-          : ItemDetails.fromJson(json['itemDetails'] as Map<String, dynamic>),
+          : ItemDetails.fromJson(json['item'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_ItemToJson(_$_Item instance) => <String, dynamic>{
       'qty': instance.qty,
-      'itemDetails': instance.itemDetails,
+      'item': instance.item,
     };

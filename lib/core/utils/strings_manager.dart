@@ -100,4 +100,5 @@ abstract class StringsManager {
   static const numberConfirm = "numberConfirm";
   static const cancel = "cancel";
   static const createdAt = "createdAt";
+  static const invoice = "invoice";
 }

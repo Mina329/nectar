@@ -1,12 +1,13 @@
-import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/utils/pdf_invoice.dart';
 import 'package:nectar/core/widgets/custom_loading_indicator.dart';
+import 'package:nectar/core/widgets/custom_toast_widget.dart';
 import 'package:nectar/features/orders/presentation/view%20model/order_details_cubit/order_details_cubit.dart';
 
 import '../../../../../core/utils/strings_manager.dart';
@@ -29,14 +30,15 @@ class OrderCard extends StatelessWidget {
           CustomLoadingIndicator.buildLoadingIndicator(context);
         } else if (state is OrderDetailsSuccess) {
           GoRouter.of(context).pop();
-
-          final pdfFile = await PdfInvoice.generate(state.orderDetails);
-          log(pdfFile.path);
-
-          await PdfApi.openFile(pdfFile);
+          final pdfFile =
+              await PdfInvoice.generate(state.orderDetails, state.addressModel);
+          if (context.mounted) {
+            GoRouter.of(context).push(AppRouter.kInvoiceView, extra: pdfFile);
+          }
         } else if (state is OrderDetailsFailure) {
           GoRouter.of(context).pop();
-          log('failure');
+          CustomToastWidget.buildCustomToast(
+              context, state.errMessage, ToastType.failure, 200.h);
         }
       },
       child: Container(
