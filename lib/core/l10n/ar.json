@@ -101,5 +101,7 @@
   "numberConfirm": " هل أنت متأكد أن هذا هو رقمك؟",
   "cancel": "ألغاء",
   "createdAt": "صدر فى",
-  "invoice": "الفاتورة"
+  "invoice": "الفاتورة",
+  "orderSuccessful": "تم ارسال الاوردر بنجاح",
+  "ok": "موافق"
 }

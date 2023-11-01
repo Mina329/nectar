@@ -61,7 +61,7 @@ class GroceryItem extends StatelessWidget {
             ),
             SizedBox(
               width: 140.w,
-              height: 130.h,
+              height: 120.h,
               child: imageLink == null
                   ? Image.asset(
                       AssetsManager.errorAlt,
@@ -92,7 +92,7 @@ class GroceryItem extends StatelessWidget {
               ),
               child: Text(
                 name ?? StringsManager.unavailable.tr(),
-                maxLines: 2,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleSmall,
                 textAlign: TextAlign.start,

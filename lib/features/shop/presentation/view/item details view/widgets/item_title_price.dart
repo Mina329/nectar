@@ -60,14 +60,17 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
               width: 300.w,
               child: Row(
                 children: [
-                  Text(
-                    widget.name ?? StringsManager.unavailable,
-                    maxLines: 3,
-                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                        fontFamily: AssetsManager.gilroyBold,
-                        fontWeight: FontWeight.w700),
-                    overflow: TextOverflow.ellipsis,
-                    softWrap: true,
+                  SizedBox(
+                    width: 180.w,
+                    child: Text(
+                      widget.name ?? StringsManager.unavailable,
+                      maxLines: 3,
+                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                          fontFamily: AssetsManager.gilroyBold,
+                          fontWeight: FontWeight.w700),
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
+                    ),
                   ),
                   if (widget.category != null)
                     SizedBox(
@@ -75,7 +78,7 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
                     ),
                   if (widget.category != null)
                     Container(
-                      height: 35.h,
+                      width: 100.w,
                       decoration: BoxDecoration(
                         color: ColorManager.green.withOpacity(0.7),
                         borderRadius: const BorderRadius.all(
@@ -90,6 +93,7 @@ class _ItemTitlePriceState extends State<ItemTitlePrice> {
                         child: Center(
                           child: Text(
                             widget.category!,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context)
                                 .textTheme

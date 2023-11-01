@@ -125,4 +125,52 @@ class CartRepoImpl extends CartRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, Response>> cancelOrder(String id) async {
+    try {
+      var data = await _apiService.post(
+        endPoint: 'api/v1/profile/orders/$id/cancel',
+        requestData: {},
+      );
+      return right(data);
+    } catch (e) {
+      if (e is DioException) {
+        return left(
+          ServerFailure(
+            e.response!.data['message'],
+          ),
+        );
+      }
+      return left(
+        ServerFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, Response>> clearCart() async {
+    try {
+      var data = await _apiService.post(
+        endPoint: 'api/v1/profile/cart/empty',
+        requestData: {},
+      );
+      return right(data);
+    } catch (e) {
+      if (e is DioException) {
+        return left(
+          ServerFailure(
+            e.response!.data['message'],
+          ),
+        );
+      }
+      return left(
+        ServerFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
 }

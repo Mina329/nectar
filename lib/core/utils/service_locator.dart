@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:nectar/core/utils/api_service.dart';
+import 'package:nectar/core/utils/stripe_service.dart';
 import 'package:nectar/features/account/data/repos/account_repo.dart';
 import 'package:nectar/features/account/data/repos/account_repo_impl.dart';
 import 'package:nectar/features/auth/data/repos/auth_repo.dart';
@@ -27,6 +28,9 @@ Future<void> setupServiceLocator() async {
     ApiService(
       Dio(),
     ),
+  );
+  getIt.registerSingleton<StripeService>(
+    StripeService(),
   );
   getIt.registerSingleton<DeliveryAddressRepo>(
     DeliveryAddressRepoImpl(getIt.get<ApiService>()),

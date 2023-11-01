@@ -23,12 +23,11 @@ final ValueNotifier<ThemeMode> notifier = ValueNotifier(
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await CacheData.casheIntialization();
   await dotenv.load();
   HydratedBloc.storage = await HydratedStorage.build(
       storageDirectory: await getApplicationDocumentsDirectory());
-  setupServiceLocator();
+  await setupServiceLocator();
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   SystemChrome.setPreferredOrientations([
@@ -36,10 +35,6 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   await EasyLocalization.ensureInitialized();
-  if (CacheData.getData(key: CacheKeys.kCARTID) == null) {
-    CacheData.setData(
-        key: CacheKeys.kCARTID, value: "fa336f5b-b06e-4111-a210-6cfbe106862f");
-  }
   if (CacheData.getData(key: CacheKeys.kDARKMODE) == null) {
     CacheData.setData(key: CacheKeys.kDARKMODE, value: CacheValues.LIGHT);
   }

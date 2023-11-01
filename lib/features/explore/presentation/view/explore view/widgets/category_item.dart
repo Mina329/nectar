@@ -72,6 +72,8 @@ class CategoryItem extends StatelessWidget {
               child: Text(
                 category.name ?? StringsManager.unavailable,
                 textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ),

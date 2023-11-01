@@ -12,4 +12,6 @@ abstract class CartRepo {
   Future<Either<Failure, Response>> updateItemsToCart(
       {required String itemId, required int quantity});
   Future<Either<Failure, CheckoutModel>> checkoutCart();
+  Future<Either<Failure, Response>> clearCart();
+  Future<Either<Failure, Response>> cancelOrder(String id);
 }

@@ -58,6 +58,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                           .fetchCategories();
                       BlocProvider.of<CategoriesCubit>(context).page = 1;
                       BlocProvider.of<CategoriesCubit>(context).isFirst = true;
+                      BlocProvider.of<CategoriesCubit>(context).searched = false;
                     } else {
                       BlocProvider.of<ExclusiveOffersCubit>(context)
                           .getExclusiveOffersItems(filter: null);

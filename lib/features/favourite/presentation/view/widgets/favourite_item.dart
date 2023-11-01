@@ -25,14 +25,14 @@ class FavouriteItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 364.w,
-      height: 140.h,
+      height: 160.h,
       child: Column(
         children: [
           SizedBox(
             height: 30.h,
           ),
           SizedBox(
-            height: 70.h,
+            height: 80.h,
             width: 364.w,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,

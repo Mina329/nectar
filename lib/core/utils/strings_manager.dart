@@ -101,4 +101,6 @@ abstract class StringsManager {
   static const cancel = "cancel";
   static const createdAt = "createdAt";
   static const invoice = "invoice";
+  static const orderSuccessful = "orderSuccessful";
+  static const ok = "ok";
 }

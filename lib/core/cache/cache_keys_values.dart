@@ -2,7 +2,6 @@ class CacheKeys {
   static String kLANGUAGE = "language";
   static String kDARKMODE = "darkMode";
   static String kONBOARDING = "firstTime";
-  static String kCARTID = "cartId";
   static String kOAUTHTOKEN = "authToken";
 }
 

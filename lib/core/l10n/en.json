@@ -99,7 +99,9 @@
   "swipe": "Swipe to Delete",
   "wrongCode": "The Provided Code is wrong",
   "numberConfirm": "Are you sure this is your number? ",
-  "cancel" : "Cancel",
-  "createdAt" : "Created At",
-  "invoice" : "Invoice"
+  "cancel": "Cancel",
+  "createdAt": "Created At",
+  "invoice": "Invoice",
+  "orderSuccessful": "Order Successful",
+  "ok": "Ok"
 }

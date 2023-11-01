@@ -34,7 +34,8 @@ class _ExploreViewBodyState extends State<ExploreViewBody> {
   void setupScrollController(context) {
     _scrollController.addListener(() {
       if (_scrollController.position.atEdge) {
-        if (_scrollController.position.pixels != 0) {
+        if (_scrollController.position.pixels != 0 &&
+            BlocProvider.of<CategoriesCubit>(context).searched) {
           BlocProvider.of<CategoriesCubit>(context).loadItems();
         }
       }
@@ -78,10 +79,12 @@ class _ExploreViewBodyState extends State<ExploreViewBody> {
                   BlocProvider.of<CategoriesCubit>(context).fetchCategories();
                   BlocProvider.of<CategoriesCubit>(context).page = 1;
                   BlocProvider.of<CategoriesCubit>(context).isFirst = true;
+                  BlocProvider.of<CategoriesCubit>(context).searched = false;
                 } else {
                   BlocProvider.of<CategoriesCubit>(context).query = p0;
                   BlocProvider.of<CategoriesCubit>(context).page = 1;
                   BlocProvider.of<CategoriesCubit>(context).isFirst = true;
+                  BlocProvider.of<CategoriesCubit>(context).searched = true;
                   BlocProvider.of<CategoriesCubit>(context).loadItems();
                 }
               },

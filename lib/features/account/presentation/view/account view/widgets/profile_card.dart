@@ -30,7 +30,7 @@ class ProfileCard extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 25.w),
             child: SizedBox(
-              height: 60.h,
+              height: 80.h,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

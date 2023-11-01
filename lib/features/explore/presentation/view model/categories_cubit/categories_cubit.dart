@@ -13,6 +13,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
   final ExploreRepo exploreRepo;
   bool isFirst = true;
   late String query;
+  bool searched = false;
   final List<Color> colors = [
     const Color(0xff59A5C6),
     const Color(0xffFFCE54),
