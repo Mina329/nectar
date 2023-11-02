@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
@@ -9,6 +10,7 @@ import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../../explore/data/models/category_model/category_model.dart';
+import '../../../../../home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 
 class CategoryGroceriesSectionItem extends StatelessWidget {
   const CategoryGroceriesSectionItem(
@@ -27,7 +29,7 @@ class CategoryGroceriesSectionItem extends StatelessWidget {
       onTap: () {
         GoRouter.of(context).push(
           AppRouter.kCategoryDetailsView,
-          extra: category,
+          extra: (category, BlocProvider.of<NavigationBarCubit>(context)),
         );
       },
       child: Container(
