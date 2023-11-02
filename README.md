@@ -68,18 +68,16 @@ behind the admin panel and backend server. A special thanks to him for his contr
       <td align="center"><img width="100%" src="images/splash.png" alt="Application Image 1"></td>
       <td align="center"><img width="100%" src="images/onboarding.png" alt="Application Image 2"></td>
       <td align="center"><img width="100%" src="images/login.png" alt="Application Image 3"></td>
+      <td align="center"><img width="100%" src="images/phone.png" alt="Application Image 4"></td>
     </tr>
     <tr>
-      <td align="center"><img width="100%" src="images/phone.png" alt="Application Image 4"></td>
       <td align="center"><img width="100%" src="images/otp.png" alt="Application Image 5"></td>
       <td align="center"><img width="100%" src="images/shop-1.png" alt="Application Image 6"></td>
-    </tr>
-    <tr>
       <td align="center"><img width="100%" src="images/shop-2.png" alt="Application Image 7"></td>
       <td align="center"><img width="100%" src="images/groceries-section.png" alt="Application Image 8"></td>
-      <td align="center"><img width="100%" src="images/exclusive-section.png" alt="Application Image 9"></td>
     </tr>
     <tr>
+      <td align="center"><img width="100%" src="images/exclusive-section.png" alt="Application Image 9"></td>
       <td align="center"><img width="100%" src="images/item-details.png" alt="Application Image 10"></td>
       <td align="center"><img width="100%" src="images/explore.png" alt="Application Image 11"></td>
       <td align="center"><img width="100%" src="images/category-section.png" alt="Application Image 12"></td>
@@ -88,18 +86,16 @@ behind the admin panel and backend server. A special thanks to him for his contr
       <td align="center"><img width="100%" src="images/search-dark.png" alt="Application Image 13"></td>
       <td align="center"><img width="100%" src="images/cart.png" alt="Application Image 14"></td>
       <td align="center"><img width="100%" src="images/payment.png" alt="Application Image 15"></td>
+      <td align="center"><img width="100%" src="images/order-success.png" alt="Application Image 16"></td>
     </tr>
     <tr>
-      <td align="center"><img width="100%" src="images/order-success.png" alt="Application Image 16"></td>
       <td align="center"><img width="100%" src="images/favourite-dark.png" alt="Application Image 17"></td>
       <td align="center"><img width="100%" src="images/account-dark.png" alt="Application Image 18"></td>
-    </tr>
-    <tr>
       <td align="center"><img width="100%" src="images/setting.png" alt="Application Image 19"></td>
       <td align="center"><img width="100%" src="images/orders.png" alt="Application Image 20"></td>
-      <td align="center"><img width="100%" src="images/pdf.png" alt="Application Image 21"></td>
     </tr>
     <tr>
+      <td align="center"><img width="100%" src="images/pdf.png" alt="Application Image 21"></td>
       <td align="center"><img width="100%" src="images/mydetails.png" alt="Application Image 22"></td>
       <td align="center"><img width="100%" src="images/addresses.png" alt="Application Image 23"></td>
       <td align="center"><img width="100%" src="images/map.png" alt="Application Image 24"></td>
