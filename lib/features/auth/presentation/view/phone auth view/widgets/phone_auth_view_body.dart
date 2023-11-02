@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:country_flags/country_flags.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -142,7 +141,6 @@ class _PhoneAuthViewBodyState extends State<PhoneAuthViewBody> {
           );
         } else if (state is SendOTPFailure) {
           GoRouter.of(context).pop();
-          log(state.errMessage);
           Fluttertoast.showToast(msg: state.errMessage);
         } else if (state is SendOTPLoading) {
           CustomLoadingIndicator.buildLoadingIndicator(context);

@@ -1,0 +1,62 @@
+name: Build and Deploy Flutter Release APK
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the code
+      uses: actions/checkout@v3
+
+    - name: Setup Java
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+
+    - name: Set up environment variables
+      run: |
+        echo "GEOCODING_API_KEY=$GEOCODING_API_KEY" >> .env
+        echo "GEOSEARCH_AUTO_SUGGESTION_API_KEY=$GEOSEARCH_AUTO_SUGGESTION_API_KEY" >> .env
+        echo "GEOCODING_URL=$GEOCODING_URL" >> .env
+        echo "GEOSEARCH_AUTO_SUGGESTION_URL=$GEOSEARCH_AUTO_SUGGESTION_URL" >> .env
+        echo "BACKEND_BASE_URL=$BACKEND_BASE_URL" >> .env
+        echo "CLIENT_ID=$CLIENT_ID" >> .env
+        echo "SERVER_ID=$SERVER_ID" >> .env
+        echo "TWILIO_SID=$TWILIO_SID" >> .env
+        echo "TWILIO_TOKEN=$TWILIO_TOKEN" >> .env
+        echo "TWILIO_TEST_TOKEN=$TWILIO_TEST_TOKEN" >> .env
+        echo "TWILIO_PHONE_NUMBER=$TWILIO_PHONE_NUMBER" >> .env
+      env:
+        GEOCODING_API_KEY: ${{ secrets.GEOCODING_API_KEY }}
+        GEOSEARCH_AUTO_SUGGESTION_API_KEY: ${{ secrets.GEOSEARCH_AUTO_SUGGESTION_API_KEY }}
+        GEOCODING_URL: ${{ secrets.GEOCODING_URL }}
+        GEOSEARCH_AUTO_SUGGESTION_URL: ${{ secrets.GEOSEARCH_AUTO_SUGGESTION_URL }}
+        BACKEND_BASE_URL: ${{ secrets.BACKEND_BASE_URL }}
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        SERVER_ID: ${{ secrets.SERVER_ID }}
+        TWILIO_SID: ${{ secrets.TWILIO_SID }}
+        TWILIO_TOKEN: ${{ secrets.TWILIO_TOKEN }}
+        TWILIO_TEST_TOKEN: ${{ secrets.TWILIO_TEST_TOKEN }}
+        TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
+
+    - name: Build Release APK
+      run: |
+        flutter pub get
+        flutter build apk --release
+
+    - name: Deploy APK
+      uses: ncipollo/release-action@v1
+      with:
+          artifacts: "build/app/outputs/apk/release/*.apk"
+          tag: v1.0.0
+          token: ${{ secrets.GITHUB_TOKEN }}

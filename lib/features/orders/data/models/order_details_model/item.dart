@@ -9,6 +9,7 @@ part 'item.g.dart';
 class Item with _$Item {
 	factory Item({
 		int? qty,
+    double? price,
 		ItemDetails? item,
 	}) = _Item;
 

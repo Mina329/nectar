@@ -7,6 +7,7 @@ import 'package:nectar/core/widgets/custom_elevated_btn.dart';
 import 'package:nectar/features/account/presentation/view%20model/account_info_cubit/account_info_cubit.dart';
 import 'package:nectar/features/my_details/presentation/view%20model/my_details_cubit/my_details_cubit.dart';
 
+import '../../../../../core/l10n/locales.dart';
 import '../../../../../core/utils/strings_manager.dart';
 import '../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../../core/widgets/custom_toast_widget.dart';
@@ -42,7 +43,16 @@ class MyDetailsViewBody extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 physics: const BouncingScrollPhysics(),
                 children: [
-                  MyDetailsImg(account: account),
+                  BlocListener<MyDetailsCubit, MyDetailsState>(
+                    listener: (context, state) {
+                      if (state is MyDetailsLoading) {
+                        CustomLoadingIndicator.buildLoadingIndicator(context);
+                      } else {
+                        GoRouter.of(context).pop();
+                      }
+                    },
+                    child: MyDetailsImg(account: account),
+                  ),
                   MyDetailsForm(
                     formKey: formKey,
                     account: account,
@@ -50,11 +60,22 @@ class MyDetailsViewBody extends StatelessWidget {
                       firstName = value;
                     },
                     onSaveDateOfBirth: (value) {
-                      if (value != null) {
-                        dateOfBirth =
-                            DateFormat('dd MMMM yyyy').parse(value).toString();
-                      } else {
-                        dateOfBirth = null;
+                      if (context.locale == ENGLISH_LOCALE) {
+                        if (value != null) {
+                          dateOfBirth = DateFormat('dd MMMM yyyy')
+                              .parse(value)
+                              .toString();
+                        } else {
+                          dateOfBirth = null;
+                        }
+                      }else{
+                        if(value != null){
+                          dateOfBirth = DateFormat('dd MMMM yyyy','ar')
+                              .parse(value)
+                              .toString();
+                        }else{
+                          dateOfBirth = null;
+                        }
                       }
                     },
                     onSaveLastName: (value) {
@@ -77,15 +98,10 @@ class MyDetailsViewBody extends StatelessWidget {
                 height: 67.h,
                 child: BlocListener<MyDetailsCubit, MyDetailsState>(
                   listener: (context, state) {
-                    if (state is MyDetailsLoading) {
-                      CustomLoadingIndicator.buildLoadingIndicator(context);
-                    } else if (state is MyDetailsInfoFailure) {
-                      GoRouter.of(context).pop();
-                      GoRouter.of(context).pop();
+                    if (state is MyDetailsInfoFailure) {
                       CustomToastWidget.buildCustomToast(
                           context, state.errMessage, ToastType.failure, 200.h);
                     } else if (state is MyDetailsInfoSuccess) {
-                      GoRouter.of(context).pop();
                       GoRouter.of(context).pop();
                       CustomToastWidget.buildCustomToast(context,
                           state.successMessage, ToastType.success, 200.h);

@@ -6,6 +6,7 @@ import 'package:nectar/features/orders/presentation/view%20model/orders_cubit/or
 
 import '../../../../../core/utils/assets_manager.dart';
 import '../../../../../core/utils/service_locator.dart';
+import '../../../../../core/widgets/custom_empty_widget.dart';
 import '../../../../../core/widgets/custom_toast_widget.dart';
 import '../../../../delivery_address/data/repos/delivery_address_repo.dart';
 import '../../../data/repos/order_repo.dart';
@@ -31,6 +32,14 @@ class OrderCardListView extends StatelessWidget {
             ),
           );
         } else if (state is OrdersSuccess) {
+          if (state.orders.isEmpty) {
+            return const SliverFillRemaining(
+              hasScrollBody: false,
+              child: Center(
+                child: CustomEmptyWidget(),
+              ),
+            );
+          }
           return SliverList(
               delegate: SliverChildBuilderDelegate(
             (context, index) => BlocProvider(

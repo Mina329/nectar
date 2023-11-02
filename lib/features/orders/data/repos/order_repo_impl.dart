@@ -42,7 +42,7 @@ class OrderRepoImpl extends OrderRepo {
   Future<Either<Failure, OrderDetailsModel>> fetchOrderDetails(
       {required String id}) async {
     try {
-      var data = await _apiService.get(endPoint: 'api/v1/profile/orders/$id?');
+      var data = await _apiService.get(endPoint: 'api/v1/profile/orders/$id?',lang: 'en');
       return right(
         OrderDetailsModel.fromJson(data['data']),
       );

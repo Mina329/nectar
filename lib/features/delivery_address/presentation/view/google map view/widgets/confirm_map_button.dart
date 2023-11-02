@@ -31,7 +31,7 @@ class ConfirmMapButton extends StatelessWidget {
       child: SizedBox(
         width: 200.w,
         height: 67.h,
-        child: BlocListener<LocationBloc, LocationState>(
+        child: BlocConsumer<LocationBloc, LocationState>(
           listener: (context, state) {
             if (state is PlacemarkLoading) {
               CustomLoadingIndicator.buildLoadingIndicator(context);
@@ -50,25 +50,29 @@ class ConfirmMapButton extends StatelessWidget {
                   context, state.errMessage, ToastType.failure, 200.h);
             }
           },
-          child: CustomElevatedBtn(
-            onPressed: () {
-              BlocProvider.of<LocationBloc>(context).add(
-                GetPlacemark(
-                    BlocProvider.of<LocationBloc>(context)
-                        .currentLocation
-                        .latitude,
-                    BlocProvider.of<LocationBloc>(context)
-                        .currentLocation
-                        .longitude,
-                    CacheData.getData(key: CacheKeys.kLANGUAGE) ==
-                            CacheValues.ARABIC
-                        ? "ar"
-                        : "en"),
-              );
-            },
-            txt: StringsManager.confirm.tr(),
-            style: Theme.of(context).textTheme.labelLarge!,
-          ),
+          builder: (context, state) {
+            return CustomElevatedBtn(
+              onPressed: BlocProvider.of<LocationBloc>(context).Enabled
+                  ? () {
+                      BlocProvider.of<LocationBloc>(context).add(
+                        GetPlacemark(
+                            BlocProvider.of<LocationBloc>(context)
+                                .currentLocation
+                                .latitude,
+                            BlocProvider.of<LocationBloc>(context)
+                                .currentLocation
+                                .longitude,
+                            CacheData.getData(key: CacheKeys.kLANGUAGE) ==
+                                    CacheValues.ARABIC
+                                ? "ar"
+                                : "en"),
+                      );
+                    }
+                  : null,
+              txt: StringsManager.confirm.tr(),
+              style: Theme.of(context).textTheme.labelLarge!,
+            );
+          },
         ),
       ),
     );

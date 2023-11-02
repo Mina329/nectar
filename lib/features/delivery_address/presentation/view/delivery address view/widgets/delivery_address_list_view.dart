@@ -4,12 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/color_manager.dart';
 import 'package:nectar/features/delivery_address/presentation/view_model/delivery_address_cubit/delivery_address_cubit.dart';
 import '../../../../../../core/utils/strings_manager.dart';
 import '../../../../../../core/widgets/custom_empty_widget.dart';
-import '../../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../../../core/widgets/custom_toast_widget.dart';
 import '../../../../../account/presentation/view model/account_info_cubit/account_info_cubit.dart';
 import '../../../view_model/address_cubit/address_cubit.dart';
@@ -56,8 +54,7 @@ class DeliveryAddressListViewState extends State<DeliveryAddressListView> {
                   }
                   return BlocListener<AddressCubit, AddressState>(
                     listener: (context, state) {
-                      if (state is AddressLoading) {
-                      } else if (state is DeleteAddressFailure) {
+                      if (state is DeleteAddressFailure) {
                         CustomToastWidget.buildCustomToast(context,
                             state.errMessage, ToastType.failure, 200.h);
                       } else if (state is DeleteAddressSuccess) {
@@ -71,14 +68,10 @@ class DeliveryAddressListViewState extends State<DeliveryAddressListView> {
                             .getUserProfile();
                         CustomToastWidget.buildCustomToast(context,
                             state.successMessage, ToastType.success, 200.h);
-                      } else if (state is DefaultAddressLoading) {
-                        CustomLoadingIndicator.buildLoadingIndicator(context);
                       } else if (state is DefaultAddressFailure) {
-                        GoRouter.of(context).pop();
                         CustomToastWidget.buildCustomToast(context,
                             state.errMessage, ToastType.failure, 200.h);
                       } else if (state is DefaultAddressSuccess) {
-                        GoRouter.of(context).pop();
                         BlocProvider.of<AccountInfoCubit>(context)
                             .getUserProfile();
                         CustomToastWidget.buildCustomToast(context,

@@ -6,7 +6,7 @@ class CustomElevatedBtn extends StatelessWidget {
       required this.onPressed,
       required this.txt,
       required this.style});
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final String txt;
   final TextStyle style;
   @override

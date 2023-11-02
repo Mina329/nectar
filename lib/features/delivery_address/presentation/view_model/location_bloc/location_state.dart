@@ -44,3 +44,7 @@ final class PlacemarkFailure extends LocationState {
 
   PlacemarkFailure(this.errMessage);
 }
+
+final class ButtonEnabled extends LocationState {}
+
+final class ButtonNotEnabled extends LocationState {}

@@ -146,7 +146,8 @@ abstract class AppRouter {
       GoRoute(
         path: kCategoryDetailsView,
         pageBuilder: (context, state) {
-          CategoryModel category = state.extra as CategoryModel;
+          (CategoryModel, NavigationBarCubit) category =
+              state.extra as (CategoryModel, NavigationBarCubit);
           return screenTransition(
             state,
             MultiBlocProvider(
@@ -154,16 +155,19 @@ abstract class AppRouter {
                 BlocProvider(
                   create: (context) => CategoryItemsCubit(
                     getIt.get<ExploreRepo>(),
-                  )..loadItems(category.id!),
+                  )..loadItems(category.$1.id!),
                 ),
                 BlocProvider(
                   create: (context) => AddToCartCubit(
                     getIt.get<CartRepo>(),
                   ),
-                )
+                ),
+                BlocProvider.value(
+                  value: category.$2,
+                ),
               ],
               child: CategoryDetailsView(
-                category: category,
+                category: category.$1,
               ),
             ),
           );
@@ -180,7 +184,6 @@ abstract class AppRouter {
                   getIt.get<OrderRepo>(),
                 )..getAllOrders(),
               ),
-              
             ],
             child: const OrdersView(),
           ),
@@ -392,7 +395,8 @@ abstract class AppRouter {
       GoRoute(
           path: kSectionView,
           pageBuilder: (context, state) {
-            SectionType type = state.extra as SectionType;
+            (SectionType, NavigationBarCubit) type =
+                state.extra as (SectionType, NavigationBarCubit);
             return screenTransition(
               state,
               MultiBlocProvider(
@@ -400,8 +404,11 @@ abstract class AppRouter {
                   BlocProvider(
                     create: (context) => SectionDetailsCubit(
                       getIt.get<ShopRepo>(),
-                      type,
+                      type.$1,
                     ),
+                  ),
+                  BlocProvider.value(
+                    value: type.$2,
                   ),
                   BlocProvider(
                     create: (context) => AddToCartCubit(

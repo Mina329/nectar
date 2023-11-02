@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -83,7 +82,6 @@ class CartRepoImpl extends CartRepo {
       return right(data);
     } catch (e) {
       if (e is DioException) {
-        log(e.message!);
         return left(
           ServerFailure(
             e.response!.data['message'],

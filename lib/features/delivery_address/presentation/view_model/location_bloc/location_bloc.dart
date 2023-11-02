@@ -13,6 +13,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   late LatLng currentLocation;
   late Placemark currentLocationPlacemark;
   bool fromChange = false;
+  bool Enabled = true;
 
   LocationBloc(this.deliveryAddressRepo) : super(LocationInitial()) {
     on<LocationEvent>((event, emit) async {
@@ -60,6 +61,14 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
             );
           },
         );
+      } else if (event is Button) {
+        if (event.enabled == false) {
+          Enabled = false;
+          emit(ButtonNotEnabled());
+        } else {
+          Enabled = true;
+          emit(ButtonEnabled());
+        }
       }
     });
   }

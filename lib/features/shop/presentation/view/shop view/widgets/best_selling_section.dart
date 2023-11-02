@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nectar/features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 import 'package:nectar/features/shop/presentation/view%20model/best_selling_cubit/best_selling_cubit.dart';
 import 'package:nectar/features/shop/presentation/view/shop%20view/widgets/sections_shimmer.dart';
 
@@ -43,7 +44,10 @@ class BestSellingSection extends StatelessWidget {
                     TextButton(
                       onPressed: () {
                         GoRouter.of(context).push(AppRouter.kSectionView,
-                            extra: SectionType.bestSelling);
+                            extra: (
+                              SectionType.bestSelling,
+                              BlocProvider.of<NavigationBarCubit>(context)
+                            ));
                       },
                       child: Text(
                         StringsManager.seeAll.tr(),

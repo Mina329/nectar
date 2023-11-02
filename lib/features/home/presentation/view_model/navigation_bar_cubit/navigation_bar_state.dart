@@ -12,3 +12,7 @@ final class NavigationBarCart extends NavigationBarState {}
 final class NavigationBarFavourite extends NavigationBarState {}
 
 final class NavigationBarAccount extends NavigationBarState {}
+
+final class ActivateCart extends NavigationBarState {}
+
+final class DeactivateCart extends NavigationBarState {}

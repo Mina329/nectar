@@ -11,15 +11,11 @@ import 'custom_google_map.dart';
 import 'custom_location_pin.dart';
 import 'google_map_app_bar.dart';
 
-class GoogleMapViewBody extends StatefulWidget {
-  const GoogleMapViewBody({super.key});
+class GoogleMapViewBody extends StatelessWidget {
+   GoogleMapViewBody({super.key});
 
-  @override
-  State<GoogleMapViewBody> createState() => _GoogleMapViewBodyState();
-}
-
-class _GoogleMapViewBodyState extends State<GoogleMapViewBody> {
   final Completer<GoogleMapController> _controller = Completer();
+
   @override
   Widget build(BuildContext context) {
     final LatLng previousLocation =

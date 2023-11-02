@@ -173,6 +173,9 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return BlocBuilder<NavigationBarCubit, NavigationBarState>(
       builder: (context, state) {
+        if (BlocProvider.of<NavigationBarCubit>(context).selectedIndex == 2) {
+          BlocProvider.of<NavigationBarCubit>(context).deactivateCart();
+        }
         return Scaffold(
           resizeToAvoidBottomInset: true,
           bottomNavigationBar: CustomBottomNavigationBar(

@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -76,8 +75,6 @@ class LoginViewBody extends StatelessWidget {
                             state.errMessage, ToastType.failure, 200.h);
                       } else if (state is GoogleLogInAuthSuccess) {
                         GoRouter.of(context).pop();
-
-                        log(state.user.token!);
                         if (state.user.user?.phoneNumber == null) {
                           if (context.mounted) {
                             GoRouter.of(context).go(AppRouter.kPhoneAuthView);

@@ -6,6 +6,7 @@ part 'navigation_bar_state.dart';
 class NavigationBarCubit extends Cubit<NavigationBarState> {
   NavigationBarCubit() : super(NavigationBarShop());
   late PageController savedPageController;
+  bool cartNotify = false;
   int selectedIndex = 0;
   void changeIndex(int index) {
     selectedIndex = index;
@@ -30,5 +31,15 @@ class NavigationBarCubit extends Cubit<NavigationBarState> {
         emit(NavigationBarAccount());
         break;
     }
+  }
+
+  void activateCart() {
+    cartNotify = true;
+    emit(ActivateCart());
+  }
+
+  void deactivateCart() {
+    cartNotify = false;
+    emit(DeactivateCart());
   }
 }

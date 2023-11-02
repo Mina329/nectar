@@ -14,6 +14,7 @@ import '../../../../../../core/l10n/locales.dart';
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/strings_manager.dart';
+import '../../../../../home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 import 'category_groceries_section_item.dart';
 import 'grocery_item.dart';
 import 'grocery_section_shimmer.dart';
@@ -196,7 +197,10 @@ class GroceriesSection extends StatelessWidget {
                           TextButton(
                             onPressed: () {
                               GoRouter.of(context).push(AppRouter.kSectionView,
-                                  extra: SectionType.groceries);
+                                  extra: (
+                                    SectionType.groceries,
+                                    BlocProvider.of<NavigationBarCubit>(context)
+                                  ));
                             },
                             child: Text(
                               StringsManager.seeAll.tr(),

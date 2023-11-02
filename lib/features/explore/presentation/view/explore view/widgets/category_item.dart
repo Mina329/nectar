@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nectar/core/utils/app_router.dart';
 import 'package:nectar/core/utils/assets_manager.dart';
 import 'package:nectar/core/utils/strings_manager.dart';
+import 'package:nectar/features/home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 
 import '../../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../data/models/category_model/category_model.dart';
@@ -31,7 +33,7 @@ class CategoryItem extends StatelessWidget {
         onTap: () {
           GoRouter.of(context).push(
             AppRouter.kCategoryDetailsView,
-            extra: category,
+            extra: (category, BlocProvider.of<NavigationBarCubit>(context)),
           );
         },
         child: Column(

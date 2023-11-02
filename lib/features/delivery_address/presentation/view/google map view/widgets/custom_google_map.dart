@@ -47,6 +47,17 @@ class CustomGoogleMap extends StatelessWidget {
         BlocProvider.of<LocationBloc>(context).currentLocation =
             LatLng(position.target.latitude, position.target.longitude);
       },
+      onCameraIdle: () async {
+        await Future.delayed(
+          const Duration(seconds: 2),
+          () {
+            BlocProvider.of<LocationBloc>(context).add(Button(true));
+          },
+        );
+      },
+      onCameraMoveStarted: () {
+        BlocProvider.of<LocationBloc>(context).add(Button(false));
+      },
     );
   }
 }

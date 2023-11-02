@@ -11,7 +11,6 @@ import 'package:nectar/features/my_details/presentation/view%20model/my_details_
 
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/strings_manager.dart';
-import '../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../../core/widgets/custom_toast_widget.dart';
 import 'package:nectar/features/account/data/models/account_model/account_model.dart';
 import '../../../../account/presentation/view model/account_info_cubit/account_info_cubit.dart';
@@ -114,16 +113,10 @@ class _MyDetailsImgState extends State<MyDetailsImg> {
                 top: 40.h,
                 child: BlocListener<MyDetailsCubit, MyDetailsState>(
                   listener: (context, state) {
-                    if (state is MyDetailsLoading) {
-                      CustomLoadingIndicator.buildLoadingIndicator(context);
-                    } else if (state is MyDetailsImgFailure) {
-                      GoRouter.of(context).pop();
-                      GoRouter.of(context).pop();
+                    if (state is MyDetailsImgFailure) {
                       CustomToastWidget.buildCustomToast(
                           context, state.errMessage, ToastType.failure, 200.h);
                     } else if (state is MyDetailsImgSuccess) {
-                      GoRouter.of(context).pop();
-                      GoRouter.of(context).pop();
                       CustomToastWidget.buildCustomToast(context,
                           state.successMessage, ToastType.success, 200.h);
                       BlocProvider.of<AccountInfoCubit>(context)

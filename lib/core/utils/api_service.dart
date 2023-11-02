@@ -36,10 +36,11 @@ class ApiService {
     return response.data;
   }
 
-  Future<Map<String, dynamic>> get({required String endPoint}) async {
+  Future<Map<String, dynamic>> get(
+      {required String endPoint, String? lang}) async {
     await initializeHeaders();
     var response = await _dio.get(
-      "${Env.BACKEND_BASE_URL}${endPoint}lang=${CacheData.getData(key: CacheKeys.kLANGUAGE) == CacheValues.ARABIC ? "ar" : "en"}",
+      "${Env.BACKEND_BASE_URL}${endPoint}lang=${lang ?? (CacheData.getData(key: CacheKeys.kLANGUAGE) == CacheValues.ARABIC ? "ar" : "en")}",
       options: Options(
         headers: headers,
       ),

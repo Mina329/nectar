@@ -14,3 +14,9 @@ class GetPlacemark extends LocationEvent {
 
   GetPlacemark(this.latitude, this.longitude, this.language);
 }
+
+class Button extends LocationEvent {
+  final bool enabled;
+
+  Button(this.enabled);
+}

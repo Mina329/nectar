@@ -165,24 +165,17 @@ class PdfInvoice {
       'Date',
       'Quantity',
       'Unit Price',
-      'Offer Price',
       'Total'
     ];
     final data = invoice.items!.map((item) {
-      late double total;
-      if (item.item!.offerPrice != 0) {
-        total = item.qty! * item.item!.offerPrice!;
-      } else {
-        total = item.qty! * item.item!.price!;
-      }
+      final double total = item.qty! * item.price!;
 
       return [
         item.item!.name,
         item.item!.qtyType,
         '${invoice.createdAt!.day}/${invoice.createdAt!.month}/${invoice.createdAt!.year}',
         item.qty.toString(),
-        '${item.item!.price} \$',
-        item.item!.offerPrice == 0 ? '-' : '${item.item!.offerPrice} \$',
+        '${item.price} \$',
         '${total.toStringAsFixed(2)} \$'
       ];
     }).toList();
@@ -200,17 +193,15 @@ class PdfInvoice {
           3: Alignment.centerRight,
           4: Alignment.centerRight,
           5: Alignment.centerRight,
-          6: Alignment.centerRight,
+        },
+        columnWidths: {
+          0: const FlexColumnWidth(1),
         });
   }
 
   static Widget buildTotal(OrderDetailsModel invoice) {
     final total = invoice.items!.map((item) {
-      if (item.item!.offerPrice != 0) {
-        return item.qty! * item.item!.offerPrice!;
-      } else {
-        return item.qty! * item.item!.price!;
-      }
+      return item.qty! * item.price!;
     }).reduce((value, element) => value + element);
 
     return Container(

@@ -14,6 +14,7 @@ import 'package:nectar/features/shop/presentation/view%20model/add_to_cart_cubit
 import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/widgets/custom_add_action_btn.dart';
+import '../../../../../home/presentation/view_model/navigation_bar_cubit/navigation_bar_cubit.dart';
 
 class GroceryItem extends StatelessWidget {
   const GroceryItem({
@@ -179,6 +180,8 @@ class GroceryItem extends StatelessWidget {
                             ToastType.success,
                             200.h,
                           );
+                          BlocProvider.of<NavigationBarCubit>(context)
+                              .activateCart();
                         }
                       },
                       child: CustomAddActionButton(
